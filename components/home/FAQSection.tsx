@@ -28,7 +28,7 @@ const faqs = [
   {
     question: "What is the Pro Dashboard subscription?",
     answer:
-      "For $49/month, you get access to an in-app browser where you can search and filter all 500,000+ agents by state, name, or email. No CSV download — this tier is designed for teams that need a searchable interface.",
+      "For $49/month, you get access to an in-app browser where you can search and filter all 478,000+ agents by state, name, or email. No CSV download — this tier is designed for teams that need a searchable interface.",
   },
   {
     question: "Can I cancel my subscription anytime?",

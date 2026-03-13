@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | USAgentLeads",
   },
   description:
-    "Buy verified US real estate agent contacts by state or nationwide. Name, email, phone. CSV download. Starting at $20.",
+    "Buy verified US real estate agent contacts by state or nationwide. Name, email, phone. CSV download. Starting at $10.",
   keywords: [
     "realtor email list",
     "real estate agent database",
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
     siteName: "USAgentLeads",
     title: "USAgentLeads — Real Estate Agent Contact Database",
     description:
-      "Buy verified US real estate agent contacts by state or nationwide. Name, email, phone. CSV download. Starting at $20.",
+      "Buy verified US real estate agent contacts by state or nationwide. Name, email, phone. CSV download. Starting at $10.",
   },
   twitter: {
     card: "summary_large_image",
     title: "USAgentLeads — Real Estate Agent Contact Database",
     description:
-      "Buy verified US real estate agent contacts by state or nationwide. CSV download. Starting at $20.",
+      "Buy verified US real estate agent contacts by state or nationwide. CSV download. Starting at $10.",
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "https://usagentleads.com" },

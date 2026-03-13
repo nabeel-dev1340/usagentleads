@@ -5,9 +5,9 @@ import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 import { SubscribeButton } from "@/components/checkout/SubscribeButton"
 
 export const metadata: Metadata = {
-  title: "Pricing — Real Estate Agent Data Starting at $20",
+  title: "Pricing — Real Estate Agent Data Starting at $10",
   description:
-    "Buy US real estate agent contact data starting at $20 per state. Full 50-state database for $100. Pro Dashboard for $49/month.",
+    "Buy US real estate agent contact data starting at $10 per state. Full 50-state database for $99. Pro Dashboard for $49/month.",
   alternates: {
     canonical: "https://usagentleads.com/pricing",
   },
@@ -22,7 +22,7 @@ const plans = [
   {
     name: "State Pack",
     subtitle: "One-time purchase",
-    price: "$20",
+    price: "$10",
     period: "/ state",
     features: [
       { text: "Single state CSV download", included: true },
@@ -38,12 +38,12 @@ const plans = [
   {
     name: "Full Database",
     subtitle: "One-time purchase",
-    price: "$100",
+    price: "$99",
     period: "/ one-time",
     badge: "BEST VALUE",
     features: [
       { text: "All 50 states in one CSV", included: true },
-      { text: "500K+ verified contacts", included: true },
+      { text: "478K+ verified contacts", included: true },
       { text: "Instant delivery via email", included: true },
       { text: "No account required", included: true },
       { text: "Dashboard access", included: false },
@@ -71,7 +71,7 @@ const plans = [
 ]
 
 const comparisonRows = [
-  { label: "Price", state: "$20/state", full: "$100", pro: "$49/mo" },
+  { label: "Price", state: "$10/state", full: "$99", pro: "$49/mo" },
   { label: "All 50 states", state: false, full: true, pro: false },
   { label: "CSV download", state: true, full: true, pro: false },
   { label: "Dashboard access", state: false, full: false, pro: true },

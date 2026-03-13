@@ -13,6 +13,16 @@ export async function POST(request: Request) {
   }
 
   const payload = JSON.parse(rawBody)
+
+  // Reject webhooks older than 5 minutes to prevent replay attacks
+  const createdAt = payload.data?.attributes?.created_at || payload.data?.attributes?.updated_at
+  if (createdAt) {
+    const eventAge = Date.now() - new Date(createdAt).getTime()
+    if (eventAge > 5 * 60 * 1000) {
+      return NextResponse.json({ error: "Webhook too old" }, { status: 400 })
+    }
+  }
+
   const eventName = payload.meta?.event_name as string
   const data = payload.data
 

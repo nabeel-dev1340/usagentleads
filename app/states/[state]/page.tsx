@@ -5,6 +5,7 @@ import { US_STATES, getStateBySlug, formatAgentCount } from "@/lib/utils/states"
 import { generateStateMetadata, generateBreadcrumbSchema, generateProductSchema } from "@/lib/utils/seo"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
 import { ChevronRight, Check, Lock, ShieldCheck } from "lucide-react"
+import { createServiceClient } from "@/lib/supabase/server"
 
 interface Props {
   params: Promise<{ state: string }>
@@ -32,6 +33,19 @@ export default async function StatePage({ params }: Props) {
   const { state: slug } = await params
   const state = getStateBySlug(slug)
   if (!state) notFound()
+
+  // Fetch real count from DB
+  const supabase = createServiceClient()
+  const { data: stateCountRow } = await supabase
+    .schema("usagentleads")
+    .from("state_count")
+    .select("count, total_emails, total_phones")
+    .eq("state", state.name)
+    .single()
+
+  const agentCount: number = stateCountRow?.count ?? state.agentCount
+  const totalEmails: number = stateCountRow?.total_emails ?? agentCount
+  const totalPhones: number = stateCountRow?.total_phones ?? 0
 
   const breadcrumb = generateBreadcrumbSchema([
     { name: "Home", url: "https://usagentleads.com" },
@@ -82,23 +96,22 @@ export default async function StatePage({ params }: Props) {
               <p className="text-[17px] text-tertiary mb-10">
                 Real Estate Agent Email List —{" "}
                 <span className="font-mono text-ink font-semibold ml-1">
-                  {state.agentCount.toLocaleString()}
+                  {agentCount.toLocaleString()}
                 </span>{" "}
                 verified contacts
               </p>
 
               {/* Mobile CTA */}
               <div className="lg:hidden mb-10">
-                <PurchaseCard stateCode={state.code} stateName={state.name} agentCount={state.agentCount} />
+                <PurchaseCard stateCode={state.code} stateName={state.name} agentCount={agentCount} />
               </div>
 
               {/* 4-stat strip */}
-              <div className="bg-white border border-border rounded-xl p-6 grid grid-cols-2 sm:grid-cols-4 gap-0 divide-x divide-border mb-10">
+              <div className="bg-white border border-border rounded-xl p-6 grid grid-cols-3 gap-0 divide-x divide-border mb-10">
                 {[
-                  { value: state.agentCount.toLocaleString(), label: "Total" },
-                  { value: Math.round(state.agentCount * 1.43).toLocaleString(), label: "Emails" },
-                  { value: Math.round(state.agentCount * 0.41).toLocaleString(), label: "Phones" },
-                  { value: "10+", label: "Fields" },
+                  { value: agentCount.toLocaleString(), label: "Total" },
+                  { value: totalEmails.toLocaleString(), label: "Emails" },
+                  { value: totalPhones.toLocaleString(), label: "Phones" },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center px-4">
                     <div className="font-mono text-[28px] font-semibold text-ink">{stat.value}</div>
@@ -116,7 +129,7 @@ export default async function StatePage({ params }: Props) {
                     Sample Preview
                   </span>
                   <span className="text-[13px] text-tertiary font-mono">
-                    Showing 1 of {state.agentCount.toLocaleString()} records
+                    Showing 1 of {agentCount.toLocaleString()} records
                   </span>
                 </div>
 
@@ -145,7 +158,7 @@ export default async function StatePage({ params }: Props) {
                 <div className="flex items-center justify-center gap-2 px-5 py-3.5 bg-accent-light border-t border-accent-mid">
                   <Lock size={14} className="text-accent" />
                   <span className="text-[14px] text-accent font-medium">
-                    Purchase to access all {state.agentCount.toLocaleString()} records
+                    Purchase to access all {agentCount.toLocaleString()} records
                   </span>
                 </div>
               </div>
@@ -176,7 +189,7 @@ export default async function StatePage({ params }: Props) {
 
             {/* Right column — sticky purchase card (desktop) */}
             <div className="hidden lg:block w-[300px] shrink-0 sticky top-24">
-              <PurchaseCard stateCode={state.code} stateName={state.name} agentCount={state.agentCount} />
+              <PurchaseCard stateCode={state.code} stateName={state.name} agentCount={agentCount} />
             </div>
           </div>
         </div>
@@ -192,7 +205,7 @@ function PurchaseCard({ stateCode, stateName, agentCount }: { stateCode: string;
       <p className="text-[13px] font-mono text-tertiary mb-5">One-time purchase</p>
 
       <div className="flex items-baseline gap-1.5 mb-1">
-        <span className="font-mono text-[48px] font-semibold text-ink leading-none">$20</span>
+        <span className="font-mono text-[48px] font-semibold text-ink leading-none">$10</span>
         <span className="text-tertiary text-[15px]">one-time</span>
       </div>
       <p className="text-[14px] text-body mb-6">

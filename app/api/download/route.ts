@@ -21,34 +21,42 @@ export async function GET(request: Request) {
 
   const supabase = createServiceClient()
 
+  // Atomic: claim the token in a single update (prevents race condition)
   const { data: purchase, error } = await supabase
     .from("purchases")
-    .select("*")
+    .update({ token_used: true })
     .eq("download_token", token)
+    .eq("token_used", false)
+    .eq("status", "completed")
+    .select("id, user_id, guest_email, purchase_type, state_code, expires_at")
     .single()
 
   if (error || !purchase) {
-    return NextResponse.json(
-      { error: "Download link not found" },
-      { status: 404 }
-    )
-  }
+    // Check why it failed to give a useful error
+    const { data: existing } = await supabase
+      .from("purchases")
+      .select("token_used, status, expires_at")
+      .eq("download_token", token)
+      .single()
 
-  if (purchase.status !== "completed") {
-    return NextResponse.json(
-      { error: "Purchase not completed" },
-      { status: 403 }
-    )
-  }
-
-  if (purchase.token_used) {
-    return NextResponse.json(
-      { error: "This download link has already been used" },
-      { status: 403 }
-    )
+    if (!existing) {
+      return NextResponse.json({ error: "Download link not found" }, { status: 404 })
+    }
+    if (existing.status !== "completed") {
+      return NextResponse.json({ error: "Purchase not completed" }, { status: 403 })
+    }
+    if (existing.token_used) {
+      return NextResponse.json({ error: "This download link has already been used" }, { status: 403 })
+    }
+    return NextResponse.json({ error: "Download link not found" }, { status: 404 })
   }
 
   if (purchase.expires_at && new Date(purchase.expires_at) < new Date()) {
+    // Revert token_used since it's expired
+    await supabase
+      .from("purchases")
+      .update({ token_used: false })
+      .eq("id", purchase.id)
     return NextResponse.json(
       { error: "This download link has expired" },
       { status: 403 }
@@ -77,12 +85,6 @@ export async function GET(request: Request) {
       { status: 500 }
     )
   }
-
-  // Mark token as used
-  await supabase
-    .from("purchases")
-    .update({ token_used: true })
-    .eq("id", purchase.id)
 
   // Log download
   await supabase.from("download_logs").insert({

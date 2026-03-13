@@ -5,11 +5,20 @@ import { StateCard } from "./StateCard"
 import { US_STATES } from "@/lib/utils/states"
 import { Search } from "lucide-react"
 
-export function StateGrid() {
+interface StateGridProps {
+  countMap: Record<string, number>
+}
+
+export function StateGrid({ countMap }: StateGridProps) {
   const [search, setSearch] = useState("")
   const [sort, setSort] = useState<"largest" | "alpha">("largest")
 
-  const filtered = US_STATES.filter(
+  const statesWithCounts = US_STATES.map((s) => ({
+    ...s,
+    agentCount: countMap[s.name] ?? s.agentCount,
+  }))
+
+  const filtered = statesWithCounts.filter(
     (s) =>
       s.name.toLowerCase().includes(search.toLowerCase()) ||
       s.code.toLowerCase().includes(search.toLowerCase())

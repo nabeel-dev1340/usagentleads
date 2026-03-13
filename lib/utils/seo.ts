@@ -7,13 +7,13 @@ export function generateStateMetadata(state: USState): Metadata {
   const count = state.agentCount.toLocaleString()
   return {
     title: `${state.name} Real Estate Agent Email List — ${count}+ Contacts`,
-    description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone. Instant CSV delivery. $20 one-time.`,
+    description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone. Instant CSV delivery. $10 one-time.`,
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
     },
     openGraph: {
       title: `${state.name} Real Estate Agent Email List — ${count}+ Contacts | USAgentLeads`,
-      description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone. Instant CSV delivery. $20 one-time.`,
+      description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone. Instant CSV delivery. $10 one-time.`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
     },
@@ -43,7 +43,7 @@ export function generateProductSchema(state: USState) {
     description: `Verified list of ${state.agentCount.toLocaleString()}+ ${state.name} real estate agents with name, email, and phone.`,
     offers: {
       "@type": "Offer",
-      price: "20.00",
+      price: "10.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
     },

@@ -12,7 +12,7 @@ const plans = [
   {
     name: "State Pack",
     subtitle: "One-time purchase",
-    price: "$20",
+    price: "$10",
     period: "/ state",
     features: [
       { text: "Single state CSV download", included: true },
@@ -28,12 +28,12 @@ const plans = [
   {
     name: "Full Database",
     subtitle: "One-time purchase",
-    price: "$100",
+    price: "$99",
     period: "/ one-time",
     badge: "BEST VALUE",
     features: [
       { text: "All 50 states in one CSV", included: true },
-      { text: "500K+ verified contacts", included: true },
+      { text: "478K+ verified contacts", included: true },
       { text: "Instant delivery via email", included: true },
       { text: "No account required", included: true },
       { text: "Dashboard access", included: false },

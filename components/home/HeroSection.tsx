@@ -40,7 +40,7 @@ export function HeroSection() {
             Live Data
           </span>
           <span className="text-border-strong">|</span>
-          <span className="font-mono text-ink font-medium">500,000+</span>
+          <span className="font-mono text-ink font-medium">478,000+</span>
           <span className="text-tertiary">Contacts</span>
           <span className="text-border-strong">|</span>
           <span className="text-tertiary">Updated 2026</span>
@@ -75,7 +75,7 @@ export function HeroSection() {
             Browse by State <ArrowRight size={16} />
           </Link>
           <Link href="/pricing" className="btn-outline text-[16px] px-8 py-3.5">
-            Get Full Database — <span className="font-mono">$100</span>
+            Get Full Database — <span className="font-mono">$99</span>
           </Link>
         </div>
 
