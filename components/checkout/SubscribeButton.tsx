@@ -1,0 +1,59 @@
+"use client"
+
+import { Loader2, ArrowRight } from "lucide-react"
+import { useState } from "react"
+import { createClient } from "@/lib/supabase/client"
+
+export function SubscribeButton({ className }: { className?: string }) {
+  const [loading, setLoading] = useState(false)
+
+  const handleSubscribe = async () => {
+    setLoading(true)
+    try {
+      const supabase = createClient()
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) {
+        await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: `${window.location.origin}/auth/callback?next=/pricing`,
+          },
+        })
+        return
+      }
+
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          purchaseType: "subscription",
+        }),
+      })
+      const data = await res.json()
+      if (data.url) {
+        window.location.href = data.url
+      }
+    } catch {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <button
+      onClick={handleSubscribe}
+      disabled={loading}
+      className={`btn-outline justify-center text-[15px] py-3.5 ${className ?? ""}`}
+    >
+      {loading ? (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      ) : (
+        <>
+          Subscribe <ArrowRight size={14} />
+        </>
+      )}
+    </button>
+  )
+}
