@@ -65,7 +65,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? "max-h-[300px] pb-5" : "max-h-0"
+          open ? "max-h-75 pb-5" : "max-h-0"
         }`}
       >
         <p className="text-[14px] text-tertiary leading-[1.8]">{answer}</p>

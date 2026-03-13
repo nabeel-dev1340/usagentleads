@@ -156,7 +156,7 @@ html, body {
   /* ── Typography patterns ─────────────────────── */
 
   .label-eyebrow {
-    @apply text-[13px] font-mono font-medium tracking-[0.1em]
+    @apply text-[13px] font-mono font-medium tracking-widest
            uppercase text-accent;
   }
 

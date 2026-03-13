@@ -17,7 +17,7 @@ export function Footer() {
                 <span className="text-accent-mid">Leads</span>
               </span>
             </Link>
-            <p className="text-[14px] text-[#9CA3AF] leading-relaxed max-w-[220px]">
+            <p className="text-[14px] text-[#9CA3AF] leading-relaxed max-w-55">
               Verified real estate agent contacts across all 50 US states.
             </p>
           </div>

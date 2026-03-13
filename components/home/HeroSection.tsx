@@ -13,26 +13,7 @@ const previewRows = [
 export function HeroSection() {
   return (
     <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 sm:pb-20 pt-10 overflow-hidden">
-      {/* Subtle editorial lines */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute left-0 right-0 h-px"
-          style={{
-            top: "35%",
-            background: "linear-gradient(to right, transparent, #E2E5EB 20%, #E2E5EB 80%, transparent)",
-          }}
-        />
-        <div
-          className="absolute left-0 right-0 h-px"
-          style={{
-            top: "65%",
-            background: "linear-gradient(to right, transparent, #E2E5EB 20%, #E2E5EB 80%, transparent)",
-          }}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 mx-auto max-w-[780px] text-center">
+<div className="relative z-10 mx-auto max-w-195 text-center">
         {/* Badge */}
         <div className="hero-badge inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-full bg-white border border-border shadow-sm text-[12px] sm:text-[14px] mb-10 flex-wrap justify-center">
           <span className="flex items-center gap-1.5 text-success font-medium">
@@ -48,7 +29,7 @@ export function HeroSection() {
 
         {/* H1 */}
         <h1 className="hero-h1">
-          <span className="block text-tertiary font-light text-[28px] sm:text-[40px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.025em]">
+          <span className="block text-tertiary font-light text-[28px] sm:text-[40px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-tight">
             The Complete US
           </span>
           <span className="block text-ink font-semibold text-[32px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-none tracking-[-0.03em]">
@@ -85,7 +66,7 @@ export function HeroSection() {
         </p>
 
         {/* Data preview card */}
-        <div className="hero-preview mt-16 bg-white border border-border rounded-2xl shadow-xl overflow-hidden max-w-[700px] mx-auto">
+        <div className="hero-preview mt-16 bg-white border border-border rounded-2xl shadow-xl overflow-hidden max-w-175 mx-auto">
           {/* Card header */}
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-subtle">
             <span className="text-[13px] font-mono font-medium text-tertiary uppercase tracking-wider">
