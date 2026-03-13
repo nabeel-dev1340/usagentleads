@@ -177,9 +177,14 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <div className="flex items-center justify-center gap-2 mt-10 text-[14px] text-tertiary">
-          <ShieldCheck size={16} className="text-tertiary" />
-          Payments processed by Lemon Squeezy &middot; SSL encrypted &middot; Instant delivery
+        <div className="flex flex-col items-center gap-3 mt-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success-bg border border-success/20 text-[14px] text-success font-medium">
+            <ShieldCheck size={16} />
+            30-Day Money-Back Guarantee
+          </div>
+          <p className="text-[14px] text-tertiary">
+            Payments processed by Lemon Squeezy &middot; SSL encrypted &middot; Instant delivery
+          </p>
         </div>
 
         {/* Comparison table */}

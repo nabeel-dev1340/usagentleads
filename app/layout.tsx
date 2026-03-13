@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
-import { DM_Sans, JetBrains_Mono } from "next/font/google"
+import { Poppins, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { ScrollRevealProvider } from "@/components/layout/ScrollRevealProvider"
 import "./globals.css"
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
@@ -69,7 +69,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased bg-page text-ink`}>
+      <body className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased bg-page text-ink`}>
         <ScrollRevealProvider />
         <Navbar />
         <main>{children}</main>

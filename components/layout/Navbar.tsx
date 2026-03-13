@@ -54,6 +54,7 @@ export function Navbar() {
     { href: "/states", label: "Browse States" },
     { href: "/pricing", label: "Pricing" },
     { href: "/dashboard", label: "Dashboard" },
+    { href: "/contact", label: "Contact" },
   ]
 
   const initials = user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || "U"
@@ -134,12 +135,12 @@ export function Navbar() {
                 )}
               </div>
             ) : (
-              <button
-                onClick={handleSignIn}
-                className="btn-primary text-[14px] px-5 py-2.5"
+              <Link
+                href="/pricing"
+                className="btn-primary text-[14px] px-5 py-2.5 font-semibold"
               >
-                Sign In
-              </button>
+                Get 500K+ Agents — <span className="font-bold">$99</span>
+              </Link>
             )}
           </div>
 
@@ -205,12 +206,13 @@ export function Navbar() {
                   Sign Out
                 </button>
               ) : (
-                <button
-                  onClick={() => { handleSignIn(); setMobileOpen(false) }}
-                  className="btn-primary text-lg px-8 py-3"
+                <Link
+                  href="/pricing"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-primary text-lg px-8 py-3 font-semibold"
                 >
-                  Sign In
-                </button>
+                  Get 500K+ Agents — <span className="font-bold">$99</span>
+                </Link>
               )}
             </div>
           </div>

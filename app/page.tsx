@@ -1,7 +1,12 @@
 import { HeroSection } from "@/components/home/HeroSection"
 import { TrustBar } from "@/components/home/TrustBar"
+import { WhoIsThisFor } from "@/components/home/WhoIsThisFor"
 import { HowItWorks } from "@/components/home/HowItWorks"
+import { UseCases } from "@/components/home/UseCases"
 import { PricingCards } from "@/components/home/PricingCards"
+import { CompetitorComparison } from "@/components/home/CompetitorComparison"
+import { Testimonials } from "@/components/home/Testimonials"
+import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
 import { FAQSection } from "@/components/home/FAQSection"
 
@@ -34,8 +39,13 @@ export default function Home() {
       />
       <HeroSection />
       <TrustBar />
+      <WhoIsThisFor />
       <HowItWorks />
+      <UseCases />
       <PricingCards />
+      <CompetitorComparison />
+      <Testimonials />
+      <DataSources />
       <StatsCTA />
       <FAQSection />
     </>

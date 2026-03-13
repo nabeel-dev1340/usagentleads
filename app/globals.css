@@ -4,7 +4,7 @@
 @theme inline {
   --color-background: #F8F9FB;
   --color-foreground: #0F1623;
-  --font-sans: var(--font-dm-sans);
+  --font-sans: var(--font-poppins);
   --font-mono: var(--font-jetbrains-mono);
 
   /* Backgrounds */
