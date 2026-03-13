@@ -17,6 +17,8 @@ const organizationSchema = {
   "@type": "Organization",
   name: "USAgentLeads",
   url: "https://usagentleads.com",
+  logo: "https://usagentleads.com/icon-512.png",
+  image: "https://usagentleads.com/opengraph-image",
   description:
     "Verified US real estate agent contact data. CSV download. All 50 states.",
 }

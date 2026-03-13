@@ -1,0 +1,110 @@
+# USAgentLeads
+
+> Verified US real estate agent contact database. Buy name, email, and phone data for agents in all 50 states. CSV download. Starting at $10 per state.
+
+## About
+
+USAgentLeads provides verified contact information for US real estate agents. Our database includes full name, email address, and phone number for hundreds of thousands of licensed real estate agents across all 50 US states. Data is delivered as instant CSV downloads.
+
+## Products
+
+### State Pack — $10 per state (one-time)
+- Single state CSV download
+- Includes name, email, phone, and state
+- Instant delivery via email
+- No account required
+
+### Full Database — $99 (one-time)
+- All 50 states in one CSV
+- 478,000+ verified contacts
+- Instant delivery via email
+- No account required
+
+### Pro Dashboard — $49/month
+- Browse all agents in-app
+- Search and filter by state
+- Real-time data access
+- Cancel anytime
+
+## Pages
+
+- [Home](https://usagentleads.com): Landing page with overview, pricing, and FAQ
+- [Browse States](https://usagentleads.com/states): Browse and purchase agent data by individual US state
+- [Pricing](https://usagentleads.com/pricing): Detailed pricing comparison for all three plans
+
+## State Pages
+
+Each state has a dedicated page with agent count, sample data preview, and purchase option:
+
+- [Alabama](https://usagentleads.com/states/alabama)
+- [Alaska](https://usagentleads.com/states/alaska)
+- [Arizona](https://usagentleads.com/states/arizona)
+- [Arkansas](https://usagentleads.com/states/arkansas)
+- [California](https://usagentleads.com/states/california)
+- [Colorado](https://usagentleads.com/states/colorado)
+- [Connecticut](https://usagentleads.com/states/connecticut)
+- [Delaware](https://usagentleads.com/states/delaware)
+- [Florida](https://usagentleads.com/states/florida)
+- [Georgia](https://usagentleads.com/states/georgia)
+- [Hawaii](https://usagentleads.com/states/hawaii)
+- [Idaho](https://usagentleads.com/states/idaho)
+- [Illinois](https://usagentleads.com/states/illinois)
+- [Indiana](https://usagentleads.com/states/indiana)
+- [Iowa](https://usagentleads.com/states/iowa)
+- [Kansas](https://usagentleads.com/states/kansas)
+- [Kentucky](https://usagentleads.com/states/kentucky)
+- [Louisiana](https://usagentleads.com/states/louisiana)
+- [Maine](https://usagentleads.com/states/maine)
+- [Maryland](https://usagentleads.com/states/maryland)
+- [Massachusetts](https://usagentleads.com/states/massachusetts)
+- [Michigan](https://usagentleads.com/states/michigan)
+- [Minnesota](https://usagentleads.com/states/minnesota)
+- [Mississippi](https://usagentleads.com/states/mississippi)
+- [Missouri](https://usagentleads.com/states/missouri)
+- [Montana](https://usagentleads.com/states/montana)
+- [Nebraska](https://usagentleads.com/states/nebraska)
+- [Nevada](https://usagentleads.com/states/nevada)
+- [New Hampshire](https://usagentleads.com/states/new-hampshire)
+- [New Jersey](https://usagentleads.com/states/new-jersey)
+- [New Mexico](https://usagentleads.com/states/new-mexico)
+- [New York](https://usagentleads.com/states/new-york)
+- [North Carolina](https://usagentleads.com/states/north-carolina)
+- [North Dakota](https://usagentleads.com/states/north-dakota)
+- [Ohio](https://usagentleads.com/states/ohio)
+- [Oklahoma](https://usagentleads.com/states/oklahoma)
+- [Oregon](https://usagentleads.com/states/oregon)
+- [Pennsylvania](https://usagentleads.com/states/pennsylvania)
+- [Rhode Island](https://usagentleads.com/states/rhode-island)
+- [South Carolina](https://usagentleads.com/states/south-carolina)
+- [South Dakota](https://usagentleads.com/states/south-dakota)
+- [Tennessee](https://usagentleads.com/states/tennessee)
+- [Texas](https://usagentleads.com/states/texas)
+- [Utah](https://usagentleads.com/states/utah)
+- [Vermont](https://usagentleads.com/states/vermont)
+- [Virginia](https://usagentleads.com/states/virginia)
+- [Washington](https://usagentleads.com/states/washington)
+- [West Virginia](https://usagentleads.com/states/west-virginia)
+- [Wisconsin](https://usagentleads.com/states/wisconsin)
+- [Wyoming](https://usagentleads.com/states/wyoming)
+
+## Data Fields
+
+Each record in our database contains:
+- **Full Name**: Agent's legal name
+- **Email Address**: Verified professional email
+- **Phone Number**: Direct phone number (where available)
+- **State**: US state of licensure
+
+## FAQ
+
+**How is the data collected?**
+Our data is compiled from publicly available state licensing boards and professional directories, then verified for accuracy.
+
+**What format is the data in?**
+All data is delivered as CSV (comma-separated values) files, compatible with Excel, Google Sheets, and any CRM.
+
+**How often is the data updated?**
+Our database is updated regularly to maintain accuracy and include newly licensed agents.
+
+**Is there a refund policy?**
+Due to the digital nature of the product, all sales are final. We stand behind our data quality.

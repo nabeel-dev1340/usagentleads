@@ -9,6 +9,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://usagentleads.com/states",
   },
+  openGraph: {
+    title: "Browse Real Estate Agent Data by State — All 50 States | USAgentLeads",
+    description: "Buy verified real estate agent contact data for any US state. CSV download with name, email, phone. Starting at $10 per state.",
+    url: "https://usagentleads.com/states",
+    images: [{ url: "https://usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Browse Real Estate Agent Data by State — All 50 States",
+    description: "Verified real estate agent contacts for every US state. Starting at $10 per state.",
+    images: ["https://usagentleads.com/twitter-image"],
+  },
 }
 
 export default async function StatesPage() {

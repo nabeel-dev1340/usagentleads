@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { LogoIcon } from "@/components/ui/Logo"
 import { US_STATES } from "@/lib/utils/states"
 
 export function Footer() {
@@ -9,9 +10,12 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           {/* Brand */}
           <div>
-            <div className="mb-4">
-              <span className="text-white font-semibold text-[18px]">USAgent</span>
-              <span className="text-accent-mid font-semibold text-[18px]">Leads</span>
+            <div className="mb-4 flex items-center gap-2">
+              <LogoIcon className="h-7 w-7 text-white" />
+              <span>
+                <span className="text-white font-semibold text-[18px]">USAgent</span>
+                <span className="text-accent-mid font-semibold text-[18px]">Leads</span>
+              </span>
             </div>
             <p className="text-[14px] text-[#9CA3AF] leading-relaxed max-w-[220px]">
               Verified real estate agent contacts across all 50 US states.

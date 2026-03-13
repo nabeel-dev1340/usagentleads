@@ -16,6 +16,13 @@ export function generateStateMetadata(state: USState): Metadata {
       description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone. Instant CSV delivery. $10 one-time.`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
+      images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${state.name} Real Estate Agent Email List — ${count}+ Contacts`,
+      description: `Download a verified list of ${count}+ ${state.name} real estate agents. Instant CSV delivery. $10 one-time.`,
+      images: [`${BASE_URL}/twitter-image`],
     },
   }
 }

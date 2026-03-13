@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Menu, X, LogOut, LayoutDashboard, CreditCard } from "lucide-react"
+import { LogoIcon } from "@/components/ui/Logo"
 import type { User } from "@supabase/supabase-js"
 
 export function Navbar() {
@@ -68,9 +69,12 @@ export function Navbar() {
       >
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <Link href="/" className="text-[19px] font-semibold tracking-tight">
-            <span className="text-ink">USAgent</span>
-            <span className="text-accent">Leads</span>
+          <Link href="/" className="flex items-center gap-2 text-[19px] font-semibold tracking-tight">
+            <LogoIcon className="h-7 w-7 text-accent" />
+            <span>
+              <span className="text-ink">USAgent</span>
+              <span className="text-accent">Leads</span>
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -154,9 +158,12 @@ export function Navbar() {
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] bg-white md:hidden">
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 border-b border-border">
-            <Link href="/" className="text-[19px] font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
-              <span className="text-ink">USAgent</span>
-              <span className="text-accent">Leads</span>
+            <Link href="/" className="flex items-center gap-2 text-[19px] font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
+              <LogoIcon className="h-7 w-7 text-accent" />
+              <span>
+                <span className="text-ink">USAgent</span>
+                <span className="text-accent">Leads</span>
+              </span>
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
