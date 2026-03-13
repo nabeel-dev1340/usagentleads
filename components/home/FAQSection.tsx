@@ -94,7 +94,7 @@ export function FAQSection() {
           <h2 className="section-heading">Common Questions</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0 reveal">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-0 reveal">
           <div>
             {col1.map((faq, i) => (
               <FAQItem key={i} question={faq.question} answer={faq.answer} />

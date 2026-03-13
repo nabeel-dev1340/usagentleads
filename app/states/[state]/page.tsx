@@ -80,7 +80,7 @@ export default async function StatePage({ params }: Props) {
           </nav>
 
           {/* Two-column layout */}
-          <div className="flex gap-16 items-start pb-20">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start pb-20">
             {/* Left column */}
             <div className="flex-1 min-w-0">
               <p className="label-eyebrow mb-4">State Data</p>
@@ -88,12 +88,12 @@ export default async function StatePage({ params }: Props) {
               {/* Big state name */}
               <h1
                 className="font-semibold text-ink tracking-[-0.04em] leading-[0.9] mb-5"
-                style={{ fontSize: "clamp(56px, 9vw, 88px)" }}
+                style={{ fontSize: "clamp(36px, 10vw, 88px)" }}
               >
                 {state.name}
               </h1>
 
-              <p className="text-[17px] text-tertiary mb-10">
+              <p className="text-[15px] sm:text-[17px] text-tertiary mb-10">
                 Real Estate Agent Email List —{" "}
                 <span className="font-mono text-ink font-semibold ml-1">
                   {agentCount.toLocaleString()}
@@ -107,14 +107,14 @@ export default async function StatePage({ params }: Props) {
               </div>
 
               {/* 4-stat strip */}
-              <div className="bg-white border border-border rounded-xl p-6 grid grid-cols-3 gap-0 divide-x divide-border mb-10">
+              <div className="bg-white border border-border rounded-xl p-4 sm:p-6 grid grid-cols-3 gap-0 divide-x divide-border mb-10">
                 {[
                   { value: agentCount.toLocaleString(), label: "Total" },
                   { value: totalEmails.toLocaleString(), label: "Emails" },
                   { value: totalPhones.toLocaleString(), label: "Phones" },
                 ].map((stat) => (
-                  <div key={stat.label} className="text-center px-4">
-                    <div className="font-mono text-[28px] font-semibold text-ink">{stat.value}</div>
+                  <div key={stat.label} className="text-center px-2 sm:px-4">
+                    <div className="font-mono text-[20px] sm:text-[28px] font-semibold text-ink">{stat.value}</div>
                     <div className="text-[13px] font-mono uppercase tracking-wider text-tertiary mt-1">
                       {stat.label}
                     </div>
@@ -200,12 +200,12 @@ export default async function StatePage({ params }: Props) {
 
 function PurchaseCard({ stateCode, stateName, agentCount }: { stateCode: string; stateName: string; agentCount: number }) {
   return (
-    <div className="card p-7 border-accent/30 border-2 shadow-lg">
+    <div className="card p-5 sm:p-7 border-accent/30 border-2 shadow-lg">
       <p className="label-eyebrow mb-1">{stateName} Data</p>
       <p className="text-[13px] font-mono text-tertiary mb-5">One-time purchase</p>
 
       <div className="flex items-baseline gap-1.5 mb-1">
-        <span className="font-mono text-[48px] font-semibold text-ink leading-none">$10</span>
+        <span className="font-mono text-[36px] sm:text-[48px] font-semibold text-ink leading-none">$10</span>
         <span className="text-tertiary text-[15px]">one-time</span>
       </div>
       <p className="text-[14px] text-body mb-6">

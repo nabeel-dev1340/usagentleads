@@ -83,7 +83,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-[14px] font-medium text-tertiary transition-colors duration-150 hover:text-ink"
+                className="rounded-lg border border-transparent px-3 py-2 text-[14px] font-semibold text-body transition-all duration-150 hover:text-ink hover:border-border hover:bg-subtle"
               >
                 {link.label}
               </Link>
@@ -173,13 +173,13 @@ export function Navbar() {
               <X className="h-5 w-5" />
             </button>
           </div>
-          <div className="flex flex-col items-center justify-center gap-8 pt-24">
+          <div className="flex flex-col items-center justify-center gap-6 sm:gap-8 pt-16 sm:pt-24">
             {navLinks.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-[22px] font-medium text-ink transition-colors hover:text-accent"
+                className="text-[20px] sm:text-[22px] font-medium text-ink transition-colors hover:text-accent"
                 style={{
                   animation: `fade-in-up 0.4s ease-out forwards`,
                   animationDelay: `${i * 80}ms`,

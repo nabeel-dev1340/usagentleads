@@ -97,7 +97,7 @@ export function PricingCards() {
               <p className="text-[13px] font-mono text-tertiary mb-6">{plan.subtitle}</p>
 
               <div className="flex items-baseline gap-1.5 mb-8">
-                <span className="font-mono text-[52px] font-semibold text-ink leading-none">
+                <span className="font-mono text-[36px] sm:text-[52px] font-semibold text-ink leading-none">
                   {plan.price}
                 </span>
                 <span className="text-tertiary text-[15px]">{plan.period}</span>

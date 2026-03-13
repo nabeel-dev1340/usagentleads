@@ -117,7 +117,7 @@ export default function PricingPage() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative p-8 flex flex-col rounded-xl transition-all duration-200 ${
+              className={`relative p-5 sm:p-8 flex flex-col rounded-xl transition-all duration-200 ${
                 plan.highlighted
                   ? "bg-white border-2 border-accent shadow-[0_8px_40px_rgba(29,78,216,0.12),0_2px_8px_rgba(29,78,216,0.08)] scale-[1.02] max-sm:scale-100 hover:-translate-y-0.5"
                   : "card hover:-translate-y-0.5 hover:shadow-md"
@@ -137,7 +137,7 @@ export default function PricingPage() {
               <p className="text-[13px] font-mono text-tertiary mb-6">{plan.subtitle}</p>
 
               <div className="flex items-baseline gap-1.5 mb-8">
-                <span className="font-mono text-[52px] font-semibold text-ink leading-none">
+                <span className="font-mono text-[36px] sm:text-[52px] font-semibold text-ink leading-none">
                   {plan.price}
                 </span>
                 <span className="text-tertiary text-[15px]">{plan.period}</span>
@@ -183,8 +183,8 @@ export default function PricingPage() {
         </div>
 
         {/* Comparison table */}
-        <div className="mt-20 max-w-3xl mx-auto card overflow-hidden">
-          <table className="data-table">
+        <div className="mt-20 max-w-3xl mx-auto card overflow-hidden overflow-x-auto">
+          <table className="data-table min-w-120">
             <thead>
               <tr>
                 <th className="text-left">Feature</th>

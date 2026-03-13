@@ -12,7 +12,7 @@ const previewRows = [
 
 export function HeroSection() {
   return (
-    <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-6 pb-20 pt-10 overflow-hidden">
+    <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 sm:pb-20 pt-10 overflow-hidden">
       {/* Subtle editorial lines */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
@@ -34,7 +34,7 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-[780px] text-center">
         {/* Badge */}
-        <div className="hero-badge inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-border shadow-sm text-[14px] mb-10">
+        <div className="hero-badge inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-full bg-white border border-border shadow-sm text-[12px] sm:text-[14px] mb-10 flex-wrap justify-center">
           <span className="flex items-center gap-1.5 text-success font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
             Live Data
@@ -48,16 +48,16 @@ export function HeroSection() {
 
         {/* H1 */}
         <h1 className="hero-h1">
-          <span className="block text-tertiary font-light text-[40px] sm:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.025em]">
+          <span className="block text-tertiary font-light text-[28px] sm:text-[40px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-[-0.025em]">
             The Complete US
           </span>
-          <span className="block text-ink font-semibold text-[48px] sm:text-[60px] lg:text-[72px] leading-[1.0] tracking-[-0.03em]">
+          <span className="block text-ink font-semibold text-[32px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-none tracking-[-0.03em]">
             Real Estate Agent Database
           </span>
         </h1>
 
         {/* Subheadline */}
-        <p className="hero-sub text-[18px] text-tertiary mt-6 leading-relaxed">
+        <p className="hero-sub text-[14px] sm:text-[18px] text-tertiary mt-6 leading-relaxed">
           <span className="text-ink font-medium">Name</span>
           <span className="text-accent mx-2 font-bold">&middot;</span>
           <span className="text-ink font-medium">Email</span>

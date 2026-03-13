@@ -7,7 +7,7 @@ function StatItem({ value, suffix, label, active }: { value: number; suffix?: st
   const count = useCountUp(value, active)
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-1 py-2">
-      <span className="font-mono text-[30px] font-semibold text-ink leading-none">
+      <span className="font-mono text-[22px] sm:text-[30px] font-semibold text-ink leading-none">
         {count.toLocaleString()}{suffix}
       </span>
       <span className="text-[13px] font-mono uppercase tracking-wide text-body mt-1">{label}</span>
@@ -39,7 +39,7 @@ export function TrustBar() {
       className="bg-white border-y border-border py-8"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-center divide-x divide-border">
+        <div className="flex flex-wrap items-center justify-center gap-y-4 divide-x divide-border max-sm:divide-x-0">
           <StatItem value={500847} label="Total Contacts" active={inView} />
           <StatItem value={50} label="US States" active={inView} />
           <TextStatItem value="Name · Email · Phone" label="Fields Per Record" active={inView} />

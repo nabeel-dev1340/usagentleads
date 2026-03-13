@@ -7,16 +7,16 @@ export function Footer() {
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-7xl px-4 pt-16 pb-10 sm:px-6 lg:px-8">
         {/* Top columns */}
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-8 sm:gap-10 grid-cols-2 md:grid-cols-4">
           {/* Brand */}
           <div>
-            <div className="mb-4 flex items-center gap-2">
-              <LogoIcon className="h-7 w-7 text-white" />
+            <Link href="/" className="mb-4 flex items-center gap-2 text-[19px] font-semibold tracking-tight w-fit">
+              <LogoIcon className="h-7 w-7 text-white" detailClassName="fill-ink stroke-ink" />
               <span>
-                <span className="text-white font-semibold text-[18px]">USAgent</span>
-                <span className="text-accent-mid font-semibold text-[18px]">Leads</span>
+                <span className="text-white">USAgent</span>
+                <span className="text-accent-mid">Leads</span>
               </span>
-            </div>
+            </Link>
             <p className="text-[14px] text-[#9CA3AF] leading-relaxed max-w-[220px]">
               Verified real estate agent contacts across all 50 US states.
             </p>

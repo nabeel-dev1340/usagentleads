@@ -1,4 +1,10 @@
-export function LogoIcon({ className = "h-6 w-6" }: { className?: string }) {
+export function LogoIcon({
+  className = "h-6 w-6",
+  detailClassName = "fill-white stroke-white",
+}: {
+  className?: string
+  detailClassName?: string
+}) {
   return (
     <svg
       viewBox="0 0 64 64"
@@ -10,10 +16,10 @@ export function LogoIcon({ className = "h-6 w-6" }: { className?: string }) {
         d="M32 2C19.85 2 10 11.85 10 24c0 16.5 22 38 22 38s22-21.5 22-38C54 11.85 44.15 2 32 2z"
         fill="currentColor"
       />
-      <circle cx="32" cy="19" r="6" fill="white" />
+      <circle cx="32" cy="19" r="6" className={detailClassName} />
       <path
         d="M24 33c0-4.42 3.58-8 8-8s8 3.58 8 8"
-        stroke="white"
+        className={detailClassName}
         strokeWidth="4"
         strokeLinecap="round"
         fill="none"

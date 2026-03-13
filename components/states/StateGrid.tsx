@@ -32,11 +32,11 @@ export function StateGrid({ countMap }: StateGridProps) {
   return (
     <div>
       {/* Sort bar */}
-      <div className="mt-8 mb-6 flex items-center justify-between flex-wrap gap-4">
+      <div className="mt-8 mb-6 flex items-center justify-between flex-wrap gap-3">
         <p className="text-[14px] font-mono text-tertiary">
           {filtered.length} states available
         </p>
-        <div className="flex items-center gap-1 ml-auto">
+        <div className="flex items-center gap-1 max-sm:w-full">
           <span className="text-[14px] text-tertiary mr-2">Sort:</span>
           {(["Most Agents", "Alphabetical"] as const).map((opt) => (
             <button
@@ -55,7 +55,7 @@ export function StateGrid({ countMap }: StateGridProps) {
       </div>
 
       {/* Grid */}
-      <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {sorted.map((state, i) => (
           <StateCard key={state.code} state={state} index={i} />
         ))}

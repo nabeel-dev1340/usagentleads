@@ -35,7 +35,7 @@ export async function StatsCTA() {
           </p>
         </div>
 
-        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-10 gap-2 max-w-5xl mx-auto reveal-stagger">
+        <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 gap-2 max-w-5xl mx-auto reveal-stagger">
           {US_STATES.map((state) => {
             const count = countMap.get(state.name) ?? state.agentCount
             return (
