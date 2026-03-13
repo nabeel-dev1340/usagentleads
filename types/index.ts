@@ -1,11 +1,9 @@
 export interface Agent {
   id: string
-  full_name: string
+  name: string
   email: string | null
   phone: string | null
   state: string
-  state_full: string
-  created_at: string
 }
 
 export interface Purchase {

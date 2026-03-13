@@ -3,6 +3,8 @@ import { createServiceClient } from "@/lib/supabase/server"
 import { isValidUUID } from "@/lib/utils/security"
 import { rateLimit } from "@/lib/utils/rateLimit"
 
+const db = () => createServiceClient().schema("usagentleads")
+
 export async function GET(request: Request) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
@@ -19,10 +21,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Invalid token" }, { status: 400 })
   }
 
-  const supabase = createServiceClient()
-
   // Atomic: claim the token in a single update (prevents race condition)
-  const { data: purchase, error } = await supabase
+  const { data: purchase, error } = await db()
     .from("purchases")
     .update({ token_used: true })
     .eq("download_token", token)
@@ -32,33 +32,20 @@ export async function GET(request: Request) {
     .single()
 
   if (error || !purchase) {
-    // Check why it failed to give a useful error
-    const { data: existing } = await supabase
-      .from("purchases")
-      .select("token_used, status, expires_at")
-      .eq("download_token", token)
-      .single()
-
-    if (!existing) {
-      return NextResponse.json({ error: "Download link not found" }, { status: 404 })
-    }
-    if (existing.status !== "completed") {
-      return NextResponse.json({ error: "Purchase not completed" }, { status: 403 })
-    }
-    if (existing.token_used) {
-      return NextResponse.json({ error: "This download link has already been used" }, { status: 403 })
-    }
-    return NextResponse.json({ error: "Download link not found" }, { status: 404 })
+    return NextResponse.json(
+      { error: "Invalid or expired download link" },
+      { status: 403 }
+    )
   }
 
   if (purchase.expires_at && new Date(purchase.expires_at) < new Date()) {
     // Revert token_used since it's expired
-    await supabase
+    await db()
       .from("purchases")
       .update({ token_used: false })
       .eq("id", purchase.id)
     return NextResponse.json(
-      { error: "This download link has expired" },
+      { error: "Invalid or expired download link" },
       { status: 403 }
     )
   }
@@ -74,6 +61,7 @@ export async function GET(request: Request) {
   }
 
   // Generate signed URL
+  const supabase = createServiceClient()
   const { data: signedUrlData, error: storageError } = await supabase.storage
     .from("agent-csvs")
     .createSignedUrl(filePath, 300) // 5-minute expiry
@@ -87,7 +75,7 @@ export async function GET(request: Request) {
   }
 
   // Log download
-  await supabase.from("download_logs").insert({
+  await db().from("download_logs").insert({
     user_id: purchase.user_id,
     guest_email: purchase.guest_email,
     download_type: purchase.purchase_type,

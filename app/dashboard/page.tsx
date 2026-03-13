@@ -5,8 +5,10 @@ import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar"
 import { AgentTable } from "@/components/dashboard/AgentTable"
 import { SearchFilterBar } from "@/components/dashboard/SearchFilterBar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Search } from "lucide-react"
+import { Menu } from "lucide-react"
 import type { Agent } from "@/types"
+
+const COLLAPSED_KEY = "dashboard-sidebar-collapsed"
 
 export default function DashboardPage() {
   const [agents, setAgents] = useState<Agent[]>([])
@@ -16,6 +18,22 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [state, setState] = useState("")
+  const [pageSize, setPageSize] = useState(25)
+  const [collapsed, setCollapsed] = useState(false)
+
+  // Restore collapsed preference
+  useEffect(() => {
+    const saved = localStorage.getItem(COLLAPSED_KEY)
+    if (saved === "true") setCollapsed(true)
+  }, [])
+
+  const toggleCollapsed = () => {
+    setCollapsed((prev) => {
+      const next = !prev
+      localStorage.setItem(COLLAPSED_KEY, String(next))
+      return next
+    })
+  }
 
   const fetchAgents = useCallback(async () => {
     setLoading(true)
@@ -24,6 +42,7 @@ export default function DashboardPage() {
       if (state && state !== "all") params.set("state", state)
       if (search) params.set("search", search)
       params.set("page", String(page))
+      params.set("pageSize", String(pageSize))
 
       const res = await fetch(`/api/agents?${params.toString()}`)
       if (res.ok) {
@@ -37,7 +56,7 @@ export default function DashboardPage() {
     } finally {
       setLoading(false)
     }
-  }, [state, search, page])
+  }, [state, search, page, pageSize])
 
   useEffect(() => {
     fetchAgents()
@@ -61,15 +80,26 @@ export default function DashboardPage() {
     setPage(1)
   }
 
-  const perPage = 25
-  const start = (page - 1) * perPage + 1
-  const end = Math.min(page * perPage, count)
+  const handlePageSizeChange = (size: number) => {
+    setPageSize(size)
+    setPage(1)
+  }
+
+  const start = (page - 1) * pageSize + 1
+  const end = Math.min(page * pageSize, count)
 
   return (
-    <div className="flex h-[calc(100vh-4rem)]">
+    <div className="flex h-screen">
       {/* Desktop Sidebar */}
-      <aside className="hidden w-64 shrink-0 lg:block">
-        <DashboardSidebar activeState={state} onStateSelect={handleStateSelect} />
+      <aside
+        className={`hidden shrink-0 lg:block transition-all duration-200 ${collapsed ? "w-17" : "w-64"}`}
+      >
+        <DashboardSidebar
+          activeState={state}
+          onStateSelect={handleStateSelect}
+          collapsed={collapsed}
+          onToggleCollapse={toggleCollapsed}
+        />
       </aside>
 
       {/* Main Content */}
@@ -103,20 +133,18 @@ export default function DashboardPage() {
           </div>
 
           {/* Search/filter bar */}
-          <div className="mb-5">
-            <div className="flex items-center gap-3 flex-wrap">
-              <SearchFilterBar
-                search={search}
-                state={state}
-                onSearchChange={setSearch}
-                onStateChange={handleStateSelect}
-                onClear={handleClear}
-              />
-              <p className="font-mono text-[14px] text-tertiary ml-auto">
-                <span className="text-ink font-medium">{start}–{end}</span> of{" "}
-                <span className="text-ink font-medium">{count.toLocaleString()}</span> agents
-              </p>
-            </div>
+          <div className="mb-5 space-y-3">
+            <SearchFilterBar
+              search={search}
+              state={state}
+              onSearchChange={setSearch}
+              onStateChange={handleStateSelect}
+              onClear={handleClear}
+            />
+            <p className="font-mono text-[13px] sm:text-[14px] text-tertiary">
+              <span className="text-ink font-medium">{start}–{end}</span> of{" "}
+              <span className="text-ink font-medium">{count.toLocaleString()}</span> agents
+            </p>
           </div>
 
           <AgentTable
@@ -125,7 +153,9 @@ export default function DashboardPage() {
             page={page}
             totalPages={totalPages}
             loading={loading}
+            pageSize={pageSize}
             onPageChange={setPage}
+            onPageSizeChange={handlePageSizeChange}
           />
         </div>
       </div>

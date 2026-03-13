@@ -2,6 +2,7 @@
 
 import { Search, X } from "lucide-react"
 import { US_STATES } from "@/lib/utils/states"
+import { CustomSelect } from "@/components/ui/CustomSelect"
 
 interface SearchFilterBarProps {
   search: string
@@ -11,6 +12,11 @@ interface SearchFilterBarProps {
   onClear: () => void
 }
 
+const stateOptions = [
+  { value: "", label: "All States" },
+  ...US_STATES.map((s) => ({ value: s.code, label: s.name })),
+]
+
 export function SearchFilterBar({
   search,
   state,
@@ -19,11 +25,11 @@ export function SearchFilterBar({
   onClear,
 }: SearchFilterBarProps) {
   return (
-    <div className="flex items-center gap-3 flex-wrap">
-      <div className="relative flex-1 min-w-[220px] max-w-[380px]">
-        <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
+    <div className="flex items-center gap-2 sm:gap-3 flex-wrap w-full">
+      <div className="relative flex-1 min-w-0 sm:min-w-50 sm:max-w-95">
+        <Search size={15} className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 text-muted" />
         <input
-          className="input pl-10"
+          className="input pl-9 sm:pl-10"
           placeholder="Search by name or email..."
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
@@ -31,23 +37,19 @@ export function SearchFilterBar({
         />
       </div>
 
-      <select
-        className="input w-auto min-w-[160px]"
+      <CustomSelect
         value={state}
-        onChange={(e) => onStateChange(e.target.value)}
+        options={stateOptions}
+        onChange={onStateChange}
+        placeholder="All States"
         aria-label="Filter by state"
-      >
-        <option value="">All States</option>
-        {US_STATES.map((s) => (
-          <option key={s.code} value={s.code}>
-            {s.name}
-          </option>
-        ))}
-      </select>
+        className="w-full sm:w-auto"
+        minWidth={0}
+      />
 
       {(search || state) && (
-        <button onClick={onClear} className="btn-ghost" aria-label="Clear filters">
-          <X size={14} />
+        <button onClick={onClear} className="btn-ghost text-[13px] sm:text-[14px]" aria-label="Clear filters">
+          <X size={15} />
           Clear
         </button>
       )}

@@ -58,15 +58,16 @@ export async function proxy(request: NextRequest) {
     )
 
     const { data: subscription } = await serviceClient
+      .schema("usagentleads")
       .from("subscriptions")
       .select("status, current_period_end")
       .eq("user_id", user.id)
-      .eq("status", "active")
+      .in("status", ["active", "on_trial"])
       .single()
 
     const isActive =
       subscription &&
-      subscription.status === "active" &&
+      (subscription.status === "active" || subscription.status === "on_trial") &&
       (!subscription.current_period_end ||
         new Date(subscription.current_period_end) > new Date())
 

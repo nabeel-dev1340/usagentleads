@@ -16,12 +16,7 @@ export function SubscribeButton({ className }: { className?: string }) {
       } = await supabase.auth.getUser()
 
       if (!user) {
-        await supabase.auth.signInWithOAuth({
-          provider: "google",
-          options: {
-            redirectTo: `${window.location.origin}/auth/callback?next=/pricing`,
-          },
-        })
+        window.location.href = "/login?next=/pricing"
         return
       }
 

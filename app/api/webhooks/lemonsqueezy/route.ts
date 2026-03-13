@@ -4,6 +4,8 @@ import { createServiceClient } from "@/lib/supabase/server"
 import { sendDownloadEmail } from "@/lib/resend/emails"
 import { getStateByCode } from "@/lib/utils/states"
 
+const db = () => createServiceClient().schema("usagentleads")
+
 export async function POST(request: Request) {
   const rawBody = await request.text()
   const signature = request.headers.get("x-signature") || ""
@@ -26,8 +28,6 @@ export async function POST(request: Request) {
   const eventName = payload.meta?.event_name as string
   const data = payload.data
 
-  const supabase = createServiceClient()
-
   try {
     switch (eventName) {
       case "order_created": {
@@ -41,38 +41,39 @@ export async function POST(request: Request) {
         const stateCode = customData.state_code || null
         const amountPaid = data.attributes?.total || 0
 
-        // Idempotency check
-        const { data: existing } = await supabase
-          .from("purchases")
-          .select("id")
-          .eq("lemon_squeezy_order_id", orderId)
-          .single()
-
-        if (existing) {
-          return NextResponse.json({ message: "Already processed" })
-        }
+        // Skip subscription orders — handled by subscription_created
+        if (purchaseType === "subscription") break
 
         const userId = customData.user_id || null
 
-        const { data: purchase, error: insertError } = await supabase
+        // Atomic idempotency: upsert on unique lemon_squeezy_order_id
+        // If the order already exists, the onConflict will match and no changes are made
+        const { data: purchase, error: insertError } = await db()
           .from("purchases")
-          .insert({
-            user_id: userId,
-            guest_email: customerEmail,
-            purchase_type: purchaseType,
-            state_code: stateCode,
-            lemon_squeezy_order_id: orderId,
-            lemon_squeezy_customer_id: customerId,
-            amount_paid: amountPaid,
-            status: status === "paid" ? "completed" : "pending",
-            expires_at: new Date(
-              Date.now() + 48 * 60 * 60 * 1000
-            ).toISOString(),
-          })
+          .upsert(
+            {
+              user_id: userId,
+              guest_email: customerEmail,
+              purchase_type: purchaseType,
+              state_code: stateCode,
+              lemon_squeezy_order_id: orderId,
+              lemon_squeezy_customer_id: customerId,
+              amount_paid: amountPaid,
+              status: status === "paid" ? "completed" : "pending",
+              expires_at: new Date(
+                Date.now() + 48 * 60 * 60 * 1000
+              ).toISOString(),
+            },
+            { onConflict: "lemon_squeezy_order_id", ignoreDuplicates: true }
+          )
           .select("download_token")
           .single()
 
         if (insertError) {
+          // If ignoreDuplicates returned no row, it's already processed
+          if (insertError.code === "PGRST116") {
+            return NextResponse.json({ message: "Already processed" })
+          }
           console.error("Purchase insert error:", insertError)
           return NextResponse.json({ error: "DB error" }, { status: 500 })
         }
@@ -99,7 +100,7 @@ export async function POST(request: Request) {
 
       case "order_refunded": {
         const orderId = String(data.id)
-        await supabase
+        await db()
           .from("purchases")
           .update({ status: "refunded" })
           .eq("lemon_squeezy_order_id", orderId)
@@ -111,16 +112,20 @@ export async function POST(request: Request) {
         const customerId = String(data.attributes?.customer_id || "")
         const userId = payload.meta?.custom_data?.user_id
         const status = data.attributes?.status || "active"
+        const periodStart = data.attributes?.created_at || null
         const periodEnd = data.attributes?.renews_at || null
+        const trialEndsAt = data.attributes?.trial_ends_at || null
 
         if (userId) {
-          await supabase.from("subscriptions").upsert(
+          await db().from("subscriptions").upsert(
             {
               user_id: userId,
               lemon_squeezy_subscription_id: subId,
               lemon_squeezy_customer_id: customerId,
               status,
+              current_period_start: periodStart,
               current_period_end: periodEnd,
+              trial_ends_at: trialEndsAt,
             },
             { onConflict: "user_id" }
           )
@@ -132,12 +137,18 @@ export async function POST(request: Request) {
         const subId = String(data.id)
         const status = data.attributes?.status || "active"
         const periodEnd = data.attributes?.renews_at || null
+        const cancelAtPeriodEnd = data.attributes?.cancelled === true
+        const cancelledAt = data.attributes?.cancelled
+          ? data.attributes?.updated_at || new Date().toISOString()
+          : null
 
-        await supabase
+        await db()
           .from("subscriptions")
           .update({
             status,
             current_period_end: periodEnd,
+            cancel_at_period_end: cancelAtPeriodEnd,
+            cancelled_at: cancelledAt,
             updated_at: new Date().toISOString(),
           })
           .eq("lemon_squeezy_subscription_id", subId)
@@ -150,10 +161,11 @@ export async function POST(request: Request) {
         const newStatus =
           eventName === "subscription_cancelled" ? "cancelled" : "expired"
 
-        await supabase
+        await db()
           .from("subscriptions")
           .update({
             status: newStatus,
+            cancelled_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
           })
           .eq("lemon_squeezy_subscription_id", subId)

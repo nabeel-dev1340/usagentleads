@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
 
   if (
     !authHeader ||
+    authHeader.length !== expected.length ||
     !crypto.timingSafeEqual(
       Buffer.from(authHeader),
       Buffer.from(expected)

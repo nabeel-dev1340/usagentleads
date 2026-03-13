@@ -17,7 +17,7 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.lemonsqueezy.com",
+      "script-src 'self' 'unsafe-inline' https://app.lemonsqueezy.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https:",
@@ -36,10 +36,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "*.supabase.co",
-      },
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
       },
     ],
   },

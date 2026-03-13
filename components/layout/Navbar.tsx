@@ -35,13 +35,8 @@ export function Navbar() {
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
-  const handleSignIn = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
-      },
-    })
+  const handleSignIn = () => {
+    window.location.href = "/login?next=/dashboard"
   }
 
   const handleSignOut = async () => {

@@ -1,15 +1,23 @@
 export default function DashboardLoading() {
   return (
-    <div className="flex h-[calc(100vh-4rem)]">
+    <div className="flex h-screen">
       <aside className="hidden w-64 shrink-0 border-r border-border bg-white lg:block">
-        <div className="p-5 space-y-3">
+        <div className="px-5 py-4 border-b border-border">
           <div className="h-6 w-32 rounded-md bg-subtle animate-pulse" />
-          <div className="h-5 w-full rounded-md bg-subtle animate-pulse" />
-          <div className="h-5 w-full rounded-md bg-subtle animate-pulse" />
-          <div className="h-5 w-full rounded-md bg-subtle animate-pulse" />
+        </div>
+        <div className="px-3 py-3 border-b border-border space-y-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="h-9 w-full rounded-lg bg-subtle animate-pulse" />
+          ))}
+        </div>
+        <div className="px-3 py-3 space-y-1">
+          <div className="h-4 w-16 rounded bg-subtle animate-pulse mx-3 mb-2" />
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="h-7 w-full rounded-lg bg-subtle animate-pulse" />
+          ))}
         </div>
       </aside>
-      <div className="flex-1 p-8 bg-page">
+      <div className="flex-1 p-8 max-sm:p-4 bg-page">
         <div className="mb-8 h-7 w-48 rounded-md bg-subtle animate-pulse" />
         <div className="flex gap-3 mb-6">
           <div className="h-10 flex-1 rounded-lg bg-subtle animate-pulse" />

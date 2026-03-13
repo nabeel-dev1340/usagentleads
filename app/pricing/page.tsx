@@ -70,12 +70,13 @@ const plans = [
     subtitle: "Monthly subscription",
     price: "$49",
     period: "/ month",
+    trial: "3-day free trial",
     features: [
       { text: "Browse all agents in-app", included: true },
       { text: "Search & filter by state", included: true },
       { text: "Real-time data access", included: true },
       { text: "Cancel anytime", included: true },
-      { text: "Google Sign In required", included: true },
+      { text: "3-day free trial included", included: true },
     ] as Feature[],
     cta: "subscribe",
     href: "/pricing",
@@ -89,7 +90,7 @@ const comparisonRows = [
   { label: "CSV download", state: true, full: true, pro: false },
   { label: "Dashboard access", state: false, full: false, pro: true },
   { label: "Search & filter", state: false, full: false, pro: true },
-  { label: "Account required", state: false, full: false, pro: true },
+  { label: "Account required", state: false, full: false, pro: "Email" },
   { label: "Delivery", state: "Email CSV", full: "Email CSV", pro: "Instant" },
 ]
 
@@ -136,12 +137,17 @@ export default function PricingPage() {
               </p>
               <p className="text-[13px] font-mono text-tertiary mb-6">{plan.subtitle}</p>
 
-              <div className="flex items-baseline gap-1.5 mb-8">
+              <div className="flex items-baseline gap-1.5 mb-2">
                 <span className="font-mono text-[36px] sm:text-[52px] font-semibold text-ink leading-none">
                   {plan.price}
                 </span>
                 <span className="text-tertiary text-[15px]">{plan.period}</span>
               </div>
+              {"trial" in plan && plan.trial ? (
+                <p className="text-[13px] font-medium text-accent mb-6">{plan.trial}</p>
+              ) : (
+                <div className="mb-6" />
+              )}
 
               <div className="h-px bg-border mb-8" />
 

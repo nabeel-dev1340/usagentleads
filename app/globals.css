@@ -71,6 +71,10 @@ html {
   scroll-behavior: smooth;
 }
 
+button, [role="button"], select {
+  cursor: pointer;
+}
+
 html, body {
   background-color: #F8F9FB;
   color: #0F1623;
@@ -180,6 +184,18 @@ html, body {
     @apply inline-flex items-center gap-1.5 text-[13px]
            text-success font-medium bg-success-bg
            px-2.5 py-1 rounded-full border border-success/20;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center gap-1.5 text-[13px]
+           text-amber-600 font-medium bg-amber-50
+           px-2.5 py-1 rounded-full border border-amber-200;
+  }
+
+  .badge-info {
+    @apply inline-flex items-center gap-1.5 text-[13px]
+           text-accent font-medium bg-accent-light
+           px-2.5 py-1 rounded-full border border-accent/20;
   }
 
   /* ── Tables ──────────────────────────────────── */
@@ -322,3 +338,4 @@ html, body {
   filter: blur(3px);
   user-select: none;
 }
+

@@ -1,8 +1,9 @@
 import { VALID_STATE_CODES } from "./states"
 
 export function sanitizeSearchInput(input: string): string {
+  // Whitelist: only allow alphanumeric, spaces, hyphens, dots, and @
   return input
-    .replace(/[%_'";\-\-]/g, "")
+    .replace(/[^a-zA-Z0-9\s\-\.@]/g, "")
     .trim()
     .slice(0, 100)
 }

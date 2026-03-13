@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
 import { createCheckout } from "@/lib/lemonsqueezy/client"
 import { isValidStateCode } from "@/lib/utils/security"
+import { rateLimit } from "@/lib/utils/rateLimit"
 import { z } from "zod"
 
 const checkoutSchema = z.object({
@@ -11,6 +12,13 @@ const checkoutSchema = z.object({
 
 export async function POST(request: Request) {
   try {
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const { success } = rateLimit(`checkout:${ip}`, 10)
+    if (!success) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+    }
+
     const body = await request.json()
     const parsed = checkoutSchema.safeParse(body)
 

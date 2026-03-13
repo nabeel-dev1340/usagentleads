@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server"
 import { createClient, createServiceClient } from "@/lib/supabase/server"
 import { sanitizeSearchInput, isValidStateCode, clampPage } from "@/lib/utils/security"
+import { getStateByCode } from "@/lib/utils/states"
 import { rateLimit } from "@/lib/utils/rateLimit"
 
-const PAGE_SIZE = 25
+const VALID_PAGE_SIZES = [25, 50, 100] as const
+const DEFAULT_PAGE_SIZE = 25
 
 export async function GET(request: Request) {
   // Auth check
@@ -25,15 +27,16 @@ export async function GET(request: Request) {
   // Check active subscription
   const serviceClient = createServiceClient()
   const { data: subscription } = await serviceClient
+    .schema("usagentleads")
     .from("subscriptions")
     .select("status, current_period_end")
     .eq("user_id", user.id)
-    .eq("status", "active")
+    .in("status", ["active", "on_trial"])
     .single()
 
   const isActive =
     subscription &&
-    subscription.status === "active" &&
+    (subscription.status === "active" || subscription.status === "on_trial") &&
     (!subscription.current_period_end ||
       new Date(subscription.current_period_end) > new Date())
 
@@ -49,26 +52,35 @@ export async function GET(request: Request) {
   const state = searchParams.get("state") || ""
   const search = searchParams.get("search") || ""
   const page = clampPage(searchParams.get("page") || "1")
+  const rawSize = Number(searchParams.get("pageSize") || DEFAULT_PAGE_SIZE)
+  const pageSize = VALID_PAGE_SIZES.includes(rawSize as 25 | 50 | 100) ? rawSize : DEFAULT_PAGE_SIZE
 
-  const from = (page - 1) * PAGE_SIZE
-  const to = from + PAGE_SIZE - 1
+  const from = (page - 1) * pageSize
+  const to = from + pageSize - 1
 
-  // Build query
+  // Build query — exclude rows with empty/junk names (must contain at least 2 letters)
   let query = serviceClient
-    .from("agents")
-    .select("*", { count: "exact" })
-    .order("full_name", { ascending: true })
+    .schema("usagentleads")
+    .from("leads")
+    .select("id, name, email, phone, state", { count: "exact" })
+    .not("name", "is", null)
+    .neq("name", "")
+    .filter("name", "match", "[a-zA-Z]{2,}")
+    .order("name", { ascending: true })
     .range(from, to)
 
   if (state && isValidStateCode(state)) {
-    query = query.eq("state", state.toUpperCase())
+    const stateEntry = getStateByCode(state)
+    if (stateEntry) {
+      query = query.eq("state", stateEntry.name)
+    }
   }
 
   if (search) {
     const sanitized = sanitizeSearchInput(search)
     if (sanitized) {
       query = query.or(
-        `full_name.ilike.%${sanitized}%,email.ilike.%${sanitized}%`
+        `name.ilike.%${sanitized}%,email.ilike.%${sanitized}%`
       )
     }
   }
@@ -84,6 +96,6 @@ export async function GET(request: Request) {
     data: data || [],
     count: count || 0,
     page,
-    totalPages: Math.ceil((count || 0) / PAGE_SIZE),
+    totalPages: Math.ceil((count || 0) / pageSize),
   })
 }
