@@ -1,0 +1,23 @@
+name: IndexNow URL Submission
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # Daily at 7:00 AM UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  submit-urls:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit URLs to IndexNow
+        run: |
+          response=$(curl -s -L -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://www.usagentleads.com/api/cron/indexnow")
+
+          if [ "$response" != "200" ]; then
+            echo "IndexNow submission failed with status: $response"
+            exit 1
+          fi
+
+          echo "IndexNow URLs submitted successfully"
