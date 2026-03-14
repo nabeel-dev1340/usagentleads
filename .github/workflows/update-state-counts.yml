@@ -13,7 +13,7 @@ jobs:
         run: |
           response=$(curl -s -L -o /dev/null -w "%{http_code}" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "${{ secrets.APP_URL }}/api/cron/update-state-counts")
+            "https://www.usagentleads.com/api/cron/update-state-counts")
 
           if [ "$response" != "200" ]; then
             echo "Cron failed with status: $response"
