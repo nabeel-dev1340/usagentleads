@@ -7,6 +7,10 @@ export const metadata: Metadata = {
     "Get in touch with USAgentLeads. Questions about our real estate agent database, pricing, or data quality? We're here to help.",
   alternates: {
     canonical: "https://usagentleads.com/contact",
+    languages: {
+      "en-US": "https://usagentleads.com/contact",
+      "x-default": "https://usagentleads.com/contact",
+    },
   },
   openGraph: {
     title: "Contact Us | USAgentLeads",

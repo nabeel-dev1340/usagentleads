@@ -2,10 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { US_STATES, getStateBySlug, formatAgentCount } from "@/lib/utils/states"
-import { generateStateMetadata, generateBreadcrumbSchema, generateProductSchema } from "@/lib/utils/seo"
+import { generateStateMetadata, generateBreadcrumbSchema, generateProductSchema, generateDatasetSchema, generateFAQSchema } from "@/lib/utils/seo"
+import { getStateContent, getStateFAQs } from "@/lib/utils/state-content"
+import { STATE_NEIGHBORS } from "@/lib/utils/state-neighbors"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
+import { StateFAQ } from "@/components/states/StateFAQ"
 import { ChevronRight, Check, Lock, ShieldCheck } from "lucide-react"
 import { createServiceClient } from "@/lib/supabase/server"
+
+export const revalidate = 86400
 
 interface Props {
   params: Promise<{ state: string }>
@@ -19,7 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { state: slug } = await params
   const state = getStateBySlug(slug)
   if (!state) return {}
-  return generateStateMetadata(state)
+  const content = getStateContent(slug)
+  return generateStateMetadata(state, content?.cities)
 }
 
 const sampleData = [
@@ -53,20 +59,31 @@ export default async function StatePage({ params }: Props) {
     { name: state.name, url: `https://usagentleads.com/states/${state.slug}` },
   ])
   const product = generateProductSchema(state)
+  const dataset = generateDatasetSchema(state)
 
-  const stateIndex = US_STATES.findIndex((s) => s.code === state.code)
-  const neighbors = [
-    US_STATES[(stateIndex - 1 + US_STATES.length) % US_STATES.length],
-    US_STATES[(stateIndex + 1) % US_STATES.length],
-    US_STATES[(stateIndex + 2) % US_STATES.length],
-    US_STATES[(stateIndex + 3) % US_STATES.length],
-  ]
+  const stateContent = getStateContent(slug)
+  const faqs = getStateFAQs(state, agentCount)
+  const faqSchema = generateFAQSchema(faqs)
+
+  // Geographic neighbors (fallback to alphabetical if not mapped)
+  const neighborSlugs = STATE_NEIGHBORS[slug]
+  const neighbors = neighborSlugs
+    ? neighborSlugs.map((s) => getStateBySlug(s)).filter(Boolean) as typeof US_STATES[number][]
+    : (() => {
+        const idx = US_STATES.findIndex((s) => s.code === state.code)
+        return [
+          US_STATES[(idx - 1 + US_STATES.length) % US_STATES.length],
+          US_STATES[(idx + 1) % US_STATES.length],
+          US_STATES[(idx + 2) % US_STATES.length],
+          US_STATES[(idx + 3) % US_STATES.length],
+        ]
+      })()
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, product]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, product, dataset, faqSchema]) }}
       />
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -125,9 +142,9 @@ export default async function StatePage({ params }: Props) {
               {/* Sample data preview */}
               <div className="card overflow-hidden mb-10">
                 <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-subtle">
-                  <span className="text-[13px] font-mono font-semibold text-tertiary uppercase tracking-wider">
+                  <h2 className="text-[13px] font-mono font-semibold text-tertiary uppercase tracking-wider">
                     Sample Preview
-                  </span>
+                  </h2>
                   <span className="text-[13px] text-tertiary font-mono">
                     Showing 1 of {agentCount.toLocaleString()} records
                   </span>
@@ -163,11 +180,59 @@ export default async function StatePage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Neighboring states */}
-              <div>
-                <p className="text-[13px] font-mono uppercase tracking-wider text-tertiary mb-4">
-                  Also Available
+              {/* About this state's data */}
+              {stateContent && (
+                <section className="mb-10">
+                  <h2 className="text-[17px] font-semibold text-ink mb-3">
+                    About {state.name} Real Estate Agent Data
+                  </h2>
+                  <p className="text-[15px] text-body leading-[1.8]">
+                    {stateContent.description}
+                  </p>
+                </section>
+              )}
+
+              {/* What's included */}
+              <section className="mb-10">
+                <h2 className="text-[17px] font-semibold text-ink mb-3">
+                  What You Get in the {state.name} Agent List
+                </h2>
+                <p className="text-[15px] text-body mb-4">
+                  Your {state.name} CSV download includes {agentCount.toLocaleString()} verified records, each containing:
                 </p>
+                <ul className="space-y-2.5 text-[15px] text-body">
+                  <li className="flex items-start gap-2.5">
+                    <Check size={15} className="text-success shrink-0 mt-0.5" />
+                    <span><strong>Full Name</strong> — the agent&apos;s registered legal name</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check size={15} className="text-success shrink-0 mt-0.5" />
+                    <span><strong>Email Address</strong> — {totalEmails.toLocaleString()} verified professional emails</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check size={15} className="text-success shrink-0 mt-0.5" />
+                    <span><strong>Phone Number</strong> — {totalPhones.toLocaleString()} direct phone numbers</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <Check size={15} className="text-success shrink-0 mt-0.5" />
+                    <span><strong>State</strong> — {state.name} ({state.code})</span>
+                  </li>
+                </ul>
+              </section>
+
+              {/* FAQ */}
+              <section className="mb-10">
+                <h2 className="text-[17px] font-semibold text-ink mb-4">
+                  Frequently Asked Questions
+                </h2>
+                <StateFAQ faqs={faqs} />
+              </section>
+
+              {/* Neighboring states */}
+              <section>
+                <h2 className="text-[13px] font-mono uppercase tracking-wider text-tertiary mb-4">
+                  Agent Lists for Nearby States
+                </h2>
                 <div className="flex flex-wrap gap-2">
                   {neighbors.map((s) => (
                     <Link
@@ -184,7 +249,14 @@ export default async function StatePage({ params }: Props) {
                     </Link>
                   ))}
                 </div>
-              </div>
+                <Link
+                  href="/states"
+                  className="inline-flex items-center gap-1.5 mt-4 text-[14px] text-accent font-medium hover:underline"
+                >
+                  View All 50 States
+                  <ChevronRight size={14} />
+                </Link>
+              </section>
             </div>
 
             {/* Right column — sticky purchase card (desktop) */}

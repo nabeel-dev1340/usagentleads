@@ -15,6 +15,7 @@ const websiteSchema = {
   "@type": "WebSite",
   name: "USAgentLeads",
   url: "https://usagentleads.com",
+  inLanguage: "en-US",
 }
 
 const organizationSchema = {
@@ -26,6 +27,18 @@ const organizationSchema = {
   image: "https://usagentleads.com/opengraph-image",
   description:
     "Verified US real estate agent contact data. CSV download. All 50 states.",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+    sameAs: "https://en.wikipedia.org/wiki/United_States",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "support@usagentleads.com",
+    contactType: "customer service",
+    areaServed: "US",
+    availableLanguage: "English",
+  },
 }
 
 export default function Home() {

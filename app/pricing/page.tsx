@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     "Buy US real estate agent contact data starting at $10 per state. Full 50-state database for $99. Pro Dashboard for $49/month.",
   alternates: {
     canonical: "https://usagentleads.com/pricing",
+    languages: {
+      "en-US": "https://usagentleads.com/pricing",
+      "x-default": "https://usagentleads.com/pricing",
+    },
   },
   openGraph: {
     title: "Pricing — Real Estate Agent Data Starting at $10 | USAgentLeads",

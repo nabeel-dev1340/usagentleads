@@ -33,6 +33,12 @@ export const metadata: Metadata = {
     "real estate agent database",
     "real estate agent email list",
     "realtor contacts usa",
+    "buy real estate agent list",
+    "realtor mailing list",
+    "real estate agent phone numbers",
+    "licensed realtor database",
+    "real estate agent CSV download",
+    "realtor lead list USA",
   ],
   icons: {
     icon: [
@@ -59,7 +65,18 @@ export const metadata: Metadata = {
       "Buy verified US real estate agent contacts by state or nationwide. CSV download. Starting at $10.",
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: "https://usagentleads.com" },
+  alternates: {
+    canonical: "https://usagentleads.com",
+    languages: {
+      "en-US": "https://usagentleads.com",
+      "x-default": "https://usagentleads.com",
+    },
+  },
+  other: {
+    "geo.region": "US",
+    "geo.placename": "United States",
+    "content-language": "en-US",
+  },
 }
 
 export default function RootLayout({
@@ -68,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-US">
       <body className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased bg-page text-ink`}>
         <ScrollRevealProvider />
         <Navbar />

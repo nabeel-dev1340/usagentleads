@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { StateGrid } from "@/components/states/StateGrid"
 import { createServiceClient } from "@/lib/supabase/server"
 
@@ -8,6 +9,10 @@ export const metadata: Metadata = {
     "Buy verified real estate agent contact data for any US state. CSV download with name, email, phone. Starting at $10 per state.",
   alternates: {
     canonical: "https://usagentleads.com/states",
+    languages: {
+      "en-US": "https://usagentleads.com/states",
+      "x-default": "https://usagentleads.com/states",
+    },
   },
   openGraph: {
     title: "Browse Real Estate Agent Data by State — All 50 States | USAgentLeads",
@@ -51,6 +56,13 @@ export default async function StatesPage() {
             </p>
           </div>
         </div>
+
+        <p className="text-[15px] text-body leading-[1.8] max-w-2xl mt-8 mb-2">
+          Browse verified real estate agent contact data for all 50 US states. Each state pack includes name, email, and phone number for every licensed agent, delivered as an instant CSV download for $10.{" "}
+          <Link href="/pricing" className="text-accent font-medium hover:underline">
+            Looking for all 50 states? Get the Full Database for $99 →
+          </Link>
+        </p>
 
         <StateGrid countMap={countMap} />
       </div>
