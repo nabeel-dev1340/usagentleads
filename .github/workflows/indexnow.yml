@@ -8,10 +8,11 @@ on:
 jobs:
   submit-urls:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Submit URLs to IndexNow
         run: |
-          response=$(curl -s -L -o /dev/null -w "%{http_code}" \
+          response=$(curl -s -L -o /dev/null -w "%{http_code}" --max-time 600 \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             "https://www.usagentleads.com/api/cron/indexnow")
 

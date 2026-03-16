@@ -1,3 +1,4 @@
+import Script from "next/script"
 import type { Metadata } from "next"
 import { Poppins, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     "realtor email list",
     "real estate agent database",
     "real estate agent email list",
+    "realtors email",
     "realtor contacts usa",
     "buy real estate agent list",
     "realtor mailing list",
@@ -39,6 +41,9 @@ export const metadata: Metadata = {
     "licensed realtor database",
     "real estate agent CSV download",
     "realtor lead list USA",
+    "real estate email database",
+    "list of real estate agents email addresses",
+    "find real estate agent emails and phone numbers",
   ],
   icons: {
     icon: [
@@ -86,6 +91,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-US">
+      <head>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-T91HEN5X72');
+          `}
+        </Script>
+      </head>
       <body className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased bg-page text-ink`}>
         <ScrollRevealProvider />
         <Navbar />

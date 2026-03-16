@@ -272,16 +272,28 @@ export function getStateFAQs(
       answer: `Our database contains ${agentCount.toLocaleString()}+ verified real estate agent contacts in ${state.name}, including name, email address, and phone number.`,
     },
     {
-      question: `What format is the ${state.name} agent list delivered in?`,
-      answer: `The ${state.name} real estate agent list is delivered as a CSV file immediately after purchase. It's compatible with Excel, Google Sheets, and any CRM that supports CSV import.`,
+      question: `Where can I find a realtor email list for ${state.name}?`,
+      answer: `USAgentLeads provides a complete ${state.name} realtor email list with ${agentCount.toLocaleString()}+ verified contacts. Download the full email database instantly as a CSV file for $10 one-time.`,
     },
     {
-      question: `How current is the ${state.name} agent data?`,
+      question: `How do I find emails and phone numbers of real estate agents in ${state.name}?`,
+      answer: `The easiest way to find ${state.name} real estate agent emails and phone numbers is to download our verified database. It includes ${agentCount.toLocaleString()}+ agent contacts with name, email, and phone — sourced from public licensing records and professional directories.`,
+    },
+    {
+      question: `What format is the ${state.name} agent list delivered in?`,
+      answer: `The ${state.name} real estate agent email database is delivered as a CSV file immediately after purchase. It's compatible with Excel, Google Sheets, and any CRM that supports CSV import.`,
+    },
+    {
+      question: `How current is the ${state.name} real estate email database?`,
       answer: `The ${state.name} agent contact data is sourced from publicly available state licensing records and professional directories, and is regularly verified for accuracy.`,
     },
     {
-      question: `Can I use the ${state.name} agent list for email marketing?`,
+      question: `Can I use the ${state.name} realtor email list for email marketing?`,
       answer: `Yes. The data is sourced from public professional directories and business listings. As the sender, you are responsible for complying with CAN-SPAM regulations for commercial email outreach.`,
+    },
+    {
+      question: `Is this the complete list of real estate agents in ${state.name}?`,
+      answer: `Our ${state.name} database includes ${agentCount.toLocaleString()}+ licensed real estate agents and realtors. The list is compiled from public state licensing boards and professional directories to provide the most comprehensive coverage available.`,
     },
   ]
 }

@@ -110,12 +110,15 @@ export default async function StatePage({ params }: Props) {
                 {state.name}
               </h1>
 
-              <p className="text-[15px] sm:text-[17px] text-tertiary mb-10">
-                Real Estate Agent Email List —{" "}
+              <p className="text-[15px] sm:text-[17px] text-tertiary mb-4">
+                Realtor Email List & Contact Database —{" "}
                 <span className="font-mono text-ink font-semibold ml-1">
                   {agentCount.toLocaleString()}
                 </span>{" "}
                 verified contacts
+              </p>
+              <p className="text-[14px] text-body/70 mb-10">
+                Download {state.name} real estate agent emails and phone numbers. The complete {state.name} realtor email database with instant CSV delivery.
               </p>
 
               {/* Mobile CTA */}
@@ -184,7 +187,7 @@ export default async function StatePage({ params }: Props) {
               {stateContent && (
                 <section className="mb-10">
                   <h2 className="text-[17px] font-semibold text-ink mb-3">
-                    About {state.name} Real Estate Agent Data
+                    {state.name} Real Estate Agent Email Database
                   </h2>
                   <p className="text-[15px] text-body leading-[1.8]">
                     {stateContent.description}

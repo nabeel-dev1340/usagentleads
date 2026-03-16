@@ -7,14 +7,20 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
   const count = state.agentCount.toLocaleString()
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 3).join(", ")} and more.` : ""
   return {
-    title: `${state.name} Real Estate Agent Email List — ${count}+ Contacts`,
-    description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone.${cityText} Instant CSV delivery. $10 one-time.`,
+    title: `${state.name} Realtor Email List & Database — ${count}+ Contacts`,
+    description: `Download ${count}+ ${state.name} real estate agent emails and phone numbers. Verified realtor email list with name, email, phone.${cityText} CSV download. $10 one-time.`,
     keywords: [
       `${state.name} real estate agent list`,
-      `${state.code} realtor email list`,
+      `realtor email list ${state.name}`,
+      `${state.name} real estate email database`,
+      `${state.name} realtor email list`,
       `buy ${state.name} agent contacts`,
       `${state.name} realtor database`,
       `${state.name} real estate agent email addresses`,
+      `${state.name} real estate agent phone numbers`,
+      `find real estate agents ${state.name}`,
+      `${state.name} realtors email`,
+      `list of real estate agents ${state.name}`,
     ],
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
@@ -28,16 +34,16 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
       "geo.placename": state.name,
     },
     openGraph: {
-      title: `${state.name} Real Estate Agent Email List — ${count}+ Contacts | USAgentLeads`,
-      description: `Download a verified list of ${count}+ ${state.name} real estate agents with name, email, and phone.${cityText} Instant CSV delivery. $10 one-time.`,
+      title: `${state.name} Realtor Email List & Database — ${count}+ Contacts | USAgentLeads`,
+      description: `Download ${count}+ ${state.name} real estate agent emails and phone numbers. Verified realtor email list with name, email, phone.${cityText} CSV download. $10 one-time.`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${state.name} Real Estate Agent Email List — ${count}+ Contacts`,
-      description: `Download a verified list of ${count}+ ${state.name} real estate agents.${cityText} Instant CSV delivery. $10 one-time.`,
+      title: `${state.name} Realtor Email List & Database — ${count}+ Contacts`,
+      description: `Download ${count}+ ${state.name} real estate agent emails and phone numbers.${cityText} CSV download. $10 one-time.`,
       images: [`${BASE_URL}/twitter-image`],
     },
   }
@@ -62,8 +68,8 @@ export function generateProductSchema(state: USState) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${state.name} Real Estate Agent Email List`,
-    description: `Verified list of ${state.agentCount.toLocaleString()}+ ${state.name} real estate agents with name, email, and phone.`,
+    name: `${state.name} Realtor Email List & Contact Database`,
+    description: `Verified database of ${state.agentCount.toLocaleString()}+ ${state.name} real estate agent emails and phone numbers. Download the complete realtor email list.`,
     image: "https://usagentleads.com/opengraph-image",
     brand: {
       "@type": "Brand",
@@ -140,8 +146,8 @@ export function generateDatasetSchema(state: USState) {
   return {
     "@context": "https://schema.org",
     "@type": "Dataset",
-    name: `${state.name} Real Estate Agent Contact List`,
-    description: `Verified contact data for ${state.agentCount.toLocaleString()}+ licensed real estate agents in ${state.name}, including name, email, and phone number.`,
+    name: `${state.name} Real Estate Agent Email Database`,
+    description: `Verified email database of ${state.agentCount.toLocaleString()}+ licensed realtors in ${state.name}. Includes name, email address, and phone number for each agent.`,
     url: `${BASE_URL}/states/${state.slug}`,
     creator: {
       "@type": "Organization",

@@ -29,28 +29,29 @@ export async function GET(request: NextRequest) {
     ...US_STATES.map((state) => `${BASE_URL}/states/${state.slug}`),
   ]
 
-  const body = {
-    host: HOST,
-    key: INDEXNOW_KEY,
-    keyLocation: `${BASE_URL}/${INDEXNOW_KEY}.txt`,
-    urlList,
-  }
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+  const keyLocation = `${BASE_URL}/${INDEXNOW_KEY}.txt`
+  const results: { url: string; status: number }[] = []
+  const failed: string[] = []
 
-  const response = await fetch("https://api.indexnow.org/IndexNow", {
-    method: "POST",
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify(body),
-  })
-
-  if (!response.ok) {
-    return NextResponse.json(
-      { error: "IndexNow submission failed", status: response.status },
-      { status: 500 }
+  for (const url of urlList) {
+    const response = await fetch(
+      `https://api.indexnow.org/IndexNow?url=${encodeURIComponent(url)}&key=${INDEXNOW_KEY}&keyLocation=${encodeURIComponent(keyLocation)}`,
+      { method: "GET" }
     )
+
+    results.push({ url, status: response.status })
+    if (!response.ok) {
+      failed.push(url)
+    }
+
+    await delay(2000)
   }
 
   return NextResponse.json({
-    success: true,
+    success: failed.length === 0,
     urlsSubmitted: urlList.length,
+    urlsFailed: failed.length,
+    results,
   })
 }
