@@ -4,48 +4,51 @@ import { useState } from "react"
 import { generateFAQSchema } from "@/lib/utils/seo"
 import { Plus } from "lucide-react"
 
-const faqs = [
-  {
-    question: "What data fields are included?",
-    answer:
-      "Each record contains: Full Name, Email Address, Phone Number, and State. All records are in CSV format, ready to import into any CRM or spreadsheet.",
-  },
-  {
-    question: "Do I need to create an account?",
-    answer:
-      "No. State CSV and full database purchases are guest checkouts — just enter your email at checkout and we email you the download link.",
-  },
-  {
-    question: "How quickly do I receive my data?",
-    answer:
-      "Your download link is sent to your email within minutes of payment confirmation.",
-  },
-  {
-    question: "How often is the data updated?",
-    answer:
-      "We update the full database annually. The current dataset was last refreshed in 2026.",
-  },
-  {
-    question: "What is the Pro Dashboard subscription?",
-    answer:
-      "For $49/month, you get access to an in-app browser where you can search and filter all 478,000+ agents by state, name, or email. No CSV download — this tier is designed for teams that need a searchable interface.",
-  },
-  {
-    question: "Can I cancel my subscription anytime?",
-    answer:
-      "Yes. You can cancel from your Lemon Squeezy customer portal at any time with no penalties or questions.",
-  },
-  {
-    question: "Is the data compliant for outreach?",
-    answer:
-      "All contact data is sourced from publicly available professional directories. As the sender, you must comply with CAN-SPAM regulations.",
-  },
-  {
-    question: "What format is the CSV?",
-    answer:
-      "Standard UTF-8 CSV. Opens directly in Excel, Google Sheets, or any CRM that accepts CSV import.",
-  },
-]
+function getFaqs(totalCount: number) {
+  const countLabel = totalCount > 0 ? totalCount.toLocaleString() + "+" : "500,000+"
+  return [
+    {
+      question: "What data fields are included?",
+      answer:
+        "Each record contains: Full Name, Email Address, Phone Number, and State. All records are in CSV format, ready to import into any CRM or spreadsheet.",
+    },
+    {
+      question: "Do I need to create an account?",
+      answer:
+        "No. State CSV and full database purchases are guest checkouts — just enter your email at checkout and we email you the download link.",
+    },
+    {
+      question: "How quickly do I receive my data?",
+      answer:
+        "Your download link is sent to your email within minutes of payment confirmation.",
+    },
+    {
+      question: "How often is the data updated?",
+      answer:
+        "We update the full database annually. The current dataset was last refreshed in 2026.",
+    },
+    {
+      question: "What is the Pro Dashboard subscription?",
+      answer:
+        `For $49/month, you get access to an in-app browser where you can search and filter all ${countLabel} agents by state, name, or email. No CSV download — this tier is designed for teams that need a searchable interface.`,
+    },
+    {
+      question: "Can I cancel my subscription anytime?",
+      answer:
+        "Yes. You can cancel from your Lemon Squeezy customer portal at any time with no penalties or questions.",
+    },
+    {
+      question: "Is the data compliant for outreach?",
+      answer:
+        "All contact data is sourced from publicly available professional directories. As the sender, you must comply with CAN-SPAM regulations.",
+    },
+    {
+      question: "What format is the CSV?",
+      answer:
+        "Standard UTF-8 CSV. Opens directly in Excel, Google Sheets, or any CRM that accepts CSV import.",
+    },
+  ]
+}
 
 function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
@@ -74,7 +77,8 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   )
 }
 
-export function FAQSection() {
+export function FAQSection({ totalCount }: { totalCount: number }) {
+  const faqs = getFaqs(totalCount)
   const faqSchema = generateFAQSchema(faqs)
 
   // Split FAQs into two columns

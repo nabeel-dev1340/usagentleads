@@ -12,6 +12,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [totalCount, setTotalCount] = useState(0)
   const supabase = createClient()
 
   useEffect(() => {
@@ -23,6 +24,18 @@ export function Navbar() {
     })
     return () => subscription.unsubscribe()
   }, [supabase.auth])
+
+  useEffect(() => {
+    supabase
+      .schema("usagentleads")
+      .from("state_count")
+      .select("count")
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setTotalCount(data.reduce((sum: number, row: { count: number }) => sum + row.count, 0))
+        }
+      })
+  }, [supabase])
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10)
@@ -134,7 +147,7 @@ export function Navbar() {
                 href="/pricing"
                 className="btn-primary text-[14px] px-5 py-2.5 font-semibold"
               >
-                Get 500K+ Agents — <span className="font-bold">$99</span>
+                Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
               </Link>
             )}
           </div>
@@ -206,7 +219,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="btn-primary text-lg px-8 py-3 font-semibold"
                 >
-                  Get 500K+ Agents — <span className="font-bold">$99</span>
+                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
                 </Link>
               )}
             </div>

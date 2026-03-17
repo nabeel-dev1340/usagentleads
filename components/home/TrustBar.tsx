@@ -30,8 +30,9 @@ function TextStatItem({ value, label, active }: { value: string; label: string; 
   )
 }
 
-export function TrustBar() {
+export function TrustBar({ totalCount }: { totalCount: number }) {
   const { ref, inView } = useInView()
+  const count = totalCount > 0 ? totalCount : 500000
 
   return (
     <section
@@ -40,10 +41,10 @@ export function TrustBar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-center gap-y-4 divide-x divide-border max-sm:divide-x-0">
-          <StatItem value={500847} label="Total Contacts" active={inView} />
+          <StatItem value={count} label="Total Contacts" active={inView} />
           <StatItem value={50} label="US States" active={inView} />
           <TextStatItem value="Name · Email · Phone" label="Fields Per Record" active={inView} />
-          <TextStatItem value="< 5 min" label="Avg. Delivery" active={inView} />
+          <TextStatItem value="90%+" label="Deliverability" active={inView} />
           <TextStatItem value="CAN-SPAM" label="Compliant" active={inView} />
         </div>
       </div>

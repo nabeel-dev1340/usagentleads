@@ -31,7 +31,7 @@ export async function StatsCTA() {
           <p className="section-sub">
             {totalLeads > 0
               ? `${totalLeads.toLocaleString()}+ verified contacts across all 50 US states.`
-              : "478,000+ verified contacts across all 50 US states."}
+              : "500,000+ verified contacts across all 50 US states."}
           </p>
         </div>
 

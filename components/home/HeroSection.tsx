@@ -10,7 +10,9 @@ const previewRows = [
   { name: "Emily Thompson", email: "emily.t@sold.net", phone: "(404) 223-8877", state: "GA" },
 ]
 
-export function HeroSection() {
+export function HeroSection({ totalCount }: { totalCount: number }) {
+  const displayCount = totalCount > 0 ? `${totalCount.toLocaleString()}+` : "500,000+"
+
   return (
     <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 sm:pb-20 pt-10 overflow-hidden">
 <div className="relative z-10 mx-auto max-w-195 text-center">
@@ -21,10 +23,10 @@ export function HeroSection() {
             Live Data
           </span>
           <span className="text-border-strong">|</span>
-          <span className="font-mono text-ink font-medium">478,000+</span>
+          <span className="font-mono text-ink font-medium">{displayCount}</span>
           <span className="text-tertiary">Contacts</span>
           <span className="text-border-strong">|</span>
-          <span className="text-tertiary">Updated 2026</span>
+          <span className="text-tertiary">90%+ Deliverability</span>
         </div>
 
         {/* H1 */}

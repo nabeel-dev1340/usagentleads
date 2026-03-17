@@ -128,7 +128,7 @@ export default function DashboardPage() {
               Agent Database
             </h1>
             <p className="text-[14px] text-tertiary mt-1">
-              Browse and search all 500,847 verified US real estate agents
+              Browse and search all {count > 0 ? count.toLocaleString() : ""} verified US real estate agents
             </p>
           </div>
 

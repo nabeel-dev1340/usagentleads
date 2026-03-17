@@ -41,3 +41,15 @@ export function createServiceClient() {
     }
   )
 }
+
+/** Fetch total lead count from state_count table. Returns 0 if DB is unavailable. */
+export async function getTotalCount(): Promise<number> {
+  const supabase = createServiceClient()
+  const { data } = await supabase
+    .schema("usagentleads")
+    .from("state_count")
+    .select("count")
+
+  if (!data || data.length === 0) return 0
+  return data.reduce((sum: number, row: { count: number }) => sum + row.count, 0)
+}

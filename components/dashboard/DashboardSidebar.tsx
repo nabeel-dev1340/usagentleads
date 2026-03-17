@@ -46,6 +46,7 @@ export function DashboardSidebar({
   const [cancelling, setCancelling] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
   const [showBilling, setShowBilling] = useState(false)
+  const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
     fetch("/api/subscription")
@@ -59,7 +60,17 @@ export function DashboardSidebar({
         setUserName(data.user.user_metadata?.full_name || "")
       }
     })
-  }, [supabase.auth])
+
+    supabase
+      .schema("usagentleads")
+      .from("state_count")
+      .select("count")
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setTotalCount(data.reduce((sum: number, row: { count: number }) => sum + row.count, 0))
+        }
+      })
+  }, [supabase.auth, supabase])
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -161,7 +172,7 @@ export function DashboardSidebar({
           {!collapsed && (
             <>
               All States
-              <span className="ml-auto font-mono text-[14px] text-tertiary">500K+</span>
+              <span className="ml-auto font-mono text-[14px] text-tertiary">{totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"}</span>
             </>
           )}
         </button>

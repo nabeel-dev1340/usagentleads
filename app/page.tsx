@@ -9,6 +9,7 @@ import { Testimonials } from "@/components/home/Testimonials"
 import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
 import { FAQSection } from "@/components/home/FAQSection"
+import { getTotalCount } from "@/lib/supabase/server"
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -41,7 +42,9 @@ const organizationSchema = {
   },
 }
 
-export default function Home() {
+export default async function Home() {
+  const totalCount = await getTotalCount()
+
   return (
     <>
       <script
@@ -50,17 +53,17 @@ export default function Home() {
           __html: JSON.stringify([websiteSchema, organizationSchema]),
         }}
       />
-      <HeroSection />
-      <TrustBar />
+      <HeroSection totalCount={totalCount} />
+      <TrustBar totalCount={totalCount} />
       <WhoIsThisFor />
       <HowItWorks />
       <UseCases />
-      <PricingCards />
+      <PricingCards totalCount={totalCount} />
       <CompetitorComparison />
       <Testimonials />
       <DataSources />
       <StatsCTA />
-      <FAQSection />
+      <FAQSection totalCount={totalCount} />
     </>
   )
 }

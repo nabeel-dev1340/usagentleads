@@ -2,65 +2,70 @@
 
 import Link from "next/link"
 import { Check, X, ArrowRight, ShieldCheck } from "lucide-react"
+import { formatAgentCount } from "@/lib/utils/states"
 
 interface Feature {
   text: string
   included: boolean
 }
 
-const plans = [
-  {
-    name: "State Pack",
-    subtitle: "One-time purchase",
-    price: "$10",
-    period: "/ state",
-    features: [
-      { text: "Single state CSV download", included: true },
-      { text: "Name, email, phone, state", included: true },
-      { text: "Instant delivery via email", included: true },
-      { text: "No account required", included: true },
-      { text: "Dashboard access", included: false },
-    ] as Feature[],
-    cta: "Browse States",
-    href: "/states",
-    highlighted: false,
-  },
-  {
-    name: "Full Database",
-    subtitle: "One-time purchase",
-    price: "$99",
-    period: "/ one-time",
-    badge: "BEST VALUE",
-    features: [
-      { text: "All 50 states in one CSV", included: true },
-      { text: "478K+ verified contacts", included: true },
-      { text: "Instant delivery via email", included: true },
-      { text: "No account required", included: true },
-      { text: "Dashboard access", included: false },
-    ] as Feature[],
-    cta: "Buy Full Database",
-    href: "/pricing",
-    highlighted: true,
-  },
-  {
-    name: "Pro Dashboard",
-    subtitle: "Monthly subscription",
-    price: "$49",
-    period: "/ month",
-    features: [
-      { text: "Browse all agents in-app", included: true },
-      { text: "Search & filter by state", included: true },
-      { text: "Real-time data access", included: true },
-      { text: "Cancel anytime", included: true },
-      { text: "Google Sign In required", included: true },
-    ] as Feature[],
-    cta: "Subscribe",
-    href: "/pricing",
-    highlighted: false,
-  },
-]
+function getPlans(totalCount: number) {
+  const countLabel = totalCount > 0 ? `${formatAgentCount(totalCount)} verified contacts` : "500K+ verified contacts"
+  return [
+    {
+      name: "State Pack",
+      subtitle: "One-time purchase",
+      price: "$10",
+      period: "/ state",
+      features: [
+        { text: "Single state CSV download", included: true },
+        { text: "Name, email, phone, state", included: true },
+        { text: "Instant delivery via email", included: true },
+        { text: "No account required", included: true },
+        { text: "Dashboard access", included: false },
+      ] as Feature[],
+      cta: "Browse States",
+      href: "/states",
+      highlighted: false,
+    },
+    {
+      name: "Full Database",
+      subtitle: "One-time purchase",
+      price: "$99",
+      period: "/ one-time",
+      badge: "BEST VALUE",
+      features: [
+        { text: "All 50 states in one CSV", included: true },
+        { text: countLabel, included: true },
+        { text: "Instant delivery via email", included: true },
+        { text: "No account required", included: true },
+        { text: "Dashboard access", included: false },
+      ] as Feature[],
+      cta: "Buy Full Database",
+      href: "/pricing",
+      highlighted: true,
+    },
+    {
+      name: "Pro Dashboard",
+      subtitle: "Monthly subscription",
+      price: "$49",
+      period: "/ month",
+      features: [
+        { text: "Browse all agents in-app", included: true },
+        { text: "Search & filter by state", included: true },
+        { text: "Real-time data access", included: true },
+        { text: "Cancel anytime", included: true },
+        { text: "Google Sign In required", included: true },
+      ] as Feature[],
+      cta: "Subscribe",
+      href: "/pricing",
+      highlighted: false,
+    },
+  ]
+}
 
-export function PricingCards() {
+export function PricingCards({ totalCount }: { totalCount: number }) {
+  const plans = getPlans(totalCount)
   return (
     <section className="bg-page py-28 max-sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

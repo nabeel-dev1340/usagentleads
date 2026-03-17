@@ -3,6 +3,8 @@ import Link from "next/link"
 import { Check, X, Minus, ArrowRight, ShieldCheck } from "lucide-react"
 import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 import { SubscribeButton } from "@/components/checkout/SubscribeButton"
+import { getTotalCount } from "@/lib/supabase/server"
+import { formatAgentCount } from "@/lib/utils/states"
 
 export const metadata: Metadata = {
   title: "Pricing — Real Estate Agent Data Starting at $10",
@@ -35,58 +37,61 @@ interface Feature {
   included: boolean
 }
 
-const plans = [
-  {
-    name: "State Pack",
-    subtitle: "One-time purchase",
-    price: "$10",
-    period: "/ state",
-    features: [
-      { text: "Single state CSV download", included: true },
-      { text: "Name, email, phone, state", included: true },
-      { text: "Instant delivery via email", included: true },
-      { text: "No account required", included: true },
-      { text: "Dashboard access", included: false },
-    ] as Feature[],
-    cta: "Browse States",
-    href: "/states",
-    highlighted: false,
-  },
-  {
-    name: "Full Database",
-    subtitle: "One-time purchase",
-    price: "$99",
-    period: "/ one-time",
-    badge: "BEST VALUE",
-    features: [
-      { text: "All 50 states in one CSV", included: true },
-      { text: "478K+ verified contacts", included: true },
-      { text: "Instant delivery via email", included: true },
-      { text: "No account required", included: true },
-      { text: "Dashboard access", included: false },
-    ] as Feature[],
-    cta: "buy",
-    href: "/pricing",
-    highlighted: true,
-  },
-  {
-    name: "Pro Dashboard",
-    subtitle: "Monthly subscription",
-    price: "$49",
-    period: "/ month",
-    trial: "3-day free trial",
-    features: [
-      { text: "Browse all agents in-app", included: true },
-      { text: "Search & filter by state", included: true },
-      { text: "Real-time data access", included: true },
-      { text: "Cancel anytime", included: true },
-      { text: "3-day free trial included", included: true },
-    ] as Feature[],
-    cta: "subscribe",
-    href: "/pricing",
-    highlighted: false,
-  },
-]
+function getPlans(totalCount: number) {
+  const countLabel = totalCount > 0 ? `${formatAgentCount(totalCount)} verified contacts` : "500K+ verified contacts"
+  return [
+    {
+      name: "State Pack",
+      subtitle: "One-time purchase",
+      price: "$10",
+      period: "/ state",
+      features: [
+        { text: "Single state CSV download", included: true },
+        { text: "Name, email, phone, state", included: true },
+        { text: "Instant delivery via email", included: true },
+        { text: "No account required", included: true },
+        { text: "Dashboard access", included: false },
+      ] as Feature[],
+      cta: "Browse States",
+      href: "/states",
+      highlighted: false,
+    },
+    {
+      name: "Full Database",
+      subtitle: "One-time purchase",
+      price: "$99",
+      period: "/ one-time",
+      badge: "BEST VALUE",
+      features: [
+        { text: "All 50 states in one CSV", included: true },
+        { text: countLabel, included: true },
+        { text: "Instant delivery via email", included: true },
+        { text: "No account required", included: true },
+        { text: "Dashboard access", included: false },
+      ] as Feature[],
+      cta: "buy",
+      href: "/pricing",
+      highlighted: true,
+    },
+    {
+      name: "Pro Dashboard",
+      subtitle: "Monthly subscription",
+      price: "$49",
+      period: "/ month",
+      trial: "3-day free trial",
+      features: [
+        { text: "Browse all agents in-app", included: true },
+        { text: "Search & filter by state", included: true },
+        { text: "Real-time data access", included: true },
+        { text: "Cancel anytime", included: true },
+        { text: "3-day free trial included", included: true },
+      ] as Feature[],
+      cta: "subscribe",
+      href: "/pricing",
+      highlighted: false,
+    },
+  ]
+}
 
 const comparisonRows = [
   { label: "Price", state: "$10/state", full: "$99", pro: "$49/mo" },
@@ -104,7 +109,10 @@ function renderCell(val: boolean | string) {
   return <span className="font-mono text-[14px] text-ink">{val}</span>
 }
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const totalCount = await getTotalCount()
+  const plans = getPlans(totalCount)
+
   return (
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-28 max-sm:py-16 sm:px-6 lg:px-8">
