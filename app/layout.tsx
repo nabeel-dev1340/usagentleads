@@ -104,11 +104,6 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased bg-page text-ink">
         <ScrollRevealProvider />
-        <div className="bg-accent text-white text-center text-[13px] font-medium py-1.5 px-4">
-          <span className="font-mono tracking-wide uppercase">Beta</span>
-          <span className="mx-2 opacity-50">—</span>
-          We&apos;re still polishing things. Expect updates soon.
-        </div>
         <Navbar />
         <main>{children}</main>
         <Footer />
