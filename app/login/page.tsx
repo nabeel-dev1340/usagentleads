@@ -1,7 +1,6 @@
 "use client"
 
 import { Suspense, useState } from "react"
-import { createClient } from "@/lib/supabase/client"
 import { useSearchParams } from "next/navigation"
 import { Loader2, Mail, ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -28,19 +27,21 @@ function LoginContent() {
     setLoading(true)
     setError("")
 
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=${next}`,
-      },
-    })
+    try {
+      const res = await fetch("/api/auth/send-magic-link", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, next }),
+      })
 
-    if (error) {
-      setError(error.message)
-      setLoading(false)
-    } else {
-      setSent(true)
+      if (!res.ok) {
+        setError("Something went wrong. Please try again.")
+      } else {
+        setSent(true)
+      }
+    } catch {
+      setError("Something went wrong. Please try again.")
+    } finally {
       setLoading(false)
     }
   }
