@@ -29,11 +29,16 @@ export async function proxy(request: NextRequest) {
     }
   )
 
+  const pathname = request.nextUrl.pathname
+
+  // Skip middleware for webhook/hook endpoints (called by external services, not users)
+  if (pathname.startsWith("/api/auth/send-email") || pathname.startsWith("/api/webhooks")) {
+    return supabaseResponse
+  }
+
   const {
     data: { user },
   } = await supabase.auth.getUser()
-
-  const pathname = request.nextUrl.pathname
 
   // Helper: check if user has an active subscription or valid trial/period
   async function hasActiveSubscription(userId: string): Promise<boolean> {
