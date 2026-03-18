@@ -53,7 +53,7 @@ export async function GET(request: Request) {
   // Determine file path
   let filePath: string
   if (purchase.purchase_type === "full_database") {
-    filePath = "full/usa_agents_full.csv"
+    filePath = "full/usa_agents_full.xlsx"
   } else if (purchase.purchase_type === "state" && purchase.state_code) {
     filePath = `states/${purchase.state_code}.csv`
   } else {
