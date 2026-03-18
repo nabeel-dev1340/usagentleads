@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server"
 import { verifyWebhookSignature } from "@/lib/lemonsqueezy/webhook"
 import { createServiceClient } from "@/lib/supabase/server"
-import { sendDownloadEmail } from "@/lib/resend/emails"
+import {
+  sendDownloadEmail,
+  sendSubscriptionWelcome,
+  sendSubscriptionCancelled,
+  sendSubscriptionRenewed,
+  sendPaymentFailed,
+} from "@/lib/resend/emails"
 import { getStateByCode } from "@/lib/utils/states"
 
 const db = () => createServiceClient().schema("usagentleads")
@@ -14,15 +20,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 })
   }
 
-  const payload = JSON.parse(rawBody)
+  let payload: any
+  try {
+    payload = JSON.parse(rawBody)
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 })
+  }
 
   // Reject webhooks older than 5 minutes to prevent replay attacks
   const createdAt = payload.data?.attributes?.created_at || payload.data?.attributes?.updated_at
-  if (createdAt) {
-    const eventAge = Date.now() - new Date(createdAt).getTime()
-    if (eventAge > 5 * 60 * 1000) {
-      return NextResponse.json({ error: "Webhook too old" }, { status: 400 })
-    }
+  if (!createdAt) {
+    return NextResponse.json({ error: "Missing timestamp" }, { status: 400 })
+  }
+  const eventAge = Date.now() - new Date(createdAt).getTime()
+  if (eventAge > 5 * 60 * 1000) {
+    return NextResponse.json({ error: "Webhook too old" }, { status: 400 })
   }
 
   const eventName = payload.meta?.event_name as string
@@ -45,9 +57,9 @@ export async function POST(request: Request) {
         if (purchaseType === "subscription") break
 
         const userId = customData.user_id || null
+        const pageToken = customData.page_token || null
 
         // Atomic idempotency: upsert on unique lemon_squeezy_order_id
-        // If the order already exists, the onConflict will match and no changes are made
         const { data: purchase, error: insertError } = await db()
           .from("purchases")
           .upsert(
@@ -60,6 +72,7 @@ export async function POST(request: Request) {
               lemon_squeezy_customer_id: customerId,
               amount_paid: amountPaid,
               status: status === "paid" ? "completed" : "pending",
+              ...(pageToken ? { page_token: pageToken } : {}),
               expires_at: new Date(
                 Date.now() + 48 * 60 * 60 * 1000
               ).toISOString(),
@@ -92,6 +105,7 @@ export async function POST(request: Request) {
             to: customerEmail,
             downloadUrl,
             productName,
+            purchaseType,
           })
         }
 
@@ -111,6 +125,7 @@ export async function POST(request: Request) {
         const subId = String(data.id)
         const customerId = String(data.attributes?.customer_id || "")
         const userId = payload.meta?.custom_data?.user_id
+        const customerEmail = data.attributes?.user_email || ""
         const status = data.attributes?.status || "active"
         const periodStart = data.attributes?.created_at || null
         const periodEnd = data.attributes?.renews_at || null
@@ -130,17 +145,34 @@ export async function POST(request: Request) {
             { onConflict: "user_id" }
           )
         }
+
+        // Send welcome email
+        if (customerEmail) {
+          await sendSubscriptionWelcome({
+            to: customerEmail,
+            trialEndsAt,
+          })
+        }
+
         break
       }
 
       case "subscription_updated": {
         const subId = String(data.id)
         const status = data.attributes?.status || "active"
+        const customerEmail = data.attributes?.user_email || ""
         const periodEnd = data.attributes?.renews_at || null
         const cancelAtPeriodEnd = data.attributes?.cancelled === true
         const cancelledAt = data.attributes?.cancelled
           ? data.attributes?.updated_at || new Date().toISOString()
           : null
+
+        // Fetch existing subscription to determine if this is a genuine renewal
+        const { data: existingSub } = await db()
+          .from("subscriptions")
+          .select("created_at")
+          .eq("lemon_squeezy_subscription_id", subId)
+          .single()
 
         await db()
           .from("subscriptions")
@@ -152,6 +184,32 @@ export async function POST(request: Request) {
             updated_at: new Date().toISOString(),
           })
           .eq("lemon_squeezy_subscription_id", subId)
+
+        // Send appropriate notification email
+        if (customerEmail) {
+          if (cancelAtPeriodEnd) {
+            // User cancelled — notify with access end date
+            await sendSubscriptionCancelled({
+              to: customerEmail,
+              accessUntil: periodEnd,
+            })
+          } else if (status === "past_due") {
+            // Payment failed
+            await sendPaymentFailed({ to: customerEmail })
+          } else if (status === "active" && !cancelAtPeriodEnd) {
+            // Only send renewal email if subscription is older than 5 minutes
+            // (avoids duplicate email on initial creation + immediate update)
+            const isNew = existingSub?.created_at &&
+              Date.now() - new Date(existingSub.created_at).getTime() < 5 * 60 * 1000
+            if (!isNew) {
+              await sendSubscriptionRenewed({
+                to: customerEmail,
+                nextRenewal: periodEnd,
+              })
+            }
+          }
+        }
+
         break
       }
 
@@ -169,6 +227,14 @@ export async function POST(request: Request) {
             updated_at: new Date().toISOString(),
           })
           .eq("lemon_squeezy_subscription_id", subId)
+        break
+      }
+
+      case "subscription_payment_failed": {
+        const customerEmail = data.attributes?.user_email || ""
+        if (customerEmail) {
+          await sendPaymentFailed({ to: customerEmail })
+        }
         break
       }
     }

@@ -29,16 +29,29 @@ export async function GET(request: Request) {
   const { data: subscription } = await serviceClient
     .schema("usagentleads")
     .from("subscriptions")
-    .select("status, current_period_end")
+    .select("status, current_period_end, cancel_at_period_end, trial_ends_at")
     .eq("user_id", user.id)
-    .in("status", ["active", "on_trial"])
     .single()
+
+  // Allow access if:
+  // 1. Status is active/on_trial and period hasn't ended, OR
+  // 2. Subscription is cancelled but period/trial hasn't ended yet (cancel_at_period_end)
+  const now = new Date()
+  const periodValid = subscription?.current_period_end
+    ? new Date(subscription.current_period_end) > now
+    : false
+  const trialValid = subscription?.trial_ends_at
+    ? new Date(subscription.trial_ends_at) > now
+    : false
 
   const isActive =
     subscription &&
-    (subscription.status === "active" || subscription.status === "on_trial") &&
-    (!subscription.current_period_end ||
-      new Date(subscription.current_period_end) > new Date())
+    (
+      // Active or on trial with valid period
+      (["active", "on_trial"].includes(subscription.status) && (periodValid || trialValid)) ||
+      // Cancelled but still within the paid/trial period
+      (subscription.cancel_at_period_end && (periodValid || trialValid))
+    )
 
   if (!isActive) {
     return NextResponse.json(

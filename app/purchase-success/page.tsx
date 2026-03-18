@@ -1,13 +1,67 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { Mail, ArrowRight, CheckCircle } from "lucide-react"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Purchase Confirmed",
-  robots: { index: false, follow: false },
-}
+import { Suspense, useEffect, useState } from "react"
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { ArrowRight, CheckCircle, Download, Loader2, Mail } from "lucide-react"
 
 export default function PurchaseSuccessPage() {
+  return (
+    <Suspense>
+      <PurchaseSuccessContent />
+    </Suspense>
+  )
+}
+
+interface PurchaseInfo {
+  status: string
+  purchaseType: string
+  stateCode: string | null
+  downloadAvailable: boolean
+  downloadUrl: string | null
+}
+
+function PurchaseSuccessContent() {
+  const searchParams = useSearchParams()
+  const pageToken = searchParams.get("pt")
+  const [purchase, setPurchase] = useState<PurchaseInfo | null>(null)
+  const [loading, setLoading] = useState(!!pageToken)
+  const [retries, setRetries] = useState(0)
+
+  useEffect(() => {
+    if (!pageToken) return
+
+    let cancelled = false
+
+    async function fetchPurchase() {
+      try {
+        const res = await fetch(`/api/purchase?pt=${pageToken}`)
+        if (!res.ok) throw new Error("Not found")
+        const data = await res.json()
+
+        if (!cancelled) {
+          setPurchase(data)
+          setLoading(false)
+
+          // If purchase is still pending (webhook hasn't fired yet), retry
+          if (data.status === "pending" && retries < 10) {
+            setTimeout(() => setRetries((r) => r + 1), 3000)
+          }
+        }
+      } catch {
+        // Purchase not found yet — webhook may not have fired, retry
+        if (!cancelled && retries < 10) {
+          setTimeout(() => setRetries((r) => r + 1), 3000)
+        } else if (!cancelled) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchPurchase()
+    return () => { cancelled = true }
+  }, [pageToken, retries])
+
   return (
     <div className="bg-page min-h-[80vh] flex items-center justify-center px-4 py-16">
       <div className="card max-w-lg w-full p-10 text-center">
@@ -17,12 +71,43 @@ export default function PurchaseSuccessPage() {
         <h1 className="text-[24px] font-semibold text-ink">
           Purchase Confirmed!
         </h1>
-        <p className="mt-3 text-[15px] text-tertiary leading-relaxed">
-          Check your email for your download link. It will arrive within a few minutes.
-        </p>
-        <p className="mt-2 text-[14px] text-tertiary">
+
+        {/* Download button or loading state */}
+        {loading ? (
+          <div className="mt-6 flex items-center justify-center gap-2 text-[15px] text-tertiary">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Preparing your download...
+          </div>
+        ) : purchase?.downloadAvailable && purchase.downloadUrl ? (
+          <div className="mt-6">
+            <a
+              href={purchase.downloadUrl}
+              className="btn-primary w-full justify-center text-[15px] py-3.5"
+            >
+              <Download size={16} />
+              Download Your {purchase.purchaseType === "full_database" ? "Full Database" : "State Data"}
+            </a>
+            <p className="mt-3 text-[13px] text-tertiary">
+              Single-use link. Expires in 48 hours.
+            </p>
+          </div>
+        ) : null}
+
+        {/* Email notice */}
+        <div className="mt-6 flex items-center gap-3 rounded-lg bg-subtle border border-border p-4 text-left">
+          <Mail className="h-5 w-5 text-accent shrink-0" />
+          <div>
+            <p className="text-[14px] font-medium text-ink">Check your email</p>
+            <p className="text-[13px] text-tertiary mt-0.5">
+              A download link has also been sent to your email.
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-4 text-[13px] text-tertiary">
           The download link expires in 48 hours, so be sure to download your file soon.
         </p>
+
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link href="/states" className="btn-primary">
             Browse More States <ArrowRight size={14} />

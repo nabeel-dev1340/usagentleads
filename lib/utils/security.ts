@@ -1,11 +1,21 @@
 import { VALID_STATE_CODES } from "./states"
 
 export function sanitizeSearchInput(input: string): string {
-  // Whitelist: only allow alphanumeric, spaces, hyphens, dots, and @
+  // Whitelist: only allow alphanumeric, spaces, hyphens, and @
+  // Dots are excluded because they are PostgREST filter separators
   return input
-    .replace(/[^a-zA-Z0-9\s\-\.@]/g, "")
+    .replace(/[^a-zA-Z0-9\s\-@]/g, "")
     .trim()
     .slice(0, 100)
+}
+
+export function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
 }
 
 export function isValidStateCode(code: string): boolean {

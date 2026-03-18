@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { createClient } from "@/lib/supabase/server"
+import crypto from "crypto"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 import { createCheckout } from "@/lib/lemonsqueezy/client"
 import { isValidStateCode } from "@/lib/utils/security"
 import { rateLimit } from "@/lib/utils/rateLimit"
@@ -35,6 +36,12 @@ export async function POST(request: Request) {
     let variantId: string
     const customData: Record<string, string> = { purchase_type: purchaseType }
 
+    // Generate a page_token for secure purchase-success page lookup
+    // Only the person who completes checkout will have this token in the redirect URL
+    if (purchaseType !== "subscription") {
+      customData.page_token = crypto.randomUUID()
+    }
+
     if (purchaseType === "state") {
       variantId = process.env.NEXT_PUBLIC_LS_STATE_VARIANT_ID!
       customData.state_code = stateCode!
@@ -54,9 +61,25 @@ export async function POST(request: Request) {
         )
       }
       customData.user_id = user.id
+
+      // Check if user has ever had a subscription (skip trial for returning users)
+      const { data: existingSub } = await createServiceClient()
+        .schema("usagentleads")
+        .from("subscriptions")
+        .select("id")
+        .eq("user_id", user.id)
+        .limit(1)
+        .maybeSingle()
+
+      if (existingSub) {
+        customData.skip_trial = "true"
+      }
     }
 
-    const url = await createCheckout({ variantId, customData })
+    const skipTrial = customData.skip_trial === "true"
+    delete customData.skip_trial
+
+    const url = await createCheckout({ variantId, customData, skipTrial })
 
     return NextResponse.json({ url })
   } catch (error) {

@@ -35,23 +35,14 @@ export async function proxy(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname
 
-  // Protect /dashboard routes
-  if (pathname.startsWith("/dashboard")) {
-    if (!user) {
-      const url = request.nextUrl.clone()
-      url.pathname = "/pricing"
-      return NextResponse.redirect(url)
-    }
-
-    // Check active subscription using service role
+  // Helper: check if user has an active subscription or valid trial/period
+  async function hasActiveSubscription(userId: string): Promise<boolean> {
     const serviceClient = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!,
       {
         cookies: {
-          getAll() {
-            return []
-          },
+          getAll() { return [] },
           setAll() {},
         },
       }
@@ -60,18 +51,46 @@ export async function proxy(request: NextRequest) {
     const { data: subscription } = await serviceClient
       .schema("usagentleads")
       .from("subscriptions")
-      .select("status, current_period_end")
-      .eq("user_id", user.id)
-      .in("status", ["active", "on_trial"])
+      .select("status, current_period_end, cancel_at_period_end, trial_ends_at")
+      .eq("user_id", userId)
       .single()
 
-    const isActive =
-      subscription &&
-      (subscription.status === "active" || subscription.status === "on_trial") &&
-      (!subscription.current_period_end ||
-        new Date(subscription.current_period_end) > new Date())
+    if (!subscription) return false
 
-    if (!isActive) {
+    const now = new Date()
+    const periodValid = subscription.current_period_end
+      ? new Date(subscription.current_period_end) > now
+      : false
+    const trialValid = subscription.trial_ends_at
+      ? new Date(subscription.trial_ends_at) > now
+      : false
+
+    return (
+      (["active", "on_trial"].includes(subscription.status) && (periodValid || trialValid)) ||
+      (subscription.cancel_at_period_end && (periodValid || trialValid))
+    )
+  }
+
+  // Signed-in user with active subscription on homepage → redirect to dashboard
+  if (pathname === "/" && user) {
+    const active = await hasActiveSubscription(user.id)
+    if (active) {
+      const url = request.nextUrl.clone()
+      url.pathname = "/dashboard"
+      return NextResponse.redirect(url)
+    }
+  }
+
+  // Protect /dashboard routes
+  if (pathname.startsWith("/dashboard")) {
+    if (!user) {
+      const url = request.nextUrl.clone()
+      url.pathname = "/pricing"
+      return NextResponse.redirect(url)
+    }
+
+    const active = await hasActiveSubscription(user.id)
+    if (!active) {
       const url = request.nextUrl.clone()
       url.pathname = "/pricing"
       url.searchParams.set("upgrade", "true")

@@ -109,7 +109,15 @@ export function Footer() {
             &copy; {new Date().getFullYear()} USAgentLeads. Not affiliated with NAR or any MLS.
           </p>
           <p className="text-[13px] text-[#6B7280]">
-            Built for marketers, lenders &amp; agencies.
+            Built by{" "}
+            <a
+              href="https://beelodev.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#9CA3AF] hover:text-white transition-colors font-medium"
+            >
+              BeeloDev
+            </a>
           </p>
         </div>
       </div>

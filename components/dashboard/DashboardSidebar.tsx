@@ -9,6 +9,8 @@ import {
   Loader2,
   ChevronLeft,
   ChevronRight,
+  AlertTriangle,
+  Check,
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
@@ -45,6 +47,8 @@ export function DashboardSidebar({
   const [userName, setUserName] = useState("")
   const [cancelling, setCancelling] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [cancelledConfirm, setCancelledConfirm] = useState(false)
+  const [showResumeConfirm, setShowResumeConfirm] = useState(false)
   const [showBilling, setShowBilling] = useState(false)
   const [totalCount, setTotalCount] = useState(0)
 
@@ -83,12 +87,36 @@ export function DashboardSidebar({
       const res = await fetch("/api/subscription", { method: "DELETE" })
       if (res.ok) {
         setSub((prev) => (prev ? { ...prev, cancel_at_period_end: true } : prev))
+        setCancelledConfirm(true)
       }
     } catch {
       // ignore
     } finally {
       setCancelling(false)
-      setShowConfirm(false)
+    }
+  }
+
+  const dismissCancelModal = () => {
+    setShowConfirm(false)
+    setCancelledConfirm(false)
+  }
+
+  const handleResume = async () => {
+    setCancelling(true)
+    try {
+      const res = await fetch("/api/subscription", { method: "PATCH" })
+      if (res.ok) {
+        // Determine correct status based on trial
+        const resumedStatus = sub?.trial_ends_at && new Date(sub.trial_ends_at) > new Date()
+          ? "on_trial"
+          : "active"
+        setSub((prev) => (prev ? { ...prev, status: resumedStatus, cancel_at_period_end: false, cancelled_at: null } : prev))
+        setShowResumeConfirm(true)
+      }
+    } catch {
+      // ignore
+    } finally {
+      setCancelling(false)
     }
   }
 
@@ -248,10 +276,10 @@ export function DashboardSidebar({
             {/* Plan card */}
             {sub && (
               <div className="rounded-lg border border-border overflow-hidden mb-2">
-                <div className="px-3.5 py-3 bg-subtle/60 flex items-center justify-between">
-                  <div>
+                <div className="px-3.5 py-3 bg-subtle/60 flex flex-wrap items-start justify-between gap-2">
+                  <div className="min-w-0">
                     <p className="text-[14px] font-medium text-ink">Pro Monthly</p>
-                    <p className="text-[13px] text-tertiary mt-0.5">
+                    <p className="text-[13px] text-tertiary mt-0.5 truncate">
                       {sub.status === "on_trial" && trialEnd
                         ? `Trial ends ${trialEnd}`
                         : sub.cancel_at_period_end && periodEnd
@@ -262,7 +290,7 @@ export function DashboardSidebar({
                     </p>
                   </div>
                   <span
-                    className={`inline-flex items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 rounded-full ${
+                    className={`inline-flex shrink-0 items-center gap-1.5 text-[12px] font-medium px-2.5 py-1 rounded-full whitespace-nowrap ${
                       sub.cancel_at_period_end
                         ? "bg-amber-50 text-amber-600 border border-amber-200"
                         : sub.status === "on_trial"
@@ -283,45 +311,29 @@ export function DashboardSidebar({
                   </span>
                 </div>
 
-                {/* Cancel zone */}
-                {!sub.cancel_at_period_end && (
+                {/* Cancel / Resume button */}
+                {sub.cancel_at_period_end ? (
                   <div className="px-3.5 py-3 border-t border-border">
-                    {showConfirm ? (
-                      <div className="rounded-lg bg-danger/5 border border-danger/15 p-3">
-                        <p className="text-[13px] font-medium text-ink mb-1">
-                          Are you sure?
-                        </p>
-                        <p className="text-[13px] text-body mb-3 leading-relaxed">
-                          You&apos;ll keep access until {periodEnd || "the end of your billing period"}, then your account will be downgraded.
-                        </p>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={handleCancel}
-                            disabled={cancelling}
-                            className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-danger text-white text-[13px] font-medium py-2 px-3 hover:bg-danger/90 active:scale-[0.98] transition-all disabled:opacity-60"
-                          >
-                            {cancelling ? (
-                              <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                            ) : (
-                              "Yes, cancel"
-                            )}
-                          </button>
-                          <button
-                            onClick={() => setShowConfirm(false)}
-                            className="flex-1 inline-flex items-center justify-center rounded-lg border border-border bg-white text-[13px] font-medium text-body py-2 px-3 hover:bg-subtle active:scale-[0.98] transition-all"
-                          >
-                            Keep plan
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => setShowConfirm(true)}
-                        className="w-full inline-flex items-center justify-center rounded-lg border border-border text-[13px] font-medium text-tertiary py-2 px-3 hover:border-danger/30 hover:bg-danger/5 hover:text-danger active:scale-[0.98] transition-all"
-                      >
-                        Cancel subscription
-                      </button>
-                    )}
+                    <button
+                      onClick={handleResume}
+                      disabled={cancelling}
+                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent text-white text-[13px] font-medium py-2 px-3 hover:bg-accent/90 active:scale-[0.98] transition-all disabled:opacity-60"
+                    >
+                      {cancelling ? (
+                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      ) : (
+                        "Resume subscription"
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="px-3.5 py-3 border-t border-border">
+                    <button
+                      onClick={() => setShowConfirm(true)}
+                      className="w-full inline-flex items-center justify-center rounded-lg border border-border text-[13px] font-medium text-tertiary py-2 px-3 hover:border-danger/30 hover:bg-danger/5 hover:text-danger active:scale-[0.98] transition-all"
+                    >
+                      Cancel subscription
+                    </button>
                   </div>
                 )}
               </div>
@@ -349,6 +361,116 @@ export function DashboardSidebar({
           </button>
         )}
       </div>
+
+      {/* Cancel subscription modal */}
+      {showConfirm && (
+        <>
+          <div
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm animate-fade-in"
+            onClick={dismissCancelModal}
+          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <div
+              className="pointer-events-auto w-full max-w-sm rounded-xl bg-white border border-border shadow-xl p-6 animate-scale-in"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {cancelledConfirm ? (
+                <>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/10 mb-4">
+                    <Check className="h-5 w-5 text-success" />
+                  </div>
+                  <h3 className="text-[16px] font-semibold text-ink mb-1">
+                    Subscription cancelled
+                  </h3>
+                  <p className="text-[14px] text-body leading-relaxed mb-6">
+                    You&apos;ll keep full access until{" "}
+                    <span className="font-medium text-ink">
+                      {periodEnd || "the end of your billing period"}
+                    </span>
+                    . You can resume anytime before then.
+                  </p>
+                  <button
+                    onClick={dismissCancelModal}
+                    className="w-full inline-flex items-center justify-center rounded-lg bg-accent text-white text-[14px] font-medium py-2.5 px-4 hover:bg-accent/90 active:scale-[0.98] transition-all"
+                  >
+                    Got it
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-danger/10 mb-4">
+                    <AlertTriangle className="h-5 w-5 text-danger" />
+                  </div>
+                  <h3 className="text-[16px] font-semibold text-ink mb-1">
+                    Cancel subscription?
+                  </h3>
+                  <p className="text-[14px] text-body leading-relaxed mb-6">
+                    You&apos;ll keep access until{" "}
+                    <span className="font-medium text-ink">
+                      {periodEnd || "the end of your billing period"}
+                    </span>
+                    , then your account will be downgraded.
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={dismissCancelModal}
+                      className="flex-1 inline-flex items-center justify-center rounded-lg border border-border bg-white text-[14px] font-medium text-body py-2.5 px-4 hover:bg-subtle active:scale-[0.98] transition-all"
+                    >
+                      Keep plan
+                    </button>
+                    <button
+                      onClick={handleCancel}
+                      disabled={cancelling}
+                      className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-danger text-white text-[14px] font-medium py-2.5 px-4 hover:bg-danger/90 active:scale-[0.98] transition-all disabled:opacity-60"
+                    >
+                      {cancelling ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        "Yes, cancel"
+                      )}
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Resume confirmation modal */}
+      {showResumeConfirm && (
+        <>
+          <div
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm animate-fade-in"
+            onClick={() => setShowResumeConfirm(false)}
+          />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+            <div
+              className="pointer-events-auto w-full max-w-sm rounded-xl bg-white border border-border shadow-xl p-6 animate-scale-in"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/10 mb-4">
+                <Check className="h-5 w-5 text-success" />
+              </div>
+              <h3 className="text-[16px] font-semibold text-ink mb-1">
+                Subscription resumed
+              </h3>
+              <p className="text-[14px] text-body leading-relaxed mb-6">
+                Your Pro Dashboard subscription is active again.
+                {periodEnd && (
+                  <> Next renewal on <span className="font-medium text-ink">{periodEnd}</span>.</>
+                )}
+              </p>
+              <button
+                onClick={() => setShowResumeConfirm(false)}
+                className="w-full inline-flex items-center justify-center rounded-lg bg-accent text-white text-[14px] font-medium py-2.5 px-4 hover:bg-accent/90 active:scale-[0.98] transition-all"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

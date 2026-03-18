@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { US_STATES } from "@/lib/utils/states"
 
-const INDEXNOW_KEY = "7fbaca863ddc4349af9cfe94534dc665"
+const INDEXNOW_KEY = process.env.INDEXNOW_KEY!
 const HOST = "usagentleads.com"
 const BASE_URL = `https://${HOST}`
 

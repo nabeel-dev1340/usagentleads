@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { createServiceClient } from "@/lib/supabase/server"
-import { isValidUUID } from "@/lib/utils/security"
+import { isValidUUID, isValidStateCode } from "@/lib/utils/security"
 import { rateLimit } from "@/lib/utils/rateLimit"
 
 const db = () => createServiceClient().schema("usagentleads")
@@ -21,6 +21,29 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Invalid token" }, { status: 400 })
   }
 
+  // First check expiry without claiming (avoids claim/revert race)
+  const { data: check } = await db()
+    .from("purchases")
+    .select("expires_at")
+    .eq("download_token", token)
+    .eq("token_used", false)
+    .eq("status", "completed")
+    .single()
+
+  if (!check) {
+    return NextResponse.json(
+      { error: "Invalid or expired download link" },
+      { status: 403 }
+    )
+  }
+
+  if (check.expires_at && new Date(check.expires_at) < new Date()) {
+    return NextResponse.json(
+      { error: "Invalid or expired download link" },
+      { status: 403 }
+    )
+  }
+
   // Atomic: claim the token in a single update (prevents race condition)
   const { data: purchase, error } = await db()
     .from("purchases")
@@ -38,23 +61,11 @@ export async function GET(request: Request) {
     )
   }
 
-  if (purchase.expires_at && new Date(purchase.expires_at) < new Date()) {
-    // Revert token_used since it's expired
-    await db()
-      .from("purchases")
-      .update({ token_used: false })
-      .eq("id", purchase.id)
-    return NextResponse.json(
-      { error: "Invalid or expired download link" },
-      { status: 403 }
-    )
-  }
-
   // Determine file path
   let filePath: string
   if (purchase.purchase_type === "full_database") {
     filePath = "full/usa_agents_full.xlsx"
-  } else if (purchase.purchase_type === "state" && purchase.state_code) {
+  } else if (purchase.purchase_type === "state" && purchase.state_code && isValidStateCode(purchase.state_code)) {
     filePath = `states/${purchase.state_code}.csv`
   } else {
     return NextResponse.json({ error: "Invalid purchase type" }, { status: 400 })

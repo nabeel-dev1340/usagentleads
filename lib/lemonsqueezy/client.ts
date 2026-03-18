@@ -1,16 +1,23 @@
 interface CreateCheckoutParams {
   variantId: string
   customData: Record<string, string>
+  skipTrial?: boolean
 }
 
 export async function createCheckout({
   variantId,
   customData,
+  skipTrial = false,
 }: CreateCheckoutParams): Promise<string> {
   const isSubscription = customData.purchase_type === "subscription"
+  const pageToken = customData.page_token || ""
+  // Validate page_token is a clean UUID to prevent URL injection
+  const safePageToken = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(pageToken)
+    ? pageToken
+    : ""
   const redirectUrl = isSubscription
     ? `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`
-    : `${process.env.NEXT_PUBLIC_APP_URL}/purchase-success`
+    : `${process.env.NEXT_PUBLIC_APP_URL}/purchase-success${safePageToken ? `?pt=${safePageToken}` : ""}`
   const thankYouNote = isSubscription
     ? "Your subscription is now active. Head to the dashboard to get started."
     : "Your download link is being sent to your email."
@@ -39,6 +46,8 @@ export async function createCheckout({
           checkout_data: {
             custom: customData,
           },
+          // Skip trial for returning users by setting trial end to now
+          ...(skipTrial ? { trial_ends_at: new Date().toISOString() } : {}),
           expires_at: null,
         },
         relationships: {

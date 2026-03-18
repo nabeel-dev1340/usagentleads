@@ -5,7 +5,7 @@ import { rateLimit } from "@/lib/utils/rateLimit"
 const db = () => createServiceClient().schema("usagentleads")
 
 // GET — return current user's subscription
-export async function GET() {
+export async function GET(request: Request) {
   const supabase = await createClient()
   const {
     data: { user },
@@ -13,6 +13,11 @@ export async function GET() {
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const { success } = rateLimit(`sub-get:${user.id}`, 30)
+  if (!success) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }
 
   const { data: subscription } = await db()
@@ -104,4 +109,87 @@ export async function DELETE(request: Request) {
     .eq("user_id", user.id)
 
   return NextResponse.json({ message: "Subscription will cancel at end of billing period" })
+}
+
+// PATCH — resume a cancelled subscription (un-cancel before period ends)
+export async function PATCH(request: Request) {
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+  const { success } = rateLimit(`sub-resume:${ip}`, 5)
+  if (!success) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+  }
+
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const { data: subscription } = await db()
+    .from("subscriptions")
+    .select("lemon_squeezy_subscription_id, status, cancel_at_period_end, trial_ends_at")
+    .eq("user_id", user.id)
+    .single()
+
+  if (!subscription) {
+    return NextResponse.json({ error: "No subscription found" }, { status: 404 })
+  }
+
+  if (!subscription.cancel_at_period_end) {
+    return NextResponse.json({ error: "Subscription is not scheduled for cancellation" }, { status: 400 })
+  }
+
+  // Resume via LemonSqueezy API (un-cancel)
+  const response = await fetch(
+    `https://api.lemonsqueezy.com/v1/subscriptions/${subscription.lemon_squeezy_subscription_id}`,
+    {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${process.env.LEMONSQUEEZY_API_KEY}`,
+        "Content-Type": "application/vnd.api+json",
+        Accept: "application/vnd.api+json",
+      },
+      body: JSON.stringify({
+        data: {
+          type: "subscriptions",
+          id: subscription.lemon_squeezy_subscription_id,
+          attributes: {
+            cancelled: false,
+          },
+        },
+      }),
+    }
+  )
+
+  if (!response.ok) {
+    const errBody = await response.text()
+    console.error("LemonSqueezy resume error:", errBody)
+    return NextResponse.json(
+      { error: "Failed to resume subscription" },
+      { status: 500 }
+    )
+  }
+
+  // Determine correct status: if trial hasn't ended, it's on_trial, otherwise active
+  const resumedStatus = subscription.trial_ends_at &&
+    new Date(subscription.trial_ends_at) > new Date()
+    ? "on_trial"
+    : "active"
+
+  // Update local record immediately
+  await db()
+    .from("subscriptions")
+    .update({
+      status: resumedStatus,
+      cancel_at_period_end: false,
+      cancelled_at: null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("user_id", user.id)
+
+  return NextResponse.json({ message: "Subscription resumed successfully" })
 }

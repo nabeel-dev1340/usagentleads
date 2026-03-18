@@ -11,11 +11,24 @@ const STATE_CODE_TO_NAME = new Map(
   US_STATES.map((s) => [s.code, s.name])
 )
 
-// Handle edge cases
+// Handle edge cases — DC isn't in US_STATES but exists in leads
 STATE_NAME_TO_CODE.set("Washington Dc", "DC")
 STATE_NAME_TO_CODE.set("District of Columbia", "DC")
+STATE_CODE_TO_NAME.set("DC", "District of Columbia")
 
 const CSV_HEADERS = ["name", "email", "phone", "state"] as const
+
+/** Strip zero-width characters (U+200B, U+200C, U+200D, U+FEFF) and trim */
+function cleanName(name: string | null): string | null {
+  if (!name) return null
+  return name.replace(/[\u200B\u200C\u200D\uFEFF]/g, "").trim() || null
+}
+
+/** Returns true if the name contains at least 2 consecutive letters */
+function isValidName(name: string | null): boolean {
+  if (!name) return false
+  return /[a-zA-Z]{2,}/.test(name)
+}
 
 function parseCSVLine(line: string): string[] {
   const fields: string[] = []
@@ -211,12 +224,21 @@ export async function GET(request: NextRequest) {
           .from("leads")
           .select("name, email, phone, state")
           .eq("state", name)
+          .not("name", "is", null)
+          .neq("name", "")
+          .filter("name", "match", "[a-zA-Z]{2,}")
           .range(offset, offset + PAGE_SIZE - 1)
 
         if (error) throw new Error(`Failed to fetch leads for ${name}: ${error.message}`)
         if (!data || data.length === 0) break
 
-        allRows.push(...data)
+        // Clean zero-width chars and re-validate names
+        for (const row of data) {
+          row.name = cleanName(row.name)
+          if (isValidName(row.name)) {
+            allRows.push(row)
+          }
+        }
         if (data.length < PAGE_SIZE) break
         offset += PAGE_SIZE
       }

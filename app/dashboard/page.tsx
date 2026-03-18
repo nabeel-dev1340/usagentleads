@@ -1,16 +1,18 @@
 "use client"
 
 import { useCallback, useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar"
 import { AgentTable } from "@/components/dashboard/AgentTable"
 import { SearchFilterBar } from "@/components/dashboard/SearchFilterBar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
+import { Menu, Loader2 } from "lucide-react"
 import type { Agent } from "@/types"
 
 const COLLAPSED_KEY = "dashboard-sidebar-collapsed"
 
 export default function DashboardPage() {
+  const router = useRouter()
   const [agents, setAgents] = useState<Agent[]>([])
   const [count, setCount] = useState(0)
   const [page, setPage] = useState(1)
@@ -20,6 +22,7 @@ export default function DashboardPage() {
   const [state, setState] = useState("")
   const [pageSize, setPageSize] = useState(25)
   const [collapsed, setCollapsed] = useState(false)
+  const [accessError, setAccessError] = useState<"auth" | "subscription" | null>(null)
 
   // Restore collapsed preference
   useEffect(() => {
@@ -50,6 +53,13 @@ export default function DashboardPage() {
         setAgents(data.data)
         setCount(data.count)
         setTotalPages(data.totalPages)
+        setAccessError(null)
+      } else if (res.status === 401) {
+        setAccessError("auth")
+        return
+      } else if (res.status === 403) {
+        setAccessError("subscription")
+        return
       }
     } catch (error) {
       console.error("Failed to fetch agents:", error)
@@ -87,6 +97,36 @@ export default function DashboardPage() {
 
   const start = (page - 1) * pageSize + 1
   const end = Math.min(page * pageSize, count)
+
+  // Redirect unauthenticated users to login
+  if (accessError === "auth") {
+    router.push("/login?next=/dashboard")
+    return (
+      <div className="flex h-screen items-center justify-center bg-page">
+        <Loader2 className="h-6 w-6 animate-spin text-tertiary" />
+      </div>
+    )
+  }
+
+  // Show subscription required message
+  if (accessError === "subscription") {
+    return (
+      <div className="flex h-screen items-center justify-center bg-page px-4">
+        <div className="card max-w-md w-full p-8 text-center">
+          <h2 className="text-[20px] font-semibold text-ink mb-2">Subscription Required</h2>
+          <p className="text-[15px] text-tertiary mb-6">
+            You need an active Pro Dashboard subscription to access the agent database.
+          </p>
+          <button
+            onClick={() => router.push("/pricing")}
+            className="btn-primary w-full justify-center"
+          >
+            View Pricing
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex h-screen">

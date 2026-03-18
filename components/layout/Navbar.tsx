@@ -92,7 +92,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg border border-transparent px-3 py-2 text-[14px] font-semibold text-body transition-all duration-150 hover:text-ink hover:border-border hover:bg-subtle"
+                className="rounded-lg border border-transparent px-3 py-2 text-[14px] font-medium text-body transition-all duration-150 hover:text-ink hover:border-border hover:bg-subtle"
               >
                 {link.label}
               </Link>
@@ -146,13 +146,13 @@ export function Navbar() {
               <>
                 <button
                   onClick={handleSignIn}
-                  className="rounded-lg border border-border px-4 py-2 text-[14px] font-semibold text-body transition-all duration-150 hover:text-ink hover:bg-subtle"
+                  className="rounded-lg border border-border px-4 py-2 text-[14px] font-medium text-body transition-all duration-150 hover:text-ink hover:bg-subtle"
                 >
                   Sign In
                 </button>
                 <Link
                   href="/pricing"
-                  className="btn-primary text-[14px] px-5 py-2.5 font-semibold"
+                  className="btn-primary text-[14px] px-5 py-2.5 font-medium"
                 >
                   Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
                 </Link>
