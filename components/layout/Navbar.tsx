@@ -143,12 +143,20 @@ export function Navbar() {
                 )}
               </div>
             ) : (
-              <Link
-                href="/pricing"
-                className="btn-primary text-[14px] px-5 py-2.5 font-semibold"
-              >
-                Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
-              </Link>
+              <>
+                <button
+                  onClick={handleSignIn}
+                  className="rounded-lg border border-border px-4 py-2 text-[14px] font-semibold text-body transition-all duration-150 hover:text-ink hover:bg-subtle"
+                >
+                  Sign In
+                </button>
+                <Link
+                  href="/pricing"
+                  className="btn-primary text-[14px] px-5 py-2.5 font-semibold"
+                >
+                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
+                </Link>
+              </>
             )}
           </div>
 
@@ -165,8 +173,9 @@ export function Navbar() {
 
       {/* Mobile full-screen overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] bg-white md:hidden">
-          <div className="flex h-16 items-center justify-between px-4 sm:px-6 border-b border-border">
+        <div className="fixed inset-0 z-[60] flex flex-col bg-white md:hidden animate-fade-in">
+          {/* Mobile header */}
+          <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6 border-b border-border">
             <Link href="/" className="flex items-center gap-2 text-[19px] font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
               <LogoIcon className="h-7 w-7 text-accent" />
               <span>
@@ -182,47 +191,101 @@ export function Navbar() {
               <X className="h-5 w-5" />
             </button>
           </div>
-          <div className="flex flex-col items-center justify-center gap-6 sm:gap-8 pt-16 sm:pt-24">
+
+          {/* Mobile nav links */}
+          <div className="flex flex-1 flex-col items-center justify-center gap-5 px-6">
             {navLinks.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-[20px] sm:text-[22px] font-medium text-ink transition-colors hover:text-accent"
+                className="text-[18px] font-medium text-ink transition-colors hover:text-accent"
                 style={{
-                  animation: `fade-in-up 0.4s ease-out forwards`,
-                  animationDelay: `${i * 80}ms`,
+                  animation: `fade-in-up 0.35s ease-out forwards`,
+                  animationDelay: `${i * 70}ms`,
                   animationFillMode: "backwards",
                 }}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="h-px w-16 bg-border" />
-            <div
-              style={{
-                animation: `fade-in-up 0.4s ease-out forwards`,
-                animationDelay: `${navLinks.length * 80}ms`,
-                animationFillMode: "backwards",
-              }}
-            >
-              {user ? (
-                <button
-                  onClick={() => { handleSignOut(); setMobileOpen(false) }}
-                  className="text-lg text-tertiary transition-colors hover:text-ink"
+
+            <div className="h-px w-12 bg-border my-1" />
+
+            {user ? (
+              <>
+                <div
+                  className="flex flex-col items-center gap-1"
+                  style={{
+                    animation: `fade-in-up 0.35s ease-out forwards`,
+                    animationDelay: `${navLinks.length * 70}ms`,
+                    animationFillMode: "backwards",
+                  }}
                 >
-                  Sign Out
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-[14px] font-mono font-medium text-white">
+                    {initials}
+                  </div>
+                  <span className="text-[13px] text-tertiary truncate max-w-50">{user.email}</span>
+                </div>
+                <div
+                  className="flex flex-col items-center gap-3"
+                  style={{
+                    animation: `fade-in-up 0.35s ease-out forwards`,
+                    animationDelay: `${(navLinks.length + 1) * 70}ms`,
+                    animationFillMode: "backwards",
+                  }}
+                >
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2 text-[16px] font-medium text-body transition-colors hover:text-ink"
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    Dashboard
+                  </Link>
+                  <a
+                    href="https://app.lemonsqueezy.com/my-orders"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2 text-[16px] font-medium text-body transition-colors hover:text-ink"
+                  >
+                    <CreditCard className="h-4 w-4" />
+                    Manage Subscription
+                  </a>
+                  <button
+                    onClick={() => { handleSignOut(); setMobileOpen(false) }}
+                    className="flex items-center gap-2 text-[16px] font-medium text-tertiary transition-colors hover:text-danger"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign Out
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div
+                className="flex flex-col items-center gap-4"
+                style={{
+                  animation: `fade-in-up 0.35s ease-out forwards`,
+                  animationDelay: `${navLinks.length * 70}ms`,
+                  animationFillMode: "backwards",
+                }}
+              >
+                <button
+                  onClick={() => { handleSignIn(); setMobileOpen(false) }}
+                  className="text-[16px] font-medium text-body transition-colors hover:text-ink"
+                >
+                  Sign In
                 </button>
-              ) : (
                 <Link
                   href="/pricing"
                   onClick={() => setMobileOpen(false)}
-                  className="btn-primary text-lg px-8 py-3 font-semibold"
+                  className="btn-primary text-[16px] px-7 py-2.5 font-semibold"
                 >
                   Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
                 </Link>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}
