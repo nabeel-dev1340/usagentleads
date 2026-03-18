@@ -90,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en-US">
+    <html lang="en-US" className={`${poppins.variable} ${jetbrainsMono.variable}`}>
       <head>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -102,7 +102,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased bg-page text-ink`}>
+      <body className="font-sans antialiased bg-page text-ink">
         <ScrollRevealProvider />
         <div className="bg-accent text-white text-center text-[13px] font-medium py-1.5 px-4">
           <span className="font-mono tracking-wide uppercase">Beta</span>
