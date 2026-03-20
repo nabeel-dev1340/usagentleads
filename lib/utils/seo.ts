@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import type { USState } from "@/types"
+import type { BlogPost } from "@/types/blog"
 
 const BASE_URL = "https://usagentleads.com"
 
@@ -185,5 +186,34 @@ export function generateFAQSchema(
         text: item.answer,
       },
     })),
+  }
+}
+
+export function generateArticleSchema(post: BlogPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.description,
+    image: `${BASE_URL}${post.coverImage}`,
+    datePublished: post.date,
+    dateModified: post.updatedAt || post.date,
+    author: {
+      "@type": "Organization",
+      name: "USAgentLeads",
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "USAgentLeads",
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/icon-512.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${BASE_URL}/blog/${post.slug}`,
+    },
   }
 }

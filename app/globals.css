@@ -231,6 +231,81 @@ html, body {
   .section-header {
     @apply space-y-3 mb-14;
   }
+
+  /* ── Prose (blog article typography) ────────── */
+
+  .prose {
+    @apply text-body text-[16px] sm:text-[17px] leading-[1.85];
+  }
+  .prose h2 {
+    @apply text-[22px] sm:text-[26px] font-semibold text-ink tracking-[-0.01em]
+           mt-12 mb-4 leading-[1.2];
+  }
+  .prose h3 {
+    @apply text-[18px] sm:text-[20px] font-semibold text-ink mt-8 mb-3 leading-[1.3];
+  }
+  .prose p {
+    @apply mb-6;
+  }
+  .prose a {
+    @apply text-accent font-medium underline decoration-accent/30
+           underline-offset-2 hover:decoration-accent transition-colors;
+  }
+  .prose ul {
+    @apply list-disc pl-6 mb-6 space-y-2;
+  }
+  .prose ol {
+    @apply list-decimal pl-6 mb-6 space-y-2;
+  }
+  .prose li {
+    @apply pl-1;
+  }
+  .prose blockquote {
+    @apply border-l-[3px] border-accent pl-5 py-3 my-6
+           text-[16px] italic text-tertiary bg-accent-light/50 rounded-r-lg pr-4;
+  }
+  .prose code {
+    @apply font-mono text-[14px] bg-subtle text-accent px-1.5 py-0.5 rounded;
+  }
+  .prose pre {
+    @apply bg-[#0F1623] text-[#E5E7EB] rounded-xl p-5 overflow-x-auto my-8
+           font-mono text-[14px] leading-relaxed shadow-md;
+  }
+  .prose pre code {
+    @apply bg-transparent text-inherit p-0 rounded-none;
+  }
+  .prose img {
+    @apply rounded-xl my-8 w-full;
+  }
+  .prose hr {
+    @apply border-border my-10;
+  }
+  .prose strong {
+    @apply text-ink font-semibold;
+  }
+  .prose .table-wrapper {
+    @apply overflow-x-auto my-8 rounded-xl border border-border bg-white shadow-sm;
+  }
+  .prose table {
+    @apply w-full text-[14px] sm:text-[15px] border-collapse;
+  }
+  .prose thead {
+    @apply bg-subtle;
+  }
+  .prose th {
+    @apply text-left font-mono text-[12px] sm:text-[13px] uppercase tracking-[0.06em]
+           text-tertiary font-semibold px-4 sm:px-5 py-3 border-b border-border
+           whitespace-nowrap;
+  }
+  .prose td {
+    @apply px-4 sm:px-5 py-3 border-b border-border/50 text-body;
+  }
+  .prose tbody tr:last-child td {
+    @apply border-b-0;
+  }
+  .prose tbody tr:hover td {
+    @apply bg-subtle/50;
+  }
 }
 
 /* ---- Animations ---- */

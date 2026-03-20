@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { US_STATES } from "@/lib/utils/states"
+import { getAllPosts } from "@/lib/blog"
 
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY!
 const HOST = "usagentleads.com"
@@ -26,7 +27,9 @@ export async function GET(request: NextRequest) {
     `${BASE_URL}/pricing`,
     `${BASE_URL}/states`,
     `${BASE_URL}/contact`,
+    `${BASE_URL}/blog`,
     ...US_STATES.map((state) => `${BASE_URL}/states/${state.slug}`),
+    ...getAllPosts().map((post) => `${BASE_URL}/blog/${post.slug}`),
   ]
 
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

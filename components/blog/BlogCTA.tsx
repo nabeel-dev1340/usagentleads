@@ -1,0 +1,33 @@
+import Link from "next/link"
+
+export function BlogCTA() {
+  return (
+    <section className="bg-accent rounded-2xl p-8 sm:p-12 text-center my-16">
+      <h2 className="text-[22px] sm:text-[24px] font-semibold text-white mb-3">
+        Need Real Estate Agent Contacts?
+      </h2>
+      <p className="text-[15px] sm:text-[16px] text-white/80 max-w-lg mx-auto mb-8">
+        Access 500,000+ verified realtor emails and phone numbers across all 50 states.
+        Instant CSV download starting at $10 per state.
+      </p>
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <Link
+          href="/states"
+          className="inline-flex items-center gap-2 bg-white text-accent font-medium
+                     text-[15px] px-6 py-3 rounded-lg hover:bg-white/90
+                     shadow-sm transition-all duration-150"
+        >
+          Browse States
+        </Link>
+        <Link
+          href="/pricing"
+          className="inline-flex items-center gap-2 bg-transparent text-white font-medium
+                     text-[15px] px-6 py-3 rounded-lg border border-white/30
+                     hover:bg-white/10 transition-all duration-150"
+        >
+          View Pricing
+        </Link>
+      </div>
+    </section>
+  )
+}

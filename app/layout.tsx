@@ -76,6 +76,9 @@ export const metadata: Metadata = {
       "en-US": "https://usagentleads.com",
       "x-default": "https://usagentleads.com",
     },
+    types: {
+      "application/rss+xml": "https://usagentleads.com/blog/feed.xml",
+    },
   },
   other: {
     "geo.region": "US",
