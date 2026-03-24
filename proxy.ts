@@ -32,7 +32,7 @@ export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
   // Skip middleware for webhook/auth endpoints (no user session needed)
-  if (pathname.startsWith("/api/auth/") || pathname.startsWith("/api/webhooks")) {
+  if (pathname.startsWith("/api/auth/") || pathname.startsWith("/api/webhooks") || pathname.startsWith("/api/v1/")) {
     return supabaseResponse
   }
 

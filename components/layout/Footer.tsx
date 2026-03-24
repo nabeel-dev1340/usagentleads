@@ -46,6 +46,11 @@ export function Footer() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link href="/docs" className="text-[15px] text-[#9CA3AF] hover:text-white transition-colors">
+                  API Docs
+                </Link>
+              </li>
             </ul>
           </div>
 

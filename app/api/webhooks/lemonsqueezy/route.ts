@@ -54,7 +54,7 @@ export async function POST(request: Request) {
         const amountPaid = data.attributes?.total || 0
 
         // Skip subscription orders — handled by subscription_created
-        if (purchaseType === "subscription") break
+        if (purchaseType === "subscription" || purchaseType === "subscription_api") break
 
         const userId = customData.user_id || null
         const pageToken = customData.page_token || null
@@ -130,6 +130,8 @@ export async function POST(request: Request) {
         const periodStart = data.attributes?.created_at || null
         const periodEnd = data.attributes?.renews_at || null
         const trialEndsAt = data.attributes?.trial_ends_at || null
+        const customData = payload.meta?.custom_data || {}
+        const plan = customData.purchase_type === "subscription_api" ? "pro_api" : "pro_monthly"
 
         if (userId) {
           await db().from("subscriptions").upsert(
@@ -138,6 +140,7 @@ export async function POST(request: Request) {
               lemon_squeezy_subscription_id: subId,
               lemon_squeezy_customer_id: customerId,
               status,
+              plan,
               current_period_start: periodStart,
               current_period_end: periodEnd,
               trial_ends_at: trialEndsAt,

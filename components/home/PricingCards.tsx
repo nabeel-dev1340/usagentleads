@@ -61,6 +61,22 @@ function getPlans(totalCount: number) {
       href: "/pricing",
       highlighted: false,
     },
+    {
+      name: "Pro API",
+      subtitle: "Monthly subscription",
+      price: "$79",
+      period: "/ month",
+      features: [
+        { text: "Everything in Pro Dashboard", included: true },
+        { text: "REST API access", included: true },
+        { text: "10,000 API requests/month", included: true },
+        { text: "100 requests during trial", included: true },
+        { text: "API key management & analytics", included: true },
+      ] as Feature[],
+      cta: "View API Docs",
+      href: "/docs",
+      highlighted: false,
+    },
   ]
 }
 
@@ -77,46 +93,46 @@ export function PricingCards({ totalCount }: { totalCount: number }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start reveal-stagger">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto items-stretch reveal-stagger">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative p-8 flex flex-col rounded-xl transition-all duration-200 ${
+              className={`relative p-6 flex flex-col rounded-xl transition-all duration-200 ${
                 plan.highlighted
-                  ? "bg-white border-2 border-accent shadow-[0_8px_40px_rgba(29,78,216,0.12),0_2px_8px_rgba(29,78,216,0.08)] scale-[1.02] max-sm:scale-100 hover:-translate-y-0.5"
+                  ? "bg-white border-2 border-accent shadow-[0_8px_40px_rgba(29,78,216,0.12),0_2px_8px_rgba(29,78,216,0.08)] hover:-translate-y-0.5"
                   : "bg-white border border-border rounded-xl shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:border-border-strong"
               }`}
             >
               {/* Badge */}
               {plan.badge && (
                 <div className="absolute -top-px left-1/2 -translate-x-1/2">
-                  <div className="bg-accent text-white font-mono text-[12px] font-semibold tracking-wider uppercase px-4 py-1.5 rounded-b-lg shadow-sm">
+                  <div className="bg-accent text-white font-mono text-[11px] font-semibold tracking-wider uppercase px-3 py-1 rounded-b-lg shadow-sm">
                     {plan.badge}
                   </div>
                 </div>
               )}
 
-              <p className={`text-[15px] font-medium text-body mb-1 ${plan.badge ? "mt-4" : ""}`}>
+              <p className={`text-[14px] font-medium text-body mb-0.5 ${plan.badge ? "mt-3" : ""}`}>
                 {plan.name}
               </p>
-              <p className="text-[13px] font-mono text-tertiary mb-6">{plan.subtitle}</p>
+              <p className="text-[12px] font-mono text-tertiary mb-5">{plan.subtitle}</p>
 
-              <div className="flex items-baseline gap-1.5 mb-8">
-                <span className="font-mono text-[36px] sm:text-[52px] font-semibold text-ink leading-none">
+              <div className="flex items-baseline gap-1 mb-5">
+                <span className="font-mono text-[32px] sm:text-[40px] font-semibold text-ink leading-none">
                   {plan.price}
                 </span>
-                <span className="text-tertiary text-[15px]">{plan.period}</span>
+                <span className="text-tertiary text-[14px]">{plan.period}</span>
               </div>
 
-              <div className="h-px bg-border mb-8" />
+              <div className="h-px bg-border mb-6" />
 
-              <ul className="space-y-3.5 flex-1">
+              <ul className="space-y-3 flex-1">
                 {plan.features.map((f) => (
-                  <li key={f.text} className="flex items-center gap-3 text-[15px]">
+                  <li key={f.text} className="flex items-start gap-2.5 text-[14px]">
                     {f.included ? (
-                      <Check size={16} className="text-success shrink-0" />
+                      <Check size={15} className="text-success shrink-0 mt-0.5" />
                     ) : (
-                      <X size={16} className="text-muted shrink-0" />
+                      <X size={15} className="text-muted shrink-0 mt-0.5" />
                     )}
                     <span className={f.included ? "text-body" : "text-muted line-through decoration-muted/50"}>
                       {f.text}
@@ -127,11 +143,11 @@ export function PricingCards({ totalCount }: { totalCount: number }) {
 
               <Link
                 href={plan.href}
-                className={`w-full justify-center mt-8 ${
-                  plan.highlighted ? "btn-primary text-[15px]" : "btn-outline"
+                className={`w-full justify-center mt-6 text-[14px] ${
+                  plan.highlighted ? "btn-primary" : "btn-outline"
                 }`}
               >
-                {plan.cta} <ArrowRight size={14} />
+                {plan.cta} <ArrowRight size={13} />
               </Link>
             </div>
           ))}

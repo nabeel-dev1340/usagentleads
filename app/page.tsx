@@ -4,6 +4,7 @@ import { WhoIsThisFor } from "@/components/home/WhoIsThisFor"
 import { HowItWorks } from "@/components/home/HowItWorks"
 import { UseCases } from "@/components/home/UseCases"
 import { PricingCards } from "@/components/home/PricingCards"
+import { ApiSection } from "@/components/home/ApiSection"
 import { CompetitorComparison } from "@/components/home/CompetitorComparison"
 import { Testimonials } from "@/components/home/Testimonials"
 import { DataSources } from "@/components/home/DataSources"
@@ -59,6 +60,7 @@ export default async function Home() {
       <HowItWorks />
       <UseCases />
       <PricingCards totalCount={totalCount} />
+      <ApiSection />
       <CompetitorComparison />
       <Testimonials />
       <DataSources />

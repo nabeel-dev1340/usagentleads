@@ -4,7 +4,15 @@ import { Loader2, ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 
-export function SubscribeButton({ className }: { className?: string }) {
+export function SubscribeButton({
+  className,
+  purchaseType = "subscription",
+  label = "Subscribe",
+}: {
+  className?: string
+  purchaseType?: "subscription" | "subscription_api"
+  label?: string
+}) {
   const [loading, setLoading] = useState(false)
 
   const handleSubscribe = async () => {
@@ -24,7 +32,7 @@ export function SubscribeButton({ className }: { className?: string }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          purchaseType: "subscription",
+          purchaseType,
         }),
       })
       const data = await res.json()
@@ -46,7 +54,7 @@ export function SubscribeButton({ className }: { className?: string }) {
         <Loader2 className="h-4 w-4 animate-spin" />
       ) : (
         <>
-          Subscribe <ArrowRight size={14} />
+          {label} <ArrowRight size={14} />
         </>
       )}
     </button>

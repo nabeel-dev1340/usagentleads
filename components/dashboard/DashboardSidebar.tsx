@@ -11,6 +11,7 @@ import {
   ChevronRight,
   AlertTriangle,
   Check,
+  Key,
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
@@ -230,6 +231,18 @@ export function DashboardSidebar({
         </div>
       </div>
 
+      {/* API Keys Link */}
+      <div className={`${collapsed ? "px-2" : "px-3"} pb-1`}>
+        <Link
+          href="/dashboard/api-keys"
+          title={collapsed ? "API Keys" : undefined}
+          className={`flex items-center ${collapsed ? "justify-center" : "gap-2.5"} w-full px-3 py-2.5 rounded-lg text-[15px] transition-all duration-150 text-tertiary hover:text-ink hover:bg-subtle`}
+        >
+          <Key size={16} className="shrink-0" />
+          {!collapsed && "API Keys"}
+        </Link>
+      </div>
+
       {/* Footer — User & Account */}
       <div className={`${collapsed ? "px-2" : "px-3"} pb-3 mt-auto border-t border-border pt-3`}>
         {/* User trigger */}
@@ -278,7 +291,9 @@ export function DashboardSidebar({
               <div className="rounded-lg border border-border overflow-hidden mb-2">
                 <div className="px-3.5 py-3 bg-subtle/60 flex flex-wrap items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <p className="text-[14px] font-medium text-ink">Pro Monthly</p>
+                    <p className="text-[14px] font-medium text-ink">
+                      {sub.plan === "pro_api" ? "Pro API" : "Pro Monthly"}
+                    </p>
                     <p className="text-[13px] text-tertiary mt-0.5 truncate">
                       {sub.status === "on_trial" && trialEnd
                         ? `Trial ends ${trialEnd}`

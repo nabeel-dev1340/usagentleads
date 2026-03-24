@@ -9,7 +9,7 @@ export async function createCheckout({
   customData,
   skipTrial = false,
 }: CreateCheckoutParams): Promise<string> {
-  const isSubscription = customData.purchase_type === "subscription"
+  const isSubscription = customData.purchase_type === "subscription" || customData.purchase_type === "subscription_api"
   const pageToken = customData.page_token || ""
   // Validate page_token is a clean UUID to prevent URL injection
   const safePageToken = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(pageToken)

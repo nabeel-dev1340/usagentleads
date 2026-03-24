@@ -62,6 +62,7 @@ export function Navbar() {
     { href: "/states", label: "Browse States" },
     { href: "/pricing", label: "Pricing" },
     { href: "/blog", label: "Blog" },
+    { href: "/docs", label: "API Docs" },
     { href: "/dashboard", label: "Dashboard" },
     { href: "/contact", label: "Contact" },
   ]

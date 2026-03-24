@@ -7,7 +7,7 @@ import { rateLimit } from "@/lib/utils/rateLimit"
 import { z } from "zod"
 
 const checkoutSchema = z.object({
-  purchaseType: z.enum(["state", "full_database", "subscription"]),
+  purchaseType: z.enum(["state", "full_database", "subscription", "subscription_api"]),
   stateCode: z.string().optional(),
 })
 
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
     // Generate a page_token for secure purchase-success page lookup
     // Only the person who completes checkout will have this token in the redirect URL
-    if (purchaseType !== "subscription") {
+    if (purchaseType !== "subscription" && purchaseType !== "subscription_api") {
       customData.page_token = crypto.randomUUID()
     }
 
@@ -48,8 +48,10 @@ export async function POST(request: Request) {
     } else if (purchaseType === "full_database") {
       variantId = process.env.NEXT_PUBLIC_LS_FULL_DB_VARIANT_ID!
     } else {
-      // subscription
-      variantId = process.env.NEXT_PUBLIC_LS_SUBSCRIPTION_VARIANT_ID!
+      // subscription or subscription_api
+      variantId = purchaseType === "subscription_api"
+        ? process.env.NEXT_PUBLIC_LS_API_SUBSCRIPTION_VARIANT_ID!
+        : process.env.NEXT_PUBLIC_LS_SUBSCRIPTION_VARIANT_ID!
       const supabase = await createClient()
       const {
         data: { user },
