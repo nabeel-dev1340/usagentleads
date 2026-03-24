@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
+import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
 
 const previewRows = [
   { name: "James Harrington", email: "james@harrington-realty.com", phone: "(305) 881-2244", state: "FL" },
@@ -72,7 +73,7 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
           {/* Card header */}
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-subtle">
             <span className="text-[13px] font-mono font-medium text-tertiary uppercase tracking-wider">
-              Sample Data — First 4 Records
+              Sample Data — First 500 Records
             </span>
             <span className="badge-state">Preview</span>
           </div>
@@ -103,11 +104,14 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
           </table>
 
           {/* Footer */}
-          <div className="flex items-center justify-center gap-2 px-5 py-3 bg-accent-light border-t border-accent-mid">
-            <Lock size={14} className="text-accent" />
-            <span className="text-[14px] text-accent font-medium">
-              Purchase to access the full database
-            </span>
+          <div className="flex items-center justify-between px-5 py-3 bg-accent-light border-t border-accent-mid">
+            <div className="flex items-center gap-2">
+              <Lock size={14} className="text-accent" />
+              <span className="text-[14px] text-accent font-medium">
+                First 500 records free
+              </span>
+            </div>
+            <FreeSampleDialog />
           </div>
         </div>
       </div>

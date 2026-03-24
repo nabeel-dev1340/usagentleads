@@ -325,6 +325,59 @@ interface SendPaymentFailedParams {
   to: string
 }
 
+// ── Free sample download email ────────────────────────────────────────
+
+interface SendFreeSampleEmailParams {
+  to: string
+  downloadUrl: string
+}
+
+export async function sendFreeSampleEmail({
+  to,
+  downloadUrl,
+}: SendFreeSampleEmailParams) {
+  const body = `
+    <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
+
+    <p style="margin: 0 0 8px 0; font-size: 15px;">
+      Thanks for your interest in USAgentLeads! Here's your <strong>free sample</strong> of 500 verified real estate agent contacts.
+    </p>
+
+    ${primaryButton(downloadUrl, "Download Free Sample (CSV)")}
+
+    <p style="color: #dc2626; font-weight: 600; font-size: 14px; text-align: center; margin: 0 0 24px 0;">
+      This link expires in 7 days.
+    </p>
+
+    ${infoBox(`
+      <p style="margin: 0 0 8px 0; font-weight: 600; font-size: 14px; color: #1e3a5f;">What's included:</p>
+      <table style="width: 100%; font-size: 14px; color: #334155;">
+        <tr><td style="padding: 3px 0;">500 verified agent records</td></tr>
+        <tr><td style="padding: 3px 0;">Full Name, Email, Phone, State</td></tr>
+        <tr><td style="padding: 3px 0;">Ready for Excel, Google Sheets, or any CRM</td></tr>
+      </table>
+    `)}
+
+    <p style="margin: 0 0 8px 0; font-size: 15px;">
+      Want access to our <strong>full database of 500K+ agents</strong>?
+    </p>
+
+    ${primaryButton("https://usagentleads.com/pricing", "View Pricing Plans")}
+
+    <p style="color: #64748b; font-size: 13px; margin: 0;">
+      Questions? Reply to this email and we'll be happy to help.
+    </p>`
+
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to,
+    subject: "Your Free Sample — 500 Real Estate Agent Contacts",
+    html: emailLayout(body),
+  })
+}
+
+// ── Payment failed email ─────────────────────────────────────────────
+
 export async function sendPaymentFailed({ to }: SendPaymentFailedParams) {
   const body = `
     <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
