@@ -16,7 +16,7 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
 
   return (
     <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 sm:pb-20 pt-10 overflow-hidden">
-<div className="relative z-10 mx-auto max-w-195 text-center">
+      <div className="relative z-10 mx-auto max-w-195 text-center">
         {/* Badge */}
         <div className="hero-badge inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-full bg-white border border-border shadow-sm text-[12px] sm:text-[14px] mb-10 flex-wrap justify-center">
           <span className="flex items-center gap-1.5 text-success font-medium">
@@ -82,10 +82,10 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
           <table className="data-table">
             <thead>
               <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th className="hidden sm:table-cell">Phone</th>
-                <th>State</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" className="hidden sm:table-cell">Phone</th>
+                <th scope="col">State</th>
               </tr>
             </thead>
             <tbody>

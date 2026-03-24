@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Menu, X, LogOut, LayoutDashboard, CreditCard } from "lucide-react"
 import { LogoIcon } from "@/components/ui/Logo"
@@ -13,7 +13,7 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [totalCount, setTotalCount] = useState(0)
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user))
@@ -23,7 +23,7 @@ export function Navbar() {
       setUser(session?.user ?? null)
     })
     return () => subscription.unsubscribe()
-  }, [supabase.auth])
+  }, [supabase])
 
   useEffect(() => {
     supabase
@@ -47,6 +47,15 @@ export function Navbar() {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
+
+  useEffect(() => {
+    if (!dropdownOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDropdownOpen(false)
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [dropdownOpen])
 
   const handleSignIn = () => {
     window.location.href = "/login?next=/dashboard"
@@ -107,6 +116,8 @@ export function Navbar() {
               <div className="relative">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
+                  aria-expanded={dropdownOpen}
+                  aria-haspopup="menu"
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-[12px] font-mono font-medium text-white"
                 >
                   {initials}
@@ -114,9 +125,14 @@ export function Navbar() {
                 {dropdownOpen && (
                   <>
                     <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} />
-                    <div className="absolute right-0 top-full z-50 mt-2 w-52 rounded-xl border border-border bg-white p-1.5 shadow-lg">
+                    <div
+                      role="menu"
+                      onKeyDown={(e) => { if (e.key === "Escape") setDropdownOpen(false) }}
+                      className="absolute right-0 top-full z-50 mt-2 w-52 rounded-xl border border-border bg-white p-1.5 shadow-lg"
+                    >
                       <Link
                         href="/dashboard"
+                        role="menuitem"
                         onClick={() => setDropdownOpen(false)}
                         className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[14px] text-body transition-colors hover:bg-subtle hover:text-ink"
                       >
@@ -127,6 +143,7 @@ export function Navbar() {
                         href="https://app.lemonsqueezy.com/my-orders"
                         target="_blank"
                         rel="noopener noreferrer"
+                        role="menuitem"
                         className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[14px] text-body transition-colors hover:bg-subtle hover:text-ink"
                       >
                         <CreditCard className="h-4 w-4" />
@@ -135,6 +152,7 @@ export function Navbar() {
                       <div className="my-1 h-px bg-border" />
                       <button
                         onClick={handleSignOut}
+                        role="menuitem"
                         className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-[14px] text-body transition-colors hover:bg-subtle hover:text-danger"
                       >
                         <LogOut className="h-4 w-4" />

@@ -36,20 +36,20 @@ function CodeBlock({
   children: string
 }) {
   return (
-    <div className="rounded-xl bg-[#0F1623] overflow-hidden">
+    <div className="rounded-xl bg-ink overflow-hidden">
       {title && (
-        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#1F2937]">
-          <span className="text-[12px] font-mono uppercase tracking-wider text-[#6B7280]">
+        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-dark-border">
+          <span className="text-[12px] font-mono uppercase tracking-wider text-tertiary">
             {title}
           </span>
           {lang && (
-            <span className="text-[11px] font-mono text-[#4B5563] ml-auto">
+            <span className="text-[11px] font-mono text-body ml-auto">
               {lang}
             </span>
           )}
         </div>
       )}
-      <pre className="p-4 sm:p-5 text-[13px] font-mono text-[#E5E7EB] leading-relaxed overflow-x-auto">
+      <pre className="p-4 sm:p-5 text-[13px] font-mono text-code-text leading-relaxed overflow-x-auto">
         {children}
       </pre>
     </div>

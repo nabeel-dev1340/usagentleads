@@ -15,7 +15,7 @@ import {
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 interface Subscription {
   status: string
@@ -42,7 +42,7 @@ export function DashboardSidebar({
   onToggleCollapse,
 }: DashboardSidebarProps) {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [sub, setSub] = useState<Subscription | null>(null)
   const [userEmail, setUserEmail] = useState("")
   const [userName, setUserName] = useState("")

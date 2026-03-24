@@ -89,8 +89,8 @@ export function ExitIntentPopup() {
       <DialogContent className="sm:max-w-md">
         {submitted ? (
           <div className="flex flex-col items-center gap-4 py-4 text-center">
-            <div className="flex size-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-              <MailIcon className="size-6 text-green-600 dark:text-green-400" />
+            <div className="flex size-12 items-center justify-center rounded-full bg-success-bg">
+              <MailIcon className="size-6 text-success" />
             </div>
             <DialogHeader className="items-center">
               <DialogTitle className="text-lg">Check Your Email!</DialogTitle>
@@ -106,8 +106,8 @@ export function ExitIntentPopup() {
           <>
             <DialogHeader>
               <div className="flex items-center gap-2">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                  <DownloadIcon className="size-5 text-blue-600 dark:text-blue-400" />
+                <div className="flex size-9 items-center justify-center rounded-lg bg-accent-light">
+                  <DownloadIcon className="size-5 text-accent" />
                 </div>
                 <DialogTitle className="text-lg">Wait — Free Sample!</DialogTitle>
               </div>
@@ -119,13 +119,14 @@ export function ExitIntentPopup() {
               <Input
                 type="email"
                 placeholder="Enter your email address"
+                aria-label="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-10"
+                className="h-11"
                 autoFocus
               />
-              <Button type="submit" disabled={loading} className="h-10 w-full gap-2">
+              <Button type="submit" disabled={loading} className="h-11 w-full gap-2">
                 {loading ? (
                   <>
                     <Loader2Icon className="size-4 animate-spin" />

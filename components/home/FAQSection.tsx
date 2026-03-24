@@ -50,23 +50,34 @@ function getFaqs(totalCount: number) {
   ]
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer, id }: { question: string; answer: string; id: string }) {
   const [open, setOpen] = useState(false)
+  const buttonId = `faq-btn-${id}`
+  const panelId = `faq-panel-${id}`
 
   return (
     <div className="border-b border-border last:border-0">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left group"
-      >
-        <span className="text-[15px] font-medium text-ink group-hover:text-accent transition-colors pr-8">
-          {question}
-        </span>
-        <span className={`text-accent transition-transform duration-200 shrink-0 ${open ? "rotate-45" : "rotate-0"}`}>
-          <Plus size={16} strokeWidth={2.5} />
-        </span>
-      </button>
+      <h3>
+        <button
+          id={buttonId}
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-controls={panelId}
+          className="w-full flex items-center justify-between py-5 text-left group"
+        >
+          <span className="text-[15px] font-medium text-ink group-hover:text-accent transition-colors pr-8">
+            {question}
+          </span>
+          <span className={`text-accent transition-transform duration-200 shrink-0 ${open ? "rotate-45" : "rotate-0"}`}>
+            <Plus size={16} strokeWidth={2.5} />
+          </span>
+        </button>
+      </h3>
       <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        aria-hidden={!open}
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
           open ? "max-h-75 pb-5" : "max-h-0"
         }`}
@@ -101,12 +112,12 @@ export function FAQSection({ totalCount }: { totalCount: number }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-0 reveal">
           <div>
             {col1.map((faq, i) => (
-              <FAQItem key={i} question={faq.question} answer={faq.answer} />
+              <FAQItem key={i} id={`l-${i}`} question={faq.question} answer={faq.answer} />
             ))}
           </div>
           <div>
             {col2.map((faq, i) => (
-              <FAQItem key={i} question={faq.question} answer={faq.answer} />
+              <FAQItem key={i} id={`r-${i}`} question={faq.question} answer={faq.answer} />
             ))}
           </div>
         </div>

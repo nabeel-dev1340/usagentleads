@@ -43,18 +43,18 @@ export function AgentTable({
           <table className="data-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th className="hidden sm:table-cell">Phone</th>
-                <th>State</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" className="hidden sm:table-cell">Phone</th>
+                <th scope="col">State</th>
               </tr>
             </thead>
             <tbody>
               {Array.from({ length: 10 }).map((_, i) => (
                 <tr key={i}>
-                  <td><div className="h-4 rounded-md bg-subtle animate-pulse" style={{ width: `${60 + Math.random() * 30}%` }} /></td>
-                  <td><div className="h-4 rounded-md bg-subtle animate-pulse" style={{ width: `${50 + Math.random() * 30}%` }} /></td>
-                  <td className="hidden sm:table-cell"><div className="h-4 rounded-md bg-subtle animate-pulse" style={{ width: `${40 + Math.random() * 30}%` }} /></td>
+                  <td><div className="h-4 rounded-md bg-subtle animate-pulse" style={{ width: `${65 + (i * 7) % 25}%` }} /></td>
+                  <td><div className="h-4 rounded-md bg-subtle animate-pulse" style={{ width: `${55 + (i * 11) % 25}%` }} /></td>
+                  <td className="hidden sm:table-cell"><div className="h-4 rounded-md bg-subtle animate-pulse" style={{ width: `${45 + (i * 13) % 25}%` }} /></td>
                   <td><div className="h-4 rounded-md bg-subtle animate-pulse w-10" /></td>
                 </tr>
               ))}
@@ -86,10 +86,10 @@ export function AgentTable({
           <table className="data-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th className="hidden sm:table-cell">Phone</th>
-                <th>State</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col" className="hidden sm:table-cell">Phone</th>
+                <th scope="col">State</th>
               </tr>
             </thead>
             <tbody>

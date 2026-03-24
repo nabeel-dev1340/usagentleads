@@ -49,7 +49,7 @@ export function FreeSampleDialog() {
     <>
       <button
         onClick={() => { setOpen(true); setSubmitted(false); setEmail("") }}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-accent text-white text-[13px] font-medium px-3.5 py-1.5 hover:bg-accent-hover transition-colors"
+        className="inline-flex items-center gap-1.5 rounded-lg bg-accent text-white text-[13px] font-medium px-4 py-2.5 min-h-[44px] hover:bg-accent-hover transition-colors"
       >
         <DownloadIcon size={13} />
         Download Free Sample
@@ -122,10 +122,10 @@ export function FreeSampleDialog() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="h-10 text-[14px]"
+                      className="h-11 text-[14px]"
                     />
                   </div>
-                  <Button type="submit" disabled={loading} className="h-10 w-full gap-2 text-[14px]">
+                  <Button type="submit" disabled={loading} className="h-11 w-full gap-2 text-[14px]">
                     {loading ? (
                       <>
                         <Loader2Icon className="size-4 animate-spin" />

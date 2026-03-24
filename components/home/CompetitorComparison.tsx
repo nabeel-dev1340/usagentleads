@@ -33,11 +33,11 @@ export function CompetitorComparison() {
           <table className="data-table min-w-[500px]">
             <thead>
               <tr>
-                <th className="text-left">Feature</th>
-                <th className="text-center bg-accent-light/50">
+                <th scope="col" className="text-left">Feature</th>
+                <th scope="col" className="text-center bg-accent-light/50">
                   <span className="text-accent">USAgentLeads</span>
                 </th>
-                <th className="text-center">Other Providers</th>
+                <th scope="col" className="text-center">Other Providers</th>
               </tr>
             </thead>
             <tbody>

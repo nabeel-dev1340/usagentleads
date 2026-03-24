@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Code2, Key, BarChart3, Zap, ArrowRight, Copy, Check } from "lucide-react"
 
 const codeExamples = {
@@ -62,11 +62,17 @@ const features = [
 export function ApiSection() {
   const [lang, setLang] = useState<Lang>("curl")
   const [copied, setCopied] = useState(false)
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout>>(null)
+
+  useEffect(() => {
+    return () => { if (copyTimerRef.current) clearTimeout(copyTimerRef.current) }
+  }, [])
 
   const copyCode = () => {
     navigator.clipboard.writeText(codeExamples[lang].code)
     setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    if (copyTimerRef.current) clearTimeout(copyTimerRef.current)
+    copyTimerRef.current = setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -84,18 +90,21 @@ export function ApiSection() {
         <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto items-start">
           {/* Code example */}
           <div className="reveal">
-            <div className="rounded-xl bg-[#0F1623] overflow-hidden shadow-xl">
+            <div className="rounded-xl bg-ink overflow-hidden shadow-xl">
               {/* Tab bar */}
-              <div className="flex items-center justify-between border-b border-[#1F2937] px-4">
-                <div className="flex gap-1">
+              <div className="flex items-center justify-between border-b border-dark-border px-4">
+                <div className="flex gap-1" role="tablist" aria-label="Code examples">
                   {(Object.keys(codeExamples) as Lang[]).map((key) => (
                     <button
                       key={key}
+                      role="tab"
+                      aria-selected={lang === key}
+                      aria-controls="code-tabpanel"
                       onClick={() => setLang(key)}
                       className={`px-3 py-2.5 text-[13px] font-mono font-medium transition-colors border-b-2 -mb-px ${
                         lang === key
                           ? "text-white border-accent"
-                          : "text-[#6B7280] border-transparent hover:text-[#9CA3AF]"
+                          : "text-tertiary border-transparent hover:text-muted"
                       }`}
                     >
                       {codeExamples[key].label}
@@ -104,11 +113,11 @@ export function ApiSection() {
                 </div>
                 <button
                   onClick={copyCode}
-                  className="flex items-center gap-1.5 text-[12px] font-mono text-[#6B7280] hover:text-white transition-colors py-2"
+                  className="flex items-center gap-1.5 text-[12px] font-mono text-tertiary hover:text-white transition-colors py-2"
                 >
                   {copied ? (
                     <>
-                      <Check size={13} className="text-green-400" />
+                      <Check size={13} className="text-success" />
                       Copied
                     </>
                   ) : (
@@ -120,15 +129,15 @@ export function ApiSection() {
                 </button>
               </div>
               {/* Code */}
-              <pre className="p-5 text-[13px] font-mono text-[#E5E7EB] leading-relaxed overflow-x-auto whitespace-pre-wrap">
+              <pre id="code-tabpanel" role="tabpanel" aria-label={`${codeExamples[lang].label} code example`} className="p-5 text-[13px] font-mono text-code-text leading-relaxed overflow-x-auto whitespace-pre-wrap">
                 {codeExamples[lang].code}
               </pre>
               {/* Response preview */}
-              <div className="border-t border-[#1F2937] px-5 py-4">
-                <p className="text-[11px] font-mono uppercase tracking-wider text-[#6B7280] mb-2">
+              <div className="border-t border-dark-border px-5 py-4">
+                <p className="text-[11px] font-mono uppercase tracking-wider text-tertiary mb-2">
                   Response
                 </p>
-                <pre className="text-[12px] font-mono text-[#9CA3AF] leading-relaxed">{`{
+                <pre className="text-[12px] font-mono text-muted leading-relaxed">{`{
   "data": [
     { "name": "Jane Smith", "email": "jane@...", "phone": "(310) 555-...", "state": "California" }
   ],

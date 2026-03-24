@@ -26,6 +26,10 @@
   --color-tertiary: #6B7280;
   --color-muted: #9CA3AF;
 
+  /* Dark surfaces (footer, code blocks) */
+  --color-dark-border: #1F2937;
+  --color-code-text: #E5E7EB;
+
   /* Semantic */
   --color-success: #15803D;
   --color-success-bg: #F0FDF4;
@@ -67,8 +71,19 @@
 }
 
 /* ---- Base ---- */
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 button, [role="button"], select {
@@ -76,8 +91,8 @@ button, [role="button"], select {
 }
 
 html, body {
-  background-color: #F8F9FB;
-  color: #0F1623;
+  background-color: var(--color-page);
+  color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -88,20 +103,20 @@ html, body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F3F7;
+  background: var(--color-subtle);
 }
 ::-webkit-scrollbar-thumb {
-  background: #C9CDD6;
+  background: var(--color-border-strong);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: var(--color-muted);
 }
 
 /* ---- Selection ---- */
 ::selection {
-  background: rgba(29, 78, 216, 0.15);
-  color: #0F1623;
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  color: var(--color-ink);
 }
 
 /* ---- Component Classes ---- */
@@ -130,7 +145,7 @@ html, body {
 
   .btn-ghost {
     @apply inline-flex items-center gap-2 bg-transparent text-tertiary font-medium
-           text-[14px] px-4 py-2 rounded-lg
+           text-[14px] px-4 py-2.5 rounded-lg min-h-[44px]
            hover:bg-subtle hover:text-body
            active:scale-[0.98]
            transition-all duration-150 cursor-pointer select-none;
@@ -268,7 +283,7 @@ html, body {
     @apply font-mono text-[14px] bg-subtle text-accent px-1.5 py-0.5 rounded;
   }
   .prose pre {
-    @apply bg-[#0F1623] text-[#E5E7EB] rounded-xl p-5 overflow-x-auto my-8
+    @apply bg-ink text-code-text rounded-xl p-5 overflow-x-auto my-8
            font-mono text-[14px] leading-relaxed shadow-md;
   }
   .prose pre code {

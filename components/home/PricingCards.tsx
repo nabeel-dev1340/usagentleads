@@ -95,7 +95,7 @@ export function PricingCards({ totalCount }: { totalCount: number }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto items-stretch reveal-stagger">
           {plans.map((plan) => (
-            <div
+            <article
               key={plan.name}
               className={`relative p-6 flex flex-col rounded-xl transition-all duration-200 ${
                 plan.highlighted
@@ -149,7 +149,7 @@ export function PricingCards({ totalCount }: { totalCount: number }) {
               >
                 {plan.cta} <ArrowRight size={13} />
               </Link>
-            </div>
+            </article>
           ))}
         </div>
 

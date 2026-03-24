@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Mail, MessageSquare, Clock } from "lucide-react"
+import { ContactForm } from "@/components/ContactForm"
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -39,7 +40,7 @@ export default function ContactPage() {
             {
               icon: Mail,
               title: "Email Us",
-              detail: "support@usagentleads.com",
+              detail: "support@beelodev.com",
               sub: "We reply within 24 hours",
             },
             {
@@ -73,86 +74,7 @@ export default function ContactPage() {
             Fill out the form below and we&apos;ll get back to you as soon as possible.
           </p>
 
-          <form
-            action="https://formsubmit.co/support@usagentleads.com"
-            method="POST"
-            className="space-y-5"
-          >
-            {/* Honeypot */}
-            <input type="text" name="_honey" className="hidden" />
-            {/* Disable captcha page */}
-            <input type="hidden" name="_captcha" value="false" />
-            {/* Redirect back */}
-            <input type="hidden" name="_next" value="https://usagentleads.com/contact?sent=true" />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label htmlFor="name" className="block text-[14px] font-medium text-ink mb-1.5">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="Your name"
-                  className="input"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-[14px] font-medium text-ink mb-1.5">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="you@company.com"
-                  className="input"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="subject" className="block text-[14px] font-medium text-ink mb-1.5">
-                Subject
-              </label>
-              <select
-                id="subject"
-                name="subject"
-                required
-                className="input"
-                defaultValue=""
-              >
-                <option value="" disabled>Select a topic</option>
-                <option value="pricing">Pricing & Plans</option>
-                <option value="data-quality">Data Quality</option>
-                <option value="bulk">Bulk / Custom Orders</option>
-                <option value="technical">Technical Support</option>
-                <option value="partnership">Partnership Inquiry</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-[14px] font-medium text-ink mb-1.5">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="How can we help?"
-                className="input resize-none"
-              />
-            </div>
-
-            <button type="submit" className="btn-primary w-full justify-center text-[15px]">
-              Send Message
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </div>
     </div>

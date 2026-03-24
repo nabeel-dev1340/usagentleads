@@ -25,9 +25,9 @@ const testimonials = [
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-0.5" role="img" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: rating }).map((_, i) => (
-        <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+        <Star key={i} size={14} className="fill-amber-400 text-amber-400" aria-hidden="true" />
       ))}
     </div>
   )
@@ -47,16 +47,18 @@ export function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto reveal-stagger">
           {testimonials.map((t) => (
-            <div key={t.name} className="card p-7 flex flex-col">
+            <blockquote key={t.name} className="card p-7 flex flex-col">
               <StarRating rating={t.rating} />
               <p className="text-[14px] text-body leading-relaxed mt-4 flex-1">
                 &ldquo;{t.text}&rdquo;
               </p>
-              <div className="mt-5 pt-5 border-t border-border">
-                <p className="text-[15px] font-semibold text-ink">{t.name}</p>
-                <p className="text-[13px] text-tertiary">{t.role}</p>
-              </div>
-            </div>
+              <footer className="mt-5 pt-5 border-t border-border">
+                <cite className="not-italic">
+                  <p className="text-[15px] font-semibold text-ink">{t.name}</p>
+                  <p className="text-[13px] text-tertiary">{t.role}</p>
+                </cite>
+              </footer>
+            </blockquote>
           ))}
         </div>
       </div>
