@@ -17,7 +17,7 @@ export function BlogCTA() {
                      text-[15px] px-6 py-3 rounded-lg hover:bg-white/90
                      shadow-sm transition-all duration-150"
         >
-          Browse States
+          Browse Real Estate Agent Data by State
         </Link>
         <Link
           href="/pricing"

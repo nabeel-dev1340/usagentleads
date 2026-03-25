@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
+  trailingSlash: false,
   images: {
     remotePatterns: [
       {
@@ -38,6 +39,16 @@ const nextConfig: NextConfig = {
         hostname: "*.supabase.co",
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "usagentleads.com" }],
+        destination: "https://www.usagentleads.com/:path*",
+        permanent: true,
+      },
+    ]
   },
   async headers() {
     return [

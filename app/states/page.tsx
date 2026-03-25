@@ -1,30 +1,32 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 import { StateGrid } from "@/components/states/StateGrid"
 import { createServiceClient } from "@/lib/supabase/server"
+import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "Browse Real Estate Agent Data by State — All 50 States",
+  title: "Real Estate Agent Email Lists by State | All 50 States",
   description:
-    "Buy verified real estate agent contact data for any US state. CSV download with name, email, phone. Starting at $10 per state.",
+    "Browse verified real estate agent contact databases for every US state. Download CSV files with agent names, emails, and phone numbers. Starting at $10 per state.",
   alternates: {
-    canonical: "https://usagentleads.com/states",
+    canonical: "https://www.usagentleads.com/states",
     languages: {
-      "en-US": "https://usagentleads.com/states",
-      "x-default": "https://usagentleads.com/states",
+      "en-US": "https://www.usagentleads.com/states",
+      "x-default": "https://www.usagentleads.com/states",
     },
   },
   openGraph: {
-    title: "Browse Real Estate Agent Data by State — All 50 States | USAgentLeads",
-    description: "Buy verified real estate agent contact data for any US state. CSV download with name, email, phone. Starting at $10 per state.",
-    url: "https://usagentleads.com/states",
-    images: [{ url: "https://usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
+    title: "Real Estate Agent Email Lists by State | All 50 States | USAgentLeads",
+    description: "Browse verified real estate agent contact databases for every US state. Download CSV files with agent names, emails, and phone numbers. Starting at $10 per state.",
+    url: "https://www.usagentleads.com/states",
+    images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Browse Real Estate Agent Data by State — All 50 States",
-    description: "Verified real estate agent contacts for every US state. Starting at $10 per state.",
-    images: ["https://usagentleads.com/twitter-image"],
+    title: "Real Estate Agent Email Lists by State | All 50 States",
+    description: "Browse verified real estate agent contact databases for every US state. Starting at $10 per state.",
+    images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
 
@@ -42,11 +44,28 @@ export default async function StatesPage() {
     }
   }
 
+  const breadcrumb = generateBreadcrumbSchema([
+    { name: "Home", url: "https://www.usagentleads.com" },
+    { name: "States", url: "https://www.usagentleads.com/states" },
+  ])
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
     <div className="bg-page min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6">
+          <Link href="/" className="hover:text-ink transition-colors">Home</Link>
+          <ChevronRight size={14} className="text-muted" />
+          <span className="text-ink font-medium">States</span>
+        </nav>
+
         {/* Page header */}
-        <div className="pt-20 pb-12 border-b border-border flex items-end justify-between flex-wrap gap-6">
+        <div className="pb-12 border-b border-border flex items-end justify-between flex-wrap gap-6">
           <div>
             <p className="label-eyebrow mb-3">50 States Available</p>
             <h1 className="section-heading">Browse by State</h1>
@@ -67,5 +86,6 @@ export default async function StatesPage() {
         <StateGrid countMap={countMap} />
       </div>
     </div>
+    </>
   )
 }

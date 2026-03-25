@@ -5,7 +5,7 @@ import { Link2, Check } from "lucide-react"
 
 export function ShareRow({ title, slug }: { title: string; slug: string }) {
   const [copied, setCopied] = useState(false)
-  const url = `https://usagentleads.com/blog/${slug}`
+  const url = `https://www.usagentleads.com/blog/${slug}`
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(url)

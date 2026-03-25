@@ -1,0 +1,208 @@
+---
+title: "How to Import Real Estate Agent Contacts into HubSpot"
+description: "Step-by-step guide to importing real estate agent contacts into HubSpot. Covers CSV formatting, field mapping, and list segmentation."
+date: "2026-03-25"
+slug: "import-real-estate-contacts-hubspot"
+coverImage: "/blog/cover-placeholder.svg"
+category: "Technology"
+tags: ["HubSpot", "CRM", "import contacts", "real estate agents", "technology"]
+author: "USAgentLeads Team"
+published: true
+---
+
+Once you have a real estate agent contact list, the next step is getting it into your CRM so you can segment, automate, and track outreach. HubSpot is one of the most popular CRMs for B2B teams, and importing a CSV of agent data takes just a few minutes when you know the right steps. This guide walks through the full process from file prep to your first automated workflow. If you need agent data to import, explore contacts by [state](/states) or check our [pricing](/pricing).
+
+## Preparing Your Agent CSV File for HubSpot Import
+
+HubSpot accepts CSV files for contact imports, but a little preparation goes a long way toward avoiding errors and duplicate records. Before you open the import wizard, take 10 minutes to clean your file.
+
+### Required and recommended columns
+
+At a minimum, every row in your CSV needs a unique identifier. For HubSpot contacts, that identifier is the **email address**. Without it, HubSpot has no way to deduplicate records or match incoming data to existing contacts.
+
+Here is the column structure we recommend for real estate agent data:
+
+| Column Header | Example Value | HubSpot Default Property | Required? |
+|---------------|---------------|--------------------------|-----------|
+| Email | jane.smith@remax.com | Email | Yes |
+| First Name | Jane | First Name | Recommended |
+| Last Name | Smith | Last Name | Recommended |
+| Phone | (305) 555-1234 | Phone Number | Recommended |
+| State | Florida | State/Region | Recommended |
+| Company | RE/MAX Premier | Company Name | Optional |
+| License Type | Broker | (Custom) | Optional |
+
+<Callout type="tip" title="Column Header Naming Matters">
+HubSpot's import tool auto-maps columns when the header names match existing HubSpot properties. Using "First Name" instead of "fname" or "first" saves you manual mapping steps. Stick to plain English headers that mirror HubSpot's default property names.
+</Callout>
+
+### Cleaning your data before import
+
+Run through this checklist before uploading:
+
+1. **Remove rows without email addresses.** HubSpot will skip them anyway, and they inflate your error count.
+2. **Standardize state names.** Use either full names ("California") or two-letter abbreviations ("CA") consistently. Don't mix formats.
+3. **Check for duplicate emails.** HubSpot will merge duplicates during import, but it picks field values unpredictably from duplicate rows. Deduplicate in your spreadsheet first so you control which record wins.
+4. **Strip special characters from phone numbers.** HubSpot stores phone numbers as text, so formats like "(305) 555-1234" and "3055551234" both work. Just be consistent.
+5. **Save as UTF-8 CSV.** If you're exporting from Excel, choose "CSV UTF-8" to preserve any special characters in names.
+
+A clean file with 10,000 contacts imports in under 60 seconds. A messy file with the same number of contacts can generate hundreds of errors and require multiple re-imports.
+
+## Step-by-Step: The HubSpot Contact Import Process
+
+With your CSV ready, here is the exact workflow to get your agent contacts into HubSpot.
+
+**Step 1: Navigate to the import tool.**
+Go to Contacts > Contacts in the top navigation, then click the "Import" button in the upper right corner. Select "Start an import."
+
+**Step 2: Choose your import type.**
+Select "File from computer." On the next screen, choose "One file" and "One object." The object type is "Contacts."
+
+**Step 3: Upload your CSV.**
+Drag and drop your file or click to browse. HubSpot will validate the file format and show you a preview of the first few rows. If you see garbled characters, your file likely isn't saved as UTF-8.
+
+**Step 4: Map your columns.**
+This is the most important step. HubSpot will attempt to auto-map your column headers to existing contact properties. Review every mapping carefully. For standard fields like Email, First Name, and Last Name, auto-mapping usually works. For custom fields (like License Type or License Number), you will need to either map to an existing custom property or create one on the fly.
+
+**Step 5: Set import options.**
+HubSpot will ask how to handle duplicates. Choose "Update existing contacts and create new ones." This ensures that if an agent's email already exists in your CRM, the import updates their record with new data rather than creating a duplicate.
+
+**Step 6: Review and start the import.**
+HubSpot shows a summary screen with the total number of rows, mapped fields, and any warnings. Click "Finish import" to begin. You will receive an email notification when the import completes.
+
+<Callout type="info" title="Import Size Limits">
+HubSpot Free and Starter plans allow CSV imports of up to 1 million rows per file. However, for large imports (50,000+ contacts), we recommend splitting your file into batches of 20,000-30,000 rows. This makes it easier to catch and fix errors, and reduces the risk of timeout issues.
+</Callout>
+
+## Mapping Fields: Matching Agent Data to HubSpot Properties
+
+Field mapping is where most import mistakes happen. HubSpot has over 100 default contact properties, and mapping your agent data to the wrong one creates downstream headaches in reporting, segmentation, and automation.
+
+### Default properties that match agent data
+
+| Your CSV Column | Map To HubSpot Property | Notes |
+|----------------|------------------------|-------|
+| Email | Email | Primary identifier. Must be mapped. |
+| First Name | First Name | Used in email personalization tokens |
+| Last Name | Last Name | Used in email personalization tokens |
+| Phone | Phone Number | HubSpot stores as text, any format works |
+| State | State/Region | Maps to the address-related state field |
+| Company / Brokerage | Company Name | Also creates/associates a Company record |
+| City | City | Useful for local market segmentation |
+
+### Common mapping mistakes
+
+**Mapping "State" to "Lifecycle Stage."** These are both dropdown fields and HubSpot sometimes suggests the wrong match. Lifecycle Stage is for tracking where a contact is in your sales funnel (Lead, MQL, Customer), not their geographic location.
+
+**Mapping "License Type" to "Job Title."** While "Broker" or "Sales Agent" might look like job titles, using the Job Title field for license type means you lose the ability to track actual job titles later. Create a custom property instead.
+
+**Skipping the Company field.** When you map a column to "Company Name," HubSpot automatically creates Company records and associates your contacts with them. This is incredibly valuable for seeing how many agents you have at each brokerage.
+
+## Creating Custom Properties for Real Estate Data
+
+HubSpot's default properties cover standard B2B contact data, but real estate agent records have unique fields that don't fit neatly into defaults. Creating custom properties before your import makes segmentation and reporting much more powerful.
+
+### Recommended custom properties for agent data
+
+| Property Name | Field Type | Options/Format | Why You Need It |
+|--------------|------------|----------------|-----------------|
+| License Type | Dropdown | Salesperson, Broker, Broker Associate | Segment by license level |
+| License Number | Single-line text | Free text | Unique identifier from state board |
+| License State | Dropdown | All 50 states | Distinct from mailing address state |
+| License Expiration | Date picker | MM/DD/YYYY | Trigger renewal-related outreach |
+| MLS Association | Single-line text | Free text | Know which MLS they belong to |
+| Years Licensed | Number | Whole number | Target by experience level |
+
+**To create a custom property in HubSpot:**
+
+1. Go to Settings (gear icon) > Properties
+2. Click "Create property"
+3. Set the Object type to "Contact"
+4. Choose the Group (create a group called "Real Estate License Info" to keep things organized)
+5. Name the property, select the field type, and add dropdown options if applicable
+6. Click "Create"
+
+Create all your custom properties before running your import. That way, you can map directly to them during the import wizard instead of needing to re-import later.
+
+<Callout type="tip" title="Property Groups Keep Things Clean">
+Create a custom property group called "Real Estate Data" or "License Information" and put all your agent-specific properties in it. This keeps them organized in the contact sidebar and makes it easy for your team to find agent-specific fields without scrolling through dozens of default properties.
+</Callout>
+
+## Segmenting Imported Agents by State and License Type
+
+With your contacts imported and properly mapped, the next step is building lists and saved views so you can target specific segments of agents.
+
+### Active lists vs. static lists
+
+HubSpot offers two types of lists:
+
+- **Active lists** automatically update as contacts meet or stop meeting the criteria. Use these for ongoing segmentation (e.g., "All Florida Brokers").
+- **Static lists** are frozen snapshots. Use these to tag a specific import batch (e.g., "March 2026 FL Import").
+
+For most agent outreach use cases, active lists are more valuable because new imports automatically flow into the correct segments.
+
+### High-value segments to create
+
+Build these lists immediately after your first import:
+
+1. **By state** — Create one active list per state you're targeting. Filter: License State is [State Name].
+2. **By license type** — Separate brokers from sales agents. Brokers are typically decision-makers for brokerage-level purchases. Filter: License Type is "Broker."
+3. **By brokerage size** — Use the Company property. Filter: Company Name is "Keller Williams" or "RE/MAX" for franchise-level targeting.
+4. **By import date** — Filter: "Date entered" is after [your import date]. Useful for measuring campaign performance by data batch.
+5. **By engagement** — After your first email campaign, create a list of contacts who opened or clicked. Filter: Last marketing email open date is known.
+
+### Saved views for your sales team
+
+Beyond lists, create saved views in the Contacts table for quick access:
+
+- "New Agent Leads (This Week)" — Sorted by create date, filtered to this week
+- "Engaged Agents" — Filtered to contacts with at least one email open
+- "Brokers Only" — Filtered by License Type = Broker
+
+These views give your team instant access to the contacts that matter most without running a new filter every time.
+
+## Setting Up Automated Outreach After Import
+
+The real power of importing agent data into HubSpot is automation. Once your contacts are organized into lists, you can build workflows that nurture them without manual effort.
+
+### A simple post-import email sequence
+
+Here is a three-email sequence that works well for first contact with imported agent data:
+
+**Email 1 (Day 0, immediately after import):** Introduction email. Who you are, what you offer, and one specific value proposition relevant to the agent's state or market. Keep it under 150 words. Include an unsubscribe link.
+
+**Email 2 (Day 3):** Value email. Share a useful resource, a market stat, a free tool, or a relevant blog post. No hard sell. The goal is to establish credibility and encourage an open or click.
+
+**Email 3 (Day 7):** Soft CTA email. Reference the previous emails, offer to schedule a brief call or demo, and include a clear call to action. If they haven't engaged with emails 1 or 2, this is your last touch before moving them to a slower nurture cadence.
+
+### Building the workflow in HubSpot
+
+1. Go to Automation > Workflows
+2. Click "Create workflow" and choose "Contact-based"
+3. Set the enrollment trigger to "Contact is member of list" and select your target list
+4. Add a "Send email" action for Email 1
+5. Add a "Delay" action for 3 days
+6. Add a "Send email" action for Email 2
+7. Add another "Delay" for 4 days
+8. Add a "Send email" action for Email 3
+9. At the end, add an "If/then branch" — if the contact opened any email, enroll them in a longer nurture workflow. If not, set their lifecycle stage to "Other" and stop the workflow.
+
+<Callout type="warning" title="Mind Your Sending Limits">
+HubSpot Free accounts can send up to 2,000 marketing emails per month. Starter plans allow 5x your contact tier. If you're importing 10,000+ agent contacts, make sure your HubSpot plan supports the email volume your workflows will generate. Exceeding limits pauses all scheduled emails.
+</Callout>
+
+### Tracking results
+
+After your first workflow completes a full cycle, review these metrics in the workflow performance tab:
+
+- **Enrollment count** — How many contacts entered the workflow
+- **Email open rate** — Target 25-40% for cold outreach to agents
+- **Click rate** — Target 3-8%
+- **Reply rate** — Track this manually or with a connected inbox
+- **Unsubscribe rate** — Keep below 0.5% per email
+
+If your open rates are below 15%, revisit your subject lines and sender name. If open rates are healthy but click rates are low, your email content or CTA needs work.
+
+## Get Started with USAgentLeads
+
+Ready to fill your HubSpot CRM with verified real estate agent contacts? USAgentLeads provides state-by-state agent data sourced directly from licensing boards, formatted and ready to import. Browse available states in our [state directory](/states) and check [pricing](/pricing) to find the right plan for your outreach goals.

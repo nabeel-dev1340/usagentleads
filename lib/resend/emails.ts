@@ -226,7 +226,7 @@ export async function sendSubscriptionWelcome({
       </table>
     `)}
 
-    ${primaryButton("https://usagentleads.com/dashboard", "Go to Dashboard")}
+    ${primaryButton("https://www.usagentleads.com/dashboard", "Go to Dashboard")}
 
     <p style="color: #64748b; font-size: 13px; margin: 0;">
       Manage your subscription anytime from the dashboard sidebar.
@@ -267,7 +267,7 @@ export async function sendSubscriptionCancelled({
     ${infoBox(`
       <p style="margin: 0; font-size: 14px; color: #1e3a5f;">
         Changed your mind? You can resubscribe anytime from our
-        <a href="https://usagentleads.com/pricing" style="color: ${BRAND_COLOR}; text-decoration: none; font-weight: 500;">pricing page</a>.
+        <a href="https://www.usagentleads.com/pricing" style="color: ${BRAND_COLOR}; text-decoration: none; font-weight: 500;">pricing page</a>.
       </p>
     `)}
 
@@ -305,7 +305,7 @@ export async function sendSubscriptionRenewed({
       Your USAgentLeads Pro Dashboard subscription has been renewed successfully. ${renewalNote}
     </p>
 
-    ${primaryButton("https://usagentleads.com/dashboard", "Go to Dashboard")}
+    ${primaryButton("https://www.usagentleads.com/dashboard", "Go to Dashboard")}
 
     <p style="color: #64748b; font-size: 13px; margin: 0;">
       Thanks for being a Pro member!
@@ -362,7 +362,7 @@ export async function sendFreeSampleEmail({
       Want access to our <strong>full database of 500K+ agents</strong>?
     </p>
 
-    ${primaryButton("https://usagentleads.com/pricing", "View Pricing Plans")}
+    ${primaryButton("https://www.usagentleads.com/pricing", "View Pricing Plans")}
 
     <p style="color: #64748b; font-size: 13px; margin: 0;">
       Questions? Reply to this email and we'll be happy to help.

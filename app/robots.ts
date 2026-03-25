@@ -6,37 +6,29 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dashboard", "/api/", "/auth/", "/purchase-success", "/login"],
+        disallow: ["/dashboard", "/api/"],
       },
       {
         userAgent: "GPTBot",
-        allow: ["/", "/llms.txt"],
-      },
-      {
-        userAgent: "ChatGPT-User",
-        allow: ["/", "/llms.txt"],
-      },
-      {
-        userAgent: "Claude-Web",
-        allow: ["/", "/llms.txt"],
-      },
-      {
-        userAgent: "anthropic-ai",
-        allow: ["/", "/llms.txt"],
-      },
-      {
-        userAgent: "Amazonbot",
-        allow: ["/", "/llms.txt"],
-      },
-      {
-        userAgent: "PerplexityBot",
-        allow: ["/", "/llms.txt"],
+        allow: "/",
       },
       {
         userAgent: "Google-Extended",
-        allow: ["/", "/llms.txt"],
+        allow: "/",
+      },
+      {
+        userAgent: "ClaudeBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Bytespider",
+        allow: "/",
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
       },
     ],
-    sitemap: "https://usagentleads.com/sitemap.xml",
+    sitemap: "https://www.usagentleads.com/sitemap.xml",
   }
 }

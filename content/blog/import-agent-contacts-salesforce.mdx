@@ -1,0 +1,265 @@
+---
+title: "How to Import Agent Contacts into Salesforce"
+description: "Learn how to import real estate agent contacts into Salesforce. Covers data prep, Data Import Wizard, field mapping, and lead assignment."
+date: "2026-03-25"
+slug: "import-agent-contacts-salesforce"
+coverImage: "/blog/cover-placeholder.svg"
+category: "Technology"
+tags: ["Salesforce", "CRM", "import contacts", "real estate agents", "technology"]
+author: "USAgentLeads Team"
+published: true
+---
+
+Salesforce is the go-to CRM for enterprise sales teams, and importing a real estate agent contact list into it is straightforward once you understand the data model. Whether you are loading leads or contacts, the key is clean data, correct field mapping, and a plan for lead assignment. This guide covers the full workflow from CSV prep to your first Salesforce campaign targeting realtors. Get verified agent data from our [state directory](/states) or view [pricing](/pricing) to get started.
+
+## Leads vs. Contacts: Choosing the Right Salesforce Object
+
+Before you import a single record, you need to decide where your agent data should live in Salesforce. This is the most important architectural decision you will make, and changing it later is painful.
+
+### The Lead object
+
+Leads in Salesforce represent unqualified prospects. They live in their own table, separate from your Accounts and Contacts. When a lead becomes a customer (or a qualified opportunity), you "convert" the lead, which creates an Account record, a Contact record, and optionally an Opportunity.
+
+**Use the Lead object when:**
+- You are importing agent data for cold outreach and have not spoken with any of these agents yet
+- Your sales process starts with qualification before creating accounts
+- You want to track conversion rates from raw import to qualified opportunity
+- Different team members handle prospecting vs. account management
+
+### The Contact object
+
+Contacts in Salesforce are linked to Account records. They represent people at companies you already have a relationship with, or at minimum, companies you have identified as target accounts.
+
+**Use the Contact object when:**
+- You have already created Account records for the brokerages you are targeting
+- You are adding agent data to existing accounts (e.g., adding 15 agents at a Keller Williams office you already track)
+- Your sales motion is account-based rather than lead-based
+- You want agents grouped under their brokerage from day one
+
+| Factor | Lead Object | Contact Object |
+|--------|------------|----------------|
+| Best for | Cold outreach, high volume | Account-based sales, existing relationships |
+| Requires Account? | No | Yes (auto-created or pre-existing) |
+| Conversion tracking | Built-in lead conversion | Not applicable |
+| Duplicate management | Separate from contacts | Shared with existing contact records |
+| Reporting | Lead reports and dashboards | Contact and opportunity reports |
+| Typical volume | 1,000-100,000+ records | Hundreds to low thousands |
+
+<Callout type="info" title="Our Recommendation for Most Teams">
+If you are importing purchased real estate agent data for outbound campaigns, start with the Lead object. It keeps your imported data separate from your existing customer contacts, gives you built-in conversion tracking, and is easier to clean up if something goes wrong with the import.
+</Callout>
+
+## Formatting Your Agent CSV for Salesforce Import
+
+Salesforce is pickier about CSV formatting than most CRMs. A few minutes of data prep prevents hours of troubleshooting import errors.
+
+### Column requirements by object type
+
+**For Lead imports, you need at minimum:**
+- Last Name (required by Salesforce)
+- Company (required by Salesforce, use the brokerage name or "Independent" if unknown)
+
+**For Contact imports, you need at minimum:**
+- Last Name (required)
+- Account Name (must match an existing Account record, or a new Account will be created)
+
+### Recommended CSV structure for agent leads
+
+| Column Header | Example | Salesforce Field | Required? |
+|---------------|---------|------------------|-----------|
+| First Name | Maria | First Name | No, but recommended |
+| Last Name | Rodriguez | Last Name | Yes |
+| Email | maria@brokerage.com | Email | No, but critical for outreach |
+| Phone | (407) 555-9876 | Phone | No |
+| Company | Century 21 Premier | Company | Yes (for Leads) |
+| State | Florida | State/Province | No |
+| City | Orlando | City | No |
+| Lead Source | USAgentLeads Import | Lead Source | No, but valuable for tracking |
+| License Type | Broker | (Custom field) | No |
+
+### Data cleaning checklist
+
+1. **Every row must have a Last Name.** Salesforce rejects rows without one. If your source data has full names in a single column, split them into First Name and Last Name before import.
+2. **Every Lead row must have a Company.** For agents without a known brokerage, use "Independent Agent" or "Self-Employed" rather than leaving it blank.
+3. **Standardize state values.** Salesforce accepts both "FL" and "Florida" but pick one format and use it consistently across your org.
+4. **Remove commas from within fields.** If a company name includes a comma (e.g., "Smith, Jones & Associates"), make sure your CSV properly quotes that field. Most spreadsheet tools handle this automatically when exporting to CSV.
+5. **Set your Lead Source value.** Add a column called "Lead Source" with a consistent value like "USAgentLeads Import - March 2026." This makes it trivial to track and report on imported data later.
+6. **Save as CSV with UTF-8 encoding.** Salesforce handles UTF-8 well but can choke on other encodings, especially with special characters in names.
+
+<Callout type="tip" title="Add a Lead Source Column Before Import">
+Adding a "Lead Source" column with a value like "Purchased List - FL Agents 2026" to every row before import is the single most valuable thing you can do for downstream reporting. It lets you filter dashboards, build reports, and measure ROI on your agent data investment with one click.
+</Callout>
+
+## Using the Data Import Wizard Step by Step
+
+Salesforce offers two import tools: the Data Import Wizard (built into the browser UI) and the Data Loader (a separate desktop application). For most real estate agent imports, the Data Import Wizard is the right choice.
+
+### When to use which tool
+
+| Feature | Data Import Wizard | Data Loader |
+|---------|-------------------|-------------|
+| Max records per import | 50,000 | 5,000,000 |
+| Interface | Browser-based, guided | Desktop app, requires install |
+| Skill level | Beginner-friendly | Intermediate to advanced |
+| Scheduling | Not available | Supports scheduled/automated imports |
+| Custom objects | Supported | Supported |
+| Best for | One-time imports under 50K | Large data loads, recurring imports |
+
+If your agent file has fewer than 50,000 records, use the Data Import Wizard. Here is the step-by-step process:
+
+**Step 1: Open the wizard.**
+Go to Setup > Data Import Wizard (search for "Import" in the Quick Find box). Click "Launch Wizard."
+
+**Step 2: Choose what to import.**
+Select the object type. For leads, choose "Leads." For contacts and accounts, choose "Accounts and Contacts." This screen also lets you choose whether to add new records, update existing ones, or both.
+
+**Step 3: Handle duplicates.**
+Choose your matching rule. For leads, Salesforce can match on Email or Salesforce ID. Select "Email" as your matching field. Choose "Do not import duplicate Leads" or "Update existing Leads" depending on your preference.
+
+**Step 4: Upload your CSV.**
+Click "CSV" and select your file. Salesforce parses the file and shows you the total row count. If the count doesn't match what you expect, your file may have formatting issues.
+
+**Step 5: Map fields.**
+Salesforce displays your CSV column headers alongside suggested Salesforce field matches. Review every mapping. Auto-suggestions are right about 70% of the time but commonly miss custom fields, confuse "State" with unrelated fields, or skip columns it doesn't recognize.
+
+**Step 6: Start the import.**
+Click "Start Import." Salesforce processes the file in the background. You will receive an email when it completes, along with a summary of successes and errors.
+
+**Step 7: Review results.**
+Go to Setup > Bulk Data Load Jobs (or check the email) to see how many records were created, updated, or rejected. Download the error file to see which rows failed and why.
+
+<Callout type="warning" title="The 50,000 Row Limit">
+The Data Import Wizard caps each import at 50,000 records. If your agent file is larger, split it into multiple files by state or alphabetically. Alternatively, install the Data Loader application, which handles up to 5 million records per batch and supports command-line scheduling for recurring imports.
+</Callout>
+
+## Mapping Agent Fields to Salesforce Columns
+
+Correct field mapping is the difference between clean, reportable data and a CRM full of records you can't segment or search.
+
+### Standard field mappings
+
+Most agent data fields map cleanly to Salesforce defaults:
+
+- **Email** maps to Email
+- **First Name** maps to First Name
+- **Last Name** maps to Last Name
+- **Phone** maps to Phone
+- **Company / Brokerage** maps to Company (Leads) or Account Name (Contacts)
+- **City** maps to City
+- **State** maps to State/Province
+- **Zip Code** maps to Zip/Postal Code
+
+### Creating custom fields for agent-specific data
+
+Real estate agent data includes fields that don't exist in standard Salesforce. Create these custom fields before running your import:
+
+**To create a custom field:**
+1. Go to Setup > Object Manager > Lead (or Contact)
+2. Click "Fields & Relationships"
+3. Click "New"
+4. Choose the field type and configure it
+
+| Custom Field | Field Type | Purpose |
+|-------------|------------|---------|
+| License Type | Picklist (Salesperson, Broker, Broker Associate) | Segment outreach by license level |
+| License Number | Text (30 characters) | Unique state identifier |
+| License State | Picklist (all 50 states) | Track licensing jurisdiction separately from mailing state |
+| License Expiration Date | Date | Trigger renewal-season outreach |
+| MLS ID | Text (20 characters) | Cross-reference with MLS data |
+| Years Licensed | Number (whole) | Target by experience level |
+
+### Record types for different agent segments
+
+If your team targets agents differently based on license type or state, consider creating Record Types on the Lead object. Record types let you:
+
+- Show different page layouts for Brokers vs. Sales Agents
+- Assign different lead assignment rules by record type
+- Run reports filtered by record type
+- Require different fields for different agent segments
+
+For example, a Record Type called "Broker Lead" could include fields for brokerage size and number of agents, while "Agent Lead" could include fields for team affiliation and production volume.
+
+## Setting Up Lead Assignment Rules for Agent Data
+
+After importing thousands of agent records, you need a system to distribute them to the right sales reps. Salesforce Lead Assignment Rules automate this process.
+
+### Building assignment rules by state
+
+The most common assignment model for agent outreach is geographic. Each rep owns a set of states or metros.
+
+**To create a Lead Assignment Rule:**
+1. Go to Setup > Lead Assignment Rules
+2. Click "New" and name your rule (e.g., "Agent Leads by State")
+3. Add rule entries in priority order
+
+| Rule Entry | Criteria | Assign To |
+|-----------|----------|-----------|
+| 1 | State/Province = FL, GA, SC | Rep A (Southeast) |
+| 2 | State/Province = TX, OK, AR | Rep B (South Central) |
+| 3 | State/Province = CA, AZ, NV | Rep C (West) |
+| 4 | State/Province = NY, NJ, CT | Rep D (Northeast) |
+| 5 | All other leads | Round-robin queue |
+
+Make sure to check the "Active" box on your rule and select "Assign using active assignment rule" during your import. Otherwise, all imported leads will be assigned to the person running the import.
+
+### Using queues for team-based assignment
+
+If you prefer round-robin distribution rather than territory-based assignment, create a Lead Queue:
+
+1. Go to Setup > Queues
+2. Create a queue called "Agent Leads" and add your sales reps as members
+3. In your assignment rule, assign leads to the queue instead of individual reps
+4. Reps pull leads from the queue manually, or you can use Flow automation to distribute them evenly
+
+<Callout type="tip" title="Tag Your Import Batch">
+After each import, create a Salesforce Campaign and add all imported leads as campaign members. This gives you a permanent record of each data batch, makes ROI tracking straightforward, and lets you compare performance across different import sources or time periods.
+</Callout>
+
+## Building a Salesforce Campaign to Track Outreach
+
+Salesforce Campaigns are the best way to track the performance of your outreach to imported agent data. They connect your import to measurable outcomes.
+
+### Creating the campaign
+
+1. Go to the Campaigns tab and click "New"
+2. Name it descriptively: "FL Agent Outreach - March 2026"
+3. Set the Type to "Email" or "Direct Mail" depending on your outreach channel
+4. Set the Status to "Planned" (change to "In Progress" when you launch)
+5. Fill in the Start Date, Expected Revenue, and Budgeted Cost fields
+
+### Adding imported leads as campaign members
+
+After your import completes:
+
+1. Create a Lead List View filtered to your import batch (filter by Lead Source or Created Date)
+2. Select all leads in the view
+3. Click "Add to Campaign" and select your campaign
+4. Set the initial member status to "Sent" or "Imported"
+
+### Tracking campaign performance
+
+As your outreach progresses, update campaign member statuses to track the funnel:
+
+| Status | Meaning | When to Update |
+|--------|---------|---------------|
+| Imported | Raw data, no outreach yet | At import time |
+| Sent | Email or message sent | When campaign launches |
+| Opened | Agent opened the email | Via email tool sync |
+| Responded | Agent replied or clicked | Manual or automated |
+| Qualified | Agent expressed interest | After sales conversation |
+| Converted | Agent became a customer | After closed deal |
+
+This gives you a clear pipeline view from raw import to revenue, broken down by state, license type, or any other custom field you populated during import.
+
+### Post-import cleanup
+
+After every import, run these cleanup steps within the first 48 hours:
+
+1. **Check for duplicates.** Run a duplicate report using Salesforce's built-in Duplicate Management. Merge any duplicates the import created.
+2. **Verify field values.** Spot-check 20-30 records to make sure field mappings worked correctly. Pay special attention to custom fields.
+3. **Review error logs.** Download the error file from your import job and categorize failures. Common causes include missing required fields, invalid picklist values, and duplicate matching conflicts.
+4. **Update data quality dashboards.** If you track data completeness (e.g., percentage of leads with email, phone, and state), refresh those reports after import.
+
+## Get Started with USAgentLeads
+
+USAgentLeads provides Salesforce-ready CSV files with verified real estate agent data sourced from state licensing boards. Browse our [state directory](/states) to find the markets you need, and visit [pricing](/pricing) to choose the plan that fits your team's outreach volume.

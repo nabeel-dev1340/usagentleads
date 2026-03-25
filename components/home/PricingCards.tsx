@@ -50,6 +50,7 @@ function getPlans(totalCount: number) {
       subtitle: "Monthly subscription",
       price: "$49",
       period: "/ month",
+      trial: "3-day free trial",
       features: [
         { text: "Browse all agents in-app", included: true },
         { text: "Search & filter by state", included: true },
@@ -66,6 +67,7 @@ function getPlans(totalCount: number) {
       subtitle: "Monthly subscription",
       price: "$79",
       period: "/ month",
+      trial: "3-day free trial",
       features: [
         { text: "Everything in Pro Dashboard", included: true },
         { text: "REST API access", included: true },
@@ -73,8 +75,8 @@ function getPlans(totalCount: number) {
         { text: "100 requests during trial", included: true },
         { text: "API key management & analytics", included: true },
       ] as Feature[],
-      cta: "View API Docs",
-      href: "/docs",
+      cta: "Subscribe",
+      href: "/pricing",
       highlighted: false,
     },
   ]
@@ -117,12 +119,17 @@ export function PricingCards({ totalCount }: { totalCount: number }) {
               </p>
               <p className="text-[12px] font-mono text-tertiary mb-5">{plan.subtitle}</p>
 
-              <div className="flex items-baseline gap-1 mb-5">
+              <div className="flex items-baseline gap-1 mb-1.5">
                 <span className="font-mono text-[32px] sm:text-[40px] font-semibold text-ink leading-none">
                   {plan.price}
                 </span>
                 <span className="text-tertiary text-[14px]">{plan.period}</span>
               </div>
+              {"trial" in plan && plan.trial ? (
+                <p className="text-[12px] font-medium text-accent mb-5">{plan.trial}</p>
+              ) : (
+                <div className="mb-5" />
+              )}
 
               <div className="h-px bg-border mb-6" />
 

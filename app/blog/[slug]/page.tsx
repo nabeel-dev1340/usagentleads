@@ -30,16 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: meta.title,
     description: meta.description,
     alternates: {
-      canonical: `https://usagentleads.com/blog/${meta.slug}`,
+      canonical: `https://www.usagentleads.com/blog/${meta.slug}`,
       languages: {
-        "en-US": `https://usagentleads.com/blog/${meta.slug}`,
-        "x-default": `https://usagentleads.com/blog/${meta.slug}`,
+        "en-US": `https://www.usagentleads.com/blog/${meta.slug}`,
+        "x-default": `https://www.usagentleads.com/blog/${meta.slug}`,
       },
     },
     openGraph: {
       title: `${meta.title} | USAgentLeads`,
       description: meta.description,
-      url: `https://usagentleads.com/blog/${meta.slug}`,
+      url: `https://www.usagentleads.com/blog/${meta.slug}`,
       type: "article",
       publishedTime: meta.date,
       modifiedTime: meta.updatedAt || meta.date,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       tags: meta.tags,
       images: [
         {
-          url: `https://usagentleads.com${meta.coverImage}`,
+          url: `https://www.usagentleads.com${meta.coverImage}`,
           width: 1200,
           height: 630,
           alt: meta.title,
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: [`https://usagentleads.com${meta.coverImage}`],
+      images: [`https://www.usagentleads.com${meta.coverImage}`],
     },
   }
 }
@@ -72,9 +72,9 @@ export default async function BlogPostPage({ params }: Props) {
   const related = getRelatedPosts(slug, meta.category)
 
   const breadcrumb = generateBreadcrumbSchema([
-    { name: "Home", url: "https://usagentleads.com" },
-    { name: "Blog", url: "https://usagentleads.com/blog" },
-    { name: meta.title, url: `https://usagentleads.com/blog/${meta.slug}` },
+    { name: "Home", url: "https://www.usagentleads.com" },
+    { name: "Blog", url: "https://www.usagentleads.com/blog" },
+    { name: meta.title, url: `https://www.usagentleads.com/blog/${meta.slug}` },
   ])
   const articleSchema = generateArticleSchema(meta)
 

@@ -22,13 +22,13 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://usagentleads.com"),
+  metadataBase: new URL("https://www.usagentleads.com"),
   title: {
-    default: "USAgentLeads — Real Estate Agent Contact Database",
+    default: "Real Estate Agent Email List & Database | 553K+ Contacts | USAgentLeads",
     template: "%s | USAgentLeads",
   },
   description:
-    "Buy verified US real estate agent contacts by state or nationwide. Name, email, phone. CSV download. Starting at $10.",
+    "Download verified real estate agent emails and phone numbers for all 50 US states. 553,778+ contacts, instant CSV delivery, starting at $10/state. CRM-ready data.",
   keywords: [
     "realtor email list",
     "real estate agent database",
@@ -59,25 +59,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "USAgentLeads",
-    title: "USAgentLeads — Real Estate Agent Contact Database",
+    title: "Real Estate Agent Email List & Database | 553K+ Contacts | USAgentLeads",
     description:
-      "Buy verified US real estate agent contacts by state or nationwide. Name, email, phone. CSV download. Starting at $10.",
+      "Download verified real estate agent emails and phone numbers for all 50 US states. 553,778+ contacts, instant CSV delivery, starting at $10/state. CRM-ready data.",
+    url: "https://www.usagentleads.com",
+    images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "USAgentLeads — Real Estate Agent Contact Database",
+    title: "Real Estate Agent Email List & Database | 553K+ Contacts | USAgentLeads",
     description:
-      "Buy verified US real estate agent contacts by state or nationwide. CSV download. Starting at $10.",
+      "Download verified real estate agent emails and phone numbers for all 50 US states. 553,778+ contacts, instant CSV delivery, starting at $10/state.",
+    images: ["https://www.usagentleads.com/twitter-image"],
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: "https://usagentleads.com",
+    canonical: "https://www.usagentleads.com",
     languages: {
-      "en-US": "https://usagentleads.com",
-      "x-default": "https://usagentleads.com",
+      "en-US": "https://www.usagentleads.com",
+      "x-default": "https://www.usagentleads.com",
     },
     types: {
-      "application/rss+xml": "https://usagentleads.com/blog/feed.xml",
+      "application/rss+xml": "https://www.usagentleads.com/blog/feed.xml",
     },
   },
   other: {
@@ -95,6 +98,9 @@ export default function RootLayout({
   return (
     <html lang="en-US" className={`${poppins.variable} ${jetbrainsMono.variable}`}>
       <head>
+        <link rel="preconnect" href="https://app.lemonsqueezy.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`

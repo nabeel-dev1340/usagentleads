@@ -1,34 +1,77 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Check, X, Minus, ArrowRight, ShieldCheck } from "lucide-react"
+import { Check, X, Minus, ArrowRight, ShieldCheck, ChevronRight } from "lucide-react"
 import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 import { SubscribeButton } from "@/components/checkout/SubscribeButton"
 import { getTotalCount } from "@/lib/supabase/server"
 import { formatAgentCount } from "@/lib/utils/states"
+import { generateBreadcrumbSchema } from "@/lib/utils/seo"
+
+const pricingProductSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "USAgentLeads Real Estate Agent Database",
+  description: "Complete US real estate agent contact database with 553,778+ verified contacts across all 50 states",
+  brand: { "@type": "Brand", name: "USAgentLeads" },
+  offers: [
+    {
+      "@type": "Offer",
+      name: "State Pack",
+      price: "10.00",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: "https://www.usagentleads.com/states",
+    },
+    {
+      "@type": "Offer",
+      name: "Full Database",
+      price: "99.00",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: "https://www.usagentleads.com/pricing",
+    },
+    {
+      "@type": "Offer",
+      name: "Pro Dashboard",
+      price: "49.00",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: "https://www.usagentleads.com/pricing",
+    },
+    {
+      "@type": "Offer",
+      name: "Pro API",
+      price: "79.00",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: "https://www.usagentleads.com/pricing",
+    },
+  ],
+}
 
 export const metadata: Metadata = {
-  title: "Pricing — Real Estate Agent Data Starting at $10",
+  title: "Pricing | Real Estate Agent Database from $10/State",
   description:
-    "Buy US real estate agent contact data starting at $10 per state. Full 50-state database for $99. Pro Dashboard for $49/month.",
+    "Get verified real estate agent contact data starting at $10 per state or $99 for all 50 states. 553K+ contacts with instant CSV delivery. No subscription required.",
   alternates: {
-    canonical: "https://usagentleads.com/pricing",
+    canonical: "https://www.usagentleads.com/pricing",
     languages: {
-      "en-US": "https://usagentleads.com/pricing",
-      "x-default": "https://usagentleads.com/pricing",
+      "en-US": "https://www.usagentleads.com/pricing",
+      "x-default": "https://www.usagentleads.com/pricing",
     },
   },
   openGraph: {
-    title: "Pricing — Real Estate Agent Data Starting at $10 | USAgentLeads",
+    title: "Pricing | Real Estate Agent Database from $10/State | USAgentLeads",
     description:
-      "Buy US real estate agent contact data starting at $10 per state. Full 50-state database for $99. Pro Dashboard for $49/month.",
-    url: "https://usagentleads.com/pricing",
-    images: [{ url: "https://usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
+      "Get verified real estate agent contact data starting at $10 per state or $99 for all 50 states. 553K+ contacts with instant CSV delivery. No subscription required.",
+    url: "https://www.usagentleads.com/pricing",
+    images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing — Real Estate Agent Data Starting at $10",
-    description: "US real estate agent contact data starting at $10 per state. Full 50-state database for $99.",
-    images: ["https://usagentleads.com/twitter-image"],
+    title: "Pricing | Real Estate Agent Database from $10/State",
+    description: "Verified real estate agent contact data starting at $10 per state or $99 for all 50 states. Instant CSV delivery.",
+    images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
 
@@ -133,9 +176,26 @@ export default async function PricingPage() {
   const totalCount = await getTotalCount()
   const plans = getPlans(totalCount)
 
+  const breadcrumb = generateBreadcrumbSchema([
+    { name: "Home", url: "https://www.usagentleads.com" },
+    { name: "Pricing", url: "https://www.usagentleads.com/pricing" },
+  ])
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([pricingProductSchema, breadcrumb]) }}
+      />
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-28 max-sm:py-16 sm:px-6 lg:px-8">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-[14px] text-tertiary mb-10 -mt-12">
+          <Link href="/" className="hover:text-ink transition-colors">Home</Link>
+          <ChevronRight size={14} className="text-muted" />
+          <span className="text-ink font-medium">Pricing</span>
+        </nav>
+
         {/* Header */}
         <div className="section-header text-center flex flex-col items-center mb-16">
           <p className="label-eyebrow">Pricing</p>
@@ -259,5 +319,6 @@ export default async function PricingPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }

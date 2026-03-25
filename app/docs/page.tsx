@@ -9,20 +9,33 @@ import {
   AlertTriangle,
   CheckCircle2,
   BookOpen,
+  ChevronRight,
 } from "lucide-react"
+import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "API Documentation — USAgentLeads REST API",
+  title: "Real Estate Agent API | REST API Documentation",
   description:
-    "Complete API documentation for the USAgentLeads REST API. Search 500K+ US real estate agent contacts programmatically.",
+    "Integrate 553K+ verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.",
   alternates: {
-    canonical: "https://usagentleads.com/docs",
+    canonical: "https://www.usagentleads.com/docs",
+    languages: {
+      "en-US": "https://www.usagentleads.com/docs",
+      "x-default": "https://www.usagentleads.com/docs",
+    },
   },
   openGraph: {
-    title: "API Documentation — USAgentLeads",
+    title: "Real Estate Agent API | REST API Documentation | USAgentLeads",
     description:
-      "Complete REST API documentation. Integrate 500K+ real estate agent contacts into your application.",
-    url: "https://usagentleads.com/docs",
+      "Integrate 553K+ verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.",
+    url: "https://www.usagentleads.com/docs",
+    images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Real Estate Agent API | REST API Documentation",
+    description: "Integrate 553K+ verified real estate agent contacts into your app via REST API.",
+    images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
 
@@ -139,10 +152,27 @@ const tocItems = [
   { id: "security", label: "Security" },
 ]
 
+const docsBreadcrumb = generateBreadcrumbSchema([
+  { name: "Home", url: "https://www.usagentleads.com" },
+  { name: "API Docs", url: "https://www.usagentleads.com/docs" },
+])
+
 export default function DocsPage() {
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(docsBreadcrumb) }}
+      />
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-28 max-sm:py-16 sm:px-6 lg:px-8">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-[14px] text-tertiary mb-10 -mt-12">
+          <Link href="/" className="hover:text-ink transition-colors">Home</Link>
+          <ChevronRight size={14} className="text-muted" />
+          <span className="text-ink font-medium">API Docs</span>
+        </nav>
+
         {/* Header */}
         <div className="mb-16 max-w-3xl">
           <div className="flex items-center gap-2 mb-4">
@@ -236,12 +266,12 @@ export default function DocsPage() {
               headers using one of these methods:
             </p>
             <CodeBlock title="Option 1 — X-API-Key header (recommended)">{`curl -H "X-API-Key: sk_live_abc123..." \\
-  https://usagentleads.com/api/v1/agents`}</CodeBlock>
+  https://www.usagentleads.com/api/v1/agents`}</CodeBlock>
 
             <div className="my-4" />
 
             <CodeBlock title="Option 2 — Bearer token">{`curl -H "Authorization: Bearer sk_live_abc123..." \\
-  https://usagentleads.com/api/v1/agents`}</CodeBlock>
+  https://www.usagentleads.com/api/v1/agents`}</CodeBlock>
 
             <div className="mt-5 p-4 rounded-xl border border-amber-200 bg-amber-50/50 flex gap-3">
               <AlertTriangle size={18} className="text-amber-600 shrink-0 mt-0.5" />
@@ -259,7 +289,7 @@ export default function DocsPage() {
 
             {/* ========== BASE URL ========== */}
             <SectionAnchor id="base-url">Base URL</SectionAnchor>
-            <CodeBlock>{`https://usagentleads.com/api/v1`}</CodeBlock>
+            <CodeBlock>{`https://www.usagentleads.com/api/v1`}</CodeBlock>
             <p className="text-[14px] text-tertiary mt-3">
               All endpoints are relative to this base URL. HTTPS is required — HTTP
               requests will be rejected.
@@ -565,7 +595,7 @@ export default function DocsPage() {
             <SectionAnchorH3 id="example-curl">cURL</SectionAnchorH3>
             <CodeBlock title="Get all California agents">{`curl -s \\
   -H "X-API-Key: sk_live_abc123..." \\
-  "https://usagentleads.com/api/v1/agents?state=CA&pageSize=50" | jq .`}</CodeBlock>
+  "https://www.usagentleads.com/api/v1/agents?state=CA&pageSize=50" | jq .`}</CodeBlock>
 
             <SectionAnchorH3 id="example-javascript">JavaScript / TypeScript</SectionAnchorH3>
             <CodeBlock title="Fetch agents with error handling" lang="JavaScript">{`async function getAgents({ state, search, page = 1, pageSize = 25 }) {
@@ -574,7 +604,7 @@ export default function DocsPage() {
   if (search) params.set("search", search);
 
   const res = await fetch(
-    \`https://usagentleads.com/api/v1/agents?\${params}\`,
+    \`https://www.usagentleads.com/api/v1/agents?\${params}\`,
     { headers: { "X-API-Key": process.env.USAGENTLEADS_API_KEY } }
   );
 
@@ -595,7 +625,7 @@ console.log(\`Found \${count} agents (\${quota.used}/\${quota.limit} quota used)
 import os
 
 API_KEY = os.environ["USAGENTLEADS_API_KEY"]
-BASE_URL = "https://usagentleads.com/api/v1/agents"
+BASE_URL = "https://www.usagentleads.com/api/v1/agents"
 
 def get_all_agents(state: str):
     agents = []
@@ -724,5 +754,6 @@ print(f"Fetched {len(ca_agents)} California agents")`}</CodeBlock>
         </div>
       </div>
     </div>
+    </>
   )
 }

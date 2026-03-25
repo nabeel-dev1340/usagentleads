@@ -64,7 +64,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer" className="text-[15px] text-muted hover:text-white transition-colors">
+                <a href="https://app.lemonsqueezy.com/my-orders" target="_blank" rel="noopener noreferrer nofollow" className="text-[15px] text-muted hover:text-white transition-colors">
                   Manage Subscription
                 </a>
               </li>

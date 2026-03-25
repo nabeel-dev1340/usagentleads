@@ -2,14 +2,14 @@ import type { Metadata } from "next"
 import type { USState } from "@/types"
 import type { BlogPost } from "@/types/blog"
 
-const BASE_URL = "https://usagentleads.com"
+const BASE_URL = "https://www.usagentleads.com"
 
 export function generateStateMetadata(state: USState, cities?: string[]): Metadata {
   const count = state.agentCount.toLocaleString()
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 3).join(", ")} and more.` : ""
   return {
-    title: `${state.name} Realtor Email List & Database — ${count}+ Contacts`,
-    description: `Download ${count}+ ${state.name} real estate agent emails and phone numbers. Verified realtor email list with name, email, phone.${cityText} CSV download. $10 one-time.`,
+    title: `${state.name} Real Estate Agent Email List | ${count}+ Contacts`,
+    description: `Download ${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV delivery for $10. Includes name, email, phone for every licensed ${state.code} agent.${cityText}`,
     keywords: [
       `${state.name} real estate agent list`,
       `realtor email list ${state.name}`,
@@ -35,16 +35,16 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
       "geo.placename": state.name,
     },
     openGraph: {
-      title: `${state.name} Realtor Email List & Database — ${count}+ Contacts | USAgentLeads`,
-      description: `Download ${count}+ ${state.name} real estate agent emails and phone numbers. Verified realtor email list with name, email, phone.${cityText} CSV download. $10 one-time.`,
+      title: `${state.name} Real Estate Agent Email List | ${count}+ Contacts | USAgentLeads`,
+      description: `Download ${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV delivery for $10. Includes name, email, phone for every licensed ${state.code} agent.${cityText}`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${state.name} Realtor Email List & Database — ${count}+ Contacts`,
-      description: `Download ${count}+ ${state.name} real estate agent emails and phone numbers.${cityText} CSV download. $10 one-time.`,
+      title: `${state.name} Real Estate Agent Email List | ${count}+ Contacts`,
+      description: `Download ${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV delivery for $10.`,
       images: [`${BASE_URL}/twitter-image`],
     },
   }
@@ -71,7 +71,7 @@ export function generateProductSchema(state: USState) {
     "@type": "Product",
     name: `${state.name} Realtor Email List & Contact Database`,
     description: `Verified database of ${state.agentCount.toLocaleString()}+ ${state.name} real estate agent emails and phone numbers. Download the complete realtor email list.`,
-    image: "https://usagentleads.com/opengraph-image",
+    image: "https://www.usagentleads.com/opengraph-image",
     brand: {
       "@type": "Brand",
       name: "USAgentLeads",
@@ -101,7 +101,7 @@ export function generateProductSchema(state: USState) {
       price: "10.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      url: `https://usagentleads.com/states/${state.slug}`,
+      url: `https://www.usagentleads.com/states/${state.slug}`,
       priceValidUntil: "2027-12-31",
       seller: {
         "@type": "Organization",
@@ -169,6 +169,16 @@ export function generateDatasetSchema(state: USState) {
       contentUrl: `${BASE_URL}/states/${state.slug}`,
     },
     variableMeasured: ["Full Name", "Email Address", "Phone Number", "State"],
+    keywords: [
+      `${state.name.toLowerCase()} realtor email list`,
+      `${state.name.toLowerCase()} real estate agent database`,
+      `${state.name.toLowerCase()} agent contacts`,
+    ],
+    offers: {
+      "@type": "Offer",
+      price: "10.00",
+      priceCurrency: "USD",
+    },
   }
 }
 

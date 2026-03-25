@@ -2,53 +2,62 @@ import type { MetadataRoute } from "next"
 import { US_STATES } from "@/lib/utils/states"
 import { getAllPosts } from "@/lib/blog"
 
+const BASE_URL = "https://www.usagentleads.com"
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://usagentleads.com"
+  const now = new Date().toISOString()
 
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
+      url: BASE_URL,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 1.0,
     },
     {
-      url: `${baseUrl}/pricing`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/states`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      url: `${BASE_URL}/states`,
+      lastModified: now,
+      changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      url: `${BASE_URL}/pricing`,
+      lastModified: now,
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/docs`,
+      lastModified: now,
       changeFrequency: "monthly",
       priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
   ]
 
   const statePages: MetadataRoute.Sitemap = US_STATES.map((state) => ({
-    url: `${baseUrl}/states/${state.slug}`,
-    lastModified: new Date(),
+    url: `${BASE_URL}/states/${state.slug}`,
+    lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: 0.9,
+    priority: 0.8,
   }))
 
-  const blogPages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt || post.date),
-    changeFrequency: "weekly" as const,
+  const posts = getAllPosts()
+  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: post.updatedAt || post.date,
+    changeFrequency: "monthly" as const,
     priority: 0.7,
   }))
 

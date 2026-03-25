@@ -26,7 +26,7 @@ export function ContactForm() {
       {/* Disable captcha page */}
       <input type="hidden" name="_captcha" value="false" />
       {/* Redirect back */}
-      <input type="hidden" name="_next" value="https://usagentleads.com/contact?sent=true" />
+      <input type="hidden" name="_next" value="https://www.usagentleads.com/contact?sent=true" />
       {/* Hidden input to submit CustomSelect value */}
       <input type="hidden" name="subject" value={subject} />
 

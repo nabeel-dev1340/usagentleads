@@ -2,7 +2,7 @@ name: Generate State CSVs
 
 on:
   schedule:
-    - cron: '0 3 * * 0' # Weekly on Sunday at 3:00 AM UTC
+    - cron: '0 3 */3 * *' # Every 3 days at 3:00 AM UTC (1 hour after state counts)
   workflow_dispatch: # Allow manual trigger
 
 jobs:

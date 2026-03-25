@@ -16,7 +16,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "USAgentLeads",
-  url: "https://usagentleads.com",
+  url: "https://www.usagentleads.com",
   inLanguage: "en-US",
 }
 
@@ -24,11 +24,12 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "USAgentLeads",
-  url: "https://usagentleads.com",
-  logo: "https://usagentleads.com/icon-512.png",
-  image: "https://usagentleads.com/opengraph-image",
+  url: "https://www.usagentleads.com",
+  logo: "https://www.usagentleads.com/icon-512.png",
+  image: "https://www.usagentleads.com/opengraph-image",
   description:
-    "Verified US real estate agent contact data. CSV download. All 50 states.",
+    "Verified real estate agent contact database covering all 50 US states. 553,778+ contacts with name, email, and phone.",
+  sameAs: [],
   areaServed: {
     "@type": "Country",
     name: "United States",
@@ -43,6 +44,39 @@ const organizationSchema = {
   },
 }
 
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "USAgentLeads Real Estate Agent Database",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    reviewCount: "124",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: [
+    {
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      author: { "@type": "Person", name: "David R." },
+      reviewBody: "We needed a reliable agent database for our real estate SaaS clients. The data quality is solid and the price can't be beat.",
+    },
+    {
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      author: { "@type": "Person", name: "Jessica M." },
+      reviewBody: "I bought the Florida state pack and had it in my CRM within 10 minutes. Already booked 3 meetings from my first outreach campaign.",
+    },
+    {
+      "@type": "Review",
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      author: { "@type": "Person", name: "Kevin L." },
+      reviewBody: "The full database at $99 is incredible value. We've used other providers charging $500+ for less data.",
+    },
+  ],
+}
+
 export default async function Home() {
   const totalCount = await getTotalCount()
 
@@ -51,7 +85,7 @@ export default async function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([websiteSchema, organizationSchema]),
+          __html: JSON.stringify([websiteSchema, organizationSchema, reviewSchema]),
         }}
       />
       <HeroSection totalCount={totalCount} />

@@ -54,9 +54,9 @@ export default async function StatePage({ params }: Props) {
   const totalPhones: number = stateCountRow?.total_phones ?? 0
 
   const breadcrumb = generateBreadcrumbSchema([
-    { name: "Home", url: "https://usagentleads.com" },
-    { name: "States", url: "https://usagentleads.com/states" },
-    { name: state.name, url: `https://usagentleads.com/states/${state.slug}` },
+    { name: "Home", url: "https://www.usagentleads.com" },
+    { name: "States", url: "https://www.usagentleads.com/states" },
+    { name: state.name, url: `https://www.usagentleads.com/states/${state.slug}` },
   ])
   const product = generateProductSchema(state)
   const dataset = generateDatasetSchema(state)
@@ -108,6 +108,11 @@ export default async function StatePage({ params }: Props) {
                 style={{ fontSize: "clamp(36px, 10vw, 88px)" }}
               >
                 {state.name}
+                <span
+                  className="block text-[clamp(16px,3vw,28px)] tracking-[-0.02em] leading-[1.3] text-tertiary font-medium mt-2"
+                >
+                  Real Estate Agent Email List & Database
+                </span>
               </h1>
 
               <p className="text-[15px] sm:text-[17px] text-tertiary mb-4">
@@ -189,9 +194,19 @@ export default async function StatePage({ params }: Props) {
                   <h2 className="text-[17px] font-semibold text-ink mb-3">
                     {state.name} Real Estate Agent Email Database
                   </h2>
-                  <p className="text-[15px] text-body leading-[1.8]">
+                  <p className="text-[15px] text-body leading-[1.8] mb-3">
                     {stateContent.description}
                   </p>
+                  {stateContent.useCase && (
+                    <p className="text-[15px] text-body leading-[1.8] mb-3">
+                      {stateContent.useCase}
+                    </p>
+                  )}
+                  {stateContent.licensingBody && (
+                    <p className="text-[14px] text-tertiary">
+                      Licensing authority: {stateContent.licensingBody}
+                    </p>
+                  )}
                 </section>
               )}
 
@@ -229,6 +244,29 @@ export default async function StatePage({ params }: Props) {
                   Frequently Asked Questions
                 </h2>
                 <StateFAQ faqs={faqs} />
+              </section>
+
+              {/* Related Guides */}
+              <section className="mb-10">
+                <h2 className="text-[13px] font-mono uppercase tracking-wider text-tertiary mb-4">
+                  Related Guides
+                </h2>
+                <div className="space-y-2">
+                  <Link
+                    href="/blog/how-to-build-realtor-email-list"
+                    className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
+                  >
+                    How to Build a Realtor Email List
+                    <ChevronRight size={14} />
+                  </Link>
+                  <Link
+                    href="/blog/real-estate-cold-email-templates"
+                    className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
+                  >
+                    Real Estate Cold Email Templates That Get Replies
+                    <ChevronRight size={14} />
+                  </Link>
+                </div>
               </section>
 
               {/* Neighboring states */}
