@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
-import ExcelJS from "exceljs"
 import { createServiceClient } from "@/lib/supabase/server"
 import { US_STATES } from "@/lib/utils/states"
 
@@ -104,7 +103,7 @@ export async function GET(request: NextRequest) {
   try {
     const supabase = createServiceClient()
 
-    // ?combine=true → merge all state CSVs into a full .xlsx with formatting
+    // ?combine=true → merge all state CSVs into a single CSV (memory-efficient)
     if (combine === "true") {
       const { data: files, error: listError } = await supabase.storage
         .from("agent-csvs")
@@ -114,8 +113,9 @@ export async function GET(request: NextRequest) {
 
       const csvFiles = (files || []).filter((f) => f.name.endsWith(".csv"))
 
-      // Collect all rows from state CSVs
-      const allRows: string[][] = []
+      // Stream-concatenate CSVs without parsing rows into memory
+      const chunks: string[] = [CSV_HEADERS.join(",")]
+      let totalRows = 0
 
       for (const file of csvFiles) {
         const { data, error } = await supabase.storage
@@ -125,53 +125,26 @@ export async function GET(request: NextRequest) {
         if (error) throw new Error(`Failed to download ${file.name}: ${error.message}`)
 
         const text = await data.text()
-        const lines = text.split("\n")
-        // Skip header row, parse each data line
-        for (const line of lines.slice(1)) {
-          if (!line.trim()) continue
-          // Parse CSV respecting quoted fields
-          const row = parseCSVLine(line)
-          allRows.push(row)
+        // Find first newline to skip header, append the rest
+        const firstNewline = text.indexOf("\n")
+        if (firstNewline === -1) continue
+        const body = text.slice(firstNewline + 1).trimEnd()
+        if (!body) continue
+        chunks.push(body)
+        // Count rows by counting newlines + 1
+        let count = 1
+        for (let i = 0; i < body.length; i++) {
+          if (body[i] === "\n") count++
         }
+        totalRows += count
       }
 
-      // Build .xlsx workbook
-      const workbook = new ExcelJS.Workbook()
-      const sheet = workbook.addWorksheet("USA Agents")
-
-      // Add header row with bold styling
-      const headerRow = sheet.addRow(["Name", "Email", "Phone", "State"])
-      headerRow.font = { bold: true, size: 12 }
-      headerRow.alignment = { vertical: "middle" }
-
-      // Set column widths
-      sheet.columns = [
-        { width: 30 }, // Name
-        { width: 35 }, // Email
-        { width: 18 }, // Phone
-        { width: 22 }, // State
-      ]
-
-      // Add data rows
-      for (const row of allRows) {
-        sheet.addRow(row)
-      }
-
-      // Enable auto-filter on all columns
-      sheet.autoFilter = {
-        from: { row: 1, column: 1 },
-        to: { row: allRows.length + 1, column: 4 },
-      }
-
-      // Freeze the header row
-      sheet.views = [{ state: "frozen", ySplit: 1 }]
-
-      const buffer = await workbook.xlsx.writeBuffer()
+      const combinedCSV = chunks.join("\n")
 
       const { error: uploadError } = await supabase.storage
         .from("agent-csvs")
-        .upload("full/usa_agents_full.xlsx", Buffer.from(buffer), {
-          contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        .upload("full/usa_agents_full.csv", combinedCSV, {
+          contentType: "text/csv",
           upsert: true,
         })
 
@@ -180,7 +153,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         success: true,
         files: csvFiles.length,
-        totalRows: allRows.length,
+        totalRows,
       })
     }
 

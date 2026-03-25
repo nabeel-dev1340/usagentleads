@@ -156,7 +156,7 @@ export async function sendDownloadEmail({
   productName,
   purchaseType,
 }: SendDownloadEmailParams) {
-  const fileFormat = purchaseType === "full_database" ? "Excel (.xlsx)" : "CSV"
+  const fileFormat = "CSV"
   const subject = `Your ${productName} Real Estate Agent Data is Ready`
 
   const body = `
