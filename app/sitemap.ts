@@ -5,42 +5,46 @@ import { getAllPosts } from "@/lib/blog"
 const BASE_URL = "https://www.usagentleads.com"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date().toISOString()
-
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
-      lastModified: now,
+      lastModified: "2025-03-25",
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${BASE_URL}/states`,
-      lastModified: now,
+      lastModified: "2025-03-25",
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${BASE_URL}/pricing`,
-      lastModified: now,
+      lastModified: "2025-03-01",
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/blog`,
-      lastModified: now,
+      lastModified: "2025-03-25",
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
       url: `${BASE_URL}/docs`,
-      lastModified: now,
+      lastModified: "2025-02-01",
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: "2025-03-25",
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: `${BASE_URL}/contact`,
-      lastModified: now,
+      lastModified: "2025-01-01",
       changeFrequency: "yearly",
       priority: 0.3,
     },
@@ -48,7 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const statePages: MetadataRoute.Sitemap = US_STATES.map((state) => ({
     url: `${BASE_URL}/states/${state.slug}`,
-    lastModified: now,
+    lastModified: "2025-03-25",
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }))

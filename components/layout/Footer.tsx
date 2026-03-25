@@ -51,6 +51,11 @@ export function Footer() {
                   API Docs
                 </Link>
               </li>
+              <li>
+                <Link href="/about" className="text-[15px] text-muted hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
             </ul>
           </div>
 

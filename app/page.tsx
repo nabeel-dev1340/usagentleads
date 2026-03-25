@@ -29,7 +29,7 @@ const organizationSchema = {
   image: "https://www.usagentleads.com/opengraph-image",
   description:
     "Verified real estate agent contact database covering all 50 US states. 553,778+ contacts with name, email, and phone.",
-  sameAs: [],
+  sameAs: [] as string[],
   areaServed: {
     "@type": "Country",
     name: "United States",

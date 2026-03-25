@@ -19,6 +19,13 @@ export const metadata: Metadata = {
       "Get in touch with USAgentLeads. Questions about our real estate agent database, pricing, or data quality?",
     url: "https://www.usagentleads.com/contact",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | USAgentLeads",
+    description:
+      "Get in touch with USAgentLeads. Questions about our real estate agent database, pricing, or data quality?",
+    images: ["https://www.usagentleads.com/twitter-image"],
+  },
 }
 
 export default function ContactPage() {

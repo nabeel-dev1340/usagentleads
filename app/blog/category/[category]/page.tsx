@@ -10,15 +10,35 @@ interface Props {
   params: Promise<{ category: string }>
 }
 
-const CATEGORY_MAP: Record<string, string> = {
-  "email-marketing": "Email Marketing",
-  "lead-generation": "Lead Generation",
-  "marketing": "Marketing",
-  "technology": "Technology",
-  "market-data": "Market Data",
+const CATEGORY_MAP: Record<string, { name: string; intro: string }> = {
+  "email-marketing": {
+    name: "Email Marketing",
+    intro:
+      "Email remains the highest-ROI channel for reaching real estate agents. Learn how to craft cold outreach sequences that get replies, maintain sender reputation, segment your lists for better engagement, and stay compliant with CAN-SPAM and state-level regulations.",
+  },
+  "lead-generation": {
+    name: "Lead Generation",
+    intro:
+      "Building a pipeline of real estate agent contacts takes the right data and the right strategy. These guides cover sourcing verified agent lists, qualifying leads, building outbound funnels, and converting cold contacts into paying customers.",
+  },
+  "marketing": {
+    name: "Marketing",
+    intro:
+      "From multi-channel campaigns to brand positioning, these articles cover the strategies that B2B companies use to reach and win over real estate professionals. Topics include content marketing, paid acquisition, event marketing, and partnership development.",
+  },
+  "technology": {
+    name: "Technology",
+    intro:
+      "CRM integrations, API usage, data automation, and the tools that help you work with real estate agent data more efficiently. Practical guides for importing contacts into HubSpot, Salesforce, and other platforms.",
+  },
+  "market-data": {
+    name: "Market Data",
+    intro:
+      "Data-driven insights into the US real estate market: agent counts by state, licensing trends, market sizing, and the metrics that matter for companies selling to real estate professionals.",
+  },
 }
 
-function slugToCategory(slug: string): string | undefined {
+function getCategory(slug: string): { name: string; intro: string } | undefined {
   return CATEGORY_MAP[slug]
 }
 
@@ -33,27 +53,33 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category: slug } = await params
-  const categoryName = slugToCategory(slug)
-  if (!categoryName) return {}
+  const category = getCategory(slug)
+  if (!category) return {}
 
   return {
-    title: `${categoryName} for Real Estate | Blog`,
-    description: `Articles about ${categoryName.toLowerCase()} for real estate professionals and companies targeting agents. Tips, strategies, and guides from USAgentLeads.`,
+    title: `${category.name} for Real Estate | Blog`,
+    description: `Articles about ${category.name.toLowerCase()} for real estate professionals and companies targeting agents. Tips, strategies, and guides from USAgentLeads.`,
     alternates: {
       canonical: `https://www.usagentleads.com/blog/category/${slug}`,
     },
     openGraph: {
-      title: `${categoryName} for Real Estate | Blog | USAgentLeads`,
-      description: `Articles about ${categoryName.toLowerCase()} for real estate professionals and companies targeting agents.`,
+      title: `${category.name} for Real Estate | Blog | USAgentLeads`,
+      description: `Articles about ${category.name.toLowerCase()} for real estate professionals and companies targeting agents.`,
       url: `https://www.usagentleads.com/blog/category/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} for Real Estate | Blog | USAgentLeads`,
+      description: `Articles about ${category.name.toLowerCase()} for real estate professionals and companies targeting agents.`,
+      images: ["https://www.usagentleads.com/twitter-image"],
     },
   }
 }
 
 export default async function CategoryPage({ params }: Props) {
   const { category: slug } = await params
-  const categoryName = slugToCategory(slug)
-  if (!categoryName) notFound()
+  const category = getCategory(slug)
+  if (!category) notFound()
 
   const allPosts = getAllPosts()
   const posts = allPosts.filter((p) => categoryToSlug(p.category) === slug)
@@ -63,7 +89,7 @@ export default async function CategoryPage({ params }: Props) {
   const breadcrumb = generateBreadcrumbSchema([
     { name: "Home", url: "https://www.usagentleads.com" },
     { name: "Blog", url: "https://www.usagentleads.com/blog" },
-    { name: categoryName, url: `https://www.usagentleads.com/blog/category/${slug}` },
+    { name: category.name, url: `https://www.usagentleads.com/blog/category/${slug}` },
   ])
 
   return (
@@ -80,15 +106,15 @@ export default async function CategoryPage({ params }: Props) {
             <ChevronRight size={14} className="text-muted" />
             <Link href="/blog" className="hover:text-ink transition-colors">Blog</Link>
             <ChevronRight size={14} className="text-muted" />
-            <span className="text-ink font-medium">{categoryName}</span>
+            <span className="text-ink font-medium">{category.name}</span>
           </nav>
 
           {/* Header */}
           <div className="pb-12 border-b border-border">
-            <p className="label-eyebrow mb-3">{categoryName}</p>
-            <h1 className="section-heading">{categoryName} for Real Estate</h1>
-            <p className="section-sub mt-3 max-w-lg">
-              Articles, guides, and strategies about {categoryName.toLowerCase()} for real estate professionals.
+            <p className="label-eyebrow mb-3">{category.name}</p>
+            <h1 className="section-heading">{category.name} for Real Estate</h1>
+            <p className="text-[15px] text-body leading-[1.8] mt-4 max-w-2xl">
+              {category.intro}
             </p>
           </div>
 

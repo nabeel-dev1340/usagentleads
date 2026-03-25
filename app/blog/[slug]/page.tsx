@@ -114,7 +114,12 @@ export default async function BlogPostPage({ params }: Props) {
 
           {/* Author & date bar */}
           <div className="flex items-center gap-3 text-[14px] font-mono text-muted border-t border-b border-border py-4 mt-6">
-            <span>{meta.author}</span>
+            <Link
+              href={`/blog/author/${meta.author.toLowerCase().replace(/\s+/g, "-")}`}
+              className="hover:text-ink transition-colors"
+            >
+              {meta.author}
+            </Link>
             <span>&middot;</span>
             <time dateTime={meta.date}>
               {new Date(meta.date).toLocaleDateString("en-US", {
