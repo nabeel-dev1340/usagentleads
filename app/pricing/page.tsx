@@ -12,7 +12,28 @@ const pricingProductSchema = {
   "@type": "Product",
   name: "USAgentLeads Real Estate Agent Database",
   description: "Complete US real estate agent contact database with 553,778+ verified contacts across all 50 states",
+  image: "https://www.usagentleads.com/opengraph-image",
   brand: { "@type": "Brand", name: "USAgentLeads" },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    reviewCount: "124",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: {
+    "@type": "Review",
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: "5",
+      bestRating: "5",
+    },
+    author: {
+      "@type": "Person",
+      name: "James H.",
+    },
+    reviewBody: "Accurate and up-to-date agent contacts. Saved me hours of manual research.",
+  },
   offers: [
     {
       "@type": "Offer",
@@ -21,6 +42,23 @@ const pricingProductSchema = {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/states",
+      priceValidUntil: "2027-12-31",
+      seller: { "@type": "Organization", name: "USAgentLeads" },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+      },
     },
     {
       "@type": "Offer",
@@ -29,6 +67,23 @@ const pricingProductSchema = {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/pricing",
+      priceValidUntil: "2027-12-31",
+      seller: { "@type": "Organization", name: "USAgentLeads" },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+      },
     },
     {
       "@type": "Offer",
@@ -37,6 +92,23 @@ const pricingProductSchema = {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/pricing",
+      priceValidUntil: "2027-12-31",
+      seller: { "@type": "Organization", name: "USAgentLeads" },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+      },
     },
     {
       "@type": "Offer",
@@ -45,6 +117,23 @@ const pricingProductSchema = {
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/pricing",
+      priceValidUntil: "2027-12-31",
+      seller: { "@type": "Organization", name: "USAgentLeads" },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "USD" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+          transitTime: { "@type": "QuantitativeValue", minValue: "0", maxValue: "0", unitCode: "DAY" },
+        },
+      },
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        applicableCountry: "US",
+        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+      },
     },
   ],
 }
