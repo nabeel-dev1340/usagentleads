@@ -123,7 +123,7 @@ export default async function AboutPage() {
             </h1>
             <p className="section-sub mt-3 max-w-xl">
               USAgentLeads provides verified contact data for licensed real estate agents across all 50 US states.
-              We exist to make B2B outreach to the real estate industry faster, cheaper, and more reliable.
+              We exist to make B2B outreach to real estate agents cheaper and more reliable.
             </p>
           </div>
 
@@ -171,7 +171,7 @@ export default async function AboutPage() {
 
           {/* Values grid */}
           <div className="py-16 border-b border-border">
-            <h2 className="text-[22px] font-semibold text-ink mb-8">What We Stand For</h2>
+            <h2 className="text-[22px] font-semibold text-ink mb-8">How We Work</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {values.map((value) => (
                 <div key={value.title} className="card p-6">

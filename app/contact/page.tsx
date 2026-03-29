@@ -37,7 +37,7 @@ export default function ContactPage() {
           <p className="label-eyebrow">Contact</p>
           <h1 className="section-heading">Get in Touch</h1>
           <p className="section-sub max-w-lg">
-            Have a question about our data, pricing, or need a custom solution? We&apos;d love to hear from you.
+            Questions about data quality, pricing, or custom solutions? Reach out below.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function ContactPage() {
         <div className="card p-7 sm:p-10">
           <h2 className="text-[20px] font-semibold text-ink mb-1">Send Us a Message</h2>
           <p className="text-[14px] text-tertiary mb-8">
-            Fill out the form below and we&apos;ll get back to you as soon as possible.
+            We typically respond within 24 hours.
           </p>
 
           <ContactForm />

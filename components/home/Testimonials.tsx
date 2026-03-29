@@ -41,7 +41,7 @@ export function Testimonials() {
           <p className="label-eyebrow">Testimonials</p>
           <h2 className="section-heading">Trusted by Marketers & Agencies</h2>
           <p className="section-sub max-w-xl">
-            See why businesses choose USAgentLeads for their real estate outreach.
+            Real feedback from customers using our agent data for outreach.
           </p>
         </div>
 

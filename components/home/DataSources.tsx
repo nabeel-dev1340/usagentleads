@@ -22,7 +22,7 @@ const highlights = [
   {
     icon: RefreshCw,
     title: "Regularly Updated",
-    description: "Our database is refreshed to keep records current and minimize bounce rates.",
+    description: "We re-verify the full database annually and remove dead emails to keep bounce rates low.",
   },
 ]
 

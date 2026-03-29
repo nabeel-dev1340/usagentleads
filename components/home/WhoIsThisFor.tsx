@@ -41,7 +41,7 @@ export function WhoIsThisFor() {
           <p className="label-eyebrow">Built For</p>
           <h2 className="section-heading">Who Is This For?</h2>
           <p className="section-sub max-w-xl">
-            Our data powers outreach for thousands of businesses across these industries.
+            Companies in these industries use our data for outreach every day.
           </p>
         </div>
 
