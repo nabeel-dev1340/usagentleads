@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next"
 import { US_STATES } from "@/lib/utils/states"
 import { getAllPosts } from "@/lib/blog"
+import { PERSONAS } from "@/lib/data/personas"
+import { COMPETITORS } from "@/lib/data/comparisons"
+import { GLOSSARY_TERMS } from "@/lib/data/glossary"
 
 const BASE_URL = "https://www.usagentleads.com"
 
@@ -31,6 +34,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/for`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/compare`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/glossary`,
+      lastModified: "2026-03-30",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/docs`,
       lastModified: "2025-02-01",
       changeFrequency: "monthly",
@@ -57,6 +78,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
+  const personaPages: MetadataRoute.Sitemap = PERSONAS.map((persona) => ({
+    url: `${BASE_URL}/for/${persona.slug}`,
+    lastModified: "2026-03-30",
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
+  const comparisonPages: MetadataRoute.Sitemap = COMPETITORS.map((comp) => ({
+    url: `${BASE_URL}/compare/${comp.slug}`,
+    lastModified: "2026-03-30",
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
+  const glossaryPages: MetadataRoute.Sitemap = GLOSSARY_TERMS.map((term) => ({
+    url: `${BASE_URL}/glossary/${term.slug}`,
+    lastModified: "2026-03-30",
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }))
+
   const posts = getAllPosts()
   const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
@@ -65,5 +107,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...statePages, ...blogPages]
+  return [...staticPages, ...statePages, ...personaPages, ...comparisonPages, ...glossaryPages, ...blogPages]
 }

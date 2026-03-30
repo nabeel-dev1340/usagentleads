@@ -33,12 +33,22 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/pricing" className="text-[15px] text-muted hover:text-white transition-colors">
-                  Full Database
+                  Pricing
                 </Link>
               </li>
               <li>
-                <Link href="/pricing" className="text-[15px] text-muted hover:text-white transition-colors">
-                  Pricing
+                <Link href="/for" className="text-[15px] text-muted hover:text-white transition-colors">
+                  Use Cases
+                </Link>
+              </li>
+              <li>
+                <Link href="/compare" className="text-[15px] text-muted hover:text-white transition-colors">
+                  Compare
+                </Link>
+              </li>
+              <li>
+                <Link href="/glossary" className="text-[15px] text-muted hover:text-white transition-colors">
+                  Glossary
                 </Link>
               </li>
               <li>
