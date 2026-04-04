@@ -28,6 +28,15 @@ export function BlogCTA() {
           View Pricing
         </Link>
       </div>
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-6 text-[13px] text-white/60">
+        <Link href="/for/saas-companies" className="hover:text-white transition-colors">For SaaS Companies</Link>
+        <span>·</span>
+        <Link href="/for/marketing-agencies" className="hover:text-white transition-colors">For Agencies</Link>
+        <span>·</span>
+        <Link href="/for/mortgage-lenders" className="hover:text-white transition-colors">For Lenders</Link>
+        <span>·</span>
+        <Link href="/compare" className="hover:text-white transition-colors">Compare Providers</Link>
+      </div>
     </section>
   )
 }

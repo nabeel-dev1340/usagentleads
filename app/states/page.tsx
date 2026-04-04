@@ -6,9 +6,9 @@ import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "Real Estate Agent Email Lists by State | All 50 States",
+  title: "Agent Email Lists by State — All 50 States from $10",
   description:
-    "Browse verified real estate agent contact databases for every US state. Download CSV files with agent names, emails, and phone numbers. Starting at $10 per state.",
+    "Browse verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $10/state. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/states",
     languages: {
@@ -17,15 +17,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Real Estate Agent Email Lists by State | All 50 States | USAgentLeads",
-    description: "Browse verified real estate agent contact databases for every US state. Download CSV files with agent names, emails, and phone numbers. Starting at $10 per state.",
+    title: "Agent Email Lists by State — All 50 States from $10",
+    description: "Browse verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $10/state.",
     url: "https://www.usagentleads.com/states",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Real Estate Agent Email Lists by State | All 50 States",
-    description: "Browse verified real estate agent contact databases for every US state. Starting at $10 per state.",
+    title: "Agent Email Lists by State — All 50 States from $10",
+    description: "Browse verified real estate agent contacts for every US state — instant download from $10/state.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }

@@ -1,4 +1,5 @@
-import { Check, X } from "lucide-react"
+import Link from "next/link"
+import { Check, X, ArrowRight } from "lucide-react"
 
 const rows = [
   { feature: "Full US Agent Database", us: true, others: true },
@@ -50,6 +51,16 @@ export function CompetitorComparison() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="text-center mt-8 reveal">
+          <Link
+            href="/compare"
+            className="inline-flex items-center gap-2 text-[15px] font-medium text-accent hover:underline"
+          >
+            See detailed comparisons vs REDX, ZoomInfo, Apollo & more
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>

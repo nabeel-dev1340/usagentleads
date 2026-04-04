@@ -8,21 +8,8 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
   const count = state.agentCount.toLocaleString()
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 3).join(", ")} and more.` : ""
   return {
-    title: `${state.name} Real Estate Agent Email List | ${count}+ Contacts`,
-    description: `Download ${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV delivery for $10. Includes name, email, phone for every licensed ${state.code} agent.${cityText}`,
-    keywords: [
-      `${state.name} real estate agent list`,
-      `realtor email list ${state.name}`,
-      `${state.name} real estate email database`,
-      `${state.name} realtor email list`,
-      `buy ${state.name} agent contacts`,
-      `${state.name} realtor database`,
-      `${state.name} real estate agent email addresses`,
-      `${state.name} real estate agent phone numbers`,
-      `find real estate agents ${state.name}`,
-      `${state.name} realtors email`,
-      `list of real estate agents ${state.name}`,
-    ],
+    title: `${state.name} Realtor Emails & Phones — ${count}+ Agents, $10 CSV`,
+    description: `${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV download for $10 — name, email, phone for every licensed ${state.code} agent.${cityText} Free sample available.`,
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
       languages: {
@@ -35,16 +22,16 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
       "geo.placename": state.name,
     },
     openGraph: {
-      title: `${state.name} Real Estate Agent Email List | ${count}+ Contacts | USAgentLeads`,
-      description: `Download ${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV delivery for $10. Includes name, email, phone for every licensed ${state.code} agent.${cityText}`,
+      title: `${state.name} Realtor Emails & Phones — ${count}+ Agents, $10 CSV`,
+      description: `${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV download for $10 — name, email, phone for every licensed ${state.code} agent.${cityText}`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${state.name} Real Estate Agent Email List | ${count}+ Contacts`,
-      description: `Download ${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV delivery for $10.`,
+      title: `${state.name} Realtor Emails & Phones — ${count}+ Agents, $10 CSV`,
+      description: `${count}+ verified ${state.name} real estate agent emails and phone numbers. Instant CSV download for $10.`,
       images: [`${BASE_URL}/twitter-image`],
     },
   }
@@ -205,7 +192,7 @@ export function generateArticleSchema(post: BlogPost) {
     "@type": "Article",
     headline: post.title,
     description: post.description,
-    image: `${BASE_URL}${post.coverImage}`,
+    image: `${BASE_URL}/blog/${post.slug}/opengraph-image`,
     datePublished: post.date,
     dateModified: post.updatedAt || post.date,
     author: {

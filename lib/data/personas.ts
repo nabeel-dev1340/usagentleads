@@ -8,6 +8,7 @@ export interface Persona {
   useCases: string[]
   cta: string
   keywords: string[]
+  relatedBlogSlugs: string[]
   faqs: { question: string; answer: string }[]
 }
 
@@ -57,6 +58,11 @@ export const PERSONAS: readonly Persona[] = [
           "You get a clean CSV file with Full Name, Email, Phone, and State columns. It imports directly into any email tool (Mailchimp, ActiveCampaign, Instantly, Smartlead) or CRM (HubSpot, Close, Salesforce) without reformatting.",
       },
     ],
+    relatedBlogSlugs: [
+      "real-estate-coach-marketing-agent-pipeline",
+      "real-estate-cold-email-templates",
+      "how-to-build-realtor-email-list",
+    ],
   },
   {
     slug: "saas-companies",
@@ -102,6 +108,11 @@ export const PERSONAS: readonly Persona[] = [
         answer:
           "A single state costs $10. The full 50-state database is $99 — one-time, not a subscription. That's typically 80-90% less than what you'd pay for the same contacts on ZoomInfo, Apollo, or similar platforms.",
       },
+    ],
+    relatedBlogSlugs: [
+      "proptech-sales-sell-software-real-estate-agents",
+      "import-real-estate-contacts-hubspot",
+      "b2b-real-estate-marketing",
     ],
   },
   {
@@ -149,6 +160,11 @@ export const PERSONAS: readonly Persona[] = [
           "The most common approach: import the state CSV into your email tool, write a short intro email about your rates or a co-marketing opportunity, and follow up with value-add content like market reports. Agents respond well to loan officers who bring them something useful.",
       },
     ],
+    relatedBlogSlugs: [
+      "mortgage-lenders-contact-real-estate-agents",
+      "real-estate-cold-email-templates",
+      "cold-outreach-realtors-compliance",
+    ],
   },
   {
     slug: "marketing-agencies",
@@ -194,6 +210,11 @@ export const PERSONAS: readonly Persona[] = [
         answer:
           "The data is for your business use, including use on behalf of clients. You can incorporate it into campaigns and deliverables. If you want to resell the raw data itself, reach out to discuss licensing.",
       },
+    ],
+    relatedBlogSlugs: [
+      "real-estate-marketing-strategies",
+      "real-estate-cold-email-templates",
+      "b2b-real-estate-marketing",
     ],
   },
   {
@@ -241,6 +262,11 @@ export const PERSONAS: readonly Persona[] = [
           "Lead with your differentiator — commission splits, technology, culture, or support. Keep the first email short and specific. Agents get recruited constantly, so generic \"join our team\" emails get ignored. Be specific about what makes your brokerage different.",
       },
     ],
+    relatedBlogSlugs: [
+      "how-to-build-realtor-email-list",
+      "real-estate-cold-email-templates",
+      "real-estate-agent-email-list-all-states",
+    ],
   },
   {
     slug: "lead-generation",
@@ -286,6 +312,11 @@ export const PERSONAS: readonly Persona[] = [
         answer:
           "Building and maintaining scrapers for 50 state licensing sites costs thousands in engineering time, plus ongoing maintenance as sites change. Our database gives you the same result for $99, verified and formatted, with regular updates.",
       },
+    ],
+    relatedBlogSlugs: [
+      "real-estate-contact-database-free-vs-paid",
+      "realtor-database-download-guide",
+      "find-real-estate-agent-email-addresses",
     ],
   },
 ] as const

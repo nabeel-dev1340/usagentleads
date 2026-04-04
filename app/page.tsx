@@ -10,7 +10,9 @@ import { Testimonials } from "@/components/home/Testimonials"
 import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
 import { FAQSection } from "@/components/home/FAQSection"
+import { LatestPosts } from "@/components/home/LatestPosts"
 import { getTotalCount } from "@/lib/supabase/server"
+import { getAllPosts } from "@/lib/blog"
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -79,6 +81,7 @@ const reviewSchema = {
 
 export default async function Home() {
   const totalCount = await getTotalCount()
+  const latestPosts = getAllPosts().slice(0, 3)
 
   return (
     <>
@@ -97,6 +100,7 @@ export default async function Home() {
       <ApiSection />
       <CompetitorComparison />
       <Testimonials />
+      <LatestPosts posts={latestPosts} />
       <DataSources />
       <StatsCTA />
       <FAQSection totalCount={totalCount} />

@@ -5,7 +5,7 @@ import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 import { SubscribeButton } from "@/components/checkout/SubscribeButton"
 import { getTotalCount } from "@/lib/supabase/server"
 import { formatAgentCount } from "@/lib/utils/states"
-import { generateBreadcrumbSchema } from "@/lib/utils/seo"
+import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 
 const pricingProductSchema = {
   "@context": "https://schema.org",
@@ -139,9 +139,9 @@ const pricingProductSchema = {
 }
 
 export const metadata: Metadata = {
-  title: "Pricing | Real Estate Agent Database from $10/State",
+  title: "Pricing — Real Estate Agent Database from $10/State",
   description:
-    "Get verified real estate agent contact data starting at $10 per state or $99 for all 50 states. 553K+ contacts with instant CSV delivery. No subscription required.",
+    "Realtor email lists from $10/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {
@@ -150,9 +150,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Pricing | Real Estate Agent Database from $10/State | USAgentLeads",
+    title: "Pricing — Real Estate Agent Database from $10/State",
     description:
-      "Get verified real estate agent contact data starting at $10 per state or $99 for all 50 states. 553K+ contacts with instant CSV delivery. No subscription required.",
+      "Realtor email lists from $10/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription.",
     url: "https://www.usagentleads.com/pricing",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
@@ -261,6 +261,39 @@ function renderCell(val: boolean | string) {
   return <span className="font-mono text-[14px] text-ink">{val}</span>
 }
 
+const pricingFAQs = [
+  {
+    question: "Is there a free trial or free sample?",
+    answer:
+      "Yes. You can download a free sample of 50 agent contacts before purchasing. For the Pro Dashboard and Pro API plans, we offer a 3-day free trial with full access.",
+  },
+  {
+    question: "Do I need to create an account to buy?",
+    answer:
+      "No. State packs and the full database are guest checkouts — just enter your email at checkout and we send the download link. The Pro Dashboard and Pro API plans require an email to create your account.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer:
+      "We accept all major credit cards (Visa, Mastercard, Amex) and PayPal through our payment processor, Lemon Squeezy. All transactions are SSL-encrypted.",
+  },
+  {
+    question: "Can I get a refund?",
+    answer:
+      "Yes. All purchases come with a 30-day money-back guarantee. If the data doesn't meet your expectations, contact us for a full refund — no questions asked.",
+  },
+  {
+    question: "How is the data delivered?",
+    answer:
+      "CSV purchases (State Pack and Full Database) are delivered instantly via email as a download link. Pro Dashboard and Pro API access is activated immediately after signup.",
+  },
+  {
+    question: "What's the difference between the Full Database and Pro Dashboard?",
+    answer:
+      "The Full Database ($99 one-time) gives you a single CSV download of all 553K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
+  },
+]
+
 export default async function PricingPage() {
   const totalCount = await getTotalCount()
   const plans = getPlans(totalCount)
@@ -269,12 +302,13 @@ export default async function PricingPage() {
     { name: "Home", url: "https://www.usagentleads.com" },
     { name: "Pricing", url: "https://www.usagentleads.com/pricing" },
   ])
+  const faqSchema = generateFAQSchema(pricingFAQs)
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([pricingProductSchema, breadcrumb]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([pricingProductSchema, breadcrumb, faqSchema]) }}
       />
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-28 max-sm:py-16 sm:px-6 lg:px-8">
@@ -405,6 +439,26 @@ export default async function PricingPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Pricing FAQ */}
+        <div className="mt-20 max-w-3xl mx-auto">
+          <h2 className="text-[22px] font-semibold text-ink text-center mb-8">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-4">
+            {pricingFAQs.map((faq) => (
+              <details key={faq.question} className="group card p-5">
+                <summary className="cursor-pointer text-[15px] font-semibold text-ink list-none flex items-center justify-between gap-3">
+                  {faq.question}
+                  <ChevronRight size={16} className="text-muted shrink-0 group-open:rotate-90 transition-transform" />
+                </summary>
+                <p className="text-[14px] text-body leading-[1.8] mt-3 pt-3 border-t border-border">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </div>

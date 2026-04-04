@@ -23,7 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${comp.title} | USAgentLeads`,
     description: comp.description.slice(0, 155) + "...",
-    keywords: comp.keywords,
     alternates: {
       canonical: `${BASE_URL}/compare/${slug}`,
       languages: { "en-US": `${BASE_URL}/compare/${slug}`, "x-default": `${BASE_URL}/compare/${slug}` },

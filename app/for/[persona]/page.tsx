@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { PERSONAS, getPersonaBySlug } from "@/lib/data/personas"
 import { TOTAL_AGENTS } from "@/lib/utils/states"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
+import { getPostBySlug } from "@/lib/blog"
 import { ChevronRight, Check, AlertCircle, ArrowRight } from "lucide-react"
 
 const BASE_URL = "https://www.usagentleads.com"
@@ -24,7 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${persona.title} | ${TOTAL_AGENTS.toLocaleString()}+ Contacts`,
     description: persona.description.slice(0, 155) + "...",
-    keywords: persona.keywords,
     alternates: {
       canonical: `${BASE_URL}/for/${slug}`,
       languages: { "en-US": `${BASE_URL}/for/${slug}`, "x-default": `${BASE_URL}/for/${slug}` },
@@ -179,20 +179,20 @@ export default async function PersonaPage({ params }: Props) {
                   Related Guides
                 </h2>
                 <div className="space-y-2">
-                  <Link
-                    href="/blog/how-to-build-realtor-email-list"
-                    className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
-                  >
-                    How to Build a Realtor Email List
-                    <ChevronRight size={14} />
-                  </Link>
-                  <Link
-                    href="/blog/real-estate-cold-email-templates"
-                    className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
-                  >
-                    Real Estate Cold Email Templates That Get Replies
-                    <ChevronRight size={14} />
-                  </Link>
+                  {persona.relatedBlogSlugs.map((slug) => {
+                    const post = getPostBySlug(slug)
+                    if (!post) return null
+                    return (
+                      <Link
+                        key={slug}
+                        href={`/blog/${slug}`}
+                        className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
+                      >
+                        {post.meta.title}
+                        <ChevronRight size={14} />
+                      </Link>
+                    )
+                  })}
                 </div>
               </section>
 

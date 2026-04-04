@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { GLOSSARY_TERMS, getTermBySlug } from "@/lib/data/glossary"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
+import { getPostBySlug } from "@/lib/blog"
 import { ChevronRight, ArrowRight } from "lucide-react"
 
 const BASE_URL = "https://www.usagentleads.com"
@@ -23,7 +24,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${term.title} | USAgentLeads Glossary`,
     description: term.definition.slice(0, 155) + "...",
-    keywords: term.keywords,
     alternates: {
       canonical: `${BASE_URL}/glossary/${slug}`,
       languages: { "en-US": `${BASE_URL}/glossary/${slug}`, "x-default": `${BASE_URL}/glossary/${slug}` },
@@ -223,6 +223,31 @@ export default async function GlossaryTermPage({ params }: Props) {
                       <span className="text-ink font-medium">{t.term}</span>
                     </Link>
                   ))}
+                </div>
+              </section>
+            )}
+
+            {/* Related articles */}
+            {term.relatedBlogSlugs && term.relatedBlogSlugs.length > 0 && (
+              <section className="mb-10">
+                <h2 className="text-[13px] font-mono uppercase tracking-wider text-tertiary mb-4">
+                  Related Articles
+                </h2>
+                <div className="space-y-2">
+                  {term.relatedBlogSlugs.map((blogSlug) => {
+                    const post = getPostBySlug(blogSlug)
+                    if (!post) return null
+                    return (
+                      <Link
+                        key={blogSlug}
+                        href={`/blog/${blogSlug}`}
+                        className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
+                      >
+                        {post.meta.title}
+                        <ChevronRight size={14} />
+                      </Link>
+                    )
+                  })}
                 </div>
               </section>
             )}

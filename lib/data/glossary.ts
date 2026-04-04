@@ -6,6 +6,7 @@ export interface GlossaryTerm {
   body: string
   relatedTerms: string[]
   keywords: string[]
+  relatedBlogSlugs?: string[]
 }
 
 export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
@@ -28,6 +29,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **How this connects to USAgentLeads:** Our agent database includes contacts for agents registered across all US MLSs. When you buy a state pack, you're getting the licensed agents who participate in that state's MLS systems.`,
     relatedTerms: ["idx", "nar", "realtor-vs-real-estate-agent", "brokerage"],
     keywords: ["what is MLS", "multiple listing service", "MLS real estate", "MLS explained", "how MLS works"],
+    relatedBlogSlugs: ["find-real-estate-agent-email-addresses", "real-estate-agent-email-list-all-states"],
   },
   {
     slug: "idx",
@@ -52,6 +54,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **Changes ahead:** The NAR settlement is driving changes to how listing data is shared and displayed. IDX vendors and agents are adapting to new rules around commission transparency and data access.`,
     relatedTerms: ["mls", "brokerage", "crm-real-estate"],
     keywords: ["what is IDX", "IDX real estate", "Internet Data Exchange", "IDX explained", "IDX vs MLS"],
+    relatedBlogSlugs: ["proptech-sales-sell-software-real-estate-agents", "best-crm-for-real-estate-agents"],
   },
   {
     slug: "nar",
@@ -73,6 +76,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **Why this matters for agent outreach:** NAR membership data, combined with state licensing records, forms the backbone of agent contact databases. With 1.5 million+ members, NAR's membership directory is one of the largest sources of agent professional information. Our database pulls from state licensing authorities to ensure coverage of all licensed agents, not just NAR members.`,
     relatedTerms: ["mls", "realtor-vs-real-estate-agent", "brokerage"],
     keywords: ["what is NAR", "National Association of Realtors", "NAR explained", "NAR membership", "NAR settlement"],
+    relatedBlogSlugs: ["real-estate-agent-email-list-all-states", "cold-outreach-realtors-compliance"],
   },
   {
     slug: "realtor-vs-real-estate-agent",
@@ -104,6 +108,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 - **Salesperson/Sales Agent:** An entry-level licensee who must work under a broker`,
     relatedTerms: ["nar", "brokerage", "mls"],
     keywords: ["realtor vs real estate agent", "difference between realtor and agent", "what is a realtor", "realtor meaning", "are all agents realtors"],
+    relatedBlogSlugs: ["how-to-build-realtor-email-list", "real-estate-agent-email-list-all-states"],
   },
   {
     slug: "brokerage",
@@ -129,6 +134,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **Brokerage consolidation trend:** The industry is consolidating. Compass acquired several regional firms. eXp and Real Broker grew rapidly with remote-first, high-split models. This competition makes agent recruitment data more valuable than ever.`,
     relatedTerms: ["nar", "realtor-vs-real-estate-agent", "commission-split"],
     keywords: ["what is a real estate brokerage", "real estate brokerage explained", "how brokerages work", "real estate broker vs agent", "brokerage models"],
+    relatedBlogSlugs: ["how-to-build-realtor-email-list", "real-estate-agent-email-list-all-states"],
   },
   {
     slug: "commission-split",
@@ -155,6 +161,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **Why this matters for businesses selling to agents:** Understanding commission pressure helps you position your product. Agents feeling squeezed on commissions are more receptive to tools that help them generate leads, close more deals, or reduce costs.`,
     relatedTerms: ["brokerage", "nar", "realtor-vs-real-estate-agent"],
     keywords: ["real estate commission split", "agent commission split explained", "how do commission splits work", "brokerage commission structure", "real estate agent pay"],
+    relatedBlogSlugs: ["real-estate-marketing-strategies", "proptech-sales-sell-software-real-estate-agents"],
   },
   {
     slug: "crm-real-estate",
@@ -185,6 +192,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **How agents typically adopt CRMs:** Most agents choose a CRM based on their brokerage's recommendation, peer reviews, or direct outreach from vendors. Cold email introducing a CRM — especially with a free trial offer — is one of the highest-converting approaches for CRM sales teams.`,
     relatedTerms: ["idx", "mls", "brokerage"],
     keywords: ["real estate CRM", "what is a real estate CRM", "CRM for realtors", "best real estate CRM", "agent CRM software"],
+    relatedBlogSlugs: ["best-crm-for-real-estate-agents", "import-real-estate-contacts-hubspot"],
   },
   {
     slug: "cold-email",
@@ -222,6 +230,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **How USAgentLeads fits in:** Our database provides the contact data you need to run cold email campaigns to agents. Buy a state pack for $10 or the full database for $99, import the CSV into your email tool, and start sending.`,
     relatedTerms: ["crm-real-estate", "can-spam"],
     keywords: ["cold email real estate agents", "cold email to realtors", "email outreach real estate", "how to cold email agents", "real estate cold email"],
+    relatedBlogSlugs: ["real-estate-cold-email-templates", "cold-outreach-realtors-compliance"],
   },
   {
     slug: "can-spam",
@@ -253,6 +262,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 - Don't email anyone who has unsubscribed`,
     relatedTerms: ["cold-email", "crm-real-estate"],
     keywords: ["CAN-SPAM Act", "CAN-SPAM compliance", "email marketing laws", "can you buy email lists legally", "CAN-SPAM requirements"],
+    relatedBlogSlugs: ["cold-outreach-realtors-compliance", "real-estate-cold-email-templates"],
   },
   {
     slug: "real-estate-lead",
@@ -292,6 +302,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 **How USAgentLeads provides leads:** Our database gives you the raw contact data for licensed agents. It's up to you to turn contacts into leads through relevant outreach, and leads into customers through your sales process.`,
     relatedTerms: ["cold-email", "crm-real-estate", "mls"],
     keywords: ["real estate lead", "what is a real estate lead", "real estate lead generation", "agent leads", "how to get real estate leads"],
+    relatedBlogSlugs: ["find-real-estate-agent-email-addresses", "real-estate-marketing-strategies"],
   },
   {
     slug: "email-list",
@@ -333,6 +344,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 - Transparent about data sources and methodology`,
     relatedTerms: ["cold-email", "can-spam", "real-estate-lead"],
     keywords: ["real estate agent email list", "realtor email list", "buy agent email list", "real estate email database", "agent mailing list"],
+    relatedBlogSlugs: ["how-to-build-realtor-email-list", "real-estate-agent-mailing-list-guide"],
   },
   {
     slug: "csv",
@@ -370,6 +382,7 @@ Sarah Chen,sarah@example.com,(512) 447-9801,Texas
 **Alternatives to CSV:** Some providers use Excel (.xlsx), JSON, or API access. CSV remains the most portable and widely supported format.`,
     relatedTerms: ["email-list", "crm-real-estate"],
     keywords: ["CSV file", "CSV real estate data", "what is CSV", "CSV import CRM", "CSV contact list"],
+    relatedBlogSlugs: ["realtor-database-download-guide", "import-real-estate-contacts-hubspot"],
   },
 ] as const
 
