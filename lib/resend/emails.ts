@@ -319,6 +319,44 @@ export async function sendSubscriptionRenewed({
   })
 }
 
+// ── Contact form email ──────────────────────────────────────────────
+
+interface SendContactEmailParams {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+export async function sendContactEmail({
+  name,
+  email,
+  subject,
+  message,
+}: SendContactEmailParams) {
+  const body = `
+    <p style="margin: 0 0 16px 0; font-size: 15px;">New contact form submission:</p>
+
+    ${infoBox(`
+      <table style="width: 100%; font-size: 14px; color: #334155;">
+        <tr><td style="padding: 4px 0; font-weight: 600; width: 80px;">Name</td><td style="padding: 4px 0;">${escapeHtml(name)}</td></tr>
+        <tr><td style="padding: 4px 0; font-weight: 600;">Email</td><td style="padding: 4px 0;">${escapeHtml(email)}</td></tr>
+        <tr><td style="padding: 4px 0; font-weight: 600;">Subject</td><td style="padding: 4px 0;">${escapeHtml(subject || "Not specified")}</td></tr>
+      </table>
+    `)}
+
+    <p style="margin: 16px 0 8px 0; font-weight: 600; font-size: 14px;">Message:</p>
+    <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">${escapeHtml(message)}</p>`
+
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to: "support@beelodev.com",
+    replyTo: email,
+    subject: `Contact Form: ${subject || "New Message"} — ${name}`,
+    html: emailLayout(body),
+  })
+}
+
 // ── Payment failed email ─────────────────────────────────────────────
 
 interface SendPaymentFailedParams {

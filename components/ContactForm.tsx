@@ -14,19 +14,41 @@ const subjectOptions = [
 
 export function ContactForm() {
   const [subject, setSubject] = useState("")
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle")
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus("sending")
+
+    try {
+      const formData = new FormData(e.currentTarget)
+      const res = await fetch("/api/contact", { method: "POST", body: formData })
+
+      if (!res.ok) throw new Error()
+      setStatus("sent")
+    } catch {
+      setStatus("error")
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="text-center py-12">
+        <div className="w-12 h-12 rounded-full bg-green-100 border border-green-200 flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-[18px] font-semibold text-ink mb-1">Message Sent</h3>
+        <p className="text-[14px] text-tertiary">We typically respond within 24 hours.</p>
+      </div>
+    )
+  }
 
   return (
-    <form
-      action="https://formsubmit.co/support@beelodev.com"
-      method="POST"
-      className="space-y-5"
-    >
+    <form onSubmit={handleSubmit} className="space-y-5">
       {/* Honeypot */}
       <input type="text" name="_honey" className="hidden" />
-      {/* Disable captcha page */}
-      <input type="hidden" name="_captcha" value="false" />
-      {/* Redirect back */}
-      <input type="hidden" name="_next" value="https://www.usagentleads.com/contact?sent=true" />
       {/* Hidden input to submit CustomSelect value */}
       <input type="hidden" name="subject" value={subject} />
 
@@ -86,8 +108,16 @@ export function ContactForm() {
         />
       </div>
 
-      <button type="submit" className="btn-primary w-full justify-center text-[15px]">
-        Send Message
+      {status === "error" && (
+        <p className="text-[14px] text-red-600">Something went wrong. Please try again or email us directly.</p>
+      )}
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="btn-primary w-full justify-center text-[15px]"
+      >
+        {status === "sending" ? "Sending..." : "Send Message"}
       </button>
     </form>
   )

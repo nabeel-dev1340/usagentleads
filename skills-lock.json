@@ -66,6 +66,11 @@
       "sourceType": "github",
       "computedHash": "c7bd8bf067e761f4a8f4c17b907bacce7d8915391491b7c9b29ff70166bc6628"
     },
+    "humanizer-zh": {
+      "source": "op7418/humanizer-zh",
+      "sourceType": "github",
+      "computedHash": "7bd195e3bcdcc24f078dfd4e3b3e37e8ac321c36f410a41241fc4175eab1825a"
+    },
     "normalize": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
@@ -91,10 +96,20 @@
       "sourceType": "github",
       "computedHash": "ff757399bae6ac3a3de92ad34deec6ac18bc778633320522bf09031df6a6a8b7"
     },
+    "programmatic-seo": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "computedHash": "40b8fe29a6c9cb0606e6fa77aff227cf275e3808adf66e5ef69e02dcf60a7303"
+    },
     "quieter": {
       "source": "pbakaus/impeccable",
       "sourceType": "github",
       "computedHash": "5a19677046d48f1cca67175ad336308e8e2744d1a4d1ab0a2760338855fa2f1e"
+    },
+    "seo-audit": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "computedHash": "ec3109d213dde1747614ad1112ef0e498e04b24e464538968e156dfbfadb2121"
     },
     "teach-impeccable": {
       "source": "pbakaus/impeccable",
