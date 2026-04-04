@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const { success } = rateLimit(`api-keys-usage:${user.id}`, 10)
+  const { success } = await rateLimit(`api-keys-usage:${user.id}`, 10)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }

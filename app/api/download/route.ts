@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
 
-  const { success } = rateLimit(`download:${ip}`, 10)
+  const { success } = await rateLimit(`download:${ip}`, 10)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }

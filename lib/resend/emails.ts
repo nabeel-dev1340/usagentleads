@@ -348,11 +348,17 @@ export async function sendContactEmail({
     <p style="margin: 16px 0 8px 0; font-weight: 600; font-size: 14px;">Message:</p>
     <p style="margin: 0; font-size: 15px; white-space: pre-wrap;">${escapeHtml(message)}</p>`
 
+  // Sanitize subject line inputs: strip control chars, truncate
+  const safeName = name.replace(/[\r\n\t]/g, "").slice(0, 100)
+  const safeSubject = (subject || "New Message").replace(/[\r\n\t]/g, "").slice(0, 200)
+  // Validate replyTo is a plausible email before using it
+  const safeReplyTo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : undefined
+
   await resend.emails.send({
     from: FROM_EMAIL,
     to: "support@beelodev.com",
-    replyTo: email,
-    subject: `Contact Form: ${subject || "New Message"} — ${name}`,
+    ...(safeReplyTo ? { replyTo: safeReplyTo } : {}),
+    subject: `Contact Form: ${safeSubject} — ${safeName}`,
     html: emailLayout(body),
   })
 }

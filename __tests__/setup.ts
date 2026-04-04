@@ -1,5 +1,24 @@
 import { vi } from "vitest"
 
+// Mock Upstash Redis + Ratelimit (used by rateLimit utility)
+vi.mock("@upstash/redis", () => ({
+  Redis: class MockRedis {
+    constructor() {}
+  },
+}))
+
+vi.mock("@upstash/ratelimit", () => {
+  class MockRatelimit {
+    async limit() {
+      return { success: true, remaining: 99 }
+    }
+    static slidingWindow(maxRequests: number) {
+      return { maxRequests }
+    }
+  }
+  return { Ratelimit: MockRatelimit }
+})
+
 // Mock next/server
 vi.mock("next/server", () => {
   class MockNextResponse {

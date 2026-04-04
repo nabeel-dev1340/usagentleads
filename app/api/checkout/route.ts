@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   try {
     const ip =
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-    const { success } = rateLimit(`checkout:${ip}`, 10)
+    const { success } = await rateLimit(`checkout:${ip}`, 10)
     if (!success) {
       return NextResponse.json({ error: "Too many requests" }, { status: 429 })
     }
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
     const message = error instanceof Error ? error.message : String(error)
     console.error("Checkout error:", message)
     return NextResponse.json(
-      { error: "Failed to create checkout", detail: message },
+      { error: "Failed to create checkout" },
       { status: 500 }
     )
   }

@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
 
   // Dual-layer rate limiting: per IP and per email
-  const { success: ipOk } = rateLimit(`magic-link-ip:${ip}`, 5, 60000)
+  const { success: ipOk } = await rateLimit(`magic-link-ip:${ip}`, 5, 60000)
   if (!ipOk) {
     // Always return success to prevent email enumeration
     return NextResponse.json({ success: true })
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true })
   }
 
-  const { success: emailOk } = rateLimit(`magic-link-email:${email}`, 3, 60000)
+  const { success: emailOk } = await rateLimit(`magic-link-email:${email}`, 3, 60000)
   if (!emailOk) {
     return NextResponse.json({ success: true })
   }

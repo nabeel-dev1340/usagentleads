@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createServiceClient } from "@/lib/supabase/server"
 import { sendFreeSampleEmail } from "@/lib/resend/emails"
-import { escapeHtml } from "@/lib/utils/security"
 import { rateLimit } from "@/lib/utils/rateLimit"
 
 export async function POST(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
 
   // Rate limit: 3 requests per IP per minute
-  const { success } = rateLimit(`free-sample:${ip}`, 3, 60_000)
+  const { success } = await rateLimit(`free-sample:${ip}`, 3, 60_000)
   if (!success) {
     return NextResponse.json(
       { error: "Too many requests. Please try again later." },
@@ -21,6 +20,13 @@ export async function POST(request: NextRequest) {
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 })
+  }
+
+  // Per-email rate limit: 1 request per email per 24 hours
+  const { success: emailOk } = await rateLimit(`free-sample-email:${email}`, 1, 24 * 60 * 60 * 1000)
+  if (!emailOk) {
+    // Return success to avoid revealing whether email was already used
+    return NextResponse.json({ success: true })
   }
 
   try {
@@ -37,7 +43,7 @@ export async function POST(request: NextRequest) {
     }
 
     await sendFreeSampleEmail({
-      to: escapeHtml(email),
+      to: email,
       downloadUrl: signedUrlData.signedUrl,
     })
 

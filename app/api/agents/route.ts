@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   }
 
   // Rate limit per user
-  const { success } = rateLimit(`agents:${user.id}`, 30)
+  const { success } = await rateLimit(`agents:${user.id}`, 30)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }

@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   const { userId, apiKeyId, onTrial } = authResult
 
   // Per-minute rate limit
-  const { success, remaining } = rateLimit(`api-v1:${apiKeyId}`, 60)
+  const { success, remaining } = await rateLimit(`api-v1:${apiKeyId}`, 60)
   if (!success) {
     return NextResponse.json(
       { error: "Rate limit exceeded. Max 60 requests per minute." },

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { createClient, createServiceClient } from "@/lib/supabase/server"
 import { rateLimit } from "@/lib/utils/rateLimit"
+import { isValidUUID } from "@/lib/utils/security"
 import { z } from "zod"
 
 const db = () => createServiceClient().schema("usagentleads")
@@ -23,12 +24,15 @@ export async function DELETE(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const { success } = rateLimit(`api-keys-revoke:${user.id}`, 10)
+  const { success } = await rateLimit(`api-keys-revoke:${user.id}`, 10)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }
 
   const { id } = await params
+  if (!isValidUUID(id)) {
+    return NextResponse.json({ error: "Invalid key ID" }, { status: 400 })
+  }
 
   // Verify ownership and revoke
   const { data, error } = await db()
@@ -61,12 +65,15 @@ export async function PATCH(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const { success } = rateLimit(`api-keys-rename:${user.id}`, 10)
+  const { success } = await rateLimit(`api-keys-rename:${user.id}`, 10)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }
 
   const { id } = await params
+  if (!isValidUUID(id)) {
+    return NextResponse.json({ error: "Invalid key ID" }, { status: 400 })
+  }
 
   let body
   try {

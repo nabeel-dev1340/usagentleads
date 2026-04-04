@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const { success } = rateLimit(`sub-get:${user.id}`, 30)
+  const { success } = await rateLimit(`sub-get:${user.id}`, 30)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }
@@ -35,7 +35,7 @@ export async function GET(request: Request) {
 export async function DELETE(request: Request) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-  const { success } = rateLimit(`sub-cancel:${ip}`, 5)
+  const { success } = await rateLimit(`sub-cancel:${ip}`, 5)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }
@@ -115,7 +115,7 @@ export async function DELETE(request: Request) {
 export async function PATCH(request: Request) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-  const { success } = rateLimit(`sub-resume:${ip}`, 5)
+  const { success } = await rateLimit(`sub-resume:${ip}`, 5)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }

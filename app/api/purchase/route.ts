@@ -9,7 +9,7 @@ const db = () => createServiceClient().schema("usagentleads")
 export async function GET(request: NextRequest) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-  const { success } = rateLimit(`purchase-lookup:${ip}`, 10)
+  const { success } = await rateLimit(`purchase-lookup:${ip}`, 10)
   if (!success) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }

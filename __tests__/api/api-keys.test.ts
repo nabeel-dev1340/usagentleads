@@ -1,5 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
 
+const VALID_UUID = "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
+const VALID_UUID_2 = "b1ffcd00-0d1c-5fg9-cc7e-7ccace491b22"
+
 describe("API Key Management Routes", () => {
   let mockQuery: Record<string, ReturnType<typeof vi.fn>>
   let mockAuthClient: { auth: { getUser: ReturnType<typeof vi.fn> } }
@@ -151,8 +154,8 @@ describe("API Key Management Routes", () => {
 
       const { DELETE } = await import("@/app/api/api-keys/[id]/route")
       const res = await DELETE(
-        new Request("https://example.com/api/api-keys/some-id", { method: "DELETE" }),
-        { params: Promise.resolve({ id: "some-id" }) }
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, { method: "DELETE" }),
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.error).toBe("Unauthorized")
@@ -163,20 +166,20 @@ describe("API Key Management Routes", () => {
 
       const { DELETE } = await import("@/app/api/api-keys/[id]/route")
       const res = await DELETE(
-        new Request("https://example.com/api/api-keys/bad-id", { method: "DELETE" }),
-        { params: Promise.resolve({ id: "bad-id" }) }
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, { method: "DELETE" }),
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.error).toBe("API key not found")
     })
 
     it("successfully revokes an owned key", async () => {
-      mockQuery.single.mockResolvedValueOnce({ data: { id: "k1" }, error: null })
+      mockQuery.single.mockResolvedValueOnce({ data: { id: VALID_UUID }, error: null })
 
       const { DELETE } = await import("@/app/api/api-keys/[id]/route")
       const res = await DELETE(
-        new Request("https://example.com/api/api-keys/k1", { method: "DELETE" }),
-        { params: Promise.resolve({ id: "k1" }) }
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, { method: "DELETE" }),
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.message).toBe("API key revoked")
@@ -189,12 +192,12 @@ describe("API Key Management Routes", () => {
 
       const { PATCH } = await import("@/app/api/api-keys/[id]/route")
       const res = await PATCH(
-        new Request("https://example.com/api/api-keys/k1", {
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: "New Name" }),
         }),
-        { params: Promise.resolve({ id: "k1" }) }
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.error).toBe("Unauthorized")
@@ -203,12 +206,12 @@ describe("API Key Management Routes", () => {
     it("returns 400 for invalid name", async () => {
       const { PATCH } = await import("@/app/api/api-keys/[id]/route")
       const res = await PATCH(
-        new Request("https://example.com/api/api-keys/k1", {
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: "" }),
         }),
-        { params: Promise.resolve({ id: "k1" }) }
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.error).toBe("Invalid name")
@@ -217,12 +220,12 @@ describe("API Key Management Routes", () => {
     it("returns 400 for name longer than 50 chars", async () => {
       const { PATCH } = await import("@/app/api/api-keys/[id]/route")
       const res = await PATCH(
-        new Request("https://example.com/api/api-keys/k1", {
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: "x".repeat(51) }),
         }),
-        { params: Promise.resolve({ id: "k1" }) }
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.error).toBe("Invalid name")
@@ -230,18 +233,18 @@ describe("API Key Management Routes", () => {
 
     it("renames an owned key", async () => {
       mockQuery.single.mockResolvedValueOnce({
-        data: { id: "k1", name: "Renamed", key_prefix: "sk_live_ab", created_at: "2026-01-01" },
+        data: { id: VALID_UUID, name: "Renamed", key_prefix: "sk_live_ab", created_at: "2026-01-01" },
         error: null,
       })
 
       const { PATCH } = await import("@/app/api/api-keys/[id]/route")
       const res = await PATCH(
-        new Request("https://example.com/api/api-keys/k1", {
+        new Request(`https://example.com/api/api-keys/${VALID_UUID}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name: "Renamed" }),
         }),
-        { params: Promise.resolve({ id: "k1" }) }
+        { params: Promise.resolve({ id: VALID_UUID }) }
       )
       const json = await res.json()
       expect(json.name).toBe("Renamed")
