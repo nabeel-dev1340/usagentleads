@@ -309,14 +309,14 @@ export default function ApiKeysPage() {
           <div className="px-5 pb-5 space-y-4">
             <div>
               <p className="text-[13px] font-medium text-body mb-2">cURL</p>
-              <pre className="bg-ink text-white text-[13px] p-4 rounded-lg overflow-x-auto font-mono leading-relaxed">
+              <pre className="bg-ink text-white text-[12px] sm:text-[13px] p-4 rounded-lg overflow-x-auto font-mono leading-relaxed whitespace-pre-wrap break-all sm:break-normal">
 {`curl -H "X-API-Key: YOUR_API_KEY" \\
   "https://usagentleads.com/api/v1/agents?state=CA&page=1&pageSize=25"`}
               </pre>
             </div>
             <div>
               <p className="text-[13px] font-medium text-body mb-2">JavaScript</p>
-              <pre className="bg-ink text-white text-[13px] p-4 rounded-lg overflow-x-auto font-mono leading-relaxed">
+              <pre className="bg-ink text-white text-[12px] sm:text-[13px] p-4 rounded-lg overflow-x-auto font-mono leading-relaxed whitespace-pre-wrap break-all sm:break-normal">
 {`const res = await fetch(
   "https://usagentleads.com/api/v1/agents?state=CA",
   { headers: { "X-API-Key": "YOUR_API_KEY" } }

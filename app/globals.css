@@ -95,6 +95,7 @@ html, body {
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* ---- Scrollbar ---- */
@@ -283,8 +284,9 @@ html, body {
     @apply font-mono text-[14px] bg-subtle text-accent px-1.5 py-0.5 rounded;
   }
   .prose pre {
-    @apply bg-ink text-code-text rounded-xl p-5 overflow-x-auto my-8
-           font-mono text-[14px] leading-relaxed shadow-md;
+    @apply bg-ink text-code-text rounded-xl p-4 sm:p-5 overflow-x-auto my-8
+           font-mono text-[13px] sm:text-[14px] leading-relaxed shadow-md
+           whitespace-pre-wrap break-all sm:break-normal;
   }
   .prose pre code {
     @apply bg-transparent text-inherit p-0 rounded-none;

@@ -62,7 +62,7 @@ function CodeBlock({
           )}
         </div>
       )}
-      <pre className="p-4 sm:p-5 text-[13px] font-mono text-code-text leading-relaxed overflow-x-auto">
+      <pre className="p-4 sm:p-5 text-[12px] sm:text-[13px] font-mono text-code-text leading-relaxed overflow-x-auto whitespace-pre-wrap break-all sm:break-normal">
         {children}
       </pre>
     </div>

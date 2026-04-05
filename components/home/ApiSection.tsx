@@ -89,7 +89,7 @@ export function ApiSection() {
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto items-start">
           {/* Code example */}
-          <div className="reveal">
+          <div className="reveal min-w-0">
             <div className="rounded-xl bg-ink overflow-hidden shadow-xl">
               {/* Tab bar */}
               <div className="flex items-center justify-between border-b border-dark-border px-4">
@@ -129,7 +129,7 @@ export function ApiSection() {
                 </button>
               </div>
               {/* Code */}
-              <pre id="code-tabpanel" role="tabpanel" aria-label={`${codeExamples[lang].label} code example`} className="p-5 text-[13px] font-mono text-code-text leading-relaxed overflow-x-auto whitespace-pre-wrap">
+              <pre id="code-tabpanel" role="tabpanel" aria-label={`${codeExamples[lang].label} code example`} className="p-4 sm:p-5 text-[12px] sm:text-[13px] font-mono text-code-text leading-relaxed overflow-x-auto whitespace-pre-wrap break-all sm:break-normal">
                 {codeExamples[lang].code}
               </pre>
               {/* Response preview */}
@@ -137,7 +137,7 @@ export function ApiSection() {
                 <p className="text-[11px] font-mono uppercase tracking-wider text-tertiary mb-2">
                   Response
                 </p>
-                <pre className="text-[12px] font-mono text-muted leading-relaxed">{`{
+                <pre className="text-[11px] sm:text-[12px] font-mono text-muted leading-relaxed overflow-x-auto whitespace-pre-wrap break-all sm:break-normal">{`{
   "data": [
     { "name": "Jane Smith", "email": "jane@...", "phone": "(310) 555-...", "state": "California" }
   ],
