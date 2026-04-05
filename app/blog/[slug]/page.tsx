@@ -88,12 +88,12 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="bg-page min-h-screen">
         {/* Breadcrumb — full width */}
         <div className="mx-auto max-w-[720px] px-4 sm:px-6">
-          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Home</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <Link href="/blog" className="hover:text-ink transition-colors">Blog</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <span className="text-ink font-medium line-clamp-1">{meta.title}</span>
+          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6 overflow-hidden">
+            <Link href="/" className="hover:text-ink transition-colors shrink-0">Home</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <Link href="/blog" className="hover:text-ink transition-colors shrink-0">Blog</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <span className="text-ink font-medium truncate">{meta.title}</span>
           </nav>
         </div>
 
@@ -113,14 +113,14 @@ export default async function BlogPostPage({ params }: Props) {
           </p>
 
           {/* Author & date bar */}
-          <div className="flex items-center gap-3 text-[14px] font-mono text-muted border-t border-b border-border py-4 mt-6">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] sm:text-[14px] font-mono text-muted border-t border-b border-border py-4 mt-6">
             <Link
               href={`/blog/author/${meta.author.toLowerCase().replace(/\s+/g, "-")}`}
               className="hover:text-ink transition-colors"
             >
               {meta.author}
             </Link>
-            <span>&middot;</span>
+            <span className="hidden sm:inline">&middot;</span>
             <time dateTime={meta.date}>
               {new Date(meta.date).toLocaleDateString("en-US", {
                 month: "long",
@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: Props) {
                 year: "numeric",
               })}
             </time>
-            <span>&middot;</span>
+            <span className="hidden sm:inline">&middot;</span>
             <span>{meta.readingTime}</span>
           </div>
 

@@ -135,7 +135,10 @@ export function AgentTable({
             </button>
           </div>
 
-          <div className="flex items-center gap-3 order-1 sm:order-2">
+          <div className="flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto order-1 sm:order-2">
+            <span className="font-mono text-[13px] sm:text-[14px] text-tertiary sm:hidden">
+              Page {page}/{totalPages.toLocaleString()}
+            </span>
             <span className="hidden sm:inline font-mono text-[14px] text-tertiary">
               Page <span className="text-ink">{page}</span> of <span className="text-ink">{totalPages.toLocaleString()}</span>
             </span>
@@ -144,7 +147,7 @@ export function AgentTable({
               options={PAGE_SIZE_OPTIONS}
               onChange={(v) => onPageSizeChange(Number(v))}
               aria-label="Rows per page"
-              minWidth={130}
+              minWidth={120}
             />
           </div>
 

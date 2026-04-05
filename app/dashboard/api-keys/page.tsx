@@ -177,7 +177,7 @@ export default function ApiKeysPage() {
 
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-[22px] font-semibold text-ink">API Keys</h1>
           <p className="text-[15px] text-body mt-1">
@@ -190,7 +190,7 @@ export default function ApiKeysPage() {
             setCreatedKey(null)
           }}
           disabled={activeKeys.length >= 3}
-          className="btn-primary inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn-primary inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto justify-center sm:justify-start shrink-0"
         >
           <Plus size={14} />
           New Key

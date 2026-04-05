@@ -167,7 +167,7 @@ export default function DocsPage() {
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-28 max-sm:py-16 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-[14px] text-tertiary mb-10 -mt-12">
+        <nav className="flex items-center gap-2 text-[14px] text-tertiary mb-10 -mt-6 sm:-mt-12">
           <Link href="/" className="hover:text-ink transition-colors">Home</Link>
           <ChevronRight size={14} className="text-muted" />
           <span className="text-ink font-medium">API Docs</span>
@@ -203,6 +203,25 @@ export default function DocsPage() {
             </div>
           </div>
         </div>
+
+        {/* Mobile TOC */}
+        <details className="lg:hidden mb-8 card p-4">
+          <summary className="cursor-pointer text-[14px] font-medium text-ink flex items-center justify-between">
+            On this page
+            <ChevronRight size={16} className="text-muted" />
+          </summary>
+          <nav className="mt-3 pt-3 border-t border-border grid grid-cols-2 gap-1">
+            {tocItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="text-[14px] text-tertiary hover:text-ink transition-colors py-1.5"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </details>
 
         <div className="flex gap-12">
           {/* TOC sidebar — desktop only */}
@@ -308,8 +327,8 @@ export default function DocsPage() {
             </div>
 
             <SectionAnchorH3 id="query-params">Query Parameters</SectionAnchorH3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+              <table className="w-full text-left min-w-[500px]">
                 <thead>
                   <tr className="border-b-2 border-border">
                     <th className="pb-2 text-[12px] font-mono uppercase tracking-wider text-muted">
@@ -381,8 +400,8 @@ export default function DocsPage() {
 }`}</CodeBlock>
 
             <SectionAnchorH3 id="response-fields">Response Fields</SectionAnchorH3>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+              <table className="w-full text-left min-w-[440px]">
                 <thead>
                   <tr className="border-b-2 border-border">
                     <th className="pb-2 text-[12px] font-mono uppercase tracking-wider text-muted">
@@ -448,8 +467,8 @@ export default function DocsPage() {
               The API enforces a per-key rate limit of <strong>60 requests per minute</strong>.
               Rate limit status is returned in response headers:
             </p>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left mb-4">
+            <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+              <table className="w-full text-left mb-4 min-w-[440px]">
                 <thead>
                   <tr className="border-b-2 border-border">
                     <th className="pb-2 text-[12px] font-mono uppercase tracking-wider text-muted">

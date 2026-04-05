@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-7xl px-4 pt-16 pb-10 sm:px-6 lg:px-8">
         {/* Top columns */}
-        <div className="grid gap-8 sm:gap-10 grid-cols-2 md:grid-cols-4">
+        <div className="grid gap-8 sm:gap-10 grid-cols-1 min-[400px]:grid-cols-2 md:grid-cols-4">
           {/* Brand */}
           <div>
             <Link href="/" className="mb-4 flex items-center gap-2 text-[19px] font-semibold tracking-tight w-fit">

@@ -42,15 +42,18 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
 
         {/* Subheadline */}
         <p className="hero-sub text-[14px] sm:text-[18px] text-tertiary mt-6 leading-relaxed">
-          <span className="text-ink font-medium">Name</span>
-          <span className="text-accent mx-2 font-bold">&middot;</span>
-          <span className="text-ink font-medium">Email</span>
-          <span className="text-accent mx-2 font-bold">&middot;</span>
-          <span className="text-ink font-medium">Phone</span>
-          <span className="text-accent mx-2 font-bold">&middot;</span>
-          <span className="text-ink font-medium">State</span>
-          <span className="text-muted mx-3">&mdash;</span>
-          Clean CSV. Instant delivery. No account needed.
+          <span className="inline-flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2">
+            <span className="text-ink font-medium">Name</span>
+            <span className="text-accent font-bold">&middot;</span>
+            <span className="text-ink font-medium">Email</span>
+            <span className="text-accent font-bold">&middot;</span>
+            <span className="text-ink font-medium">Phone</span>
+            <span className="text-accent font-bold">&middot;</span>
+            <span className="text-ink font-medium">State</span>
+          </span>
+          <br className="sm:hidden" />
+          <span className="text-muted mx-1 sm:mx-3 hidden sm:inline">&mdash;</span>
+          <span className="block sm:inline mt-1 sm:mt-0">Clean CSV. Instant delivery. No account needed.</span>
         </p>
 
         {/* CTAs */}
@@ -104,10 +107,10 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
           </table>
 
           {/* Footer */}
-          <div className="flex items-center justify-between px-5 py-3 bg-accent-light border-t border-accent-mid">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-4 sm:px-5 py-3 bg-accent-light border-t border-accent-mid">
             <div className="flex items-center gap-2">
               <Lock size={14} className="text-accent" />
-              <span className="text-[14px] text-accent font-medium">
+              <span className="text-[13px] sm:text-[14px] text-accent font-medium">
                 First 500 records free
               </span>
             </div>

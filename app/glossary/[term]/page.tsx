@@ -83,12 +83,12 @@ export default async function GlossaryTermPage({ params }: Props) {
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Home</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <Link href="/glossary" className="hover:text-ink transition-colors">Glossary</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <span className="text-ink font-medium">{term.term}</span>
+          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6 overflow-hidden">
+            <Link href="/" className="hover:text-ink transition-colors shrink-0">Home</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <Link href="/glossary" className="hover:text-ink transition-colors shrink-0">Glossary</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <span className="text-ink font-medium truncate">{term.term}</span>
           </nav>
 
           <div className="max-w-3xl pb-20">

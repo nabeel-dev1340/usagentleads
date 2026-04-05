@@ -313,7 +313,7 @@ export default async function PricingPage() {
     <div className="bg-white min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-28 max-sm:py-16 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-[14px] text-tertiary mb-10 -mt-12">
+        <nav className="flex items-center gap-2 text-[14px] text-tertiary mb-10 -mt-6 sm:-mt-12">
           <Link href="/" className="hover:text-ink transition-colors">Home</Link>
           <ChevronRight size={14} className="text-muted" />
           <span className="text-ink font-medium">Pricing</span>

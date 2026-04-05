@@ -88,12 +88,12 @@ export default async function StatePage({ params }: Props) {
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Home</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <Link href="/states" className="hover:text-ink transition-colors">States</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <span className="text-ink font-medium">{state.name}</span>
+          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6 overflow-hidden">
+            <Link href="/" className="hover:text-ink transition-colors shrink-0">Home</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <Link href="/states" className="hover:text-ink transition-colors shrink-0">States</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <span className="text-ink font-medium truncate">{state.name}</span>
           </nav>
 
           {/* Two-column layout */}
@@ -138,9 +138,9 @@ export default async function StatePage({ params }: Props) {
                   { value: totalEmails.toLocaleString(), label: "Emails" },
                   { value: totalPhones.toLocaleString(), label: "Phones" },
                 ].map((stat) => (
-                  <div key={stat.label} className="text-center px-2 sm:px-4">
-                    <div className="font-mono text-[20px] sm:text-[28px] font-semibold text-ink">{stat.value}</div>
-                    <div className="text-[13px] font-mono uppercase tracking-wider text-tertiary mt-1">
+                  <div key={stat.label} className="text-center px-1 sm:px-4">
+                    <div className="font-mono text-[16px] sm:text-[28px] font-semibold text-ink leading-tight">{stat.value}</div>
+                    <div className="text-[11px] sm:text-[13px] font-mono uppercase tracking-wider text-tertiary mt-1">
                       {stat.label}
                     </div>
                   </div>

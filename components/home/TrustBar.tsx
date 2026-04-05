@@ -40,7 +40,7 @@ export function TrustBar({ totalCount }: { totalCount: number }) {
       className="bg-white border-y border-border py-8"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-center gap-y-4 divide-x divide-border max-sm:divide-x-0">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-0 sm:divide-x sm:divide-border">
           <StatItem value={count} label="Total Contacts" active={inView} />
           <StatItem value={50} label="US States" active={inView} />
           <TextStatItem value="Name · Email · Phone" label="Fields Per Record" active={inView} />

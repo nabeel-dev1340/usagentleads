@@ -71,12 +71,12 @@ export default async function ComparisonPage({ params }: Props) {
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Home</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <Link href="/compare" className="hover:text-ink transition-colors">Compare</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <span className="text-ink font-medium">{comp.name} vs USAgentLeads</span>
+          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6 overflow-hidden">
+            <Link href="/" className="hover:text-ink transition-colors shrink-0">Home</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <Link href="/compare" className="hover:text-ink transition-colors shrink-0">Compare</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <span className="text-ink font-medium truncate">{comp.name} vs USAgentLeads</span>
           </nav>
 
           <div className="max-w-4xl pb-20">

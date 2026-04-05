@@ -67,12 +67,12 @@ export default async function PersonaPage({ params }: Props) {
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6">
-            <Link href="/" className="hover:text-ink transition-colors">Home</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <Link href="/for" className="hover:text-ink transition-colors">Use Cases</Link>
-            <ChevronRight size={14} className="text-muted" />
-            <span className="text-ink font-medium">{persona.name}</span>
+          <nav className="flex items-center gap-2 text-[14px] text-tertiary pt-10 pb-6 overflow-hidden">
+            <Link href="/" className="hover:text-ink transition-colors shrink-0">Home</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <Link href="/for" className="hover:text-ink transition-colors shrink-0">Use Cases</Link>
+            <ChevronRight size={14} className="text-muted shrink-0" />
+            <span className="text-ink font-medium truncate">{persona.name}</span>
           </nav>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start pb-20">
