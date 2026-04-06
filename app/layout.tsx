@@ -4,6 +4,7 @@ import { Poppins, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
+import { SupportWidget } from "@/components/layout/SupportWidget"
 import { ScrollRevealProvider } from "@/components/layout/ScrollRevealProvider"
 import { CURRENT_YEAR } from "@/lib/utils/states"
 import "./globals.css"
@@ -101,6 +102,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <SupportWidget />
         <Toaster />
       </body>
     </html>
