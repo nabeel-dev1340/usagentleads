@@ -54,6 +54,7 @@ export const US_STATES: readonly USState[] = [
 ] as const
 
 export const TOTAL_AGENTS = US_STATES.reduce((sum, s) => sum + s.agentCount, 0)
+export const CURRENT_YEAR = new Date().getFullYear()
 
 export function getStateBySlug(slug: string): USState | undefined {
   return US_STATES.find((s) => s.slug === slug)

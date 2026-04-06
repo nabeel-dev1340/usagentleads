@@ -36,7 +36,7 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
             The Complete US
           </span>
           <span className="block text-ink font-semibold text-[32px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-none tracking-[-0.03em]">
-            Real Estate Agent Email List
+            Real Estate Agent Email List 2026
           </span>
         </h1>
 

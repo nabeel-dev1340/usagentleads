@@ -7,15 +7,15 @@ import { ChevronRight } from "lucide-react"
 const BASE_URL = "https://www.usagentleads.com"
 
 export const metadata: Metadata = {
-  title: "USAgentLeads vs Competitors — Agent Database Comparisons",
+  title: "USAgentLeads vs Competitors 2026 — Agent Database Comparisons",
   description:
-    "See how USAgentLeads compares to REDX, ZoomInfo, Apollo, CoStar, and other real estate data providers. Feature-by-feature comparisons with honest pros and cons.",
+    "2026 comparison: see how USAgentLeads compares to REDX, ZoomInfo, Apollo, CoStar, and other real estate data providers. Feature-by-feature with honest pros and cons.",
   alternates: {
     canonical: `${BASE_URL}/compare`,
     languages: { "en-US": `${BASE_URL}/compare`, "x-default": `${BASE_URL}/compare` },
   },
   openGraph: {
-    title: "USAgentLeads vs Competitors — Agent Database Comparisons",
+    title: "USAgentLeads vs Competitors 2026 — Agent Database Comparisons",
     description: "Feature-by-feature comparisons with honest pros and cons.",
     url: `${BASE_URL}/compare`,
     type: "website",

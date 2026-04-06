@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!comp) return {}
 
   return {
-    title: `${comp.title} | USAgentLeads`,
+    title: `${comp.title} 2026 | USAgentLeads`,
     description: comp.description.slice(0, 155) + "...",
     alternates: {
       canonical: `${BASE_URL}/compare/${slug}`,

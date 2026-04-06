@@ -139,9 +139,9 @@ const pricingProductSchema = {
 }
 
 export const metadata: Metadata = {
-  title: "Pricing — Real Estate Agent Database from $10/State",
+  title: "Pricing 2026 — Real Estate Agent Database from $10/State",
   description:
-    "Realtor email lists from $10/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
+    "2026 realtor email lists from $10/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {

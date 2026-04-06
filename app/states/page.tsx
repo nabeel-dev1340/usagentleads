@@ -6,9 +6,9 @@ import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "Agent Email Lists by State — All 50 States from $10",
+  title: "Agent Email Lists by State 2026 — All 50 States from $10",
   description:
-    "Browse verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $10/state. Free sample available.",
+    "2026 verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $10/state. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/states",
     languages: {

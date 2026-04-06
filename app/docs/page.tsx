@@ -14,9 +14,9 @@ import {
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "Real Estate Agent API | REST API Documentation",
+  title: "Real Estate Agent API 2026 | REST API Documentation",
   description:
-    "Integrate 553K+ verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.",
+    "Integrate 553K+ verified real estate agent contacts into your app via REST API. Updated for 2026 with simple authentication, state filtering, search, and paginated JSON responses.",
   alternates: {
     canonical: "https://www.usagentleads.com/docs",
     languages: {

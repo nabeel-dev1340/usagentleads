@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!persona) return {}
 
   return {
-    title: `${persona.title} | ${TOTAL_AGENTS.toLocaleString()}+ Contacts`,
+    title: `${persona.title} 2026 | ${TOTAL_AGENTS.toLocaleString()}+ Contacts`,
     description: persona.description.slice(0, 155) + "...",
     alternates: {
       canonical: `${BASE_URL}/for/${slug}`,

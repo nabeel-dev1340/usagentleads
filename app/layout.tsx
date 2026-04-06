@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { ScrollRevealProvider } from "@/components/layout/ScrollRevealProvider"
+import { CURRENT_YEAR } from "@/lib/utils/states"
 import "./globals.css"
 
 const poppins = Poppins({
@@ -24,11 +25,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.usagentleads.com"),
   title: {
-    default: "553K+ Real Estate Agent Emails & Phones — Instant Download",
+    default: `553K+ Real Estate Agent Emails & Phones ${CURRENT_YEAR} — Instant Download`,
     template: "%s | USAgentLeads",
   },
   description:
-    "553K+ verified realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $10. Free sample available.",
+    `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $10. Free sample available.`,
   icons: {
     icon: [
       { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
@@ -43,9 +44,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "USAgentLeads",
-    title: "553K+ Real Estate Agent Emails & Phones — Instant Download",
+    title: `553K+ Real Estate Agent Emails & Phones ${CURRENT_YEAR} — Instant Download`,
     description:
-      "553K+ verified realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $10. Free sample available.",
+      `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $10. Free sample available.`,
     url: "https://www.usagentleads.com",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },

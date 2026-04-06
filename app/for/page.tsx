@@ -16,15 +16,15 @@ const iconMap: Record<string, typeof Megaphone> = {
 }
 
 export const metadata: Metadata = {
-  title: "Real Estate Agent Data by Use Case | USAgentLeads",
+  title: "Real Estate Agent Data by Use Case 2026 | USAgentLeads",
   description:
-    "Find the right real estate agent contact database for your business. Whether you're a coach, SaaS company, mortgage lender, or brokerage — see how our data fits your outreach.",
+    "Find the right 2026 real estate agent contact database for your business. Whether you're a coach, SaaS company, mortgage lender, or brokerage — see how our data fits your outreach.",
   alternates: {
     canonical: `${BASE_URL}/for`,
     languages: { "en-US": `${BASE_URL}/for`, "x-default": `${BASE_URL}/for` },
   },
   openGraph: {
-    title: "Real Estate Agent Data by Use Case | USAgentLeads",
+    title: "Real Estate Agent Data by Use Case 2026 | USAgentLeads",
     description:
       "Find the right real estate agent contact database for your business. See how our data fits your outreach.",
     url: `${BASE_URL}/for`,

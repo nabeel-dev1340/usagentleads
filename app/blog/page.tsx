@@ -6,9 +6,9 @@ import { BlogGrid } from "@/components/blog/BlogGrid"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "Real Estate Marketing Blog — Tips, Strategies & Insights",
+  title: "Real Estate Marketing Blog 2026 — Tips, Strategies & Insights",
   description:
-    "Actionable marketing strategies, email templates, and lead generation tips for real estate professionals and companies targeting the real estate industry.",
+    "2026 marketing strategies, email templates, and lead generation tips for real estate professionals and companies targeting the real estate industry.",
   alternates: {
     canonical: "https://www.usagentleads.com/blog",
     languages: {

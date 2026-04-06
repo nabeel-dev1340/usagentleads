@@ -7,7 +7,7 @@ import { ChevronRight } from "lucide-react"
 const BASE_URL = "https://www.usagentleads.com"
 
 export const metadata: Metadata = {
-  title: "Real Estate Glossary — Key Terms Explained | USAgentLeads",
+  title: "Real Estate Glossary 2026 — Key Terms Explained | USAgentLeads",
   description:
     "Plain-language definitions of real estate industry terms: MLS, IDX, NAR, CRM, cold email, CAN-SPAM, and more. Written for businesses that sell to real estate agents.",
   alternates: {
