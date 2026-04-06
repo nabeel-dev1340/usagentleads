@@ -17,21 +17,49 @@ import { getAllPosts } from "@/lib/blog"
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://www.usagentleads.com/#website",
   name: "USAgentLeads",
   url: "https://www.usagentleads.com",
   inLanguage: "en-US",
+  description:
+    "Verified real estate agent contact database covering all 50 US states. 553,778+ contacts with name, email, and phone — instant CSV download or REST API.",
+  publisher: {
+    "@id": "https://www.usagentleads.com/#organization",
+  },
 }
 
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://www.usagentleads.com/#organization",
   name: "USAgentLeads",
+  legalName: "USAgentLeads",
   url: "https://www.usagentleads.com",
-  logo: "https://www.usagentleads.com/icon-512.png",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://www.usagentleads.com/icon-512.png",
+    width: 512,
+    height: 512,
+  },
   image: "https://www.usagentleads.com/opengraph-image",
   description:
-    "Verified real estate agent contact database covering all 50 US states. 553,778+ contacts with name, email, and phone.",
-  sameAs: [] as string[],
+    "USAgentLeads is a B2B data provider offering verified real estate agent contact databases for all 50 US states. 553,778+ contacts with name, email, and phone.",
+  foundingDate: "2024",
+  numberOfEmployees: {
+    "@type": "QuantitativeValue",
+    value: "1-10",
+  },
+  knowsAbout: [
+    "Real estate agent databases",
+    "Realtor email lists",
+    "B2B real estate data",
+    "Real estate lead generation",
+    "Real estate marketing",
+    "CRM data for real estate",
+    "Real estate agent contact information",
+    "MLS data",
+    "Real estate cold outreach",
+  ],
   areaServed: {
     "@type": "Country",
     name: "United States",
@@ -44,12 +72,63 @@ const organizationSchema = {
     areaServed: "US",
     availableLanguage: "English",
   },
+  makesOffer: [
+    {
+      "@type": "Offer",
+      name: "State Pack",
+      description: "Single state real estate agent email list CSV download",
+      price: "10.00",
+      priceCurrency: "USD",
+      url: "https://www.usagentleads.com/states",
+    },
+    {
+      "@type": "Offer",
+      name: "Full Database",
+      description: "All 50 states, 553K+ real estate agent contacts CSV download",
+      price: "99.00",
+      priceCurrency: "USD",
+      url: "https://www.usagentleads.com/pricing",
+    },
+    {
+      "@type": "Offer",
+      name: "Pro Dashboard",
+      description: "Searchable web interface to browse and filter 553K+ real estate agents",
+      price: "49.00",
+      priceCurrency: "USD",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "49.00",
+        priceCurrency: "USD",
+        billingDuration: "P1M",
+      },
+      url: "https://www.usagentleads.com/pricing",
+    },
+    {
+      "@type": "Offer",
+      name: "Pro API",
+      description: "REST API access to query 553K+ real estate agent contacts programmatically",
+      price: "79.00",
+      priceCurrency: "USD",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "79.00",
+        priceCurrency: "USD",
+        billingDuration: "P1M",
+      },
+      url: "https://www.usagentleads.com/docs",
+    },
+  ],
 }
 
 const reviewSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
+  "@id": "https://www.usagentleads.com/#product",
   name: "USAgentLeads Real Estate Agent Database",
+  brand: {
+    "@id": "https://www.usagentleads.com/#organization",
+  },
+  category: "B2B Data / Real Estate Technology",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.8",
