@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import { HeroSection } from "@/components/home/HeroSection"
 import { TrustBar } from "@/components/home/TrustBar"
 import { WhoIsThisFor } from "@/components/home/WhoIsThisFor"
@@ -77,7 +79,7 @@ const organizationSchema = {
       "@type": "Offer",
       name: "State Pack",
       description: "Single state real estate agent email list CSV download",
-      price: "10.00",
+      price: "20.00",
       priceCurrency: "USD",
       url: "https://www.usagentleads.com/states",
     },

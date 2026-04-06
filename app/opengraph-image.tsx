@@ -86,7 +86,7 @@ export default function OGImage() {
             gap: 16,
           }}
         >
-          {["Name, Email & Phone", "All 50 States", "CSV Download", "From $10"].map(
+          {["Name, Email & Phone", "All 50 States", "CSV Download", "From $20"].map(
             (text) => (
               <div
                 key={text}

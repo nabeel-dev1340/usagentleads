@@ -318,7 +318,7 @@ function PurchaseCard({ stateCode, stateName, agentCount }: { stateCode: string;
       <p className="text-[13px] font-mono text-tertiary mb-5">One-time purchase</p>
 
       <div className="flex items-baseline gap-1.5 mb-1">
-        <span className="font-mono text-[36px] sm:text-[48px] font-semibold text-ink leading-none">$10</span>
+        <span className="font-mono text-[36px] sm:text-[48px] font-semibold text-ink leading-none">$20</span>
         <span className="text-tertiary text-[15px]">one-time</span>
       </div>
       <p className="text-[14px] text-body mb-6">

@@ -4,7 +4,7 @@ import { Check, X, ArrowRight } from "lucide-react"
 const rows = [
   { feature: "Full US Agent Database", us: true, others: true },
   { feature: "Price (Full Database)", us: "$99", others: "$500 – $1,000+" },
-  { feature: "Per-State Purchase Option", us: "$10/state", others: "Rarely offered" },
+  { feature: "Per-State Purchase Option", us: "$20/state", others: "Rarely offered" },
   { feature: "Live Search Dashboard", us: true, others: false },
   { feature: "Instant CSV Download", us: true, others: true },
   { feature: "No Account Required", us: true, others: false },

@@ -9,8 +9,8 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
   const count = state.agentCount.toLocaleString()
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 3).join(", ")} and more.` : ""
   return {
-    title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $10 CSV`,
-    description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $10 — name, email, phone for every licensed ${state.code} agent.${cityText} Free sample available.`,
+    title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $20 CSV`,
+    description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $20 — name, email, phone for every licensed ${state.code} agent.${cityText} Free sample available.`,
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
       languages: {
@@ -23,16 +23,16 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
       "geo.placename": state.name,
     },
     openGraph: {
-      title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $10 CSV`,
-      description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $10 — name, email, phone for every licensed ${state.code} agent.${cityText}`,
+      title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $20 CSV`,
+      description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $20 — name, email, phone for every licensed ${state.code} agent.${cityText}`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $10 CSV`,
-      description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $10.`,
+      title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $20 CSV`,
+      description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $20.`,
       images: [`${BASE_URL}/twitter-image`],
     },
   }
@@ -86,7 +86,7 @@ export function generateProductSchema(state: USState) {
     },
     offers: {
       "@type": "Offer",
-      price: "10.00",
+      price: "20.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: `https://www.usagentleads.com/states/${state.slug}`,
@@ -164,7 +164,7 @@ export function generateDatasetSchema(state: USState) {
     ],
     offers: {
       "@type": "Offer",
-      price: "10.00",
+      price: "20.00",
       priceCurrency: "USD",
     },
   }

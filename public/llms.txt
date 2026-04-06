@@ -17,7 +17,7 @@ USAgentLeads is a B2B data provider specializing in real estate agent contact in
 
 ## Products & Pricing
 
-### State Pack — $10/state
+### State Pack — $20/state
 Download a single state's real estate agent contact list as a CSV file. Instant delivery, no account required. Available for all 50 states.
 
 ### Full Database — $99 one-time

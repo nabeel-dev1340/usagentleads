@@ -94,7 +94,7 @@ export default async function OGImage({ params }: { params: Promise<{ state: str
 
         {/* Stats pills */}
         <div style={{ display: "flex", gap: 16 }}>
-          {[`${count} Contacts`, "Name, Email & Phone", "CSV Download", "$10 One-Time"].map(
+          {[`${count} Contacts`, "Name, Email & Phone", "CSV Download", "$20 One-Time"].map(
             (text) => (
               <div
                 key={text}

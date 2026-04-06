@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronRight, Database, Shield, Zap, Users, BarChart3, HeadphonesIcon } from "lucide-react"

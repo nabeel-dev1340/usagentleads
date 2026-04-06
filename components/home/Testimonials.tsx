@@ -12,7 +12,7 @@ const testimonials = [
   {
     name: "Jessica M.",
     role: "Mortgage Loan Officer",
-    text: "I bought the Florida state pack and had it in my CRM within 10 minutes. Already booked 3 meetings from my first outreach campaign. The $10 price point made it a no-brainer.",
+    text: "I bought the Florida state pack and had it in my CRM within 10 minutes. Already booked 3 meetings from my first outreach campaign. The $20 price point made it a no-brainer.",
     rating: 5,
   },
   {

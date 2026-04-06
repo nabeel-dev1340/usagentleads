@@ -106,7 +106,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "How does pricing compare to ZoomInfo or Apollo?",
         answer:
-          "A single state costs $10. The full 50-state database is $99 — one-time, not a subscription. That's typically 80-90% less than what you'd pay for the same contacts on ZoomInfo, Apollo, or similar platforms.",
+          "A single state costs $20. The full 50-state database is $99 — one-time, not a subscription. That's typically 80-90% less than what you'd pay for the same contacts on ZoomInfo, Apollo, or similar platforms.",
       },
     ],
     relatedBlogSlugs: [
@@ -147,7 +147,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "Can I target agents in just my local market?",
         answer:
-          "Yes. Buy individual state packs for $10 each, so you only pay for the markets you serve. If you operate in multiple states, the full database at $99 is usually the better deal.",
+          "Yes. Buy individual state packs for $20 each, so you only pay for the markets you serve. If you operate in multiple states, the full database at $99 is usually the better deal.",
       },
       {
         question: "Is this data compliant with real estate marketing regulations?",

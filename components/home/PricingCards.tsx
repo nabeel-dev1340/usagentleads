@@ -15,7 +15,7 @@ function getPlans(totalCount: number) {
     {
       name: "State Pack",
       subtitle: "One-time purchase",
-      price: "$10",
+      price: "$20",
       period: "/ state",
       features: [
         { text: "Single state CSV download", included: true },

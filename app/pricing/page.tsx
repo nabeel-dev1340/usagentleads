@@ -1,3 +1,5 @@
+export const revalidate = 3600
+
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Check, X, Minus, ArrowRight, ShieldCheck, ChevronRight } from "lucide-react"
@@ -38,7 +40,7 @@ const pricingProductSchema = {
     {
       "@type": "Offer",
       name: "State Pack",
-      price: "10.00",
+      price: "20.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/states",
@@ -139,9 +141,9 @@ const pricingProductSchema = {
 }
 
 export const metadata: Metadata = {
-  title: "Pricing 2026 — Real Estate Agent Database from $10/State",
+  title: "Pricing 2026 — Real Estate Agent Database from $20/State",
   description:
-    "2026 realtor email lists from $10/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
+    "2026 realtor email lists from $20/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {
@@ -150,16 +152,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Pricing — Real Estate Agent Database from $10/State",
+    title: "Pricing — Real Estate Agent Database from $20/State",
     description:
-      "Realtor email lists from $10/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription.",
+      "Realtor email lists from $20/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription.",
     url: "https://www.usagentleads.com/pricing",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing | Real Estate Agent Database from $10/State",
-    description: "Verified real estate agent contact data starting at $10 per state or $99 for all 50 states. Instant CSV delivery.",
+    title: "Pricing | Real Estate Agent Database from $20/State",
+    description: "Verified real estate agent contact data starting at $20 per state or $99 for all 50 states. Instant CSV delivery.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
@@ -175,7 +177,7 @@ function getPlans(totalCount: number) {
     {
       name: "State Pack",
       subtitle: "One-time purchase",
-      price: "$10",
+      price: "$20",
       period: "/ state",
       features: [
         { text: "Single state CSV download", included: true },
@@ -243,7 +245,7 @@ function getPlans(totalCount: number) {
 }
 
 const comparisonRows = [
-  { label: "Price", state: "$10/state", full: "$99", pro: "$49/mo", proApi: "$79/mo" },
+  { label: "Price", state: "$20/state", full: "$99", pro: "$49/mo", proApi: "$79/mo" },
   { label: "All 50 states", state: false, full: true, pro: false, proApi: false },
   { label: "CSV download", state: true, full: true, pro: false, proApi: false },
   { label: "Dashboard access", state: false, full: false, pro: true, proApi: true },

@@ -15,7 +15,7 @@ export function StateCard({ state }: { state: USState; index?: number }) {
           <h3 className="text-[16px] font-semibold text-ink">{state.name}</h3>
           <span className="badge-state mt-1.5 inline-block">{state.code}</span>
         </div>
-        <span className="font-mono text-[16px] font-semibold text-accent">$10</span>
+        <span className="font-mono text-[16px] font-semibold text-accent">$20</span>
       </div>
 
       <div className="h-px bg-border mb-5" />
