@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | USAgentLeads",
   },
   description:
-    `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $20. Free sample available.`,
+    `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $49. Free sample available.`,
   icons: {
     icon: [
       { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "USAgentLeads",
     title: `553K+ Real Estate Agent Emails & Phones ${CURRENT_YEAR} — Instant Download`,
     description:
-      `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $20. Free sample available.`,
+      `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $49. Free sample available.`,
     url: "https://www.usagentleads.com",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "553K+ Real Estate Agent Emails & Phones — Instant Download",
     description:
-      "553K+ verified realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $20.",
+      "553K+ verified realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $49.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
   robots: { index: true, follow: true },

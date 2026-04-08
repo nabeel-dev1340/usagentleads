@@ -15,7 +15,7 @@ function getPlans(totalCount: number) {
     {
       name: "State Pack",
       subtitle: "One-time purchase",
-      price: "$20",
+      price: "$49",
       period: "/ state",
       features: [
         { text: "Single state CSV download", included: true },
@@ -31,7 +31,7 @@ function getPlans(totalCount: number) {
     {
       name: "Full Database",
       subtitle: "One-time purchase",
-      price: "$99",
+      price: "$149",
       period: "/ one-time",
       badge: "BEST VALUE",
       features: [

@@ -40,7 +40,7 @@ const pricingProductSchema = {
     {
       "@type": "Offer",
       name: "State Pack",
-      price: "20.00",
+      price: "49.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/states",
@@ -65,7 +65,7 @@ const pricingProductSchema = {
     {
       "@type": "Offer",
       name: "Full Database",
-      price: "99.00",
+      price: "149.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/pricing",
@@ -141,9 +141,9 @@ const pricingProductSchema = {
 }
 
 export const metadata: Metadata = {
-  title: "Pricing 2026 — Real Estate Agent Database from $20/State",
+  title: "Pricing 2026 — Real Estate Agent Database from $49/State",
   description:
-    "2026 realtor email lists from $20/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
+    "2026 realtor email lists from $49/state or $149 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {
@@ -152,16 +152,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Pricing — Real Estate Agent Database from $20/State",
+    title: "Pricing — Real Estate Agent Database from $49/State",
     description:
-      "Realtor email lists from $20/state or $99 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription.",
+      "Realtor email lists from $49/state or $149 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription.",
     url: "https://www.usagentleads.com/pricing",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pricing | Real Estate Agent Database from $20/State",
-    description: "Verified real estate agent contact data starting at $20 per state or $99 for all 50 states. Instant CSV delivery.",
+    title: "Pricing | Real Estate Agent Database from $49/State",
+    description: "Verified real estate agent contact data starting at $49 per state or $149 for all 50 states. Instant CSV delivery.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
@@ -177,7 +177,7 @@ function getPlans(totalCount: number) {
     {
       name: "State Pack",
       subtitle: "One-time purchase",
-      price: "$20",
+      price: "$49",
       period: "/ state",
       features: [
         { text: "Single state CSV download", included: true },
@@ -193,7 +193,7 @@ function getPlans(totalCount: number) {
     {
       name: "Full Database",
       subtitle: "One-time purchase",
-      price: "$99",
+      price: "$149",
       period: "/ one-time",
       badge: "BEST VALUE",
       features: [
@@ -245,7 +245,7 @@ function getPlans(totalCount: number) {
 }
 
 const comparisonRows = [
-  { label: "Price", state: "$20/state", full: "$99", pro: "$49/mo", proApi: "$79/mo" },
+  { label: "Price", state: "$49/state", full: "$149", pro: "$49/mo", proApi: "$79/mo" },
   { label: "All 50 states", state: false, full: true, pro: false, proApi: false },
   { label: "CSV download", state: true, full: true, pro: false, proApi: false },
   { label: "Dashboard access", state: false, full: false, pro: true, proApi: true },
@@ -292,7 +292,7 @@ const pricingFAQs = [
   {
     question: "What's the difference between the Full Database and Pro Dashboard?",
     answer:
-      "The Full Database ($99 one-time) gives you a single CSV download of all 553K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
+      "The Full Database ($149 one-time) gives you a single CSV download of all 553K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
   },
 ]
 

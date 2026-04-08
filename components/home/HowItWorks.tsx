@@ -7,7 +7,7 @@ const steps = [
     icon: MousePointerClick,
     number: "01",
     title: "Choose Your Data",
-    description: "Pick a single state for $20, grab the full 50-state database for $99, or subscribe to browse data in-app for $49/month.",
+    description: "Pick a single state for $49, grab the full 50-state database for $149, or subscribe to browse data in-app for $49/month.",
   },
   {
     icon: CreditCard,

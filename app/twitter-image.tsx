@@ -86,7 +86,7 @@ export default function TwitterImage() {
             gap: 16,
           }}
         >
-          {["Name, Email & Phone", "All 50 States", "CSV Download", "From $20"].map(
+          {["Name, Email & Phone", "All 50 States", "CSV Download", "From $49"].map(
             (text) => (
               <div
                 key={text}

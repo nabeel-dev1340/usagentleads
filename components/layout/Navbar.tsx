@@ -174,7 +174,7 @@ export function Navbar() {
                   href="/pricing"
                   className="btn-primary text-[14px] px-5 py-2.5 font-medium"
                 >
-                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
+                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$149</span>
                 </Link>
               </>
             )}
@@ -302,7 +302,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="btn-primary text-[16px] px-7 py-2.5 font-semibold"
                 >
-                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$99</span>
+                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$149</span>
                 </Link>
               </div>
             )}

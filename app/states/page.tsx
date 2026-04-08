@@ -8,9 +8,9 @@ import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 
 export const metadata: Metadata = {
-  title: "Agent Email Lists by State 2026 — All 50 States from $20",
+  title: "Agent Email Lists by State 2026 — All 50 States from $49",
   description:
-    "2026 verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $20/state. Free sample available.",
+    "2026 verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $49/state. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/states",
     languages: {
@@ -19,15 +19,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Agent Email Lists by State — All 50 States from $20",
-    description: "Browse verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $20/state.",
+    title: "Agent Email Lists by State — All 50 States from $49",
+    description: "Browse verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $49/state.",
     url: "https://www.usagentleads.com/states",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agent Email Lists by State — All 50 States from $20",
-    description: "Browse verified real estate agent contacts for every US state — instant download from $20/state.",
+    title: "Agent Email Lists by State — All 50 States from $49",
+    description: "Browse verified real estate agent contacts for every US state — instant download from $49/state.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
@@ -73,15 +73,15 @@ export default async function StatesPage() {
             <h1 className="section-heading">Browse by State</h1>
             <p className="section-sub mt-3 max-w-[440px]">
               Verified agent contacts for every US state.
-              Starting at $20 per state — instant CSV delivery.
+              Starting at $49 per state — instant CSV delivery.
             </p>
           </div>
         </div>
 
         <p className="text-[15px] text-body leading-[1.8] max-w-2xl mt-8 mb-2">
-          Browse verified real estate agent contact data for all 50 US states. Each state pack includes name, email, and phone number for every licensed agent, delivered as an instant CSV download for $20.{" "}
+          Browse verified real estate agent contact data for all 50 US states. Each state pack includes name, email, and phone number for every licensed agent, delivered as an instant CSV download for $49.{" "}
           <Link href="/pricing" className="text-accent font-medium hover:underline">
-            Looking for all 50 states? Get the Full Database for $99 →
+            Looking for all 50 states? Get the Full Database for $149 →
           </Link>
         </p>
 

@@ -8,7 +8,7 @@ export function BlogCTA() {
       </h2>
       <p className="text-[15px] sm:text-[16px] text-white/80 max-w-lg mx-auto mb-8">
         Access 500,000+ verified realtor emails and phone numbers across all 50 states.
-        Instant CSV download starting at $20 per state.
+        Instant CSV download starting at $49 per state.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Link

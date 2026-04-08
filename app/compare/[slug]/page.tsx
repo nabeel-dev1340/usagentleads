@@ -156,7 +156,7 @@ export default async function ComparisonPage({ params }: Props) {
             {/* CTA */}
             <div className="card p-5 sm:p-7 border-accent/30 border-2 mb-10 text-center">
               <p className="text-[15px] text-body mb-4">
-                553,000+ verified agent contacts. $20/state or $99 for all 50. One-time purchase.
+                553,000+ verified agent contacts. $49/state or $149 for all 50. One-time purchase.
               </p>
               <Link href="/states" className="btn-primary inline-flex items-center gap-2">
                 Browse State Data

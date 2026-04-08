@@ -62,7 +62,7 @@ export function HeroSection({ totalCount }: { totalCount: number }) {
             Browse by State <ArrowRight size={16} />
           </Link>
           <Link href="/pricing" className="btn-outline text-[16px] px-8 py-3.5">
-            Get Full Database — <span className="font-mono">$99</span>
+            Get Full Database — <span className="font-mono">$149</span>
           </Link>
         </div>
 
