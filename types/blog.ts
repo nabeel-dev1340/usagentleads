@@ -1,3 +1,8 @@
+export interface BlogFAQ {
+  question: string
+  answer: string
+}
+
 export interface BlogPost {
   title: string
   description: string
@@ -10,4 +15,5 @@ export interface BlogPost {
   author: string
   published: boolean
   readingTime: string
+  faqs?: BlogFAQ[]
 }

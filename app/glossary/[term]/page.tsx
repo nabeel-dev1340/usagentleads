@@ -16,21 +16,27 @@ export function generateStaticParams() {
   return GLOSSARY_TERMS.map((t) => ({ term: t.slug }))
 }
 
+function trimDescription(text: string, limit = 155): string {
+  if (text.length <= limit) return text
+  return text.slice(0, text.lastIndexOf(" ", limit)) + "…"
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { term: slug } = await params
   const term = getTermBySlug(slug)
   if (!term) return {}
 
+  const desc = trimDescription(term.definition)
   return {
-    title: `${term.title} | USAgentLeads Glossary`,
-    description: term.definition.slice(0, 155) + "...",
+    title: { absolute: `${term.title} | USAgentLeads Glossary` },
+    description: desc,
     alternates: {
       canonical: `${BASE_URL}/glossary/${slug}`,
       languages: { "en-US": `${BASE_URL}/glossary/${slug}`, "x-default": `${BASE_URL}/glossary/${slug}` },
     },
     openGraph: {
       title: term.title,
-      description: term.definition.slice(0, 155) + "...",
+      description: desc,
       url: `${BASE_URL}/glossary/${slug}`,
       type: "article",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630 }],
@@ -38,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: term.title,
-      description: term.definition.slice(0, 155) + "...",
+      description: desc,
     },
   }
 }

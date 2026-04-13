@@ -31,6 +31,7 @@ function parseFrontmatter(slug: string): { meta: BlogPost; content: string } | n
       author: data.author || "USAgentLeads Team",
       published: data.published !== false,
       readingTime: calculateReadingTime(content),
+      faqs: data.faqs || undefined,
     },
     content,
   }

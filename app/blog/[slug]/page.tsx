@@ -5,7 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 import { ChevronRight } from "lucide-react"
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/blog"
-import { generateBreadcrumbSchema, generateArticleSchema } from "@/lib/utils/seo"
+import { generateBreadcrumbSchema, generateArticleSchema, generateFAQSchema } from "@/lib/utils/seo"
 import { mdxComponents } from "@/components/blog/MDXComponents"
 import { BlogCover } from "@/components/blog/BlogCover"
 import { ShareRow } from "@/components/blog/ShareRow"
@@ -77,12 +77,14 @@ export default async function BlogPostPage({ params }: Props) {
     { name: meta.title, url: `https://www.usagentleads.com/blog/${meta.slug}` },
   ])
   const articleSchema = generateArticleSchema(meta)
+  const faqSchema = meta.faqs?.length ? generateFAQSchema(meta.faqs) : null
+  const schemas = [breadcrumb, articleSchema, ...(faqSchema ? [faqSchema] : [])]
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, articleSchema]) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
       <div className="bg-page min-h-screen">

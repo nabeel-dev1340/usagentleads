@@ -9,8 +9,8 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
   const count = state.agentCount.toLocaleString()
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 3).join(", ")} and more.` : ""
   return {
-    title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $49 CSV`,
-    description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $49 — name, email, phone for every licensed ${state.code} agent.${cityText} Free sample available.`,
+    title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
+    description: `Get ${count}+ verified ${state.name} realtor emails and phone numbers for $49. Instant CSV download — every licensed ${state.code} agent, sourced from state licensing board. Free sample available.${cityText}`,
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
       languages: {
@@ -23,16 +23,16 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
       "geo.placename": state.name,
     },
     openGraph: {
-      title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $49 CSV`,
-      description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $49 — name, email, phone for every licensed ${state.code} agent.${cityText}`,
+      title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
+      description: `Get ${count}+ verified ${state.name} realtor emails and phone numbers for $49. Instant CSV download — every licensed ${state.code} agent, sourced from state licensing board.${cityText}`,
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${state.name} Realtor Emails & Phones ${CURRENT_YEAR} — ${count}+ Agents, $49 CSV`,
-      description: `${CURRENT_YEAR} ${state.name} real estate agent database: ${count}+ verified emails and phone numbers. Instant CSV download for $49.`,
+      title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
+      description: `Get ${count}+ verified ${state.name} realtor emails and phone numbers for $49. Instant CSV — sourced from state licensing board.`,
       images: [`${BASE_URL}/twitter-image`],
     },
   }

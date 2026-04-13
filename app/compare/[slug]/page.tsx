@@ -15,29 +15,35 @@ export function generateStaticParams() {
   return COMPETITORS.map((c) => ({ slug: c.slug }))
 }
 
+function trimDescription(text: string, limit = 155): string {
+  if (text.length <= limit) return text
+  return text.slice(0, text.lastIndexOf(" ", limit)) + "…"
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const comp = getCompetitorBySlug(slug)
   if (!comp) return {}
 
+  const desc = trimDescription(comp.description)
   return {
-    title: `${comp.title} 2026 | USAgentLeads`,
-    description: comp.description.slice(0, 155) + "...",
+    title: `${comp.title} 2026`,
+    description: desc,
     alternates: {
       canonical: `${BASE_URL}/compare/${slug}`,
       languages: { "en-US": `${BASE_URL}/compare/${slug}`, "x-default": `${BASE_URL}/compare/${slug}` },
     },
     openGraph: {
-      title: comp.title,
-      description: comp.description.slice(0, 155) + "...",
+      title: `${comp.title} 2026`,
+      description: desc,
       url: `${BASE_URL}/compare/${slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630 }],
     },
     twitter: {
       card: "summary_large_image",
-      title: comp.title,
-      description: comp.description.slice(0, 155) + "...",
+      title: `${comp.title} 2026`,
+      description: desc,
     },
   }
 }
