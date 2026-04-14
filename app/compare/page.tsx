@@ -29,11 +29,23 @@ export default function CompareIndex() {
     { name: "Compare", url: `${BASE_URL}/compare` },
   ])
 
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "USAgentLeads vs Competitors — Real Estate Data Comparisons",
+    itemListElement: COMPETITORS.map((comp, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: `${comp.name} vs USAgentLeads`,
+      url: `${BASE_URL}/compare/${comp.slug}`,
+    })),
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, itemList]) }}
       />
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,9 +63,16 @@ export default function CompareIndex() {
             >
               How We Compare
             </h1>
-            <p className="text-[15px] sm:text-[17px] text-tertiary mb-12">
+            <p className="text-[15px] sm:text-[17px] text-tertiary mb-8">
               Honest, side-by-side comparisons of USAgentLeads and other real estate data providers. We list their strengths too — pick the tool that actually fits your needs.
             </p>
+
+            <div className="card p-5 sm:p-6 bg-subtle border-border mb-12">
+              <h2 className="text-[15px] font-semibold text-ink mb-3">How We Compare</h2>
+              <p className="text-[14px] text-body leading-[1.8]">
+                Each comparison covers the same criteria: data coverage, price, delivery format, freshness, and what type of buyer each product is best suited for. We pull from public pricing pages and our own product experience — no affiliate relationships influence the results.
+              </p>
+            </div>
 
             <div className="space-y-4">
               {COMPETITORS.map((comp) => (

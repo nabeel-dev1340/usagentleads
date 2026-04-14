@@ -5,6 +5,7 @@ interface StateContent {
   cities: string[]
   licensingBody: string
   useCase: string
+  relatedBlogSlugs?: string[]
 }
 
 export const STATE_CONTENT: Record<string, StateContent> = {
@@ -70,6 +71,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Miami", "Orlando", "Tampa", "Jacksonville", "Fort Lauderdale"],
     licensingBody: "Florida Department of Business and Professional Regulation (DBPR)",
     useCase: "Florida's combination of vacation rentals, retirement communities, and rapid population growth makes it a prime market for mortgage lenders and property management software.",
+    relatedBlogSlugs: [
+      "florida-real-estate-market-overview-2026",
+      "real-estate-cold-email-templates",
+    ],
   },
   georgia: {
     description:

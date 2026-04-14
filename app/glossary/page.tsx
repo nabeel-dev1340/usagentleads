@@ -29,11 +29,23 @@ export default function GlossaryIndex() {
     { name: "Glossary", url: `${BASE_URL}/glossary` },
   ])
 
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Real Estate Glossary — Key Terms Explained",
+    itemListElement: GLOSSARY_TERMS.map((term, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: term.term,
+      url: `${BASE_URL}/glossary/${term.slug}`,
+    })),
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, itemList]) }}
       />
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

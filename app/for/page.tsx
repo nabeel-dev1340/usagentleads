@@ -39,11 +39,23 @@ export default function PersonasIndex() {
     { name: "Use Cases", url: `${BASE_URL}/for` },
   ])
 
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Real Estate Agent Data by Use Case",
+    itemListElement: PERSONAS.map((persona, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: persona.name,
+      url: `${BASE_URL}/for/${persona.slug}`,
+    })),
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, itemList]) }}
       />
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -61,9 +73,16 @@ export default function PersonasIndex() {
             >
               Agent Data for Your Business
             </h1>
-            <p className="text-[15px] sm:text-[17px] text-tertiary mb-12">
+            <p className="text-[15px] sm:text-[17px] text-tertiary mb-8">
               Different businesses use our real estate agent database in different ways. Find the use case that matches what you do.
             </p>
+
+            <div className="card p-5 sm:p-6 bg-subtle border-border mb-12">
+              <h2 className="text-[15px] font-semibold text-ink mb-3">One Database, Many Use Cases</h2>
+              <p className="text-[14px] text-body leading-[1.8]">
+                Our database of 553,000+ verified real estate agent contacts covers all 50 US states with name, email, phone, and state. Whether you&apos;re running cold email campaigns, building referral networks, or enriching your CRM — the data is the same. The strategy depends on who you are and what you sell.
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {PERSONAS.map((persona) => {

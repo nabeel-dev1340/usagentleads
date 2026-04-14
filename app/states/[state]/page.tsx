@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { US_STATES, getStateBySlug, formatAgentCount } from "@/lib/utils/states"
 import { generateStateMetadata, generateBreadcrumbSchema, generateProductSchema, generateDatasetSchema, generateFAQSchema } from "@/lib/utils/seo"
 import { getStateContent, getStateFAQs } from "@/lib/utils/state-content"
+import { getAllPosts } from "@/lib/blog"
 import { STATE_NEIGHBORS } from "@/lib/utils/state-neighbors"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
 import { StateFAQ } from "@/components/states/StateFAQ"
@@ -58,12 +59,21 @@ export default async function StatePage({ params }: Props) {
     { name: "States", url: "https://www.usagentleads.com/states" },
     { name: state.name, url: `https://www.usagentleads.com/states/${state.slug}` },
   ])
-  const product = generateProductSchema(state)
-  const dataset = generateDatasetSchema(state)
+  const product = generateProductSchema(state, agentCount)
+  const dataset = generateDatasetSchema(state, agentCount)
 
   const stateContent = getStateContent(slug)
   const faqs = getStateFAQs(state, agentCount)
   const faqSchema = generateFAQSchema(faqs)
+
+  // Related blog guides — use state-specific slugs if defined, else fallback defaults
+  const defaultGuides = ["how-to-build-realtor-email-list", "real-estate-cold-email-templates"]
+  const guideSlugs = stateContent?.relatedBlogSlugs ?? defaultGuides
+  const allPosts = getAllPosts()
+  const relatedGuides = guideSlugs
+    .map((s) => allPosts.find((p) => p.slug === s))
+    .filter(Boolean)
+    .map((p) => ({ slug: p!.slug, title: p!.title }))
 
   // Geographic neighbors (fallback to alphabetical if not mapped)
   const neighborSlugs = STATE_NEIGHBORS[slug]
@@ -252,20 +262,16 @@ export default async function StatePage({ params }: Props) {
                   Related Guides
                 </h2>
                 <div className="space-y-2">
-                  <Link
-                    href="/blog/how-to-build-realtor-email-list"
-                    className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
-                  >
-                    How to Build a Realtor Email List
-                    <ChevronRight size={14} />
-                  </Link>
-                  <Link
-                    href="/blog/real-estate-cold-email-templates"
-                    className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
-                  >
-                    Real Estate Cold Email Templates That Get Replies
-                    <ChevronRight size={14} />
-                  </Link>
+                  {relatedGuides.map((guide) => (
+                    <Link
+                      key={guide.slug}
+                      href={`/blog/${guide.slug}`}
+                      className="flex items-center gap-2 text-[14px] text-accent font-medium hover:underline"
+                    >
+                      {guide.title}
+                      <ChevronRight size={14} />
+                    </Link>
+                  ))}
                 </div>
               </section>
 

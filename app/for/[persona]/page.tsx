@@ -4,6 +4,11 @@ import { notFound } from "next/navigation"
 import { PERSONAS, getPersonaBySlug } from "@/lib/data/personas"
 import { TOTAL_AGENTS } from "@/lib/utils/states"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
+
+function trimDescription(text: string, limit = 155): string {
+  if (text.length <= limit) return text
+  return text.slice(0, text.lastIndexOf(" ", limit)) + "…"
+}
 import { getPostBySlug } from "@/lib/blog"
 import { ChevronRight, Check, AlertCircle, ArrowRight } from "lucide-react"
 
@@ -24,14 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${persona.title} 2026 | ${TOTAL_AGENTS.toLocaleString()}+ Contacts`,
-    description: persona.description.slice(0, 155) + "...",
+    description: trimDescription(persona.description),
     alternates: {
       canonical: `${BASE_URL}/for/${slug}`,
       languages: { "en-US": `${BASE_URL}/for/${slug}`, "x-default": `${BASE_URL}/for/${slug}` },
     },
     openGraph: {
       title: `${persona.title} | USAgentLeads`,
-      description: persona.description.slice(0, 155) + "...",
+      description: trimDescription(persona.description),
       url: `${BASE_URL}/for/${slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630 }],
@@ -39,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: persona.title,
-      description: persona.description.slice(0, 155) + "...",
+      description: trimDescription(persona.description),
     },
   }
 }

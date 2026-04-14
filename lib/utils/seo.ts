@@ -5,12 +5,18 @@ import { CURRENT_YEAR } from "@/lib/utils/states"
 
 const BASE_URL = "https://www.usagentleads.com"
 
+function trimDescription(text: string, limit = 155): string {
+  if (text.length <= limit) return text
+  return text.slice(0, text.lastIndexOf(" ", limit)) + "…"
+}
+
 export function generateStateMetadata(state: USState, cities?: string[]): Metadata {
   const count = state.agentCount.toLocaleString()
-  const cityText = cities?.length ? ` Covers ${cities.slice(0, 3).join(", ")} and more.` : ""
+  const cityText = cities?.length ? ` Covers ${cities.slice(0, 2).join(", ")} and more.` : ""
+  const rawDesc = `Get ${count}+ verified ${state.name} realtor emails & phone numbers — $49, instant CSV. Every licensed ${state.code} agent, sourced from state licensing board.${cityText}`
   return {
     title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
-    description: `Get ${count}+ verified ${state.name} realtor emails and phone numbers for $49. Instant CSV download — every licensed ${state.code} agent, sourced from state licensing board. Free sample available.${cityText}`,
+    description: trimDescription(rawDesc),
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
       languages: {
@@ -24,7 +30,7 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
     },
     openGraph: {
       title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
-      description: `Get ${count}+ verified ${state.name} realtor emails and phone numbers for $49. Instant CSV download — every licensed ${state.code} agent, sourced from state licensing board.${cityText}`,
+      description: trimDescription(rawDesc),
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
       images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
@@ -32,7 +38,7 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
     twitter: {
       card: "summary_large_image",
       title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
-      description: `Get ${count}+ verified ${state.name} realtor emails and phone numbers for $49. Instant CSV — sourced from state licensing board.`,
+      description: trimDescription(rawDesc),
       images: [`${BASE_URL}/twitter-image`],
     },
   }
@@ -53,12 +59,13 @@ export function generateBreadcrumbSchema(
   }
 }
 
-export function generateProductSchema(state: USState) {
+export function generateProductSchema(state: USState, liveCount?: number) {
+  const count = (liveCount ?? state.agentCount).toLocaleString()
   return {
     "@context": "https://schema.org",
     "@type": "Product",
     name: `${state.name} Realtor Email List & Contact Database ${CURRENT_YEAR}`,
-    description: `Verified database of ${state.agentCount.toLocaleString()}+ ${state.name} real estate agent emails and phone numbers. Download the complete realtor email list.`,
+    description: `Verified database of ${count}+ ${state.name} real estate agent emails and phone numbers. Download the complete realtor email list.`,
     image: "https://www.usagentleads.com/opengraph-image",
     brand: {
       "@type": "Brand",
@@ -125,18 +132,22 @@ export function generateProductSchema(state: USState) {
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         applicableCountry: "US",
-        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+        returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+        merchantReturnDays: 30,
+        returnMethod: "https://schema.org/ReturnByMail",
+        returnFees: "https://schema.org/FreeReturn",
       },
     },
   }
 }
 
-export function generateDatasetSchema(state: USState) {
+export function generateDatasetSchema(state: USState, liveCount?: number) {
+  const count = (liveCount ?? state.agentCount).toLocaleString()
   return {
     "@context": "https://schema.org",
     "@type": "Dataset",
     name: `${state.name} Real Estate Agent Email Database`,
-    description: `Verified email database of ${state.agentCount.toLocaleString()}+ licensed realtors in ${state.name}. Includes name, email address, and phone number for each agent.`,
+    description: `Verified email database of ${count}+ licensed realtors in ${state.name}. Includes name, email address, and phone number for each agent.`,
     url: `${BASE_URL}/states/${state.slug}`,
     creator: {
       "@type": "Organization",
@@ -197,9 +208,9 @@ export function generateArticleSchema(post: BlogPost) {
     datePublished: post.date,
     dateModified: post.updatedAt || post.date,
     author: {
-      "@type": "Organization",
-      name: "USAgentLeads",
-      url: BASE_URL,
+      "@type": "Person",
+      name: post.author,
+      url: `${BASE_URL}/blog/author/${post.author.toLowerCase().replace(/\s+/g, "-")}`,
     },
     publisher: {
       "@type": "Organization",

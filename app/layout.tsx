@@ -26,11 +26,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.usagentleads.com"),
   title: {
-    default: `553K+ Real Estate Agent Emails & Phones ${CURRENT_YEAR} — Instant Download`,
+    default: `553K+ Realtor Emails & Phone Numbers ${CURRENT_YEAR} — From $49`,
     template: "%s | USAgentLeads",
   },
   description:
-    `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $49. Free sample available.`,
+    `553K+ verified realtor emails & phone numbers across all 50 US states. Download any state as CSV in under 60 seconds — from $49. Free sample included.`,
   icons: {
     icon: [
       { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "USAgentLeads",
-    title: `553K+ Real Estate Agent Emails & Phones ${CURRENT_YEAR} — Instant Download`,
+    title: `553K+ Realtor Emails & Phone Numbers ${CURRENT_YEAR} — From $49`,
     description:
-      `${CURRENT_YEAR} verified database of 553K+ realtor emails and phone numbers across all 50 states. Download any state as CSV in under 60 seconds — from $49. Free sample available.`,
+      `553K+ verified realtor emails & phone numbers across all 50 US states. Download any state as CSV in under 60 seconds — from $49. Free sample included.`,
     url: "https://www.usagentleads.com",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
