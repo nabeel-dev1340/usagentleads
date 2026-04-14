@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
+import { gzipSync } from "zlib"
 import { createServiceClient } from "@/lib/supabase/server"
 import { US_STATES } from "@/lib/utils/states"
 
@@ -140,11 +141,12 @@ export async function GET(request: NextRequest) {
       }
 
       const combinedCSV = chunks.join("\n")
+      const compressed = gzipSync(Buffer.from(combinedCSV, "utf-8"))
 
       const { error: uploadError } = await supabase.storage
         .from("agent-csvs")
-        .upload("full/usa_agents_full.csv", combinedCSV, {
-          contentType: "text/csv",
+        .upload("full/usa_agents_full.csv.gz", compressed, {
+          contentType: "application/gzip",
           upsert: true,
         })
 
@@ -154,6 +156,7 @@ export async function GET(request: NextRequest) {
         success: true,
         files: csvFiles.length,
         totalRows,
+        compressedBytes: compressed.length,
       })
     }
 
@@ -234,9 +237,10 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ state: code, rows: allRows.length, success: true })
   } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
     console.error(`Cron generate-csvs error (${stateCode}):`, error)
     return NextResponse.json(
-      { error: `Failed to generate CSV for ${stateCode}` },
+      { error: `Failed to generate CSV for ${stateCode}`, detail: msg },
       { status: 500 }
     )
   }
