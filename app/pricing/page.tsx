@@ -16,26 +16,6 @@ const pricingProductSchema = {
   description: "Complete US real estate agent contact database with 553,778+ verified contacts across all 50 states",
   image: "https://www.usagentleads.com/opengraph-image",
   brand: { "@type": "Brand", name: "USAgentLeads" },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    reviewCount: "124",
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: {
-    "@type": "Review",
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: "5",
-      bestRating: "5",
-    },
-    author: {
-      "@type": "Person",
-      name: "James H.",
-    },
-    reviewBody: "Accurate and up-to-date agent contacts. Saved me hours of manual research.",
-  },
   offers: [
     {
       "@type": "Offer",

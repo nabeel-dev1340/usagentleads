@@ -122,43 +122,6 @@ const organizationSchema = {
   ],
 }
 
-const reviewSchema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "@id": "https://www.usagentleads.com/#product",
-  name: "USAgentLeads Real Estate Agent Database",
-  brand: {
-    "@id": "https://www.usagentleads.com/#organization",
-  },
-  category: "B2B Data / Real Estate Technology",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    reviewCount: "124",
-    bestRating: "5",
-    worstRating: "1",
-  },
-  review: [
-    {
-      "@type": "Review",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      author: { "@type": "Person", name: "David R." },
-      reviewBody: "We needed a reliable agent database for our real estate SaaS clients. The data quality is solid and the price can't be beat.",
-    },
-    {
-      "@type": "Review",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      author: { "@type": "Person", name: "Jessica M." },
-      reviewBody: "I bought the Florida state pack and had it in my CRM within 10 minutes. Already booked 3 meetings from my first outreach campaign.",
-    },
-    {
-      "@type": "Review",
-      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
-      author: { "@type": "Person", name: "Kevin L." },
-      reviewBody: "The full database at $149 is incredible value. We've used other providers charging $500+ for less data.",
-    },
-  ],
-}
 
 export default async function Home() {
   const totalCount = await getTotalCount()
@@ -169,7 +132,7 @@ export default async function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([websiteSchema, organizationSchema, reviewSchema]),
+          __html: JSON.stringify([websiteSchema, organizationSchema]),
         }}
       />
       <HeroSection totalCount={totalCount} />
