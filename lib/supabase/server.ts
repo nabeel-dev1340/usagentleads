@@ -53,3 +53,22 @@ export async function getTotalCount(): Promise<number> {
   if (!data || data.length === 0) return 0
   return data.reduce((sum: number, row: { count: number }) => sum + row.count, 0)
 }
+
+/** Fetch total contacts, emails, and phones across all states. Returns zeros if DB is unavailable. */
+export async function getDatabaseTotals(): Promise<{ count: number; emails: number; phones: number }> {
+  const supabase = createServiceClient()
+  const { data } = await supabase
+    .schema("usagentleads")
+    .from("state_count")
+    .select("count, total_emails, total_phones")
+
+  if (!data || data.length === 0) return { count: 0, emails: 0, phones: 0 }
+  return data.reduce(
+    (acc, row: { count: number; total_emails: number; total_phones: number }) => ({
+      count: acc.count + row.count,
+      emails: acc.emails + row.total_emails,
+      phones: acc.phones + row.total_phones,
+    }),
+    { count: 0, emails: 0, phones: 0 }
+  )
+}

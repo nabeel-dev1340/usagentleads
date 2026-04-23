@@ -13,7 +13,7 @@ import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
 import { FAQSection } from "@/components/home/FAQSection"
 import { LatestPosts } from "@/components/home/LatestPosts"
-import { getTotalCount } from "@/lib/supabase/server"
+import { getDatabaseTotals } from "@/lib/supabase/server"
 import { getAllPosts } from "@/lib/blog"
 
 const websiteSchema = {
@@ -24,7 +24,7 @@ const websiteSchema = {
   url: "https://www.usagentleads.com",
   inLanguage: "en-US",
   description:
-    "Verified real estate agent contact database covering all 50 US states. 553,778+ contacts with name, email, and phone — instant CSV download or REST API.",
+    "Verified real estate agent contact database covering all 50 US states. 888,809+ contacts with name, email, and phone — instant CSV download or REST API.",
   publisher: {
     "@id": "https://www.usagentleads.com/#organization",
   },
@@ -45,7 +45,7 @@ const organizationSchema = {
   },
   image: "https://www.usagentleads.com/opengraph-image",
   description:
-    "USAgentLeads is a B2B data provider offering verified real estate agent contact databases for all 50 US states. 553,778+ contacts with name, email, and phone.",
+    "USAgentLeads is a B2B data provider offering verified real estate agent contact databases for all 50 US states. 888,809+ contacts with name, email, and phone.",
   foundingDate: "2024",
   numberOfEmployees: {
     "@type": "QuantitativeValue",
@@ -86,7 +86,7 @@ const organizationSchema = {
     {
       "@type": "Offer",
       name: "Full Database",
-      description: "All 50 states, 553K+ real estate agent contacts CSV download",
+      description: "All 50 states, 889K+ real estate agent contacts CSV download",
       price: "149.00",
       priceCurrency: "USD",
       url: "https://www.usagentleads.com/pricing",
@@ -94,7 +94,7 @@ const organizationSchema = {
     {
       "@type": "Offer",
       name: "Pro Dashboard",
-      description: "Searchable web interface to browse and filter 553K+ real estate agents",
+      description: "Searchable web interface to browse and filter 889K+ real estate agents",
       price: "49.00",
       priceCurrency: "USD",
       priceSpecification: {
@@ -108,7 +108,7 @@ const organizationSchema = {
     {
       "@type": "Offer",
       name: "Pro API",
-      description: "REST API access to query 553K+ real estate agent contacts programmatically",
+      description: "REST API access to query 889K+ real estate agent contacts programmatically",
       price: "79.00",
       priceCurrency: "USD",
       priceSpecification: {
@@ -124,7 +124,7 @@ const organizationSchema = {
 
 
 export default async function Home() {
-  const totalCount = await getTotalCount()
+  const { count: totalCount, emails: totalEmails, phones: totalPhones } = await getDatabaseTotals()
   const latestPosts = getAllPosts().slice(0, 3)
 
   return (
@@ -140,7 +140,7 @@ export default async function Home() {
       <WhoIsThisFor />
       <HowItWorks />
       <UseCases />
-      <PricingCards totalCount={totalCount} />
+      <PricingCards totalCount={totalCount} totalEmails={totalEmails} totalPhones={totalPhones} />
       <ApiSection />
       <CompetitorComparison />
       <Testimonials />

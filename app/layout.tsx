@@ -25,11 +25,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.usagentleads.com"),
   title: {
-    default: `USA Realtors Email & Phone Database — 781K+ Real Estate Agents`,
+    default: `USA Realtors Email & Phone Database — 889K+ Real Estate Agents`,
     template: "%s | USAgentLeads",
   },
   description:
-    `Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 781K+ verified emails & phone numbers across all 50 states — download by state from $49.`,
+    `Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 889K+ verified emails & phone numbers across all 50 states — download by state from $49.`,
   icons: {
     icon: [
       { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
@@ -44,17 +44,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "USAgentLeads",
-    title: `USA Realtors Email & Phone Database — 781K+ Real Estate Agents`,
+    title: `USA Realtors Email & Phone Database — 889K+ Real Estate Agents`,
     description:
-      `Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 781K+ verified emails & phone numbers across all 50 states — download by state from $49.`,
+      `Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 889K+ verified emails & phone numbers across all 50 states — download by state from $49.`,
     url: "https://www.usagentleads.com",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "USA Realtors Email & Phone Database — 781K+ Real Estate Agents",
+    title: "USA Realtors Email & Phone Database — 889K+ Real Estate Agents",
     description:
-      "Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 781K+ verified emails & phone numbers across all 50 states — download by state from $49.",
+      "Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 889K+ verified emails & phone numbers across all 50 states — download by state from $49.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
   robots: { index: true, follow: true },

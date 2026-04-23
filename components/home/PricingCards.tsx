@@ -9,8 +9,26 @@ interface Feature {
   included: boolean
 }
 
-function getPlans(totalCount: number) {
+interface Stat {
+  value: string
+  label: string
+}
+
+function formatStat(n: number): string {
+  if (n >= 1000) return `${Math.round(n / 1000).toLocaleString()}K+`
+  return n.toLocaleString()
+}
+
+function getPlans(totalCount: number, totalEmails: number, totalPhones: number) {
   const countLabel = totalCount > 0 ? `${formatAgentCount(totalCount)} verified contacts` : "500K+ verified contacts"
+  const fullDbStats: Stat[] | undefined =
+    totalCount > 0 && totalEmails > 0 && totalPhones > 0
+      ? [
+          { value: formatStat(totalCount), label: "Contacts" },
+          { value: formatStat(totalEmails), label: "Emails" },
+          { value: formatStat(totalPhones), label: "Phones" },
+        ]
+      : undefined
   return [
     {
       name: "State Pack",
@@ -34,6 +52,7 @@ function getPlans(totalCount: number) {
       price: "$149",
       period: "/ one-time",
       badge: "BEST VALUE",
+      stats: fullDbStats,
       features: [
         { text: "All 50 states in one CSV", included: true },
         { text: countLabel, included: true },
@@ -82,8 +101,8 @@ function getPlans(totalCount: number) {
   ]
 }
 
-export function PricingCards({ totalCount }: { totalCount: number }) {
-  const plans = getPlans(totalCount)
+export function PricingCards({ totalCount, totalEmails, totalPhones }: { totalCount: number; totalEmails: number; totalPhones: number }) {
+  const plans = getPlans(totalCount, totalEmails, totalPhones)
   return (
     <section className="bg-page py-28 max-sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -132,6 +151,21 @@ export function PricingCards({ totalCount }: { totalCount: number }) {
               )}
 
               <div className="h-px bg-border mb-6" />
+
+              {"stats" in plan && plan.stats && (
+                <div className="mb-6 rounded-lg bg-accent-light/60 border border-accent/25 px-4 py-3 space-y-1.5">
+                  {plan.stats.map((stat) => (
+                    <div key={stat.label} className="flex items-baseline justify-between">
+                      <span className="font-mono text-[18px] font-semibold text-accent leading-tight">
+                        {stat.value}
+                      </span>
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-accent/80">
+                        {stat.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <ul className="space-y-3 flex-1">
                 {plan.features.map((f) => (
