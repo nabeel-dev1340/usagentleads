@@ -13,9 +13,10 @@ function trimDescription(text: string, limit = 155): string {
 export function generateStateMetadata(state: USState, cities?: string[]): Metadata {
   const count = state.agentCount.toLocaleString()
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 2).join(", ")} and more.` : ""
-  const rawDesc = `Get ${count}+ verified ${state.name} realtor emails & phone numbers — $49, instant CSV. Every licensed ${state.code} agent, sourced from state licensing board.${cityText}`
+  const title = `${state.name} Real Estate Agent Email List | ${count}+ Contacts`
+  const rawDesc = `Download verified ${state.name} real estate agent emails and phone numbers. ${count}+ licensed agent contacts, $49 CSV, instant delivery.${cityText}`
   return {
-    title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
+    title,
     description: trimDescription(rawDesc),
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,
@@ -29,7 +30,7 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
       "geo.placename": state.name,
     },
     openGraph: {
-      title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
+      title,
       description: trimDescription(rawDesc),
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
@@ -37,7 +38,7 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
     },
     twitter: {
       card: "summary_large_image",
-      title: `${state.name} Realtor Email List ${CURRENT_YEAR} — ${count}+ Agent Contacts, $49 CSV`,
+      title,
       description: trimDescription(rawDesc),
       images: [`${BASE_URL}/twitter-image`],
     },
@@ -70,26 +71,6 @@ export function generateProductSchema(state: USState, liveCount?: number) {
     brand: {
       "@type": "Brand",
       name: "USAgentLeads",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "124",
-      bestRating: "5",
-      worstRating: "1",
-    },
-    review: {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "James H.",
-      },
-      reviewBody: "Accurate and up-to-date agent contacts. Saved me hours of manual research.",
     },
     offers: {
       "@type": "Offer",

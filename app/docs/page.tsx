@@ -16,7 +16,7 @@ import { generateBreadcrumbSchema } from "@/lib/utils/seo"
 export const metadata: Metadata = {
   title: "Real Estate Agent API 2026 | REST API Documentation",
   description:
-    "Integrate 553K+ verified real estate agent contacts into your app via REST API. Updated for 2026 with simple authentication, state filtering, search, and paginated JSON responses.",
+    "Integrate 889K+ verified real estate agent contacts into your app via REST API. Updated for 2026 with simple authentication, state filtering, search, and paginated JSON responses.",
   alternates: {
     canonical: "https://www.usagentleads.com/docs",
     languages: {
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Real Estate Agent API | REST API Documentation | USAgentLeads",
     description:
-      "Integrate 553K+ verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.",
+      "Integrate 889K+ verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.",
     url: "https://www.usagentleads.com/docs",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Real Estate Agent API | REST API Documentation",
-    description: "Integrate 553K+ verified real estate agent contacts into your app via REST API.",
+    description: "Integrate 889K+ verified real estate agent contacts into your app via REST API.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }

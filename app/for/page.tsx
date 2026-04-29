@@ -80,7 +80,7 @@ export default function PersonasIndex() {
             <div className="card p-5 sm:p-6 bg-subtle border-border mb-12">
               <h2 className="text-[15px] font-semibold text-ink mb-3">One Database, Many Use Cases</h2>
               <p className="text-[14px] text-body leading-[1.8]">
-                Our database of 553,000+ verified real estate agent contacts covers all 50 US states with name, email, phone, and state. Whether you&apos;re running cold email campaigns, building referral networks, or enriching your CRM — the data is the same. The strategy depends on who you are and what you sell.
+                Our database of 889,000+ verified real estate agent contacts covers all 50 US states with name, email, phone, and state. Whether you&apos;re running cold email campaigns, building referral networks, or enriching your CRM — the data is the same. The strategy depends on who you are and what you sell.
               </p>
             </div>
 

@@ -96,7 +96,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "How many contacts will my team actually be able to reach?",
         answer:
-          "The full database includes 553,000+ contacts. Email coverage is near-complete, and roughly 40% of records include a direct phone number. The data is verified against state licensing records, so bounce rates stay low.",
+          "The full database includes 889,000+ contacts. Email coverage is near-complete, and roughly 40% of records include a direct phone number. The data is verified against state licensing records, so bounce rates stay low.",
       },
       {
         question: "Can I integrate this with my CRM or outbound tool?",
@@ -274,7 +274,7 @@ export const PERSONAS: readonly Persona[] = [
     title: "Real Estate Agent Database for Lead Gen Companies",
     headline: "Source Verified Agent Contacts Without the Scraping",
     description:
-      "You sell leads or build contact databases for clients who target real estate agents. The data sourcing is usually the most expensive and time-consuming part. Our pre-built database saves you the scraping, cleaning, and verification work — you get 553,000+ verified contacts ready to use or resell as part of your offering.",
+      "You sell leads or build contact databases for clients who target real estate agents. The data sourcing is usually the most expensive and time-consuming part. Our pre-built database saves you the scraping, cleaning, and verification work — you get 889,000+ verified contacts ready to use or resell as part of your offering.",
     painPoints: [
       "Spending engineering time building and maintaining scrapers for state licensing sites",
       "High costs for data cleaning and email verification at scale",
@@ -300,7 +300,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "What's the data coverage like?",
         answer:
-          "553,000+ licensed real estate agents across all 50 US states. Email coverage is near-complete. Approximately 40% of records include a direct phone number. Data is sourced from state licensing authorities.",
+          "889,000+ licensed real estate agents across all 50 US states. Email coverage is near-complete. Approximately 40% of records include a direct phone number. Data is sourced from state licensing authorities.",
       },
       {
         question: "Can I use this data in my own products?",

@@ -45,7 +45,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 - The software pulls listings from the MLS and displays them with search and filter tools
 - Leads who search on the site can be captured for follow-up
 
-**Why IDX matters for businesses selling to agents:** IDX is a major expense and technology decision for agents. Companies selling IDX solutions, website builders, or CRM tools with IDX integration need to reach agents directly. A verified agent email list lets IDX vendors market to the 553,000+ licensed agents who are potential customers.
+**Why IDX matters for businesses selling to agents:** IDX is a major expense and technology decision for agents. Companies selling IDX solutions, website builders, or CRM tools with IDX integration need to reach agents directly. A verified agent email list lets IDX vendors market to the 889,000+ licensed agents who are potential customers.
 
 **IDX vs VOW (Virtual Office Website):**
 - IDX: Publicly accessible, shows listings to anyone visiting the site
@@ -187,7 +187,7 @@ export const GLOSSARY_TERMS: readonly GlossaryTerm[] = [
 - Sierra Interactive
 - HubSpot (general-purpose, adapted for RE)
 
-**Why CRM vendors buy agent data:** CRM companies need to reach agents to sell their software. The real estate CRM market is crowded, so vendors that can run targeted outbound campaigns to agents have an edge. A database of 553,000+ agent emails and phones lets a CRM sales team reach every potential customer in the US.
+**Why CRM vendors buy agent data:** CRM companies need to reach agents to sell their software. The real estate CRM market is crowded, so vendors that can run targeted outbound campaigns to agents have an edge. A database of 889,000+ agent emails and phones lets a CRM sales team reach every potential customer in the US.
 
 **How agents typically adopt CRMs:** Most agents choose a CRM based on their brokerage's recommendation, peer reviews, or direct outreach from vendors. Cold email introducing a CRM — especially with a free trial offer — is one of the highest-converting approaches for CRM sales teams.`,
     relatedTerms: ["idx", "mls", "brokerage"],
@@ -364,7 +364,7 @@ Sarah Chen,sarah@example.com,(512) 447-9801,Texas
 **Why CSV is the standard for agent data:**
 - Works with every tool: Excel, Google Sheets, HubSpot, Salesforce, Mailchimp, Instantly
 - No proprietary software needed to open or edit
-- Small file size — even 553,000+ records stay under 50MB
+- Small file size — even 889,000+ records stay under 80MB
 - Easy to filter, sort, and split by state or other fields
 
 **How to use a CSV agent list:**

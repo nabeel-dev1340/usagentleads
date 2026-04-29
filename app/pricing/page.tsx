@@ -6,14 +6,14 @@ import { Check, X, Minus, ArrowRight, ShieldCheck, ChevronRight } from "lucide-r
 import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 import { SubscribeButton } from "@/components/checkout/SubscribeButton"
 import { getDatabaseTotals } from "@/lib/supabase/server"
-import { formatAgentCount } from "@/lib/utils/states"
+import { formatAgentCount, TOTAL_AGENTS } from "@/lib/utils/states"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 
 const pricingProductSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
   name: "USAgentLeads Real Estate Agent Database",
-  description: "Complete US real estate agent contact database with 553,778+ verified contacts across all 50 states",
+  description: `Complete US real estate agent contact database with ${TOTAL_AGENTS.toLocaleString()}+ verified contacts across all 50 states`,
   image: "https://www.usagentleads.com/opengraph-image",
   brand: { "@type": "Brand", name: "USAgentLeads" },
   offers: [
@@ -135,7 +135,7 @@ const pricingProductSchema = {
 export const metadata: Metadata = {
   title: "Pricing 2026 — Real Estate Agent Database from $49/State",
   description:
-    "2026 realtor email lists from $49/state or $149 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
+    "2026 realtor email lists from $49/state or $149 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {
@@ -146,7 +146,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pricing — Real Estate Agent Database from $49/State",
     description:
-      "Realtor email lists from $49/state or $149 for all 50 states. 553K+ verified contacts, instant CSV delivery, no subscription.",
+      "Realtor email lists from $49/state or $149 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription.",
     url: "https://www.usagentleads.com/pricing",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
@@ -303,7 +303,7 @@ const pricingFAQs = [
   {
     question: "What's the difference between the Full Database and Pro Dashboard?",
     answer:
-      "The Full Database ($149 one-time) gives you a single CSV download of all 553K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
+      "The Full Database ($149 one-time) gives you a single CSV download of all 889K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
   },
 ]
 

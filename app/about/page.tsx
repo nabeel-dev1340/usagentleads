@@ -100,7 +100,7 @@ const organizationSchema = {
 
 export default async function AboutPage() {
   const totalCount = await getTotalCount()
-  const displayCount = totalCount > 0 ? totalCount.toLocaleString() : "553,000"
+  const displayCount = totalCount > 0 ? totalCount.toLocaleString() : "888,809"
 
   return (
     <>

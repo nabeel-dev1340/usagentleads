@@ -34,7 +34,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Contract Required", us: false, them: true },
       { feature: "Instant Download", us: true, them: false },
       { feature: "CRM-Ready CSV", us: true, them: "Proprietary format" },
-      { feature: "Agent Count", us: "553,000+", them: "N/A (homeowner leads)" },
+      { feature: "Agent Count", us: "889,000+", them: "N/A (homeowner leads)" },
     ],
     ourAdvantages: [
       "One-time payment vs monthly subscription — no recurring costs",
@@ -125,7 +125,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "ZoomInfo is a massive B2B contact database covering every industry. It's powerful but expensive. If you specifically need real estate agent contacts, here's why a specialized database might be the better fit.",
     features: [
       { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
-      { feature: "Real Estate Agent Coverage", us: "553,000+ verified", them: "Partial (not specialized)" },
+      { feature: "Real Estate Agent Coverage", us: "889,000+ verified", them: "Partial (not specialized)" },
       { feature: "Pricing", us: "$149 one-time", them: "$15,000-30,000+/year" },
       { feature: "Contract", us: "None", them: "Annual minimum" },
       { feature: "Data Export", us: "Unlimited CSV download", them: "Credit-based exports" },
@@ -146,7 +146,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "CRM integrations and workflow automation",
     ],
     verdict:
-      "If your sales team sells to many industries and needs a full B2B intelligence platform, ZoomInfo justifies its cost. But if you specifically target real estate agents, paying $15K+/year for ZoomInfo makes no sense when USAgentLeads covers 553,000+ agents for a one-time $149. The specialized database has better agent coverage at a fraction of the cost.",
+      "If your sales team sells to many industries and needs a full B2B intelligence platform, ZoomInfo justifies its cost. But if you specifically target real estate agents, paying $15K+/year for ZoomInfo makes no sense when USAgentLeads covers 889,000+ agents for a one-time $149. The specialized database has better agent coverage at a fraction of the cost.",
     keywords: [
       "ZoomInfo vs USAgentLeads",
       "ZoomInfo alternative for real estate",
@@ -174,7 +174,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "Apollo.io is a popular sales intelligence platform with a large B2B database and built-in email sequencing. Here's how it stacks up against USAgentLeads when your target is specifically real estate agents.",
     features: [
       { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
-      { feature: "Agent Coverage", us: "553,000+ verified", them: "Partial — not specialized" },
+      { feature: "Agent Coverage", us: "889,000+ verified", them: "Partial — not specialized" },
       { feature: "Pricing", us: "$149 one-time", them: "$49-99/month per user" },
       { feature: "Email Sequencing", us: false, them: true },
       { feature: "Data Export", us: "Unlimited CSV", them: "Credit-limited" },
@@ -224,7 +224,7 @@ export const COMPETITORS: readonly Competitor[] = [
     features: [
       { feature: "Full US Database", us: "$149", them: "$199-499+" },
       { feature: "Per-State Pricing", us: "$49", them: "$30-50" },
-      { feature: "Agent Count", us: "553,000+", them: "Varies" },
+      { feature: "Agent Count", us: "889,000+", them: "Varies" },
       { feature: "Instant Download", us: true, them: true },
       { feature: "CSV Format", us: true, them: true },
       { feature: "No Account Required", us: true, them: false },

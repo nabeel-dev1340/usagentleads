@@ -44,7 +44,7 @@ const statesFAQs = [
   },
   {
     question: "What's the difference between a state pack and the full database?",
-    answer: "A state pack ($49) gives you a CSV for a single state. The Full Database ($149, one-time) includes all 50 states in a single download — 553,000+ contacts. If you need 4+ states, the full database is better value.",
+    answer: "A state pack ($49) gives you a CSV for a single state. The Full Database ($149, one-time) includes all 50 states in a single download — 889,000+ contacts. If you need 4+ states, the full database is better value.",
   },
   {
     question: "How quickly is the CSV delivered after purchase?",
