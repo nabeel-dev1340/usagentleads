@@ -1,9 +1,20 @@
 "use client"
 
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { ArrowRight, CheckCircle, Download, Loader2, Mail } from "lucide-react"
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void
+  }
+}
+
+const PURCHASE_VALUES: Record<string, number> = {
+  full_database: 149,
+  state_data: 49,
+}
 
 export default function PurchaseSuccessPage() {
   return (
@@ -27,6 +38,7 @@ function PurchaseSuccessContent() {
   const [purchase, setPurchase] = useState<PurchaseInfo | null>(null)
   const [loading, setLoading] = useState(!!pageToken)
   const [retries, setRetries] = useState(0)
+  const pixelFired = useRef(false)
 
   useEffect(() => {
     if (!pageToken) return
@@ -42,6 +54,19 @@ function PurchaseSuccessContent() {
         if (!cancelled) {
           setPurchase(data)
           setLoading(false)
+
+          if (data.status === "completed" && !pixelFired.current) {
+            pixelFired.current = true
+            const value = PURCHASE_VALUES[data.purchaseType as string]
+            if (value && typeof window.fbq === "function") {
+              window.fbq("track", "Purchase", {
+                value,
+                currency: "USD",
+                content_type: "product",
+                content_ids: [data.stateCode ? `state_${data.stateCode}` : data.purchaseType],
+              })
+            }
+          }
 
           // If purchase is still pending (webhook hasn't fired yet), retry
           if (data.status === "pending" && retries < 10) {
