@@ -23,8 +23,8 @@
   /* Text */
   --color-ink: #0F1623;
   --color-body: #374151;
-  --color-tertiary: #6B7280;
-  --color-muted: #9CA3AF;
+  --color-tertiary: #4B5563;
+  --color-muted: #6B7280;
 
   /* Dark surfaces (footer, code blocks) */
   --color-dark-border: #1F2937;
@@ -96,6 +96,12 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* On dark surfaces (e.g. footer), token defaults are too dark — invert to lighter grays for AA contrast. */
+.bg-ink {
+  --color-tertiary: #9CA3AF;
+  --color-muted: #D1D5DB;
 }
 
 /* ---- Scrollbar ---- */

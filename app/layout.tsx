@@ -83,9 +83,6 @@ export default function RootLayout({
   return (
     <html lang="en-US" className={`${poppins.variable} ${jetbrainsMono.variable}`}>
       <head>
-        <link rel="preconnect" href="https://app.lemonsqueezy.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="lazyOnload" />
         <Script id="google-analytics" strategy="lazyOnload">
           {`
