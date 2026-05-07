@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { createServiceClient } from "@/lib/supabase/server"
+import { cleanName, isValidName } from "@/lib/utils/clean-name"
 
 function escapeCSV(value: string | null): string {
   if (!value) return ""
@@ -48,9 +49,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "No leads found" }, { status: 404 })
     }
 
+    // Clean names + drop any that fail validation post-clean
+    const cleaned = leads
+      .map((row) => ({ ...row, name: cleanName(row.name) }))
+      .filter((row) => isValidName(row.name))
+
     // Build CSV
     const csvHeaders = "name,email,phone,state"
-    const csvRows = leads.map((row) =>
+    const csvRows = cleaned.map((row) =>
       [
         escapeCSV(row.name),
         escapeCSV(row.email),
@@ -72,7 +78,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      rows: leads.length,
+      rows: cleaned.length,
     })
   } catch (error) {
     console.error("Generate free sample error:", error)

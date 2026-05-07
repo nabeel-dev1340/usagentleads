@@ -3,6 +3,7 @@ import crypto from "crypto"
 import { gzipSync } from "zlib"
 import { createServiceClient } from "@/lib/supabase/server"
 import { US_STATES } from "@/lib/utils/states"
+import { cleanName, isValidName } from "@/lib/utils/clean-name"
 
 const STATE_NAME_TO_CODE = new Map(
   US_STATES.map((s) => [s.name, s.code])
@@ -17,18 +18,6 @@ STATE_NAME_TO_CODE.set("District of Columbia", "DC")
 STATE_CODE_TO_NAME.set("DC", "District of Columbia")
 
 const CSV_HEADERS = ["name", "email", "phone", "state"] as const
-
-/** Strip zero-width characters (U+200B, U+200C, U+200D, U+FEFF) and trim */
-function cleanName(name: string | null): string | null {
-  if (!name) return null
-  return name.replace(/[\u200B\u200C\u200D\uFEFF]/g, "").trim() || null
-}
-
-/** Returns true if the name contains at least 2 consecutive letters */
-function isValidName(name: string | null): boolean {
-  if (!name) return false
-  return /[a-zA-Z]{2,}/.test(name)
-}
 
 function parseCSVLine(line: string): string[] {
   const fields: string[] = []
