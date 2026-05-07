@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { US_STATES, getStateBySlug, formatAgentCount } from "@/lib/utils/states"
 import { generateStateMetadata, generateBreadcrumbSchema, generateProductSchema, generateDatasetSchema, generateFAQSchema } from "@/lib/utils/seo"
 import { getStateContent, getStateFAQs } from "@/lib/utils/state-content"
+import { getStateSampleContact } from "@/lib/utils/state-sample-contacts"
 import { getAllPosts } from "@/lib/blog"
 import { STATE_NEIGHBORS } from "@/lib/utils/state-neighbors"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
@@ -29,8 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return generateStateMetadata(state, content?.cities)
 }
 
-const sampleData = [
-  { name: "James Harrington", email: "james@harrington-realty.com", phone: "(305) 881-2244" },
+const blurredFillerRows = [
   { name: "Sarah Chen", email: "sarah.chen@kw.com", phone: "(512) 447-9801" },
   { name: "Michael Rivera", email: "mrivera@homes.co", phone: "(213) 556-1102" },
   { name: "Emily Thompson", email: "emily.t@sold.net", phone: "(404) 223-8877" },
@@ -63,6 +63,8 @@ export default async function StatePage({ params }: Props) {
   const dataset = generateDatasetSchema(state, agentCount)
 
   const stateContent = getStateContent(slug)
+  const previewContact = getStateSampleContact(slug) ?? blurredFillerRows[0]
+  const sampleData = [previewContact, ...blurredFillerRows]
   const faqs = getStateFAQs(state, agentCount)
   const faqSchema = generateFAQSchema(faqs)
 
