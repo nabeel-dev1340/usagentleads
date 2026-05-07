@@ -1,20 +1,30 @@
 export const revalidate = 3600
 
+import dynamic from "next/dynamic"
 import { HeroSection } from "@/components/home/HeroSection"
 import { TrustBar } from "@/components/home/TrustBar"
 import { WhoIsThisFor } from "@/components/home/WhoIsThisFor"
 import { HowItWorks } from "@/components/home/HowItWorks"
 import { UseCases } from "@/components/home/UseCases"
 import { PricingCards } from "@/components/home/PricingCards"
-import { ApiSection } from "@/components/home/ApiSection"
 import { CompetitorComparison } from "@/components/home/CompetitorComparison"
-import { Testimonials } from "@/components/home/Testimonials"
+import { LatestPosts } from "@/components/home/LatestPosts"
 import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
-import { FAQSection } from "@/components/home/FAQSection"
-import { LatestPosts } from "@/components/home/LatestPosts"
 import { getDatabaseTotals } from "@/lib/supabase/server"
 import { getAllPosts } from "@/lib/blog"
+
+// Below-the-fold client components — split into their own chunks so the initial
+// page bundle stays small. SSR is preserved (default ssr: true).
+const ApiSection = dynamic(() =>
+  import("@/components/home/ApiSection").then(m => ({ default: m.ApiSection })),
+)
+const Testimonials = dynamic(() =>
+  import("@/components/home/Testimonials").then(m => ({ default: m.Testimonials })),
+)
+const FAQSection = dynamic(() =>
+  import("@/components/home/FAQSection").then(m => ({ default: m.FAQSection })),
+)
 
 const websiteSchema = {
   "@context": "https://schema.org",

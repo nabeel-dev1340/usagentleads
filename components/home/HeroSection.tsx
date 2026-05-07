@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
 import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"

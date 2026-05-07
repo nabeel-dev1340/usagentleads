@@ -4,7 +4,7 @@ import { Poppins, JetBrains_Mono } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
-import { SupportWidget } from "@/components/layout/SupportWidget"
+import { SupportWidgetLazy } from "@/components/layout/SupportWidgetLazy"
 import { ScrollRevealProvider } from "@/components/layout/ScrollRevealProvider"
 import "./globals.css"
 
@@ -86,8 +86,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://app.lemonsqueezy.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -124,7 +124,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
-        <SupportWidget />
+        <SupportWidgetLazy />
         <Toaster />
       </body>
     </html>

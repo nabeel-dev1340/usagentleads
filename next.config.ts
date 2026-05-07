@@ -32,6 +32,9 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   trailingSlash: false,
+  // Required for the PostHog reverse proxy below — PostHog's API ignores trailing slashes
+  // and Next would otherwise issue a redirect that breaks the proxied request.
+  skipTrailingSlashRedirect: true,
   images: {
     remotePatterns: [
       {
@@ -50,11 +53,24 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      { source: "/ingest/static/:path*", destination: "https://us-assets.i.posthog.com/static/:path*" },
+      { source: "/ingest/:path*", destination: "https://us.i.posthog.com/:path*" },
+      { source: "/ingest/decide", destination: "https://us.i.posthog.com/decide" },
+    ]
+  },
   async headers() {
     return [
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+      {
+        source: "/ingest/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
       },
     ]
   },
