@@ -98,12 +98,6 @@ html, body {
   overflow-x: hidden;
 }
 
-/* On dark surfaces (e.g. footer), token defaults are too dark — invert to lighter grays for AA contrast. */
-.bg-ink {
-  --color-tertiary: #9CA3AF;
-  --color-muted: #D1D5DB;
-}
-
 /* ---- Scrollbar ---- */
 ::-webkit-scrollbar {
   width: 6px;

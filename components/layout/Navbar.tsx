@@ -38,7 +38,18 @@ export function Navbar() {
   }, [supabase])
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10)
+    let ticking = false
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        setScrolled((prev) => {
+          const next = window.scrollY > 10
+          return prev === next ? prev : next
+        })
+        ticking = false
+      })
+    }
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -81,7 +92,7 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+        className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-200 ${
           scrolled
             ? "border-b border-border bg-white/80 backdrop-blur-md"
             : "border-b border-transparent bg-white"

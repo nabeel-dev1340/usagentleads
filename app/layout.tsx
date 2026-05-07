@@ -119,7 +119,7 @@ export default function RootLayout({
         </noscript>
         <ScrollRevealProvider />
         <Navbar />
-        <main>{children}</main>
+        <main className="pt-16">{children}</main>
         <Footer />
         <SupportWidgetLazy />
         <Toaster />
