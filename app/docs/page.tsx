@@ -12,31 +12,36 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
+import { getTotalCount } from "@/lib/supabase/server"
+import { formatAgentCount } from "@/lib/utils/states"
 
-export const metadata: Metadata = {
-  title: "Real Estate Agent API 2026 | REST API Documentation",
-  description:
-    "Integrate 889K+ verified real estate agent contacts into your app via REST API. Updated for 2026 with simple authentication, state filtering, search, and paginated JSON responses.",
-  alternates: {
-    canonical: "https://www.usagentleads.com/docs",
-    languages: {
-      "en-US": "https://www.usagentleads.com/docs",
-      "x-default": "https://www.usagentleads.com/docs",
+export async function generateMetadata(): Promise<Metadata> {
+  const totalCount = await getTotalCount()
+  const countLabel = totalCount > 0 ? formatAgentCount(totalCount) : "500K+"
+
+  return {
+    title: "Real Estate Agent API 2026 | REST API Documentation",
+    description: `Integrate ${countLabel} verified real estate agent contacts into your app via REST API. Updated for 2026 with simple authentication, state filtering, search, and paginated JSON responses.`,
+    alternates: {
+      canonical: "https://www.usagentleads.com/docs",
+      languages: {
+        "en-US": "https://www.usagentleads.com/docs",
+        "x-default": "https://www.usagentleads.com/docs",
+      },
     },
-  },
-  openGraph: {
-    title: "Real Estate Agent API | REST API Documentation | USAgentLeads",
-    description:
-      "Integrate 889K+ verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.",
-    url: "https://www.usagentleads.com/docs",
-    images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Real Estate Agent API | REST API Documentation",
-    description: "Integrate 889K+ verified real estate agent contacts into your app via REST API.",
-    images: ["https://www.usagentleads.com/twitter-image"],
-  },
+    openGraph: {
+      title: "Real Estate Agent API | REST API Documentation | USAgentLeads",
+      description: `Integrate ${countLabel} verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.`,
+      url: "https://www.usagentleads.com/docs",
+      images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Real Estate Agent API | REST API Documentation",
+      description: `Integrate ${countLabel} verified real estate agent contacts into your app via REST API.`,
+      images: ["https://www.usagentleads.com/twitter-image"],
+    },
+  }
 }
 
 function CodeBlock({
@@ -157,7 +162,10 @@ const docsBreadcrumb = generateBreadcrumbSchema([
   { name: "API Docs", url: "https://www.usagentleads.com/docs" },
 ])
 
-export default function DocsPage() {
+export default async function DocsPage() {
+  const totalCount = await getTotalCount()
+  const countLabel = totalCount > 0 ? formatAgentCount(totalCount) : "500K+"
+
   return (
     <>
       <script
@@ -185,7 +193,7 @@ export default function DocsPage() {
             API Reference
           </h1>
           <p className="text-[17px] text-body leading-relaxed max-w-2xl">
-            Integrate 500K+ verified US real estate agent contacts into your CRM,
+            Integrate {countLabel} verified US real estate agent contacts into your CRM,
             marketing tools, or applications with our simple REST API.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
@@ -755,7 +763,7 @@ print(f"Fetched {len(ca_agents)} California agents")`}</CodeBlock>
               </h3>
               <p className="text-[15px] text-body mb-6 max-w-lg mx-auto">
                 Subscribe to the Pro API plan, create your first API key, and start
-                querying 500K+ agents in minutes.
+                querying {countLabel} agents in minutes.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link href="/pricing" className="btn-primary text-[15px] px-6 py-3">

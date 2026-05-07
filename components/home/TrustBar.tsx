@@ -43,7 +43,7 @@ export function TrustBar({ totalCount }: { totalCount: number }) {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-0 sm:divide-x sm:divide-border">
           <StatItem value={count} label="Total Contacts" active={inView} />
           <StatItem value={50} label="US States" active={inView} />
-          <TextStatItem value="Name · Email · Phone" label="Fields Per Record" active={inView} />
+          <TextStatItem value="Name · Email · Phone · State" label="Fields Per Record" active={inView} />
           <TextStatItem value="90%+" label="Deliverability" active={inView} />
           <TextStatItem value="CAN-SPAM" label="Compliant" active={inView} />
         </div>
