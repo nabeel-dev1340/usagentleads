@@ -133,6 +133,14 @@ function PurchaseSuccessContent() {
           The download link expires in 48 hours, so be sure to download your file soon.
         </p>
 
+        <p className="mt-4 text-[13px] text-tertiary">
+          Haven&apos;t received your download link within 15–30 minutes? Please{" "}
+          <Link href="/contact" className="text-accent underline hover:no-underline">
+            contact support
+          </Link>{" "}
+          and we&apos;ll get it sorted out.
+        </p>
+
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link href="/states" className="btn-primary">
             Browse More States <ArrowRight size={14} />
