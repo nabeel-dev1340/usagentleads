@@ -2,12 +2,10 @@ export const revalidate = 3600
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
-import { Check, X, Minus, ArrowRight, ShieldCheck, ChevronRight } from "lucide-react"
-import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
-import { SubscribeButton } from "@/components/checkout/SubscribeButton"
+import { Check, Minus, ChevronRight } from "lucide-react"
+import { PlanGroups } from "@/components/pricing/PlanGroups"
 import { getDatabaseTotals } from "@/lib/supabase/server"
-import { formatAgentCount, TOTAL_AGENTS } from "@/lib/utils/states"
+import { TOTAL_AGENTS } from "@/lib/utils/states"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 
 const pricingProductSchema = {
@@ -159,101 +157,6 @@ export const metadata: Metadata = {
   },
 }
 
-interface Feature {
-  text: string
-  included: boolean
-}
-
-interface Stat {
-  value: string
-  label: string
-}
-
-function formatStat(n: number): string {
-  if (n >= 1000) return `${Math.round(n / 1000).toLocaleString()}K+`
-  return n.toLocaleString()
-}
-
-function getPlans(totalCount: number, totalEmails: number, totalPhones: number) {
-  const countLabel = totalCount > 0 ? `${formatAgentCount(totalCount)} verified contacts` : "500K+ verified contacts"
-  const fullDbStats: Stat[] | undefined =
-    totalCount > 0 && totalEmails > 0 && totalPhones > 0
-      ? [
-          { value: formatStat(totalCount), label: "Contacts" },
-          { value: formatStat(totalEmails), label: "Emails" },
-          { value: formatStat(totalPhones), label: "Phones" },
-        ]
-      : undefined
-  return [
-    {
-      name: "State Pack",
-      subtitle: "One-time purchase",
-      price: "$49",
-      period: "/ state",
-      features: [
-        { text: "Single state CSV download", included: true },
-        { text: "Name, email, phone, state", included: true },
-        { text: "Instant delivery via email", included: true },
-        { text: "No account required", included: true },
-        { text: "Dashboard access", included: false },
-      ] as Feature[],
-      cta: "Browse States",
-      href: "/states",
-      highlighted: false,
-    },
-    {
-      name: "Full Database",
-      subtitle: "One-time purchase",
-      price: "$149",
-      period: "/ one-time",
-      badge: "BEST VALUE",
-      stats: fullDbStats,
-      features: [
-        { text: "All 50 states in one CSV", included: true },
-        { text: countLabel, included: true },
-        { text: "Instant delivery via email", included: true },
-        { text: "No account required", included: true },
-        { text: "Dashboard access", included: false },
-      ] as Feature[],
-      cta: "buy",
-      href: "/pricing",
-      highlighted: true,
-    },
-    {
-      name: "Pro Dashboard",
-      subtitle: "Monthly subscription",
-      price: "$49",
-      period: "/ month",
-      features: [
-        { text: "Browse all agents in-app", included: true },
-        { text: "Search & filter by state", included: true },
-        { text: "Real-time data access", included: true },
-        { text: "Cancel anytime", included: true },
-        { text: "Google Sign In required", included: true },
-      ] as Feature[],
-      cta: "subscribe",
-      href: "/pricing",
-      highlighted: false,
-    },
-    {
-      name: "Pro API",
-      subtitle: "Monthly subscription",
-      price: "$79",
-      period: "/ month",
-      features: [
-        { text: "Everything in Pro Dashboard", included: true },
-        { text: "REST API access", included: true },
-        { text: "10,000 API requests/month", included: true },
-        { text: "60 requests/minute rate limit", included: true },
-        { text: "API key management & analytics", included: true },
-      ] as Feature[],
-      cta: "subscribe_api",
-      href: "/pricing",
-      highlighted: false,
-    },
-  ]
-}
-
 const comparisonRows = [
   { label: "Price", state: "$49/state", full: "$149", pro: "$49/mo", proApi: "$79/mo" },
   { label: "All 50 states", state: false, full: true, pro: false, proApi: false },
@@ -307,7 +210,6 @@ const pricingFAQs = [
 
 export default async function PricingPage() {
   const { count: totalCount, emails: totalEmails, phones: totalPhones } = await getDatabaseTotals()
-  const plans = getPlans(totalCount, totalEmails, totalPhones)
 
   const breadcrumb = generateBreadcrumbSchema([
     { name: "Home", url: "https://www.usagentleads.com" },
@@ -331,125 +233,32 @@ export default async function PricingPage() {
         </nav>
 
         {/* Header */}
-        <div className="section-header text-center flex flex-col items-center mb-16">
+        <div className="section-header text-center flex flex-col items-center mb-14">
           <p className="label-eyebrow">Pricing</p>
           <h1 className="section-heading">Simple, Transparent Pricing</h1>
           <p className="section-sub max-w-xl">
-            No hidden fees. No subscriptions required for CSV purchases.
+            Buy a one-time CSV download, or subscribe for always-current data. No hidden fees.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto items-stretch">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative p-6 flex flex-col rounded-xl transition-all duration-200 ${
-                plan.highlighted
-                  ? "bg-white border-2 border-accent shadow-[0_8px_40px_rgba(29,78,216,0.12),0_2px_8px_rgba(29,78,216,0.08)] hover:-translate-y-0.5"
-                  : "card hover:-translate-y-0.5 hover:shadow-md"
-              }`}
-            >
-              {plan.badge && (
-                <div className="absolute -top-px left-1/2 -translate-x-1/2">
-                  <div className="bg-accent text-white font-mono text-[11px] font-semibold tracking-wider uppercase px-3 py-1 rounded-b-lg shadow-sm">
-                    {plan.badge}
-                  </div>
-                </div>
-              )}
-
-              <p className={`text-[14px] font-medium text-body mb-0.5 ${plan.badge ? "mt-3" : ""}`}>
-                {plan.name}
-              </p>
-              <p className="text-[12px] font-mono text-tertiary mb-5">{plan.subtitle}</p>
-
-              <div className="flex items-baseline gap-1 mb-1.5">
-                <span className="font-mono text-[32px] sm:text-[40px] font-semibold text-ink leading-none">
-                  {plan.price}
-                </span>
-                <span className="text-tertiary text-[14px]">{plan.period}</span>
-              </div>
-              <div className="mb-5" />
-
-              <div className="h-px bg-border mb-6" />
-
-              {"stats" in plan && plan.stats && (
-                <div className="mb-6 rounded-lg bg-accent-light/60 border border-accent/25 px-4 py-3 space-y-1.5">
-                  {plan.stats.map((stat) => (
-                    <div key={stat.label} className="flex items-baseline justify-between">
-                      <span className="font-mono text-[18px] font-semibold text-accent leading-tight">
-                        {stat.value}
-                      </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-accent/80">
-                        {stat.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              <ul className="space-y-3 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f.text} className="flex items-start gap-2.5 text-[14px]">
-                    {f.included ? (
-                      <Check size={15} className="text-success shrink-0 mt-0.5" />
-                    ) : (
-                      <X size={15} className="text-muted shrink-0 mt-0.5" />
-                    )}
-                    <span className={f.included ? "text-body" : "text-muted line-through decoration-muted/50"}>
-                      {f.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-6">
-                {plan.name === "State Pack" && (
-                  <Link href="/states" className="btn-outline w-full justify-center text-[14px]">
-                    Browse States <ArrowRight size={13} />
-                  </Link>
-                )}
-                {plan.name === "Full Database" && (
-                  <BuyFullDBButton className="w-full" />
-                )}
-                {plan.name === "Pro Dashboard" && (
-                  <SubscribeButton className="w-full" />
-                )}
-                {plan.name === "Pro API" && (
-                  <SubscribeButton
-                    className="w-full"
-                    purchaseType="subscription_api"
-                    label="Subscribe"
-                  />
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center gap-4 mt-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success-bg border border-success/20 text-[14px] text-success font-medium">
-            <ShieldCheck size={16} />
-            30-Day Money-Back Guarantee
-          </div>
-          <div className="flex items-center gap-2.5">
-            <span className="text-[13px] text-tertiary">Secure payments by</span>
-            <Image
-              src="/lemon-squeezy-logo.svg"
-              alt="Lemon Squeezy"
-              width={212}
-              height={28}
-              unoptimized
-              className="h-5 w-auto"
-            />
-          </div>
-          <p className="text-[13px] text-muted">SSL encrypted &middot; Instant delivery</p>
-        </div>
+        {/* Grouped plans */}
+        <PlanGroups
+          totalCount={totalCount}
+          totalEmails={totalEmails}
+          totalPhones={totalPhones}
+          variant="page"
+          headingLevel="h2"
+        />
 
         {/* Comparison table */}
         <div className="mt-20 max-w-4xl mx-auto card overflow-hidden overflow-x-auto">
           <table className="data-table min-w-120">
             <thead>
+              <tr>
+                <th aria-hidden="true" className="bg-white" />
+                <th colSpan={2} className="text-center text-ink border-l border-border">One-time downloads</th>
+                <th colSpan={2} className="text-center text-ink border-l border-border">Monthly subscriptions</th>
+              </tr>
               <tr>
                 <th className="text-left">Feature</th>
                 <th className="text-center">State Pack</th>
