@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import crypto from "crypto"
-import { createClient, createServiceClient } from "@/lib/supabase/server"
+import { createClient } from "@/lib/supabase/server"
 import { createCheckout } from "@/lib/lemonsqueezy/client"
 import { isValidStateCode } from "@/lib/utils/security"
 import { rateLimit } from "@/lib/utils/rateLimit"
@@ -63,25 +63,9 @@ export async function POST(request: Request) {
         )
       }
       customData.user_id = user.id
-
-      // Check if user has ever had a subscription (skip trial for returning users)
-      const { data: existingSub } = await createServiceClient()
-        .schema("usagentleads")
-        .from("subscriptions")
-        .select("id")
-        .eq("user_id", user.id)
-        .limit(1)
-        .maybeSingle()
-
-      if (existingSub) {
-        customData.skip_trial = "true"
-      }
     }
 
-    const skipTrial = customData.skip_trial === "true"
-    delete customData.skip_trial
-
-    const url = await createCheckout({ variantId, customData, skipTrial })
+    const url = await createCheckout({ variantId, customData })
 
     return NextResponse.json({ url })
   } catch (error) {

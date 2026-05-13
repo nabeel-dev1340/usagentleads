@@ -173,7 +173,7 @@ export function ApiSection() {
             Read API Docs <ArrowRight size={14} />
           </Link>
           <Link href="/pricing" className="btn-outline text-[15px] px-6 py-3">
-            Start Free Trial — 100 API calls included
+            View API Pricing
           </Link>
         </div>
       </div>

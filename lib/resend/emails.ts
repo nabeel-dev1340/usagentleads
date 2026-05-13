@@ -193,28 +193,17 @@ export async function sendDownloadEmail({
 
 interface SendSubscriptionWelcomeParams {
   to: string
-  trialEndsAt: string | null
 }
 
 export async function sendSubscriptionWelcome({
   to,
-  trialEndsAt,
 }: SendSubscriptionWelcomeParams) {
-  const trialNote = trialEndsAt
-    ? `<p style="font-size: 14px; color: #64748b; margin: 0 0 16px 0;">
-        Your free trial is active until <strong style="color: #1a1a1a;">${new Date(trialEndsAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</strong>.
-        You won't be charged until then.
-      </p>`
-    : ""
-
   const body = `
     <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
 
     <p style="margin: 0 0 16px 0; font-size: 15px;">
       Welcome to <strong>USAgentLeads Pro Dashboard</strong>! Your subscription is now active.
     </p>
-
-    ${trialNote}
 
     ${infoBox(`
       <p style="margin: 0 0 8px 0; font-weight: 600; font-size: 14px; color: #1e3a5f;">Your Pro access includes:</p>

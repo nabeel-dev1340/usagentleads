@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { authenticateApiKey, getQuotaHeaders, getMonthlyQuota } from "@/lib/utils/apiKeyAuth"
+import { authenticateApiKey, getQuotaHeaders, MONTHLY_QUOTA } from "@/lib/utils/apiKeyAuth"
 import { rateLimit } from "@/lib/utils/rateLimit"
 import { queryAgents } from "@/lib/queries/agents"
 import { createServiceClient } from "@/lib/supabase/server"
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     return authResult
   }
 
-  const { userId, apiKeyId, onTrial } = authResult
+  const { userId, apiKeyId } = authResult
 
   // Per-minute rate limit
   const { success, remaining } = await rateLimit(`api-v1:${apiKeyId}`, 60)
@@ -46,7 +46,6 @@ export async function GET(request: Request) {
   const now = new Date()
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
   const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1)
-  const quota = getMonthlyQuota(onTrial)
 
   const serviceClient = createServiceClient()
   const { count: monthlyUsed } = await serviceClient
@@ -58,7 +57,7 @@ export async function GET(request: Request) {
     .lt("status_code", 400)
 
   const used = (monthlyUsed ?? 0) + 1
-  const quotaHeaders = getQuotaHeaders(used, onTrial)
+  const quotaHeaders = getQuotaHeaders(used)
 
   // Log usage (fire-and-forget)
   logUsage(apiKeyId, userId, "/api/v1/agents", statusCode, request, Date.now() - startTime)
@@ -71,9 +70,8 @@ export async function GET(request: Request) {
       totalPages: result.totalPages,
       quota: {
         used,
-        limit: quota,
+        limit: MONTHLY_QUOTA,
         resets_at: nextMonth.toISOString(),
-        ...(onTrial ? { trial: true } : {}),
       },
     },
     {

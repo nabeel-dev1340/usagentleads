@@ -26,7 +26,6 @@ interface ApiKey {
 interface UsageStats {
   monthly_used: number
   monthly_limit: number
-  on_trial: boolean
   resets_at: string
   daily_counts: { date: string; count: number }[]
 }
@@ -201,14 +200,7 @@ export default function ApiKeysPage() {
       {usage && (
         <div className="card p-5 mb-6">
           <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2">
-              <p className="text-[14px] font-medium text-ink">Monthly Usage</p>
-              {usage.on_trial && (
-                <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-accent-light text-accent border border-accent/20">
-                  Trial — {usage.monthly_limit} requests
-                </span>
-              )}
-            </div>
+            <p className="text-[14px] font-medium text-ink">Monthly Usage</p>
             <p className="text-[13px] font-mono text-tertiary">
               {usage.monthly_used.toLocaleString()} / {usage.monthly_limit.toLocaleString()} requests
             </p>
@@ -221,15 +213,10 @@ export default function ApiKeysPage() {
               style={{ width: `${usagePercent}%` }}
             />
           </div>
-          <div className="flex items-center justify-between mt-2">
+          <div className="mt-2">
             <p className="text-[12px] text-muted">
               Resets {new Date(usage.resets_at).toLocaleDateString("en-US", { month: "long", day: "numeric" })}
             </p>
-            {usage.on_trial && (
-              <p className="text-[12px] text-accent font-medium">
-                Full quota (10,000/mo) unlocks after trial
-              </p>
-            )}
           </div>
         </div>
       )}
@@ -326,7 +313,7 @@ const { data, count, quota } = await res.json();`}
             </div>
             <div className="text-[13px] text-body space-y-1.5">
               <p><span className="font-medium">Rate limit:</span> 60 requests/minute</p>
-              <p><span className="font-medium">Monthly quota:</span> 10,000 requests/month (100 during trial)</p>
+              <p><span className="font-medium">Monthly quota:</span> 10,000 requests/month</p>
               <p><span className="font-medium">Query params:</span> <code className="font-mono text-[12px] bg-subtle px-1.5 py-0.5 rounded">state</code>, <code className="font-mono text-[12px] bg-subtle px-1.5 py-0.5 rounded">search</code>, <code className="font-mono text-[12px] bg-subtle px-1.5 py-0.5 rounded">page</code>, <code className="font-mono text-[12px] bg-subtle px-1.5 py-0.5 rounded">pageSize</code> (25, 50, 100)</p>
             </div>
           </div>
