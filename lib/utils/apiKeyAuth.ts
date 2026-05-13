@@ -2,18 +2,11 @@ import { NextResponse } from "next/server"
 import { createServiceClient } from "@/lib/supabase/server"
 import { hashApiKey } from "./apiKeys"
 
-const MONTHLY_QUOTA_FULL = 10_000
-const MONTHLY_QUOTA_TRIAL = 100
+const MONTHLY_QUOTA = 10_000
 
 interface AuthResult {
   userId: string
   apiKeyId: string
-  onTrial: boolean
-}
-
-/** Returns the effective monthly quota based on trial status */
-export function getMonthlyQuota(onTrial: boolean): number {
-  return onTrial ? MONTHLY_QUOTA_TRIAL : MONTHLY_QUOTA_FULL
 }
 
 export async function authenticateApiKey(
@@ -97,10 +90,6 @@ export async function authenticateApiKey(
     )
   }
 
-  // Determine if user is on trial
-  const onTrial = subscription.status === "on_trial" && trialValid
-  const quota = getMonthlyQuota(onTrial)
-
   // Check monthly quota
   const { count } = await serviceClient
     .schema("usagentleads")
@@ -110,13 +99,11 @@ export async function authenticateApiKey(
     .gte("created_at", new Date(now.getFullYear(), now.getMonth(), 1).toISOString())
     .lt("status_code", 400)
 
-  if ((count ?? 0) >= quota) {
+  if ((count ?? 0) >= MONTHLY_QUOTA) {
     return NextResponse.json(
       {
-        error: onTrial
-          ? "Trial API quota exceeded (100 requests). Subscribe to unlock 10,000/month."
-          : "Monthly API quota exceeded",
-        quota: { used: count, limit: quota },
+        error: "Monthly API quota exceeded",
+        quota: { used: count, limit: MONTHLY_QUOTA },
       },
       { status: 429 }
     )
@@ -130,16 +117,15 @@ export async function authenticateApiKey(
     .eq("id", keyRecord.id)
     .then(() => {})
 
-  return { userId: keyRecord.user_id, apiKeyId: keyRecord.id, onTrial }
+  return { userId: keyRecord.user_id, apiKeyId: keyRecord.id }
 }
 
-export function getQuotaHeaders(used: number, onTrial: boolean) {
-  const quota = getMonthlyQuota(onTrial)
+export function getQuotaHeaders(used: number) {
   return {
     "X-RateLimit-Limit": "60",
-    "X-Monthly-Quota-Limit": String(quota),
-    "X-Monthly-Quota-Remaining": String(Math.max(0, quota - used)),
+    "X-Monthly-Quota-Limit": String(MONTHLY_QUOTA),
+    "X-Monthly-Quota-Remaining": String(Math.max(0, MONTHLY_QUOTA - used)),
   }
 }
 
-export { MONTHLY_QUOTA_FULL, MONTHLY_QUOTA_TRIAL }
+export { MONTHLY_QUOTA }

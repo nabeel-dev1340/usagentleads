@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { createClient, createServiceClient } from "@/lib/supabase/server"
 import { rateLimit } from "@/lib/utils/rateLimit"
-import { getMonthlyQuota } from "@/lib/utils/apiKeyAuth"
+import { MONTHLY_QUOTA } from "@/lib/utils/apiKeyAuth"
 
 const db = () => createServiceClient().schema("usagentleads")
 
@@ -21,20 +21,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 })
   }
 
-  // Check trial status
-  const { data: subscription } = await db()
-    .from("subscriptions")
-    .select("status, trial_ends_at")
-    .eq("user_id", user.id)
-    .single()
-
   const now = new Date()
-  const onTrial =
-    subscription?.status === "on_trial" &&
-    subscription?.trial_ends_at &&
-    new Date(subscription.trial_ends_at) > now
-
-  const quota = getMonthlyQuota(!!onTrial)
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
   const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1)
 
@@ -64,8 +51,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json({
     monthly_used: monthlyUsed ?? 0,
-    monthly_limit: quota,
-    on_trial: !!onTrial,
+    monthly_limit: MONTHLY_QUOTA,
     resets_at: nextMonth.toISOString(),
     daily_counts: Object.entries(dailyCounts).map(([date, count]) => ({
       date,

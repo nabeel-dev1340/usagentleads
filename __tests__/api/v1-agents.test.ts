@@ -131,17 +131,17 @@ describe("GET /api/v1/agents", () => {
     expect(json.quota.used).toBeDefined()
   })
 
-  it("returns trial quota of 100 for trial users", async () => {
+  it("does not expose a trial flag in the quota object", async () => {
     mockSingleResults = [
       { data: { id: "k1", user_id: "u1", revoked_at: null, expires_at: null }, error: null },
-      { data: { status: "on_trial", plan: "pro_api", current_period_end: null, cancel_at_period_end: false, trial_ends_at: "2027-01-01T00:00:00Z" }, error: null },
+      { data: { status: "active", plan: "pro_api", current_period_end: "2027-01-01T00:00:00Z", cancel_at_period_end: false, trial_ends_at: null }, error: null },
     ]
     mockCountResult = { count: 10 }
 
-    const res = await GET(makeRequest({ "x-api-key": "sk_live_trial_key_12345678901" }))
+    const res = await GET(makeRequest({ "x-api-key": "sk_live_active_key_1234567890ab" }))
     const json = await res.json()
 
-    expect(json.quota.limit).toBe(100)
-    expect(json.quota.trial).toBe(true)
+    expect(json.quota.limit).toBe(10000)
+    expect(json.quota.trial).toBeUndefined()
   })
 })

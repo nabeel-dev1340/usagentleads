@@ -151,10 +151,7 @@ export async function POST(request: Request) {
 
         // Send welcome email
         if (customerEmail) {
-          await sendSubscriptionWelcome({
-            to: customerEmail,
-            trialEndsAt,
-          })
+          await sendSubscriptionWelcome({ to: customerEmail })
         }
 
         break

@@ -543,20 +543,6 @@ export default async function DocsPage() {
               count toward your quota. Failed requests (4xx, 5xx) do not count.
             </p>
 
-            <div className="p-4 rounded-xl border border-amber-200 bg-amber-50/50 flex gap-3 mb-4">
-              <AlertTriangle size={18} className="text-amber-600 shrink-0 mt-0.5" />
-              <div>
-                <p className="text-[14px] font-medium text-amber-800 mb-1">
-                  Trial quota
-                </p>
-                <p className="text-[14px] text-amber-700 leading-relaxed">
-                  During the 3-day free trial, API access is limited to <strong>100 requests</strong> so
-                  you can test the integration. The full 10,000/month quota unlocks automatically
-                  when the trial ends and your subscription activates.
-                </p>
-              </div>
-            </div>
-
             <div className="p-4 rounded-xl border border-border bg-subtle/50 flex gap-3 mb-4">
               <CheckCircle2 size={18} className="text-success shrink-0 mt-0.5" />
               <p className="text-[14px] text-body">

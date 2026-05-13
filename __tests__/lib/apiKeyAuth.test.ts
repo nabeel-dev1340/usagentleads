@@ -1,42 +1,27 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { getMonthlyQuota, getQuotaHeaders } from "@/lib/utils/apiKeyAuth"
+import { getQuotaHeaders, MONTHLY_QUOTA } from "@/lib/utils/apiKeyAuth"
 
-describe("getMonthlyQuota", () => {
-  it("returns 100 for trial users", () => {
-    expect(getMonthlyQuota(true)).toBe(100)
-  })
-
-  it("returns 10000 for paid users", () => {
-    expect(getMonthlyQuota(false)).toBe(10_000)
+describe("MONTHLY_QUOTA", () => {
+  it("is 10,000 requests per month", () => {
+    expect(MONTHLY_QUOTA).toBe(10_000)
   })
 })
 
 describe("getQuotaHeaders", () => {
-  it("returns correct headers for paid users", () => {
-    const headers = getQuotaHeaders(500, false)
+  it("returns correct headers", () => {
+    const headers = getQuotaHeaders(500)
     expect(headers["X-RateLimit-Limit"]).toBe("60")
     expect(headers["X-Monthly-Quota-Limit"]).toBe("10000")
     expect(headers["X-Monthly-Quota-Remaining"]).toBe("9500")
   })
 
-  it("returns correct headers for trial users", () => {
-    const headers = getQuotaHeaders(50, true)
-    expect(headers["X-Monthly-Quota-Limit"]).toBe("100")
-    expect(headers["X-Monthly-Quota-Remaining"]).toBe("50")
-  })
-
   it("clamps remaining to 0 when over quota", () => {
-    const headers = getQuotaHeaders(10001, false)
-    expect(headers["X-Monthly-Quota-Remaining"]).toBe("0")
-  })
-
-  it("clamps remaining to 0 for trial over quota", () => {
-    const headers = getQuotaHeaders(150, true)
+    const headers = getQuotaHeaders(10001)
     expect(headers["X-Monthly-Quota-Remaining"]).toBe("0")
   })
 
   it("shows 0 remaining when exactly at quota", () => {
-    const headers = getQuotaHeaders(10000, false)
+    const headers = getQuotaHeaders(10000)
     expect(headers["X-Monthly-Quota-Remaining"]).toBe("0")
   })
 })
@@ -177,37 +162,21 @@ describe("authenticateApiKey", () => {
     expect(json.error).toBe("Subscription is not active")
   })
 
-  it("rejects key when trial quota is exceeded", async () => {
+  it("rejects key when monthly quota is exceeded", async () => {
     mockSingleResults = [
       { data: { id: "key-id", user_id: "user-id", revoked_at: null, expires_at: null }, error: null },
-      { data: { status: "on_trial", plan: "pro_api", current_period_end: null, cancel_at_period_end: false, trial_ends_at: "2027-01-01T00:00:00Z" }, error: null },
+      { data: { status: "active", plan: "pro_api", current_period_end: "2027-01-01T00:00:00Z", cancel_at_period_end: false, trial_ends_at: null }, error: null },
     ]
-    mockCountResult = { count: 100 }
+    mockCountResult = { count: 10_000 }
 
     const result = await authenticateApiKey(
-      makeRequest({ "x-api-key": "sk_live_trial_over_quota_12345" })
+      makeRequest({ "x-api-key": "sk_live_over_quota_123456789012" })
     )
     const json = await (result as Response).json()
-    expect(json.error).toContain("Trial API quota exceeded")
+    expect(json.error).toBe("Monthly API quota exceeded")
   })
 
-  it("returns onTrial=true for users on trial", async () => {
-    mockSingleResults = [
-      { data: { id: "key-id", user_id: "user-id", revoked_at: null, expires_at: null }, error: null },
-      { data: { status: "on_trial", plan: "pro_api", current_period_end: null, cancel_at_period_end: false, trial_ends_at: "2027-01-01T00:00:00Z" }, error: null },
-    ]
-    mockCountResult = { count: 50 }
-
-    const result = await authenticateApiKey(
-      makeRequest({ "x-api-key": "sk_live_trial_user_1234567890" })
-    )
-
-    expect(result).toHaveProperty("onTrial", true)
-    expect(result).toHaveProperty("userId", "user-id")
-    expect(result).toHaveProperty("apiKeyId", "key-id")
-  })
-
-  it("returns onTrial=false for active paid users", async () => {
+  it("returns userId and apiKeyId for valid active subscription", async () => {
     mockSingleResults = [
       { data: { id: "key-id", user_id: "user-id", revoked_at: null, expires_at: null }, error: null },
       { data: { status: "active", plan: "pro_api", current_period_end: "2027-01-01T00:00:00Z", cancel_at_period_end: false, trial_ends_at: null }, error: null },
@@ -218,7 +187,7 @@ describe("authenticateApiKey", () => {
       makeRequest({ "x-api-key": "sk_live_paid_user_12345678901" })
     )
 
-    expect(result).toHaveProperty("onTrial", false)
     expect(result).toHaveProperty("userId", "user-id")
+    expect(result).toHaveProperty("apiKeyId", "key-id")
   })
 })

@@ -51,16 +51,7 @@ describe("GET /api/api-keys/usage", () => {
     expect(json.error).toBe("Unauthorized")
   })
 
-  it("returns trial quota for trial users", async () => {
-    // Subscription check: on_trial
-    mockQuery.single.mockResolvedValueOnce({
-      data: {
-        status: "on_trial",
-        trial_ends_at: "2027-01-01T00:00:00Z",
-      },
-      error: null,
-    })
-
+  it("returns the monthly quota and usage", async () => {
     // Monthly usage count
     mockQuery.lt.mockResolvedValueOnce({ count: 45 })
 
@@ -76,21 +67,12 @@ describe("GET /api/api-keys/usage", () => {
     const res = await GET(new Request("https://example.com/api/api-keys/usage"))
     const json = await res.json()
 
-    expect(json.on_trial).toBe(true)
-    expect(json.monthly_limit).toBe(100)
+    expect(json.monthly_limit).toBe(10000)
     expect(json.monthly_used).toBe(45)
+    expect(json.on_trial).toBeUndefined()
   })
 
-  it("returns full quota for active paid users", async () => {
-    // Subscription check: active (not on trial)
-    mockQuery.single.mockResolvedValueOnce({
-      data: {
-        status: "active",
-        trial_ends_at: null,
-      },
-      error: null,
-    })
-
+  it("reports the full quota regardless of usage level", async () => {
     // Monthly usage count
     mockQuery.lt.mockResolvedValueOnce({ count: 5000 })
 
@@ -100,7 +82,6 @@ describe("GET /api/api-keys/usage", () => {
     const res = await GET(new Request("https://example.com/api/api-keys/usage"))
     const json = await res.json()
 
-    expect(json.on_trial).toBe(false)
     expect(json.monthly_limit).toBe(10000)
     expect(json.monthly_used).toBe(5000)
   })

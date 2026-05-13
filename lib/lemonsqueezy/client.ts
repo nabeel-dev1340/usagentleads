@@ -1,13 +1,11 @@
 interface CreateCheckoutParams {
   variantId: string
   customData: Record<string, string>
-  skipTrial?: boolean
 }
 
 export async function createCheckout({
   variantId,
   customData,
-  skipTrial = false,
 }: CreateCheckoutParams): Promise<string> {
   const isSubscription = customData.purchase_type === "subscription" || customData.purchase_type === "subscription_api"
   const pageToken = customData.page_token || ""
@@ -46,8 +44,9 @@ export async function createCheckout({
           checkout_data: {
             custom: customData,
           },
-          // Skip trial for returning users by setting trial end to now
-          ...(skipTrial ? { trial_ends_at: new Date().toISOString() } : {}),
+          // No free trial — subscriptions are charged immediately. Setting
+          // trial_ends_at to now overrides any trial configured on the variant.
+          ...(isSubscription ? { trial_ends_at: new Date().toISOString() } : {}),
           expires_at: null,
         },
         relationships: {
