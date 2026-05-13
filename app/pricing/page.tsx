@@ -2,6 +2,7 @@ export const revalidate = 3600
 
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { Check, X, Minus, ArrowRight, ShieldCheck, ChevronRight } from "lucide-react"
 import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 import { SubscribeButton } from "@/components/checkout/SubscribeButton"
@@ -223,13 +224,12 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number) 
       subtitle: "Monthly subscription",
       price: "$49",
       period: "/ month",
-      trial: "3-day free trial",
       features: [
         { text: "Browse all agents in-app", included: true },
         { text: "Search & filter by state", included: true },
         { text: "Real-time data access", included: true },
         { text: "Cancel anytime", included: true },
-        { text: "3-day free trial included", included: true },
+        { text: "Google Sign In required", included: true },
       ] as Feature[],
       cta: "subscribe",
       href: "/pricing",
@@ -240,12 +240,11 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number) 
       subtitle: "Monthly subscription",
       price: "$79",
       period: "/ month",
-      trial: "3-day free trial",
       features: [
         { text: "Everything in Pro Dashboard", included: true },
         { text: "REST API access", included: true },
         { text: "10,000 API requests/month", included: true },
-        { text: "100 requests during trial", included: true },
+        { text: "60 requests/minute rate limit", included: true },
         { text: "API key management & analytics", included: true },
       ] as Feature[],
       cta: "subscribe_api",
@@ -263,7 +262,6 @@ const comparisonRows = [
   { label: "Search & filter", state: false, full: false, pro: true, proApi: true },
   { label: "API access", state: false, full: false, pro: false, proApi: true },
   { label: "API requests/mo", state: false, full: false, pro: false, proApi: "10,000" },
-  { label: "Trial API requests", state: false, full: false, pro: false, proApi: "100" },
   { label: "Account required", state: false, full: false, pro: "Email", proApi: "Email" },
   { label: "Delivery", state: "Email CSV", full: "Email CSV", pro: "Instant", proApi: "Instant" },
 ]
@@ -276,9 +274,9 @@ function renderCell(val: boolean | string) {
 
 const pricingFAQs = [
   {
-    question: "Is there a free trial or free sample?",
+    question: "Is there a free sample?",
     answer:
-      "Yes. You can download a free sample of 50 agent contacts before purchasing. For the Pro Dashboard and Pro API plans, we offer a 3-day free trial with full access.",
+      "Yes. You can download a free sample of 50 agent contacts before purchasing — no account needed. The Pro Dashboard and Pro API plans don't include a free trial, but every plan is covered by our 30-day money-back guarantee, so you can try it risk-free.",
   },
   {
     question: "Do I need to create an account to buy?",
@@ -371,11 +369,7 @@ export default async function PricingPage() {
                 </span>
                 <span className="text-tertiary text-[14px]">{plan.period}</span>
               </div>
-              {"trial" in plan && plan.trial ? (
-                <p className="text-[12px] font-medium text-accent mb-5">{plan.trial}</p>
-              ) : (
-                <div className="mb-5" />
-              )}
+              <div className="mb-5" />
 
               <div className="h-px bg-border mb-6" />
 
@@ -433,14 +427,23 @@ export default async function PricingPage() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center gap-3 mt-10">
+        <div className="flex flex-col items-center gap-4 mt-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success-bg border border-success/20 text-[14px] text-success font-medium">
             <ShieldCheck size={16} />
             30-Day Money-Back Guarantee
           </div>
-          <p className="text-[14px] text-tertiary">
-            Payments processed by Lemon Squeezy &middot; SSL encrypted &middot; Instant delivery
-          </p>
+          <div className="flex items-center gap-2.5">
+            <span className="text-[13px] text-tertiary">Secure payments by</span>
+            <Image
+              src="/lemon-squeezy-logo.svg"
+              alt="Lemon Squeezy"
+              width={212}
+              height={28}
+              unoptimized
+              className="h-5 w-auto"
+            />
+          </div>
+          <p className="text-[13px] text-muted">SSL encrypted &middot; Instant delivery</p>
         </div>
 
         {/* Comparison table */}

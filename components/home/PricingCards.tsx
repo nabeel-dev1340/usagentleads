@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Check, X, ArrowRight, ShieldCheck } from "lucide-react"
 import { formatAgentCount } from "@/lib/utils/states"
 
@@ -69,7 +70,6 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number) 
       subtitle: "Monthly subscription",
       price: "$49",
       period: "/ month",
-      trial: "3-day free trial",
       features: [
         { text: "Browse all agents in-app", included: true },
         { text: "Search & filter by state", included: true },
@@ -86,12 +86,11 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number) 
       subtitle: "Monthly subscription",
       price: "$79",
       period: "/ month",
-      trial: "3-day free trial",
       features: [
         { text: "Everything in Pro Dashboard", included: true },
         { text: "REST API access", included: true },
         { text: "10,000 API requests/month", included: true },
-        { text: "100 requests during trial", included: true },
+        { text: "60 requests/minute rate limit", included: true },
         { text: "API key management & analytics", included: true },
       ] as Feature[],
       cta: "Subscribe",
@@ -144,11 +143,7 @@ export function PricingCards({ totalCount, totalEmails, totalPhones }: { totalCo
                 </span>
                 <span className="text-tertiary text-[14px]">{plan.period}</span>
               </div>
-              {"trial" in plan && plan.trial ? (
-                <p className="text-[12px] font-medium text-accent mb-5">{plan.trial}</p>
-              ) : (
-                <div className="mb-5" />
-              )}
+              <div className="mb-5" />
 
               <div className="h-px bg-border mb-6" />
 
@@ -194,14 +189,23 @@ export function PricingCards({ totalCount, totalEmails, totalPhones }: { totalCo
           ))}
         </div>
 
-        <div className="flex flex-col items-center gap-3 mt-10">
+        <div className="flex flex-col items-center gap-4 mt-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-success-bg border border-success/20 text-[14px] text-success font-medium">
             <ShieldCheck size={16} />
             30-Day Money-Back Guarantee
           </div>
-          <p className="text-[14px] text-tertiary">
-            Payments processed by Lemon Squeezy &middot; SSL encrypted &middot; Instant delivery
-          </p>
+          <div className="flex items-center gap-2.5">
+            <span className="text-[13px] text-tertiary">Secure payments by</span>
+            <Image
+              src="/lemon-squeezy-logo.svg"
+              alt="Lemon Squeezy"
+              width={212}
+              height={28}
+              unoptimized
+              className="h-5 w-auto"
+            />
+          </div>
+          <p className="text-[13px] text-muted">SSL encrypted &middot; Instant delivery</p>
         </div>
       </div>
     </section>
