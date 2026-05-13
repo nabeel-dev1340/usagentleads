@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { US_STATES, getStateBySlug, formatAgentCount } from "@/lib/utils/states"
 import { generateStateMetadata, generateBreadcrumbSchema, generateProductSchema, generateDatasetSchema, generateFAQSchema } from "@/lib/utils/seo"
@@ -348,6 +349,18 @@ function PurchaseCard({ stateCode, stateName, agentCount }: { stateCode: string;
         <ShieldCheck size={14} />
         Secure checkout &middot; Instant delivery &middot; No account needed
       </p>
+
+      <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t border-border">
+        <span className="text-[11px] text-muted">Payments by</span>
+        <Image
+          src="/lemon-squeezy-logo.svg"
+          alt="Lemon Squeezy"
+          width={212}
+          height={28}
+          unoptimized
+          className="h-4 w-auto"
+        />
+      </div>
     </div>
   )
 }
