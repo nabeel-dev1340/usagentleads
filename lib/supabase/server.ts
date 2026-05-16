@@ -72,3 +72,19 @@ export async function getDatabaseTotals(): Promise<{ count: number; emails: numb
     { count: 0, emails: 0, phones: 0 }
   )
 }
+
+/** Fetch per-state agent counts keyed by state name. Returns empty object if DB is unavailable. */
+export async function getStateCountMap(): Promise<Record<string, number>> {
+  const supabase = createServiceClient()
+  const { data } = await supabase
+    .schema("usagentleads")
+    .from("state_count")
+    .select("state, count")
+
+  const map: Record<string, number> = {}
+  if (!data) return map
+  for (const row of data as { state: string; count: number }[]) {
+    map[row.state] = row.count
+  }
+  return map
+}
