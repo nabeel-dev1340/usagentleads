@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
 import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
+import { TOTAL_AGENTS } from "@/lib/utils/states"
 
 const previewRows = [
   { name: "James Harrington", email: "james@harrington-realty.com", phone: "(305) 881-2244", state: "FL" },
@@ -10,7 +11,7 @@ const previewRows = [
 ]
 
 export function HeroSection({ totalCount }: { totalCount: number }) {
-  const displayCount = totalCount > 0 ? `${totalCount.toLocaleString()}+` : "500,000+"
+  const displayCount = totalCount > 0 ? `${totalCount.toLocaleString()}+` : `${TOTAL_AGENTS.toLocaleString()}+`
 
   return (
     <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 sm:pb-20 pt-10 overflow-hidden">

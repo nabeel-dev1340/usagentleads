@@ -1,13 +1,16 @@
 import Link from "next/link"
+import { formatAgentCount, TOTAL_AGENTS } from "@/lib/utils/states"
 
 export function BlogCTA() {
+  const countLabel = formatAgentCount(TOTAL_AGENTS)
+
   return (
     <section className="bg-accent rounded-2xl p-8 sm:p-12 text-center my-16">
       <h2 className="text-[22px] sm:text-[24px] font-semibold text-white mb-3">
         Need Real Estate Agent Contacts?
       </h2>
       <p className="text-[15px] sm:text-[16px] text-white/80 max-w-lg mx-auto mb-8">
-        Access 500,000+ verified realtor emails and phone numbers across all 50 states.
+        Access {countLabel} verified realtor emails and phone numbers across all 50 states.
         Instant CSV download starting at $49 per state.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">

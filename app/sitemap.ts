@@ -60,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
+      url: `${BASE_URL}/data-sources`,
+      lastModified: today,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: `${BASE_URL}/about`,
       lastModified: today,
       changeFrequency: "monthly",
@@ -70,6 +76,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: today,
       changeFrequency: "yearly",
       priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: today,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: today,
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
   ]
 

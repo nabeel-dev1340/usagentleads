@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import type { USState } from "@/types"
 import type { BlogPost } from "@/types/blog"
-import { CURRENT_YEAR } from "@/lib/utils/states"
+import { CURRENT_YEAR, formatAgentCount } from "@/lib/utils/states"
 
 const BASE_URL = "https://www.usagentleads.com"
 
@@ -12,11 +12,12 @@ function trimDescription(text: string, limit = 155): string {
 
 export function generateStateMetadata(state: USState, cities?: string[]): Metadata {
   const count = state.agentCount.toLocaleString()
+  const shortCount = formatAgentCount(state.agentCount)
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 2).join(", ")} and more.` : ""
-  const title = `${state.name} Real Estate Agent Email List | ${count}+ Contacts`
-  const rawDesc = `Download verified ${state.name} real estate agent emails and phone numbers. ${count}+ licensed agent contacts, $49 CSV, instant delivery.${cityText}`
+  const title = `${state.name} Realtor Email List: ${shortCount} Contacts, $49`
+  const rawDesc = `Buy verified ${state.name} realtor emails and phone numbers. ${count}+ licensed agent contacts, $49 CSV, instant download.${cityText}`
   return {
-    title,
+    title: { absolute: title },
     description: trimDescription(rawDesc),
     alternates: {
       canonical: `${BASE_URL}/states/${state.slug}`,

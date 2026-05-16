@@ -3,7 +3,8 @@ import { escapeHtml } from "@/lib/utils/security"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const FROM_EMAIL = "USAgentLeads <support@beelodev.com>"
+const SUPPORT_EMAIL = "support@beelodev.com"
+const FROM_EMAIL = `USAgentLeads <${SUPPORT_EMAIL}>`
 
 // ── Shared email layout ──────────────────────────────────────────────
 
@@ -36,7 +37,7 @@ function emailLayout(body: string): string {
       USAgentLeads &mdash; A product by <a href="https://beelodev.com" style="color: ${BRAND_COLOR}; text-decoration: none; font-weight: 500;">BeeloDev</a>
     </p>
     <p style="margin: 0; color: #94a3b8; font-size: 12px;">
-      Questions? Reply to this email or contact us at support@beelodev.com
+      Questions? Reply to this email or contact us at ${SUPPORT_EMAIL}
     </p>
   </div>
 </body>
@@ -345,7 +346,7 @@ export async function sendContactEmail({
 
   await resend.emails.send({
     from: FROM_EMAIL,
-    to: "support@beelodev.com",
+    to: SUPPORT_EMAIL,
     ...(safeReplyTo ? { replyTo: safeReplyTo } : {}),
     subject: `Contact Form: ${safeSubject} — ${safeName}`,
     html: emailLayout(body),

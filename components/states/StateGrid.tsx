@@ -30,41 +30,60 @@ export function StateGrid({ countMap }: StateGridProps) {
   })
 
   return (
-    <div>
-      {/* Sort bar */}
-      <div className="mt-8 mb-6 flex items-center justify-between flex-wrap gap-3">
-        <p className="text-[14px] font-mono text-tertiary">
-          {filtered.length} states available
-        </p>
-        <div className="flex items-center gap-1 max-sm:w-full">
-          <span className="text-[14px] text-tertiary mr-2">Sort:</span>
-          {(["Most Agents", "Alphabetical"] as const).map((opt) => (
-            <button
-              key={opt}
-              onClick={() => setSort(opt === "Most Agents" ? "largest" : "alpha")}
-              className={`text-[14px] px-3 py-1.5 rounded-md transition-all duration-150 ${
-                (opt === "Most Agents" && sort === "largest") || (opt === "Alphabetical" && sort === "alpha")
-                  ? "bg-accent text-white font-medium"
-                  : "text-tertiary hover:text-body hover:bg-subtle"
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
+    <div className="mt-8 sm:mt-10">
+      <div className="mb-5 flex flex-col gap-4 border-y border-border py-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="font-mono text-[13px] uppercase tracking-wider text-muted">
+            {filtered.length} of {US_STATES.length} states
+          </p>
+          <p className="mt-1 text-[14px] text-tertiary">
+            Same fields, same price, same delivery for every state.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3 md:items-end">
+          <label className="relative w-full md:w-72">
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search states"
+              className="h-11 w-full rounded-lg border border-border bg-white pl-9 pr-3 text-[14px] text-ink outline-none transition-colors placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/15"
+            />
+          </label>
+          <div className="flex w-full items-center gap-1 rounded-lg border border-border bg-white p-1 md:w-auto">
+            {(["Most Agents", "Alphabetical"] as const).map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => setSort(opt === "Most Agents" ? "largest" : "alpha")}
+                className={`min-h-9 flex-1 rounded-md px-3 text-[13px] font-medium transition-all duration-150 md:flex-none ${
+                  (opt === "Most Agents" && sort === "largest") || (opt === "Alphabetical" && sort === "alpha")
+                    ? "bg-accent text-white shadow-sm"
+                    : "text-tertiary hover:bg-subtle hover:text-body"
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {sorted.map((state, i) => (
           <StateCard key={state.code} state={state} index={i} />
         ))}
       </div>
 
       {filtered.length === 0 && (
-        <p className="py-16 text-center text-[15px] text-muted">
-          No states found matching &quot;{search}&quot;
-        </p>
+        <div className="rounded-xl border border-dashed border-border bg-white px-5 py-12 text-center">
+          <p className="text-[15px] font-medium text-ink">No states found</p>
+          <p className="mt-1 text-[14px] text-muted">
+            Try a state name or two-letter code instead of &quot;{search}&quot;.
+          </p>
+        </div>
       )}
     </div>
   )

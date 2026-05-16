@@ -79,7 +79,7 @@ const organizationSchema = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    email: "support@usagentleads.com",
+    email: "support@beelodev.com",
     contactType: "customer service",
     areaServed: "US",
     availableLanguage: "English",

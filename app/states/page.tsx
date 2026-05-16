@@ -6,12 +6,12 @@ import { ChevronRight, Check, Database, Shield, Zap } from "lucide-react"
 import { StateGrid } from "@/components/states/StateGrid"
 import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
-import { US_STATES } from "@/lib/utils/states"
+import { TOTAL_AGENTS, US_STATES } from "@/lib/utils/states"
 
 export const metadata: Metadata = {
-  title: "Agent Email Lists by State 2026 — All 50 States from $49",
+  title: { absolute: "Real Estate Agent Email Lists by State: 50 States" },
   description:
-    "Verified real estate agent contacts for every US state. CSV with names, emails & phone numbers — instant download from $49/state. Free sample included.",
+    "Buy verified real estate agent email lists by state. CSV files with realtor names, emails, and phone numbers for all 50 US states from $49.",
   alternates: {
     canonical: "https://www.usagentleads.com/states",
     languages: {
@@ -20,15 +20,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Agent Email Lists by State — All 50 States from $49",
-    description: "Browse verified real estate agent contacts for every US state. CSV files with names, emails, and phone numbers — instant download from $49/state.",
+    title: "Real Estate Agent Email Lists by State: 50 States",
+    description: "Browse verified realtor email lists for every US state. CSV files with names, emails, and phone numbers from $49/state.",
     url: "https://www.usagentleads.com/states",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agent Email Lists by State — All 50 States from $49",
-    description: "Browse verified real estate agent contacts for every US state — instant download from $49/state.",
+    title: "Real Estate Agent Email Lists by State: 50 States",
+    description: "Browse verified realtor email lists for every US state from $49/state.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
@@ -69,6 +69,9 @@ export default async function StatesPage() {
       countMap[row.state] = row.count
     }
   }
+  const totalContacts = stateCounts?.length
+    ? stateCounts.reduce((sum, row) => sum + row.count, 0)
+    : TOTAL_AGENTS
 
   const breadcrumb = generateBreadcrumbSchema([
     { name: "Home", url: "https://www.usagentleads.com" },
@@ -106,24 +109,49 @@ export default async function StatesPage() {
           <span className="text-ink font-medium">States</span>
         </nav>
 
-        {/* Page header */}
-        <div className="pb-12 border-b border-border flex items-end justify-between flex-wrap gap-6">
-          <div>
-            <p className="label-eyebrow mb-3">50 States Available</p>
-            <h1 className="section-heading">Browse by State</h1>
-            <p className="section-sub mt-3 max-w-[440px]">
-              Verified agent contacts for every US state.
-              Starting at $49 per state — instant CSV delivery.
-            </p>
-          </div>
-        </div>
+        <header className="pb-10 border-b border-border">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+            <div>
+              <p className="label-eyebrow mb-3">50 States Available</p>
+              <h1 className="section-heading max-w-3xl">Real Estate Agent Email Lists by State</h1>
+              <p className="section-sub mt-4 max-w-2xl">
+                Pick a state pack and download a clean CSV with licensed realtor names, email addresses, phone numbers, and state fields. Every card below follows the same format, price, and delivery model.
+              </p>
+            </div>
 
-        <p className="text-[15px] text-body leading-[1.8] max-w-2xl mt-8 mb-2">
-          Browse verified real estate agent contact data for all 50 US states. Each state pack includes name, email, and phone number for every licensed agent, delivered as an instant CSV download for $49.{" "}
-          <Link href="/pricing" className="text-accent font-medium hover:underline">
-            Looking for all 50 states? Get the Full Database for $149 →
-          </Link>
-        </p>
+            <div className="grid grid-cols-3 overflow-hidden rounded-xl border border-border bg-white shadow-sm">
+              {[
+                { value: US_STATES.length.toString(), label: "States" },
+                { value: totalContacts.toLocaleString(), label: "Contacts" },
+                { value: "$49", label: "Per State" },
+              ].map((stat) => (
+                <div key={stat.label} className="border-r border-border px-3 py-4 text-center last:border-r-0">
+                  <p className="font-mono text-[18px] font-semibold leading-tight text-ink sm:text-[22px]">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-[11px] font-mono uppercase tracking-wider text-muted">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        <div className="mt-6 flex flex-wrap gap-2">
+          {[
+            "Same CSV fields in every pack",
+            "Instant delivery",
+            "Full database: $149",
+          ].map((item, i) => (
+            <div key={item} className="flex min-h-10 items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-[13px] text-body">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-accent-light font-mono text-[11px] font-semibold text-accent">
+                {i + 1}
+              </span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
 
         <StateGrid countMap={countMap} />
 
