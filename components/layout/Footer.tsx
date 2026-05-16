@@ -57,6 +57,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/data-sources" className="text-[15px] text-gray-300 hover:text-white transition-colors">
+                  Data Sources
+                </Link>
+              </li>
+              <li>
                 <Link href="/docs" className="text-[15px] text-gray-300 hover:text-white transition-colors">
                   API Docs
                 </Link>

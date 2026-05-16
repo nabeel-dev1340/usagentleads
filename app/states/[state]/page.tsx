@@ -217,9 +217,87 @@ export default async function StatePage({ params }: Props) {
                   )}
                   {stateContent.licensingBody && (
                     <p className="text-[14px] text-tertiary">
-                      Licensing authority: {stateContent.licensingBody}
+                      Licensing authority:{" "}
+                      {stateContent.licensingSourceUrl ? (
+                        <a
+                          href={stateContent.licensingSourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          className="text-accent font-medium hover:underline"
+                        >
+                          {stateContent.licensingBody}
+                        </a>
+                      ) : (
+                        stateContent.licensingBody
+                      )}
                     </p>
                   )}
+                </section>
+              )}
+
+              {stateContent?.sourceNote && (
+                <section className="mb-10">
+                  <h2 className="text-[17px] font-semibold text-ink mb-3">
+                    How We Source {state.name} Agent Data
+                  </h2>
+                  <p className="text-[15px] text-body leading-[1.8] mb-3">
+                    {stateContent.sourceNote}
+                  </p>
+                  <p className="text-[15px] text-body leading-[1.8]">
+                    USAgentLeads turns fragmented public licensing records and professional directory data into a cleaned CSV with standardized names, email addresses, phone numbers, and state fields.
+                  </p>
+                </section>
+              )}
+
+              {stateContent?.cityNote && (
+                <section className="mb-10">
+                  <h2 className="text-[17px] font-semibold text-ink mb-3">
+                    Best {state.name} Cities to Target
+                  </h2>
+                  <p className="text-[15px] text-body leading-[1.8] mb-4">
+                    {stateContent.cityNote}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {stateContent.cities.map((city) => (
+                      <span
+                        key={city}
+                        className="rounded-lg border border-border bg-white px-3 py-2 text-[14px] text-body"
+                      >
+                        {city}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {stateContent?.whoUses?.length && (
+                <section className="mb-10">
+                  <h2 className="text-[17px] font-semibold text-ink mb-3">
+                    Who Uses a {state.name} Realtor Email List?
+                  </h2>
+                  <ul className="space-y-2.5 text-[15px] text-body">
+                    {stateContent.whoUses.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <Check size={15} className="text-success shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {stateContent?.localAngles?.length && (
+                <section className="mb-10">
+                  <h2 className="text-[17px] font-semibold text-ink mb-3">
+                    Outreach Angles for {state.name} Agents
+                  </h2>
+                  <div className="space-y-3">
+                    {stateContent.localAngles.map((item) => (
+                      <p key={item} className="text-[15px] text-body leading-[1.8] border-l-2 border-accent-mid pl-4">
+                        {item}
+                      </p>
+                    ))}
+                  </div>
                 </section>
               )}
 

@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
 import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
+import { StateDensityMap } from "@/components/home/StateDensityMap"
+import { TOTAL_AGENTS } from "@/lib/utils/states"
 
 const previewRows = [
   { name: "James Harrington", email: "james@harrington-realty.com", phone: "(305) 881-2244", state: "FL" },
@@ -9,110 +11,147 @@ const previewRows = [
   { name: "Emily Thompson", email: "emily.t@sold.net", phone: "(404) 223-8877", state: "GA" },
 ]
 
-export function HeroSection({ totalCount }: { totalCount: number }) {
-  const displayCount = totalCount > 0 ? `${totalCount.toLocaleString()}+` : "500,000+"
+export function HeroSection({
+  totalCount,
+  countMap,
+}: {
+  totalCount: number
+  countMap?: Record<string, number>
+}) {
+  const displayCount = totalCount > 0 ? `${totalCount.toLocaleString()}+` : `${TOTAL_AGENTS.toLocaleString()}+`
 
   return (
-    <section className="relative bg-page min-h-[88vh] flex flex-col items-center justify-center px-4 sm:px-6 pb-16 sm:pb-20 pt-10 overflow-hidden">
-      <div className="relative z-10 mx-auto max-w-195 text-center">
-        {/* Badge */}
-        <div className="hero-badge inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-full bg-white border border-border shadow-sm text-[12px] sm:text-[14px] mb-10 flex-wrap justify-center">
-          <span className="flex items-center gap-1.5 text-success font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-            Live Data
-          </span>
-          <span className="text-border-strong">|</span>
-          <span className="font-mono text-ink font-medium">{displayCount}</span>
-          <span className="text-tertiary">Contacts</span>
-          <span className="text-border-strong">|</span>
-          <span className="text-tertiary">90%+ Deliverability</span>
-        </div>
+    <section className="relative bg-page overflow-hidden px-4 pt-12 pb-20 sm:px-6 sm:pt-16 sm:pb-24">
+      {/* Decorative grid pattern */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.035] [background-image:linear-gradient(to_right,#0F1623_1px,transparent_1px),linear-gradient(to_bottom,#0F1623_1px,transparent_1px)] [background-size:32px_32px]"
+      />
+      {/* Decorative gradient blob */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 top-1/3 -z-0 hidden h-[520px] w-[520px] rounded-full bg-accent/5 blur-3xl lg:block"
+      />
 
-        {/* H1 */}
-        <h1 className="hero-h1">
-          <span className="block text-tertiary font-light text-[28px] sm:text-[40px] md:text-[52px] lg:text-[64px] leading-[1.05] tracking-tight">
-            The Complete US
-          </span>
-          <span className="block text-ink font-semibold text-[32px] sm:text-[48px] md:text-[60px] lg:text-[72px] leading-none tracking-[-0.03em]">
-            Real Estate Agent Email List 2026
-          </span>
-        </h1>
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+          {/* LEFT: Copy + CTAs */}
+          <div className="text-center lg:text-left">
+            {/* Badge */}
+            <div className="hero-badge inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-border bg-white px-3 py-2 text-[12px] shadow-sm sm:gap-3 sm:px-4 sm:text-[14px]">
+              <span className="flex items-center gap-1.5 font-medium text-success">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
+                Live Data
+              </span>
+              <span className="text-border-strong">|</span>
+              <span className="font-mono font-medium text-ink">{displayCount}</span>
+              <span className="text-tertiary">Contacts</span>
+              <span className="text-border-strong">|</span>
+              <span className="text-tertiary">All 50 States</span>
+            </div>
 
-        {/* Subheadline */}
-        <p className="hero-sub text-[14px] sm:text-[18px] text-tertiary mt-6 leading-relaxed">
-          <span className="inline-flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2">
-            <span className="text-ink font-medium">Name</span>
-            <span className="text-accent font-bold">&middot;</span>
-            <span className="text-ink font-medium">Email</span>
-            <span className="text-accent font-bold">&middot;</span>
-            <span className="text-ink font-medium">Phone</span>
-            <span className="text-accent font-bold">&middot;</span>
-            <span className="text-ink font-medium">State</span>
-          </span>
-          <br className="sm:hidden" />
-          <span className="text-muted mx-1 sm:mx-3 hidden sm:inline">&mdash;</span>
-          <span className="block sm:inline mt-1 sm:mt-0">Clean CSV. Instant delivery. No account needed.</span>
-        </p>
+            {/* H1 */}
+            <h1 className="hero-h1 mt-7">
+              <span className="block text-[28px] font-light leading-[1.05] tracking-tight text-tertiary sm:text-[38px] md:text-[44px] lg:text-[48px]">
+                The Complete US
+              </span>
+              <span className="mt-1 block text-[34px] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[46px] md:text-[54px] lg:text-[58px]">
+                Real Estate Agent Email List 2026
+              </span>
+            </h1>
 
-        {/* CTAs */}
-        <div className="hero-ctas mt-10 flex gap-3 justify-center flex-wrap">
-          <Link href="/states" className="btn-primary text-[16px] px-8 py-3.5">
-            Browse by State <ArrowRight size={16} />
-          </Link>
-          <Link href="/pricing" className="btn-outline text-[16px] px-8 py-3.5">
-            Get Full Database — <span className="font-mono">$149</span>
-          </Link>
-        </div>
+            {/* Subheadline */}
+            <p className="hero-sub mt-6 text-[14px] leading-relaxed text-tertiary sm:text-[17px]">
+              <span className="inline-flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 lg:justify-start">
+                <span className="font-medium text-ink">Name</span>
+                <span className="font-bold text-accent">&middot;</span>
+                <span className="font-medium text-ink">Email</span>
+                <span className="font-bold text-accent">&middot;</span>
+                <span className="font-medium text-ink">Phone</span>
+                <span className="font-bold text-accent">&middot;</span>
+                <span className="font-medium text-ink">State</span>
+              </span>
+              <span className="mx-1 hidden text-muted sm:mx-3 sm:inline">&mdash;</span>
+              <span className="mt-1 block sm:mt-0 sm:inline">Clean CSV. Instant delivery. No account needed.</span>
+            </p>
 
-        {/* Trust note */}
-        <p className="mt-4 text-[14px] text-tertiary hero-sub">
-          Trusted by 1,200+ marketers, agencies &amp; lenders
-        </p>
+            {/* CTAs */}
+            <div className="hero-ctas mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+              <Link href="/states" className="btn-primary px-7 py-3.5 text-[15px] sm:text-[16px] sm:px-8">
+                Browse by State <ArrowRight size={16} />
+              </Link>
+              <Link href="/pricing" className="btn-outline px-7 py-3.5 text-[15px] sm:text-[16px] sm:px-8">
+                Full Database — <span className="font-mono">$149</span>
+              </Link>
+            </div>
 
-        {/* Data preview card */}
-        <div className="hero-preview mt-16 bg-white border border-border rounded-2xl shadow-xl overflow-hidden max-w-175 mx-auto">
-          {/* Card header */}
-          <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-subtle">
-            <span className="text-[13px] font-mono font-medium text-tertiary uppercase tracking-wider">
-              Sample Data — First 500 Records
-            </span>
-            <span className="badge-state">Preview</span>
+            {/* Trust note */}
+            <p className="hero-sub mt-5 text-[13px] text-tertiary sm:text-[14px]">
+              Trusted by 1,200+ marketers, agencies &amp; lenders
+            </p>
           </div>
 
-          {/* Table */}
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th scope="col">Full Name</th>
-                <th scope="col">Email</th>
-                <th scope="col" className="hidden sm:table-cell">Phone</th>
-                <th scope="col">State</th>
-              </tr>
-            </thead>
-            <tbody>
-              {previewRows.map((row, i) => (
-                <tr
-                  key={i}
-                  className={i > 0 ? "[&_td]:blur-[3px] [&_td]:select-none pointer-events-none" : ""}
-                >
-                  <td className="cell-name">{row.name}</td>
-                  <td className="cell-email">{row.email}</td>
-                  <td className="cell-phone hidden sm:table-cell">{row.phone}</td>
-                  <td><span className="badge-state">{row.state}</span></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {/* RIGHT: Density map */}
+          <div className="hero-preview w-full">
+            <StateDensityMap countMap={countMap} />
+          </div>
+        </div>
 
-          {/* Footer */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 px-4 sm:px-5 py-3 bg-accent-light border-t border-accent-mid">
-            <div className="flex items-center gap-2">
-              <Lock size={14} className="text-accent" />
-              <span className="text-[13px] sm:text-[14px] text-accent font-medium">
-                First 500 records free
+        {/* Sample data table — connective intro + free-sample CTA */}
+        <div className="hero-preview mt-16 sm:mt-20">
+          <div className="mx-auto mb-5 max-w-3xl text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted sm:text-[12px]">
+              Want to see the real thing?
+            </p>
+            <h2 className="mt-2 text-[20px] font-semibold tracking-tight text-ink sm:text-[24px]">
+              Grab the first 500 rows — free, no signup
+            </h2>
+          </div>
+
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-border bg-white shadow-xl">
+            {/* Card header */}
+            <div className="flex items-center justify-between border-b border-border bg-subtle px-5 py-3.5">
+              <span className="font-mono text-[12px] font-medium uppercase tracking-wider text-tertiary sm:text-[13px]">
+                Sample Data — First 500 Records
               </span>
+              <span className="badge-state">Preview</span>
             </div>
-            <FreeSampleDialog />
+
+            {/* Table */}
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col" className="hidden sm:table-cell">Phone</th>
+                  <th scope="col">State</th>
+                </tr>
+              </thead>
+              <tbody>
+                {previewRows.map((row, i) => (
+                  <tr
+                    key={i}
+                    className={i > 0 ? "pointer-events-none [&_td]:select-none [&_td]:blur-[3px]" : ""}
+                  >
+                    <td className="cell-name">{row.name}</td>
+                    <td className="cell-email">{row.email}</td>
+                    <td className="cell-phone hidden sm:table-cell">{row.phone}</td>
+                    <td><span className="badge-state">{row.state}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Footer */}
+            <div className="flex flex-col items-center justify-between gap-2 border-t border-accent-mid bg-accent-light px-4 py-3 sm:flex-row sm:px-5">
+              <div className="flex items-center gap-2">
+                <Lock size={14} className="text-accent" />
+                <span className="text-[13px] font-medium text-accent sm:text-[14px]">
+                  First 500 records free
+                </span>
+              </div>
+              <FreeSampleDialog />
+            </div>
           </div>
         </div>
       </div>

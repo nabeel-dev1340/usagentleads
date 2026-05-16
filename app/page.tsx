@@ -11,7 +11,7 @@ import { CompetitorComparison } from "@/components/home/CompetitorComparison"
 import { LatestPosts } from "@/components/home/LatestPosts"
 import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
-import { getDatabaseTotals } from "@/lib/supabase/server"
+import { getDatabaseTotals, getStateCountMap } from "@/lib/supabase/server"
 import { getAllPosts } from "@/lib/blog"
 
 // Below-the-fold client components — split into their own chunks so the initial
@@ -79,7 +79,7 @@ const organizationSchema = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    email: "support@usagentleads.com",
+    email: "support@beelodev.com",
     contactType: "customer service",
     areaServed: "US",
     availableLanguage: "English",
@@ -134,7 +134,10 @@ const organizationSchema = {
 
 
 export default async function Home() {
-  const { count: totalCount, emails: totalEmails, phones: totalPhones } = await getDatabaseTotals()
+  const [{ count: totalCount, emails: totalEmails, phones: totalPhones }, countMap] = await Promise.all([
+    getDatabaseTotals(),
+    getStateCountMap(),
+  ])
   const latestPosts = getAllPosts().slice(0, 3)
 
   return (
@@ -145,7 +148,7 @@ export default async function Home() {
           __html: JSON.stringify([websiteSchema, organizationSchema]),
         }}
       />
-      <HeroSection totalCount={totalCount} />
+      <HeroSection totalCount={totalCount} countMap={countMap} />
       <TrustBar totalCount={totalCount} />
       <WhoIsThisFor />
       <HowItWorks />

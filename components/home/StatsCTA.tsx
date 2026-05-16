@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { createServiceClient } from "@/lib/supabase/server"
-import { US_STATES, formatAgentCount } from "@/lib/utils/states"
+import { US_STATES, TOTAL_AGENTS, formatAgentCount } from "@/lib/utils/states"
 
 export async function StatsCTA() {
   const supabase = createServiceClient()
@@ -31,7 +31,7 @@ export async function StatsCTA() {
           <p className="section-sub">
             {totalLeads > 0
               ? `${totalLeads.toLocaleString()}+ verified contacts across all 50 US states.`
-              : "500,000+ verified contacts across all 50 US states."}
+              : `${TOTAL_AGENTS.toLocaleString()}+ verified contacts across all 50 US states.`}
           </p>
         </div>
 

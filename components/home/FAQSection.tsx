@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import { generateFAQSchema } from "@/lib/utils/seo"
+import { TOTAL_AGENTS } from "@/lib/utils/states"
 import { Plus } from "lucide-react"
 
 function getFaqs(totalCount: number) {
-  const countLabel = totalCount > 0 ? totalCount.toLocaleString() + "+" : "500,000+"
+  const countLabel = totalCount > 0 ? totalCount.toLocaleString() + "+" : TOTAL_AGENTS.toLocaleString() + "+"
   return [
     {
       question: "What data fields are included?",

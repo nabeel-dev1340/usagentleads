@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Globe, ShieldCheck, RefreshCw } from "lucide-react"
 
 const sources = [
@@ -53,6 +54,9 @@ export function DataSources() {
                   </li>
                 ))}
               </ul>
+              <Link href="/data-sources" className="mt-6 inline-flex text-[14px] font-medium text-accent hover:underline">
+                See sourcing methodology
+              </Link>
             </div>
           </div>
 

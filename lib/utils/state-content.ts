@@ -6,6 +6,12 @@ interface StateContent {
   licensingBody: string
   useCase: string
   relatedBlogSlugs?: string[]
+  licensingSourceUrl?: string
+  sourceNote?: string
+  cityNote?: string
+  whoUses?: string[]
+  localAngles?: string[]
+  extraFaqs?: { question: string; answer: string }[]
 }
 
 export const STATE_CONTENT: Record<string, StateContent> = {
@@ -29,6 +35,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Phoenix", "Tucson", "Scottsdale", "Mesa", "Chandler"],
     licensingBody: "Arizona Department of Real Estate (ADRE)",
     useCase: "Arizona's explosive population growth and new construction boom make it a top market for home builders, solar energy companies, and CRM platforms targeting agents who handle high transaction volumes.",
+    licensingSourceUrl: "https://services.azre.gov/PdbWeb/",
+    sourceNote:
+      "Arizona license records are checked against the Arizona Department of Real Estate public database, which provides licensee, entity, school, course, instructor, subdivision public report, and disciplinary information.",
+    cityNote:
+      "Phoenix and Mesa provide scale for statewide campaigns, while Scottsdale and Chandler are useful segments for luxury, investor, and relocation-focused offers.",
+    whoUses: [
+      "Solar companies targeting homeowners through agent referral channels",
+      "New-construction marketers working with Phoenix-area buyer agents",
+      "CRM and follow-up platforms selling to high-volume desert-market agents",
+    ],
+    localAngles: [
+      "Reference Phoenix metro growth when pitching relocation or lead generation tools.",
+      "Segment Scottsdale separately for luxury, second-home, and investor messaging.",
+      "Use Tucson and Mesa for affordability, first-time buyer, and FHA-lender campaigns.",
+    ],
+    extraFaqs: [
+      {
+        question: "What are the best Arizona cities to target for realtor outreach?",
+        answer:
+          "Phoenix, Tucson, Scottsdale, Mesa, and Chandler are the strongest starting points because they combine large agent populations with active buyer demand, relocation activity, and new-construction inventory.",
+      },
+      {
+        question: "Can I segment the Arizona realtor list by city?",
+        answer:
+          "The Arizona CSV is state-level, but most teams segment their campaigns around Phoenix, Tucson, Scottsdale, Mesa, and Chandler using CRM filters and localized email copy.",
+      },
+    ],
   },
   arkansas: {
     description:
@@ -50,6 +83,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Denver", "Colorado Springs", "Aurora", "Fort Collins", "Boulder"],
     licensingBody: "Colorado Division of Real Estate",
     useCase: "Colorado's tech-driven economy and outdoor lifestyle attract a steady flow of high-income relocators, making it ideal for luxury marketing platforms, mortgage brokers, and home staging companies targeting active agents.",
+    licensingSourceUrl: "https://apps2.colorado.gov/dre/licensing/default.aspx",
+    sourceNote:
+      "Colorado license information is checked against the Division of Real Estate's public eLicense lookup, which allows public searches for real estate licensees.",
+    cityNote:
+      "Denver and Aurora provide the broadest campaign reach, while Boulder, Fort Collins, and Colorado Springs are useful for tech, lifestyle, military, and relocation offers.",
+    whoUses: [
+      "Mortgage brokers and lenders targeting relocation-heavy Front Range agents",
+      "Home staging, photography, and listing media teams serving higher-price markets",
+      "Proptech and CRM vendors selling to tech-forward Colorado brokerages",
+    ],
+    localAngles: [
+      "Use Denver and Boulder messaging for tech-worker relocation and high-income buyer segments.",
+      "Use Colorado Springs for military relocation, VA loans, and family-buyer campaigns.",
+      "Use Fort Collins for lifestyle, university, and move-up buyer messaging.",
+    ],
+    extraFaqs: [
+      {
+        question: "Why is Colorado a strong market for realtor email outreach?",
+        answer:
+          "Colorado combines strong relocation demand, high home values in key metros, and a tech-forward agent base. That makes it attractive for lenders, SaaS vendors, listing media companies, and relocation services.",
+      },
+      {
+        question: "Which Colorado cities should I prioritize first?",
+        answer:
+          "Start with Denver, Colorado Springs, Aurora, Fort Collins, and Boulder. Together they cover the state's largest metro, military relocation demand, university markets, and high-value lifestyle communities.",
+      },
+    ],
   },
   connecticut: {
     description:
@@ -138,6 +198,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette", "Lake Charles"],
     licensingBody: "Louisiana Real Estate Commission (LREC)",
     useCase: "Louisiana's historic property market, flood-zone complexities, and strong short-term rental demand in New Orleans make it valuable for flood insurance providers, renovation contractors, and vacation rental management platforms.",
+    licensingSourceUrl: "https://portal.lrec.gov/Public/FindLicense",
+    sourceNote:
+      "Louisiana real estate license records are checked against the Louisiana Real Estate Commission public license search.",
+    cityNote:
+      "New Orleans is the strongest segment for short-term rental, renovation, and historic-property offers; Baton Rouge, Lafayette, Shreveport, and Lake Charles broaden coverage across parishes.",
+    whoUses: [
+      "Flood insurance and risk advisory firms working with agents in coastal and river markets",
+      "Renovation contractors and investor services targeting historic-property specialists",
+      "Short-term rental and property management platforms focused on New Orleans",
+    ],
+    localAngles: [
+      "Use New Orleans copy for historic homes, rentals, and tourism-driven property demand.",
+      "Use Baton Rouge and Lafayette for family-buyer, university, and suburban campaign angles.",
+      "Use Lake Charles for insurance, restoration, and storm-resilience service offers.",
+    ],
+    extraFaqs: [
+      {
+        question: "What makes Louisiana realtor outreach different?",
+        answer:
+          "Louisiana campaigns work best when they account for parish-level markets, flood-zone concerns, historic properties, and New Orleans short-term rental demand rather than using generic national real estate copy.",
+      },
+      {
+        question: "Which Louisiana cities are included in the best outreach segments?",
+        answer:
+          "New Orleans, Baton Rouge, Shreveport, Lafayette, and Lake Charles are the strongest starting points for segmenting the Louisiana realtor email list.",
+      },
+    ],
   },
   maine: {
     description:
@@ -166,6 +253,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Detroit", "Grand Rapids", "Ann Arbor", "Traverse City", "Lansing"],
     licensingBody: "Michigan Department of Licensing and Regulatory Affairs (LARA)",
     useCase: "Michigan's urban revitalization in Detroit and booming growth in Grand Rapids offer opportunities for renovation lenders, investor networking platforms, and lakefront property marketing services targeting active agents.",
+    licensingSourceUrl: "https://www.michigan.gov/realestate",
+    sourceNote:
+      "Michigan real estate broker and salesperson licensing is managed by LARA through the state's real estate licensing program and public verification resources.",
+    cityNote:
+      "Detroit and Grand Rapids offer the largest outreach pools, while Ann Arbor, Lansing, and Traverse City support university, government, and vacation-home campaign angles.",
+    whoUses: [
+      "Renovation lenders and investor platforms targeting Detroit-area redevelopment",
+      "Lakefront property services and photographers focused on northern Michigan markets",
+      "CRM, recruiting, and coaching companies selling to Grand Rapids and Ann Arbor agents",
+    ],
+    localAngles: [
+      "Use Detroit copy for redevelopment, investor, renovation, and affordable housing angles.",
+      "Use Grand Rapids for growth, move-up buyers, and family-market positioning.",
+      "Use Traverse City for second-home, lakefront, and lifestyle-buyer campaigns.",
+    ],
+    extraFaqs: [
+      {
+        question: "What are the best Michigan markets for real estate agent outreach?",
+        answer:
+          "Detroit, Grand Rapids, Ann Arbor, Traverse City, and Lansing are strong first segments because they cover redevelopment, growth, university, government, and vacation-home demand.",
+      },
+      {
+        question: "Who buys a Michigan realtor email list?",
+        answer:
+          "Common buyers include investor platforms, renovation lenders, home service companies, CRM vendors, listing media providers, and recruiters targeting active Michigan real estate agents.",
+      },
+    ],
   },
   minnesota: {
     description:
@@ -208,6 +322,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Las Vegas", "Reno", "Henderson", "North Las Vegas", "Sparks"],
     licensingBody: "Nevada Real Estate Division",
     useCase: "Nevada's fast-paced Las Vegas market and California migration wave drive high transaction volumes, making it ideal for transaction management platforms, lead generation tools, and investor-focused services targeting active agents.",
+    licensingSourceUrl: "https://red.nv.gov/",
+    sourceNote:
+      "Nevada real estate licensing is regulated by the Nevada Real Estate Division, with public license lookup resources available through the state's real estate division portal.",
+    cityNote:
+      "Las Vegas and Henderson provide the largest opportunity pool, while Reno and Sparks are useful for tech-relocation, investor, and Northern Nevada campaigns.",
+    whoUses: [
+      "Investor tools and lead generation services targeting Las Vegas agents",
+      "Transaction management platforms serving high-velocity brokerage teams",
+      "Relocation, lending, and title companies reaching California-to-Nevada movers",
+    ],
+    localAngles: [
+      "Use Las Vegas messaging for investor, rental, luxury, and high-volume transaction angles.",
+      "Use Reno and Sparks for tech relocation and Northern Nevada growth campaigns.",
+      "Use Henderson for family-buyer and move-up-market messaging.",
+    ],
+    extraFaqs: [
+      {
+        question: "Why target Nevada real estate agents?",
+        answer:
+          "Nevada has high transaction activity in Las Vegas, strong relocation demand from California, and investor-heavy segments that respond well to lending, software, marketing, and property service offers.",
+      },
+      {
+        question: "Which Nevada cities should I segment first?",
+        answer:
+          "Las Vegas, Reno, Henderson, North Las Vegas, and Sparks are the best first segments for a Nevada realtor email campaign.",
+      },
+    ],
   },
   "new-hampshire": {
     description:
@@ -278,6 +419,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Philadelphia", "Pittsburgh", "Allentown", "Lancaster", "Reading"],
     licensingBody: "Pennsylvania Real Estate Commission",
     useCase: "Pennsylvania's two distinct metro markets in Philadelphia and Pittsburgh, along with affordable Lehigh Valley suburbs, offer scale for home warranty providers, title companies, and agent training platforms expanding in the Northeast.",
+    licensingSourceUrl: "https://www.pa.gov/services/dos/verify-a-professional-or-occupational-license.html",
+    sourceNote:
+      "Pennsylvania real estate license status can be verified through the Commonwealth's Pennsylvania Licensing System (PALS), with oversight from the State Real Estate Commission.",
+    cityNote:
+      "Philadelphia and Pittsburgh are the largest campaign anchors, while Allentown, Lancaster, and Reading help reach Lehigh Valley, Central Pennsylvania, and affordable suburban markets.",
+    whoUses: [
+      "Title and settlement companies expanding across Pennsylvania counties",
+      "Home warranty and inspection companies targeting active buyer-agent networks",
+      "Agent education, recruiting, and coaching platforms selling into Philadelphia and Pittsburgh",
+    ],
+    localAngles: [
+      "Use Philadelphia copy for urban, rowhome, condo, and commuter-market offers.",
+      "Use Pittsburgh copy for affordability, tech growth, and investor-service offers.",
+      "Use Allentown and Lancaster for suburban, family-buyer, and regional lender campaigns.",
+    ],
+    extraFaqs: [
+      {
+        question: "What are the best Pennsylvania cities for realtor outreach?",
+        answer:
+          "Philadelphia and Pittsburgh are the biggest anchors, followed by Allentown, Lancaster, and Reading for Lehigh Valley, Central Pennsylvania, and affordable suburban campaigns.",
+      },
+      {
+        question: "Is the Pennsylvania realtor email list useful for local service providers?",
+        answer:
+          "Yes. Title companies, home warranty providers, inspectors, lenders, and agent education businesses use Pennsylvania realtor contact data to reach agents by market and service area.",
+      },
+    ],
   },
   "rhode-island": {
     description:
@@ -299,6 +467,33 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     cities: ["Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown"],
     licensingBody: "South Dakota Real Estate Commission",
     useCase: "South Dakota's no-income-tax appeal and Sioux Falls growth corridor attract remote workers and retirees, creating opportunities for tax advisory services, rural land brokerages, and home builders partnering with local agents.",
+    licensingSourceUrl: "https://dlr.sd.gov/realestate/default.aspx",
+    sourceNote:
+      "South Dakota real estate licensees are regulated by the South Dakota Real Estate Commission through the Department of Labor and Regulation.",
+    cityNote:
+      "Sioux Falls is the highest-priority market for scale, while Rapid City and the Black Hills support lifestyle, relocation, and land-focused campaigns.",
+    whoUses: [
+      "Home builders and lenders targeting Sioux Falls growth",
+      "Rural land, ranch, and insurance providers reaching agents outside the main metros",
+      "Tax advisory and relocation services promoting South Dakota's no-income-tax advantage",
+    ],
+    localAngles: [
+      "Use Sioux Falls for growth, family-buyer, and new-construction campaigns.",
+      "Use Rapid City and Black Hills messaging for lifestyle, land, and retirement segments.",
+      "Use Aberdeen, Brookings, and Watertown for rural, university, and regional service offers.",
+    ],
+    extraFaqs: [
+      {
+        question: "Why buy a South Dakota realtor email list?",
+        answer:
+          "South Dakota is a smaller but focused market where businesses can reach agents around Sioux Falls growth, Black Hills relocation, rural land, and no-income-tax migration angles.",
+      },
+      {
+        question: "Which South Dakota markets should I target first?",
+        answer:
+          "Start with Sioux Falls and Rapid City, then expand to Aberdeen, Brookings, and Watertown for rural, university, and regional campaigns.",
+      },
+    ],
   },
   tennessee: {
     description:
@@ -373,6 +568,7 @@ export function getStateFAQs(
   state: { name: string; code: string },
   agentCount: number
 ): { question: string; answer: string }[] {
+  const content = getStateContent(state.name.toLowerCase().replace(/\s+/g, "-"))
   return [
     {
       question: `How many real estate agents are in ${state.name}?`,
@@ -402,5 +598,6 @@ export function getStateFAQs(
       question: `Is this the complete list of real estate agents in ${state.name}?`,
       answer: `Our ${state.name} database includes ${agentCount.toLocaleString()}+ licensed real estate agents and realtors. The list is compiled from public state licensing boards and professional directories to provide the most comprehensive coverage available.`,
     },
+    ...(content?.extraFaqs ?? []),
   ]
 }
