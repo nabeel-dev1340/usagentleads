@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Menu, X, LogOut, LayoutDashboard, CreditCard } from "lucide-react"
 import { LogoIcon } from "@/components/ui/Logo"
+import { formatAgentCount } from "@/lib/utils/states"
 import type { User } from "@supabase/supabase-js"
 
 export function Navbar() {
@@ -88,6 +89,8 @@ export function Navbar() {
   ]
 
   const initials = user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || "U"
+
+  const agentCountLabel = totalCount > 0 ? formatAgentCount(totalCount) : "500K+"
 
   return (
     <>
@@ -185,7 +188,7 @@ export function Navbar() {
                   href="/pricing"
                   className="btn-primary text-[14px] px-5 py-2.5 font-medium"
                 >
-                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$149</span>
+                  Get {agentCountLabel} Agents — <span className="font-bold">$149</span>
                 </Link>
               </>
             )}
@@ -313,7 +316,7 @@ export function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className="btn-primary text-[16px] px-7 py-2.5 font-semibold"
                 >
-                  Get {totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"} Agents — <span className="font-bold">$149</span>
+                  Get {agentCountLabel} Agents — <span className="font-bold">$149</span>
                 </Link>
               </div>
             )}

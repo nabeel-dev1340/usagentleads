@@ -30,6 +30,7 @@ interface Plan {
 }
 
 function formatStat(n: number): string {
+  if (n >= 1_000_000) return `${Math.floor(n / 1_000_000)}M+`
   if (n >= 1000) return `${Math.round(n / 1000).toLocaleString()}K+`
   return n.toLocaleString()
 }

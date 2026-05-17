@@ -65,6 +65,9 @@ export function getStateByCode(code: string): USState | undefined {
 }
 
 export function formatAgentCount(count: number): string {
+  if (count >= 1_000_000) {
+    return `${Math.floor(count / 1_000_000)}M+`
+  }
   if (count >= 1000) {
     return `${Math.round(count / 1000).toLocaleString()}K+`
   }

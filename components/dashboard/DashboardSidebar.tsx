@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { US_STATES } from "@/lib/utils/states"
+import { US_STATES, formatAgentCount } from "@/lib/utils/states"
 import { LogoIcon } from "@/components/ui/Logo"
 import {
   Globe,
@@ -201,7 +201,7 @@ export function DashboardSidebar({
           {!collapsed && (
             <>
               All States
-              <span className="ml-auto font-mono text-[14px] text-tertiary">{totalCount > 0 ? `${Math.round(totalCount / 1000)}K+` : "500K+"}</span>
+              <span className="ml-auto font-mono text-[14px] text-tertiary">{totalCount > 0 ? formatAgentCount(totalCount) : "500K+"}</span>
             </>
           )}
         </button>
