@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Read all blog posts by ${author.name}.`,
       images: ["https://www.usagentleads.com/twitter-image"],
     },
-    robots: { index: true, follow: true },
+    robots: { index: false, follow: true },
   }
 }
 

@@ -8,6 +8,7 @@ import { getStateContent, getStateFAQs } from "@/lib/utils/state-content"
 import { getStateSampleContact } from "@/lib/utils/state-sample-contacts"
 import { getAllPosts } from "@/lib/blog"
 import { STATE_NEIGHBORS } from "@/lib/utils/state-neighbors"
+import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
 import { StateFAQ } from "@/components/states/StateFAQ"
 import { ChevronRight, Check, Lock, ShieldCheck } from "lucide-react"
@@ -36,6 +37,30 @@ const blurredFillerRows = [
   { name: "Michael Rivera", email: "mrivera@homes.co", phone: "(213) 556-1102" },
   { name: "Emily Thompson", email: "emily.t@sold.net", phone: "(404) 223-8877" },
 ]
+
+function getFallbackSourceNote(stateName: string, licensingBody: string) {
+  return `${stateName} records are checked against public licensing and professional sources, including ${licensingBody}. We normalize names, remove obvious duplicates, and package the data into a CRM-ready CSV.`
+}
+
+function getCityNote(stateName: string, cities: string[]) {
+  return `${cities.join(", ")} are the first ${stateName} markets most teams segment because they combine larger agent pools with clearer local campaign angles. Use these cities to localize subject lines, offers, and CRM lists instead of sending one generic statewide blast.`
+}
+
+function getWhoUses(stateName: string, cities: string[], useCase?: string) {
+  return [
+    `B2B teams building segmented campaigns around ${cities.slice(0, 2).join(" and ")} agents`,
+    `Vendors that need licensed ${stateName} agent contacts for CRM enrichment, email outreach, or partner development`,
+    useCase ?? `Local service providers, software companies, lenders, and agencies selling into the ${stateName} real estate market`,
+  ]
+}
+
+function getLocalAngles(stateName: string, cities: string[]) {
+  return cities.slice(0, 3).map((city) => (
+    `Create a ${city}-specific segment and reference local market conditions, service area fit, or buyer profile in the first line of your campaign.`
+  )).concat(
+    `Keep ${stateName} outreach compliant: use a real sender identity, include a mailing address, and honor opt-out requests.`
+  )
+}
 
 export default async function StatePage({ params }: Props) {
   const { state: slug } = await params
@@ -235,27 +260,31 @@ export default async function StatePage({ params }: Props) {
                 </section>
               )}
 
-              {stateContent?.sourceNote && (
+              {stateContent && (
                 <section className="mb-10">
                   <h2 className="text-[17px] font-semibold text-ink mb-3">
                     How We Source {state.name} Agent Data
                   </h2>
                   <p className="text-[15px] text-body leading-[1.8] mb-3">
-                    {stateContent.sourceNote}
+                    {stateContent.sourceNote ?? getFallbackSourceNote(state.name, stateContent.licensingBody)}
                   </p>
                   <p className="text-[15px] text-body leading-[1.8]">
-                    USAgentLeads turns fragmented public licensing records and professional directory data into a cleaned CSV with standardized names, email addresses, phone numbers, and state fields.
+                    The current dataset was last refreshed in {DATA_LAST_REFRESHED}. USAgentLeads turns fragmented public licensing records and professional directory data into a cleaned CSV with standardized names, email addresses, phone numbers, and state fields.{" "}
+                    <Link href="/data-sources" className="text-accent font-medium hover:underline">
+                      Review the sourcing methodology
+                    </Link>
+                    .
                   </p>
                 </section>
               )}
 
-              {stateContent?.cityNote && (
+              {stateContent?.cities?.length && (
                 <section className="mb-10">
                   <h2 className="text-[17px] font-semibold text-ink mb-3">
                     Best {state.name} Cities to Target
                   </h2>
                   <p className="text-[15px] text-body leading-[1.8] mb-4">
-                    {stateContent.cityNote}
+                    {stateContent.cityNote ?? getCityNote(state.name, stateContent.cities)}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {stateContent.cities.map((city) => (
@@ -270,13 +299,13 @@ export default async function StatePage({ params }: Props) {
                 </section>
               )}
 
-              {stateContent?.whoUses?.length && (
+              {stateContent && (
                 <section className="mb-10">
                   <h2 className="text-[17px] font-semibold text-ink mb-3">
                     Who Uses a {state.name} Realtor Email List?
                   </h2>
                   <ul className="space-y-2.5 text-[15px] text-body">
-                    {stateContent.whoUses.map((item) => (
+                    {(stateContent.whoUses ?? getWhoUses(state.name, stateContent.cities, stateContent.useCase)).map((item) => (
                       <li key={item} className="flex items-start gap-2.5">
                         <Check size={15} className="text-success shrink-0 mt-0.5" />
                         <span>{item}</span>
@@ -286,13 +315,13 @@ export default async function StatePage({ params }: Props) {
                 </section>
               )}
 
-              {stateContent?.localAngles?.length && (
+              {stateContent && (
                 <section className="mb-10">
                   <h2 className="text-[17px] font-semibold text-ink mb-3">
                     Outreach Angles for {state.name} Agents
                   </h2>
                   <div className="space-y-3">
-                    {stateContent.localAngles.map((item) => (
+                    {(stateContent.localAngles ?? getLocalAngles(state.name, stateContent.cities)).map((item) => (
                       <p key={item} className="text-[15px] text-body leading-[1.8] border-l-2 border-accent-mid pl-4">
                         {item}
                       </p>

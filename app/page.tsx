@@ -13,6 +13,7 @@ import { DataSources } from "@/components/home/DataSources"
 import { StatsCTA } from "@/components/home/StatsCTA"
 import { getDatabaseTotals, getStateCountMap } from "@/lib/supabase/server"
 import { getAllPosts } from "@/lib/blog"
+import { DATA_LAST_REFRESHED, SUPPORT_EMAIL } from "@/lib/utils/site"
 
 // Below-the-fold client components — split into their own chunks so the initial
 // page bundle stays small. SSR is preserved (default ssr: true).
@@ -34,7 +35,7 @@ const websiteSchema = {
   url: "https://www.usagentleads.com",
   inLanguage: "en-US",
   description:
-    "Verified real estate agent contact database covering all 50 US states. 888,809+ contacts with name, email, and phone — instant CSV download or REST API.",
+    `Verified real estate agent contact database covering all 50 US states. 888,809+ contacts with name, email, and phone — instant CSV download or REST API. Current dataset refreshed in ${DATA_LAST_REFRESHED}.`,
   publisher: {
     "@id": "https://www.usagentleads.com/#organization",
   },
@@ -55,7 +56,7 @@ const organizationSchema = {
   },
   image: "https://www.usagentleads.com/opengraph-image",
   description:
-    "USAgentLeads is a B2B data provider offering verified real estate agent contact databases for all 50 US states. 888,809+ contacts with name, email, and phone.",
+    `USAgentLeads is a B2B data provider offering verified real estate agent contact databases for all 50 US states. 888,809+ contacts with name, email, and phone. Current dataset refreshed in ${DATA_LAST_REFRESHED}.`,
   foundingDate: "2024",
   numberOfEmployees: {
     "@type": "QuantitativeValue",
@@ -79,7 +80,7 @@ const organizationSchema = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    email: "support@beelodev.com",
+    email: SUPPORT_EMAIL,
     contactType: "customer service",
     areaServed: "US",
     availableLanguage: "English",

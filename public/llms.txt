@@ -1,30 +1,30 @@
 # USAgentLeads
 
-> USAgentLeads is a verified real estate agent contact database covering all 50 US states. It provides 553,778+ agent contacts with name, email, phone, and state — available as instant CSV downloads or via REST API.
+> USAgentLeads is a verified real estate agent contact database covering all 50 US states. It provides 888,809+ agent contacts with name, email, phone, and state — available as instant CSV downloads or via REST API.
 
 ## Company Overview
 
 USAgentLeads is a B2B data provider specializing in real estate agent contact information. The database is sourced from public state licensing boards, MLS directories, and brokerage websites, then verified for accuracy. The data is updated annually (last refreshed 2026). The company serves coaches, SaaS companies, mortgage lenders, marketing agencies, brokerages, and lead generation companies that need to reach licensed real estate professionals.
 
 - Website: https://www.usagentleads.com
-- Support: support@usagentleads.com
+- Support: support@beelodev.com
 - Industry: B2B data / real estate technology
 - Coverage: All 50 US states
-- Total contacts: 553,778+
+- Total contacts: 888,809+
 - Data fields: Full name, email address, phone number, state
 - Data format: CSV (download) or JSON (API)
 - Deliverability rate: 90%+
 
 ## Products & Pricing
 
-### State Pack — $20/state
+### State Pack — $49/state
 Download a single state's real estate agent contact list as a CSV file. Instant delivery, no account required. Available for all 50 states.
 
-### Full Database — $99 one-time
-All 50 states, 553K+ contacts in a single CSV download. One-time purchase, no subscription.
+### Full Database — $149 one-time
+All 50 states, 888,809+ contacts in a single CSV download. One-time purchase, no subscription.
 
 ### Pro Dashboard — $49/month
-Searchable web interface to browse, filter, and search all 553K+ agents by state, name, or email. No CSV download — designed for teams that need a live searchable interface.
+Searchable web interface to browse, filter, and search all 888,809+ agents by state, name, or email. No CSV download — designed for teams that need a live searchable interface.
 
 ### Pro API — $79/month
 REST API access to query the full database programmatically. Supports state filtering, search, and paginated JSON responses. Includes 10,000 requests/month.
@@ -47,16 +47,16 @@ A free 100-contact sample CSV is available on the homepage to evaluate data qual
 
 Each state has a dedicated page with agent count, sample data preview, and purchase option:
 
-- https://www.usagentleads.com/states/california (481,000+ agents)
-- https://www.usagentleads.com/states/florida (327,000+ agents)
-- https://www.usagentleads.com/states/texas (232,000+ agents)
-- https://www.usagentleads.com/states/new-york (71,000+ agents)
-- https://www.usagentleads.com/states/georgia (62,000+ agents)
-- https://www.usagentleads.com/states/arizona (61,000+ agents)
-- https://www.usagentleads.com/states/north-carolina (55,000+ agents)
-- https://www.usagentleads.com/states/illinois (54,000+ agents)
-- https://www.usagentleads.com/states/new-jersey (51,000+ agents)
-- https://www.usagentleads.com/states/colorado (47,000+ agents)
+- https://www.usagentleads.com/states/florida (167,814+ contacts)
+- https://www.usagentleads.com/states/california (84,478+ contacts)
+- https://www.usagentleads.com/states/texas (43,167+ contacts)
+- https://www.usagentleads.com/states/new-jersey (33,786+ contacts)
+- https://www.usagentleads.com/states/new-york (26,597+ contacts)
+- https://www.usagentleads.com/states/georgia (25,067+ contacts)
+- https://www.usagentleads.com/states/colorado (25,008+ contacts)
+- https://www.usagentleads.com/states/massachusetts (20,720+ contacts)
+- https://www.usagentleads.com/states/illinois (20,479+ contacts)
+- https://www.usagentleads.com/states/michigan (19,266+ contacts)
 - All 50 states available at https://www.usagentleads.com/states
 
 ## Use Case Pages
@@ -120,6 +120,6 @@ The USAgentLeads REST API provides programmatic access to the full agent databas
 
 - Sourced from state licensing boards, MLS directories, and brokerage websites
 - 90%+ email deliverability rate
-- Updated annually (last refresh: 2026)
+- Updated annually (last refresh: May 2026)
 - Each record includes: full name, verified email, phone number, US state
 - Free 100-contact sample available for quality evaluation

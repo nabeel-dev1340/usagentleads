@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import type { USState } from "@/types"
 import type { BlogPost } from "@/types/blog"
 import { CURRENT_YEAR, formatAgentCount } from "@/lib/utils/states"
+import { SITE_URL } from "@/lib/utils/site"
 
-const BASE_URL = "https://www.usagentleads.com"
+const BASE_URL = SITE_URL
 
 function trimDescription(text: string, limit = 155): string {
   if (text.length <= limit) return text

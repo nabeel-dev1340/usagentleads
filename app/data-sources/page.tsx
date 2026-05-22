@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronRight, Database, RefreshCw, ShieldCheck, SearchCheck } from "lucide-react"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
+import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 
 export const metadata: Metadata = {
   title: { absolute: "Real Estate Agent Data Sources & Verification Methodology" },
@@ -42,7 +43,7 @@ const faqs = [
   {
     question: "How often is the database updated?",
     answer:
-      "The full database is refreshed annually, with ongoing cleanup and verification passes used to remove obvious duplicates, normalize fields, and improve deliverability.",
+      `The current dataset was last refreshed in ${DATA_LAST_REFRESHED}. We also run cleanup and verification passes to remove obvious duplicates, normalize fields, and improve deliverability.`,
   },
   {
     question: "Can I see a sample before buying?",
@@ -72,7 +73,7 @@ const steps = [
   {
     icon: RefreshCw,
     title: "Refresh Cycle",
-    body: "The database is refreshed annually, with count updates and quality checks performed as new source data becomes available.",
+    body: `The current dataset was last refreshed in ${DATA_LAST_REFRESHED}. Count updates and quality checks are performed as new source data becomes available.`,
   },
 ]
 
@@ -112,6 +113,25 @@ export default function DataSourcesPage() {
           </section>
 
           <section className="border-t border-border py-12">
+            <h2 className="text-[22px] font-semibold text-ink mb-4">What We Verify</h2>
+            <p className="text-[15px] text-body leading-[1.8] mb-5">
+              Data quality matters more than raw list size. Our review process focuses on whether a record belongs to a real estate professional, whether the fields are usable in a CRM, and whether obvious duplicates or malformed contacts have been removed.
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                "License or professional-directory presence",
+                "Normalized names and state fields",
+                "Email syntax and duplicate detection",
+                "Phone formatting where phone data is available",
+              ].map((item) => (
+                <div key={item} className="rounded-lg border border-border bg-white px-4 py-3 text-[15px] text-body">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="border-t border-border py-12">
             <h2 className="text-[22px] font-semibold text-ink mb-4">What Is Included in the CSV?</h2>
             <p className="text-[15px] text-body leading-[1.8] mb-5">
               Each state CSV is designed for import into CRMs, spreadsheets, outbound tools, and internal prospecting systems. The standard fields are intentionally simple so teams can map the file without cleanup.
@@ -139,6 +159,13 @@ export default function DataSourcesPage() {
             <h2 className="text-[22px] font-semibold text-ink mb-4">Compliance Note</h2>
             <p className="text-[15px] text-body leading-[1.8]">
               USAgentLeads provides business contact data sourced from public and professional records. Customers are responsible for using the data in compliance with CAN-SPAM, platform rules, unsubscribe requirements, and any other laws that apply to their outreach.
+            </p>
+          </section>
+
+          <section className="border-t border-border py-12">
+            <h2 className="text-[22px] font-semibold text-ink mb-4">Data Freshness</h2>
+            <p className="text-[15px] text-body leading-[1.8]">
+              Last dataset refresh: <strong>{DATA_LAST_REFRESHED}</strong>. We show current record counts on the homepage, pricing page, state directory, and individual state pages so buyers can evaluate coverage before purchase.
             </p>
           </section>
 

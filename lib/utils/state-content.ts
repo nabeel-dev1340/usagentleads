@@ -31,7 +31,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   arizona: {
     description:
-      "Arizona is one of the fastest-growing real estate markets in the US, driven by rapid population growth in the Phoenix metro area, Tucson, and Scottsdale. With over 61,000 licensed agents, the state offers a highly competitive market spanning luxury desert homes, retirement communities, and new construction.",
+      "Arizona is one of the fastest-growing real estate markets in the US, driven by rapid population growth in the Phoenix metro area, Tucson, and Scottsdale. The state offers a highly competitive market spanning luxury desert homes, retirement communities, and new construction.",
     cities: ["Phoenix", "Tucson", "Scottsdale", "Mesa", "Chandler"],
     licensingBody: "Arizona Department of Real Estate (ADRE)",
     useCase: "Arizona's explosive population growth and new construction boom make it a top market for home builders, solar energy companies, and CRM platforms targeting agents who handle high transaction volumes.",
@@ -72,7 +72,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   california: {
     description:
-      "California has the largest real estate market in the United States, with over 481,000 licensed agents across major metro areas including Los Angeles, San Francisco, San Diego, and Sacramento. Whether you're targeting luxury agents in Beverly Hills or commercial specialists in the Bay Area, this dataset provides direct access to verified contacts statewide.",
+      "California has the largest real estate market in the United States, with major metro areas including Los Angeles, San Francisco, San Diego, and Sacramento. Whether you're targeting luxury agents in Beverly Hills or commercial specialists in the Bay Area, this dataset provides direct access to verified contacts statewide.",
     cities: ["Los Angeles", "San Francisco", "San Diego", "San Jose", "Sacramento"],
     licensingBody: "California Department of Real Estate (DRE)",
     useCase: "California's diverse market spanning luxury coastal properties to Central Valley farmland creates opportunities for targeted outreach across specialized agent segments.",
@@ -127,7 +127,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   florida: {
     description:
-      "Florida is the second-largest real estate market in the US with over 327,000 licensed agents. The state's massive market covers Miami luxury condos, Orlando family homes, Tampa Bay developments, and retirement communities across the Gulf Coast. Strong population growth and no state income tax fuel continued demand.",
+      "Florida is one of the largest real estate markets in the US. The state's massive market covers Miami luxury condos, Orlando family homes, Tampa Bay developments, and retirement communities across the Gulf Coast. Strong population growth and no state income tax fuel continued demand.",
     cities: ["Miami", "Orlando", "Tampa", "Jacksonville", "Fort Lauderdale"],
     licensingBody: "Florida Department of Business and Professional Regulation (DBPR)",
     useCase: "Florida's combination of vacation rentals, retirement communities, and rapid population growth makes it a prime market for mortgage lenders and property management software.",
@@ -138,7 +138,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   georgia: {
     description:
-      "Georgia's real estate market is dominated by the Atlanta metropolitan area, one of the fastest-growing metros in the US. With over 62,000 agents statewide, the market extends to Savannah's historic homes, Augusta's suburban developments, and Athens' college-town rentals.",
+      "Georgia's real estate market is dominated by the Atlanta metropolitan area, one of the fastest-growing metros in the US. The market extends to Savannah's historic homes, Augusta's suburban developments, and Athens' college-town rentals.",
     cities: ["Atlanta", "Savannah", "Augusta", "Athens", "Marietta"],
     licensingBody: "Georgia Real Estate Commission (GREC)",
     useCase: "Atlanta's position as a top relocation destination in the Southeast creates strong demand for moving companies, home warranty providers, and digital marketing agencies looking to reach high-volume agents.",
@@ -159,7 +159,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   illinois: {
     description:
-      "Illinois' real estate market centers on the Chicago metropolitan area, the third-largest in the US. With over 54,000 agents, the state covers everything from downtown Chicago luxury condos to suburban family homes in Naperville, Schaumburg, and Springfield's capital-region properties.",
+      "Illinois' real estate market centers on the Chicago metropolitan area, the third-largest in the US. The state covers everything from downtown Chicago luxury condos to suburban family homes in Naperville, Schaumburg, and Springfield's capital-region properties.",
     cities: ["Chicago", "Aurora", "Naperville", "Springfield", "Rockford"],
     licensingBody: "Illinois Department of Financial and Professional Regulation (IDFPR)",
     useCase: "Chicago's massive urban market combined with thriving suburbs like Naperville and Schaumburg offers scale for SaaS platforms, lead generation tools, and continuing education providers serving a large agent population.",
@@ -235,14 +235,14 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   maryland: {
     description:
-      "Maryland's real estate market benefits from its proximity to Washington D.C. and Baltimore, creating strong demand for suburban and commuter properties. With over 31,000 agents, the state covers everything from Montgomery County luxury homes to Eastern Shore waterfront properties and Annapolis sailing communities.",
+      "Maryland's real estate market benefits from its proximity to Washington D.C. and Baltimore, creating strong demand for suburban and commuter properties. The state covers everything from Montgomery County luxury homes to Eastern Shore waterfront properties and Annapolis sailing communities.",
     cities: ["Baltimore", "Rockville", "Bethesda", "Silver Spring", "Annapolis"],
     licensingBody: "Maryland Real Estate Commission",
     useCase: "Maryland's D.C. commuter belt and high household incomes make it a strong market for luxury staging companies, jumbo mortgage lenders, and government relocation specialists partnering with local agents.",
   },
   massachusetts: {
     description:
-      "Massachusetts' real estate market centers on the greater Boston area, one of the most competitive markets in the US. With over 27,000 agents, the state covers Boston's luxury condos, Cambridge's academic community, Cape Cod vacation homes, and the growing Pioneer Valley region.",
+      "Massachusetts' real estate market centers on the greater Boston area, one of the most competitive markets in the US. The state covers Boston's luxury condos, Cambridge's academic community, Cape Cod vacation homes, and the growing Pioneer Valley region.",
     cities: ["Boston", "Cambridge", "Worcester", "Springfield", "Plymouth"],
     licensingBody: "Massachusetts Board of Registration of Real Estate Brokers",
     useCase: "Massachusetts' competitive housing market and high median prices create strong demand for buyer's agent tools, bidding-war strategy platforms, and premium photography services catering to agents in tight-inventory markets.",
@@ -318,7 +318,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   nevada: {
     description:
-      "Nevada's real estate market is driven by Las Vegas, one of the fastest-growing metros in the US, alongside Reno's tech-fueled expansion. With over 31,000 agents, the state serves a dynamic mix of residential buyers, investors, luxury property seekers, and newcomers relocating from California.",
+      "Nevada's real estate market is driven by Las Vegas, one of the fastest-growing metros in the US, alongside Reno's tech-fueled expansion. The state serves a dynamic mix of residential buyers, investors, luxury property seekers, and newcomers relocating from California.",
     cities: ["Las Vegas", "Reno", "Henderson", "North Las Vegas", "Sparks"],
     licensingBody: "Nevada Real Estate Division",
     useCase: "Nevada's fast-paced Las Vegas market and California migration wave drive high transaction volumes, making it ideal for transaction management platforms, lead generation tools, and investor-focused services targeting active agents.",
@@ -359,7 +359,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   "new-jersey": {
     description:
-      "New Jersey's real estate market is one of the most active in the Northeast, with over 51,000 agents serving the state's dense suburban communities between New York City and Philadelphia. From Jersey Shore beach towns to Bergen County luxury homes, agents cover a high-value, fast-moving market.",
+      "New Jersey's real estate market is one of the most active in the Northeast, serving dense suburban communities between New York City and Philadelphia. From Jersey Shore beach towns to Bergen County luxury homes, agents cover a high-value, fast-moving market.",
     cities: ["Newark", "Jersey City", "Princeton", "Hoboken", "Morristown"],
     licensingBody: "New Jersey Real Estate Commission",
     useCase: "New Jersey's dense population, high property values, and competitive market make it a prime audience for listing platforms, virtual tour providers, and commission advance companies serving high-volume agents.",
@@ -373,14 +373,14 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   "new-york": {
     description:
-      "New York has one of the largest real estate markets in the world, with over 71,000 licensed agents across New York City, Long Island, Westchester, and Upstate markets. From Manhattan luxury apartments to Hudson Valley estates and Buffalo's revitalizing neighborhoods, agents cover every segment of the market.",
+      "New York has one of the largest real estate markets in the world, spanning New York City, Long Island, Westchester, and Upstate markets. From Manhattan luxury apartments to Hudson Valley estates and Buffalo's revitalizing neighborhoods, agents cover every segment of the market.",
     cities: ["New York City", "Buffalo", "Albany", "Rochester", "Westchester"],
     licensingBody: "New York Department of State Division of Licensing",
     useCase: "New York's enormous agent population and range from Manhattan luxury condos to Upstate starter homes make it the highest-volume market for CRM vendors, continuing education providers, and brokerage recruitment platforms.",
   },
   "north-carolina": {
     description:
-      "North Carolina is one of the fastest-growing states in the US, with booming real estate markets in Charlotte, Raleigh-Durham's Research Triangle, and Asheville's mountain community. Over 55,000 agents serve a diverse market of tech workers, retirees, and families relocating from higher-cost states.",
+      "North Carolina is one of the fastest-growing states in the US, with booming real estate markets in Charlotte, Raleigh-Durham's Research Triangle, and Asheville's mountain community. Agents serve a diverse market of tech workers, retirees, and families relocating from higher-cost states.",
     cities: ["Charlotte", "Raleigh", "Durham", "Asheville", "Wilmington"],
     licensingBody: "North Carolina Real Estate Commission (NCREC)",
     useCase: "North Carolina's Research Triangle tech growth and Charlotte's banking sector drive consistent relocations, making it ideal for corporate relocation firms, new construction marketers, and agent team recruiting platforms.",
@@ -394,7 +394,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   ohio: {
     description:
-      "Ohio's real estate market spans multiple major metros — Columbus, Cleveland, Cincinnati, and Dayton — making it one of the most diverse Midwest markets. With over 46,000 agents, the state offers affordable urban living, strong rental markets, and growing suburban developments across its major corridors.",
+      "Ohio's real estate market spans multiple major metros — Columbus, Cleveland, Cincinnati, and Dayton — making it one of the most diverse Midwest markets. The state offers affordable urban living, strong rental markets, and growing suburban developments across its major corridors.",
     cities: ["Columbus", "Cleveland", "Cincinnati", "Dayton", "Toledo"],
     licensingBody: "Ohio Division of Real Estate",
     useCase: "Ohio's multiple major metros and large agent population make it a cost-effective testing ground for proptech startups, home warranty companies, and marketing platforms looking to scale across diverse Midwest markets.",
@@ -415,7 +415,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   pennsylvania: {
     description:
-      "Pennsylvania's real estate market spans Philadelphia's historic urban core and Pittsburgh's revitalizing tech scene, with suburban markets throughout the Lehigh Valley and Lancaster County. Over 47,000 agents serve a state that blends East Coast urban living with affordable Rust Belt revival neighborhoods.",
+      "Pennsylvania's real estate market spans Philadelphia's historic urban core and Pittsburgh's revitalizing tech scene, with suburban markets throughout the Lehigh Valley and Lancaster County. The state blends East Coast urban living with affordable Rust Belt revival neighborhoods.",
     cities: ["Philadelphia", "Pittsburgh", "Allentown", "Lancaster", "Reading"],
     licensingBody: "Pennsylvania Real Estate Commission",
     useCase: "Pennsylvania's two distinct metro markets in Philadelphia and Pittsburgh, along with affordable Lehigh Valley suburbs, offer scale for home warranty providers, title companies, and agent training platforms expanding in the Northeast.",
@@ -456,7 +456,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   "south-carolina": {
     description:
-      "South Carolina's real estate market is booming, with Charleston, Myrtle Beach, and Greenville leading growth across the state. Over 31,000 agents serve a market of relocating retirees, vacation home buyers, and young professionals attracted to the state's affordability, warm climate, and coastal lifestyle.",
+      "South Carolina's real estate market is booming, with Charleston, Myrtle Beach, and Greenville leading growth across the state. Agents serve a market of relocating retirees, vacation home buyers, and young professionals attracted to the state's affordability, warm climate, and coastal lifestyle.",
     cities: ["Charleston", "Myrtle Beach", "Greenville", "Columbia", "Hilton Head"],
     licensingBody: "South Carolina Real Estate Commission",
     useCase: "South Carolina's booming coastal and retirement markets in Charleston and Hilton Head make it a high-value target for vacation rental platforms, retirement planning services, and relocation companies serving out-of-state buyers.",
@@ -497,14 +497,14 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   tennessee: {
     description:
-      "Tennessee's real estate market is driven by Nashville's explosive growth, with Memphis, Knoxville, and Chattanooga also seeing strong demand. Over 38,000 agents serve a state with no income tax, a booming music and entertainment industry, and some of the most popular relocation destinations in the Southeast.",
+      "Tennessee's real estate market is driven by Nashville's explosive growth, with Memphis, Knoxville, and Chattanooga also seeing strong demand. Agents serve a state with no income tax, a booming music and entertainment industry, and some of the most popular relocation destinations in the Southeast.",
     cities: ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Murfreesboro"],
     licensingBody: "Tennessee Real Estate Commission (TREC)",
     useCase: "Nashville's explosive population growth and Tennessee's no-income-tax policy fuel a high-velocity market where new construction marketers, relocation services, and agent recruiting platforms find strong returns.",
   },
   texas: {
     description:
-      "Texas is the second-largest real estate market in the US, with over 232,000 licensed agents spanning the massive metros of Houston, Dallas-Fort Worth, San Antonio, and Austin. The state's no-income-tax policy, booming tech sector, and rapid population growth create one of the most dynamic agent markets in the country.",
+      "Texas is one of the largest real estate markets in the US, spanning the massive metros of Houston, Dallas-Fort Worth, San Antonio, and Austin. The state's no-income-tax policy, booming tech sector, and rapid population growth create one of the most dynamic agent markets in the country.",
     cities: ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"],
     licensingBody: "Texas Real Estate Commission (TREC)",
     useCase: "The Texas market's sheer scale and no-income-tax migration wave create high demand for CRM providers, title companies, and marketing agencies targeting agents.",
@@ -525,14 +525,14 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
   virginia: {
     description:
-      "Virginia's real estate market benefits from the massive Washington D.C. metro economy, with Northern Virginia (Arlington, Fairfax, Alexandria) driving high-value transactions. Over 42,000 agents serve a diverse state that includes Richmond's urban revival, Virginia Beach's coastal market, and Charlottesville's university community.",
+      "Virginia's real estate market benefits from the massive Washington D.C. metro economy, with Northern Virginia (Arlington, Fairfax, Alexandria) driving high-value transactions. The state includes Richmond's urban revival, Virginia Beach's coastal market, and Charlottesville's university community.",
     cities: ["Arlington", "Virginia Beach", "Richmond", "Alexandria", "Fairfax"],
     licensingBody: "Virginia Real Estate Board",
     useCase: "Virginia's proximity to the federal government and military bases drives a constant flow of relocations, making it ideal for VA loan specialists, government relocation firms, and security-cleared housing providers.",
   },
   washington: {
     description:
-      "Washington state's real estate market is powered by Seattle's tech industry (Amazon, Microsoft), with Tacoma, Bellevue, and Spokane also seeing strong growth. Over 44,000 agents serve a market of tech professionals, outdoor enthusiasts, and Pacific Northwest lifestyle seekers across both urban and rural settings.",
+      "Washington state's real estate market is powered by Seattle's tech industry (Amazon, Microsoft), with Tacoma, Bellevue, and Spokane also seeing strong growth. Agents serve a market of tech professionals, outdoor enthusiasts, and Pacific Northwest lifestyle seekers across both urban and rural settings.",
     cities: ["Seattle", "Tacoma", "Bellevue", "Spokane", "Vancouver"],
     licensingBody: "Washington Department of Licensing",
     useCase: "Washington's tech-industry wealth and Seattle's competitive housing market create strong demand for luxury marketing tools, pre-approval lenders, and AI-powered listing platforms targeting high-performing agents.",

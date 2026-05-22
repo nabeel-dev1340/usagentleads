@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Globe, ShieldCheck, RefreshCw } from "lucide-react"
+import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 
 const sources = [
   "State licensing boards",
@@ -23,7 +24,7 @@ const highlights = [
   {
     icon: RefreshCw,
     title: "Regularly Updated",
-    description: "We re-verify the full database annually and remove dead emails to keep bounce rates low.",
+    description: `Current dataset refreshed in ${DATA_LAST_REFRESHED}; cleanup passes remove duplicates and malformed contacts.`,
   },
 ]
 

@@ -73,6 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `Articles about ${category.name.toLowerCase()} for real estate professionals and companies targeting agents.`,
       images: ["https://www.usagentleads.com/twitter-image"],
     },
+    robots: { index: false, follow: true },
   }
 }
 

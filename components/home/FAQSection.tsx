@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { generateFAQSchema } from "@/lib/utils/seo"
 import { TOTAL_AGENTS } from "@/lib/utils/states"
+import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 import { Plus } from "lucide-react"
 
 function getFaqs(totalCount: number) {
@@ -26,7 +27,7 @@ function getFaqs(totalCount: number) {
     {
       question: "How often is the data updated?",
       answer:
-        "We update the full database annually. The current dataset was last refreshed in 2026.",
+        `The current dataset was last refreshed in ${DATA_LAST_REFRESHED}. We also run cleanup passes to remove obvious duplicates and malformed records.`,
     },
     {
       question: "What is the Pro Dashboard subscription?",

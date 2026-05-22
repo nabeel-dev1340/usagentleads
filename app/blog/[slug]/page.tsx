@@ -130,6 +130,19 @@ export default async function BlogPostPage({ params }: Props) {
                 year: "numeric",
               })}
             </time>
+            {meta.updatedAt && (
+              <>
+                <span className="hidden sm:inline">&middot;</span>
+                <time dateTime={meta.updatedAt}>
+                  Updated{" "}
+                  {new Date(meta.updatedAt).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </time>
+              </>
+            )}
             <span className="hidden sm:inline">&middot;</span>
             <span>{meta.readingTime}</span>
           </div>
