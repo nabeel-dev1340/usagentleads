@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://www.usagentleads.com/blog/author/${slug}`,
     },
     openGraph: {
+      locale: "en_US",
       title: `Articles by ${author.name} | USAgentLeads Blog`,
       description: `Read all blog posts by ${author.name} on real estate marketing, lead generation, and B2B outreach strategies.`,
       url: `https://www.usagentleads.com/blog/author/${slug}`,

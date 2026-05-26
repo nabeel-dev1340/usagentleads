@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Contact Us | USAgentLeads",
     description:
       "Get in touch with USAgentLeads. Questions about our real estate agent database, pricing, or data quality?",

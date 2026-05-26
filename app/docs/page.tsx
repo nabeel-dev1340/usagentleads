@@ -30,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     openGraph: {
+      locale: "en_US",
       title: "Real Estate Agent API | REST API Documentation | USAgentLeads",
       description: `Integrate ${countLabel} verified real estate agent contacts into your app via REST API. Simple authentication, state filtering, search, and paginated JSON responses.`,
       url: "https://www.usagentleads.com/docs",

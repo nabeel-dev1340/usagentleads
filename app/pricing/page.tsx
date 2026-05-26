@@ -143,6 +143,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Pricing — Real Estate Agent Database from $49/State",
     description:
       "Realtor email lists from $49/state or $149 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription.",

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Privacy Policy | USAgentLeads",
     description: "How USAgentLeads collects, uses, and protects information.",
     url: "https://www.usagentleads.com/privacy",

@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Real Estate Agent Email Lists by State: 50 States",
     description: "Browse verified realtor email lists for every US state. CSV files with names, emails, and phone numbers from $49/state.",
     url: "https://www.usagentleads.com/states",

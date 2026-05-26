@@ -42,6 +42,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
+    locale: "en_US",
     type: "website",
     siteName: "USAgentLeads",
     title: `USA Realtors Email & Phone Database — 889K+ Real Estate Agents`,

@@ -30,19 +30,22 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
     other: {
       "geo.region": `US-${state.code}`,
       "geo.placename": state.name,
+      "content-language": "en-US",
     },
     openGraph: {
+      locale: "en_US",
       title,
       description: trimDescription(rawDesc),
       url: `${BASE_URL}/states/${state.slug}`,
       type: "website",
-      images: [{ url: `${BASE_URL}/opengraph-image`, width: 1200, height: 630, alt: "USAgentLeads — Real Estate Agent Contact Database" }],
+      // Omit images here so Next uses the per-state opengraph-image.tsx
+      // (shows the state name + agent count) instead of the generic brand image.
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: trimDescription(rawDesc),
-      images: [`${BASE_URL}/twitter-image`],
+      // Omit images here so the per-state twitter-image.tsx is used.
     },
   }
 }

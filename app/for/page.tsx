@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     languages: { "en-US": `${BASE_URL}/for`, "x-default": `${BASE_URL}/for` },
   },
   openGraph: {
+    locale: "en_US",
     title: "Real Estate Agent Data by Use Case 2026 | USAgentLeads",
     description:
       "Find the right real estate agent contact database for your business. See how our data fits your outreach.",

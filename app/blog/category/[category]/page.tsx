@@ -63,6 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://www.usagentleads.com/blog/category/${slug}`,
     },
     openGraph: {
+      locale: "en_US",
       title: `${category.name} for Real Estate | Blog | USAgentLeads`,
       description: `Articles about ${category.name.toLowerCase()} for real estate professionals and companies targeting agents.`,
       url: `https://www.usagentleads.com/blog/category/${slug}`,
