@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "About Us | Who We Are & Why USAgentLeads Exists",
     description:
       "USAgentLeads provides verified real estate agent contact data for all 50 US states. Learn about our mission, data sourcing, and commitment to accuracy.",

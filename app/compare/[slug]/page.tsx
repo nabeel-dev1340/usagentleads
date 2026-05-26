@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       languages: { "en-US": `${BASE_URL}/compare/${slug}`, "x-default": `${BASE_URL}/compare/${slug}` },
     },
     openGraph: {
+      locale: "en_US",
       title: `${comp.title} 2026`,
       description: desc,
       url: `${BASE_URL}/compare/${slug}`,

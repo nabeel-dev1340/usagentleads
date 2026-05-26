@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     languages: { "en-US": `${BASE_URL}/compare`, "x-default": `${BASE_URL}/compare` },
   },
   openGraph: {
+    locale: "en_US",
     title: "USAgentLeads vs Competitors 2026 — Agent Database Comparisons",
     description: "Feature-by-feature comparisons with honest pros and cons.",
     url: `${BASE_URL}/compare`,

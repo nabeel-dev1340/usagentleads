@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og"
 import { getStateBySlug } from "@/lib/utils/states"
 
+export const alt = "US Real Estate Agent Email List — USAgentLeads"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 

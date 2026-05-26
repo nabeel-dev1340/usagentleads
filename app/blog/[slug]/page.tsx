@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     openGraph: {
+      locale: "en_US",
       title: `${meta.title} | USAgentLeads`,
       description: meta.description,
       url: `https://www.usagentleads.com/blog/${meta.slug}`,

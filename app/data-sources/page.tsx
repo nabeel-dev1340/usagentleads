@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Real Estate Agent Data Sources & Verification Methodology",
     description: "How USAgentLeads sources, cleans, verifies, and updates realtor contact data.",
     url: "https://www.usagentleads.com/data-sources",

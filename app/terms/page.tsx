@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Terms of Service | USAgentLeads",
     description: "Terms for using USAgentLeads products, data downloads, and subscriptions.",
     url: "https://www.usagentleads.com/terms",

@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    locale: "en_US",
     title: "Real Estate Marketing Blog | USAgentLeads",
     description:
       "Actionable marketing strategies, email templates, and lead generation tips for real estate professionals.",

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     languages: { "en-US": `${BASE_URL}/glossary`, "x-default": `${BASE_URL}/glossary` },
   },
   openGraph: {
+    locale: "en_US",
     title: "Real Estate Glossary | USAgentLeads",
     description: "Plain-language definitions of key real estate industry terms.",
     url: `${BASE_URL}/glossary`,
