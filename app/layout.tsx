@@ -25,11 +25,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.usagentleads.com"),
   title: {
-    default: `USA Realtors Email & Phone Database — 889K+ Real Estate Agents`,
+    default: `Real Estate Agent Email List — 889K+ US Realtor Contacts`,
     template: "%s | USAgentLeads",
   },
   description:
-    `Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 889K+ verified emails & phone numbers across all 50 states — download by state from $49.`,
+    `Buy a verified real estate agent email list for any US state. 889K+ realtor emails and phone numbers across all 50 states — instant CSV download from $49.`,
   icons: {
     icon: [
       { url: "/icon-16.png", sizes: "16x16", type: "image/png" },
@@ -45,17 +45,17 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     siteName: "USAgentLeads",
-    title: `USA Realtors Email & Phone Database — 889K+ Real Estate Agents`,
+    title: `Real Estate Agent Email List — 889K+ US Realtor Contacts`,
     description:
-      `Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 889K+ verified emails & phone numbers across all 50 states — download by state from $49.`,
+      `Buy a verified real estate agent email list for any US state. 889K+ realtor emails and phone numbers across all 50 states — instant CSV download from $49.`,
     url: "https://www.usagentleads.com",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "USA Realtors Email & Phone Database — 889K+ Real Estate Agents",
+    title: "Real Estate Agent Email List — 889K+ US Realtor Contacts",
     description:
-      "Built for marketers, agencies, and investors who need accurate, affordable USA realtor contact data. 889K+ verified emails & phone numbers across all 50 states — download by state from $49.",
+      "Buy a verified real estate agent email list for any US state. 889K+ realtor emails and phone numbers across all 50 states — instant CSV download from $49.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
   robots: { index: true, follow: true },

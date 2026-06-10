@@ -15,8 +15,8 @@ export function generateStateMetadata(state: USState, cities?: string[]): Metada
   const count = state.agentCount.toLocaleString()
   const shortCount = formatAgentCount(state.agentCount)
   const cityText = cities?.length ? ` Covers ${cities.slice(0, 2).join(", ")} and more.` : ""
-  const title = `${state.name} Realtor Email List: ${shortCount} Contacts, $49`
-  const rawDesc = `Buy verified ${state.name} realtor emails and phone numbers. ${count}+ licensed agent contacts, $49 CSV, instant download.${cityText}`
+  const title = `${state.name} Real Estate Email Database & Realtor List, $49`
+  const rawDesc = `Download the ${state.name} real estate agent email database — ${count}+ verified realtor emails and phone numbers. $49 CSV, instant download.${cityText}`
   return {
     title: { absolute: title },
     description: trimDescription(rawDesc),

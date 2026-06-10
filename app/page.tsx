@@ -35,7 +35,7 @@ const websiteSchema = {
   url: "https://www.usagentleads.com",
   inLanguage: "en-US",
   description:
-    `Verified real estate agent contact database covering all 50 US states. 888,809+ contacts with name, email, and phone — instant CSV download or REST API. Current dataset refreshed in ${DATA_LAST_REFRESHED}.`,
+    `Verified real estate agent email list and contact database covering all 50 US states. 888,809+ realtor contacts with name, email, and phone — instant CSV download or REST API. Current dataset refreshed in ${DATA_LAST_REFRESHED}.`,
   publisher: {
     "@id": "https://www.usagentleads.com/#organization",
   },
@@ -56,7 +56,7 @@ const organizationSchema = {
   },
   image: "https://www.usagentleads.com/opengraph-image",
   description:
-    `USAgentLeads is a B2B data provider offering verified real estate agent contact databases for all 50 US states. 888,809+ contacts with name, email, and phone. Current dataset refreshed in ${DATA_LAST_REFRESHED}.`,
+    `USAgentLeads is a B2B data provider offering verified real estate agent email lists and realtor contact databases for all 50 US states. 888,809+ contacts with name, email, and phone. Current dataset refreshed in ${DATA_LAST_REFRESHED}.`,
   foundingDate: "2024",
   numberOfEmployees: {
     "@type": "QuantitativeValue",

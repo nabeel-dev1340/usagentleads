@@ -1,6 +1,6 @@
 # USAgentLeads Keyword Map
 
-Last updated: 2026-05-16
+Last updated: 2026-06-10
 
 This map prevents the homepage, state directory, state pages, and blog posts from competing for the same primary query. Each URL should have one primary target, a small set of secondary targets, and a clear internal-link role.
 
@@ -16,6 +16,8 @@ This map prevents the homepage, state directory, state pages, and blog posts fro
 | `/blog/real-estate-agent-license-lookup-all-states` | real estate agent license lookup | free real estate license lookup, public real estate license databases, state license lookup databases | Informational / public records | Link to `/data-sources` and state pages where commercial demand exists |
 | `/blog/cold-outreach-realtors-compliance` | cold email to realtors | CAN-SPAM realtor outreach, cold outreach real estate agents, realtor email templates | How-to / compliance | Link to email-list buying guides and `/data-sources` |
 | `/blog/b2b-real-estate-marketing` | B2B real estate marketing | reach real estate agents, marketing to realtors, sell to real estate agents | Strategy / channel planning | Link to persona pages, `/states`, and campaign guides |
+| `/blog/how-many-real-estate-agents-by-state` | number of real estate agents by state | how many real estate agents in the US, realtors by state, agent population 2026 | Informational / linkable statistics asset | Deep-link to every `/states/[state]` page and `/data-sources`; cite NAR for E-E-A-T |
+| `/blog/where-to-buy-realtor-email-list` | where to buy a realtor email list | buy realtor email list, purchase realtor contacts, best real estate agent database | Commercial investigation | Funnel to `/states`, `/pricing`, `/data-sources`; do not use exact "[state] realtor email list" head terms |
 
 ## Cannibalization Rules
 

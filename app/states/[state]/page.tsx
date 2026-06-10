@@ -95,7 +95,7 @@ export default async function StatePage({ params }: Props) {
   const faqSchema = generateFAQSchema(faqs)
 
   // Related blog guides — use state-specific slugs if defined, else fallback defaults
-  const defaultGuides = ["how-to-build-realtor-email-list", "real-estate-cold-email-templates"]
+  const defaultGuides = ["where-to-buy-realtor-email-list", "how-many-real-estate-agents-by-state", "how-to-build-realtor-email-list", "real-estate-cold-email-templates"]
   const guideSlugs = stateContent?.relatedBlogSlugs ?? defaultGuides
   const allPosts = getAllPosts()
   const relatedGuides = guideSlugs
