@@ -7,6 +7,8 @@ import { WhoIsThisFor } from "@/components/home/WhoIsThisFor"
 import { HowItWorks } from "@/components/home/HowItWorks"
 import { UseCases } from "@/components/home/UseCases"
 import { PricingCards } from "@/components/home/PricingCards"
+import { RecentOrders } from "@/components/home/RecentOrders"
+import { RecentOrdersToast } from "@/components/home/RecentOrdersToast"
 import { CompetitorComparison } from "@/components/home/CompetitorComparison"
 import { LatestPosts } from "@/components/home/LatestPosts"
 import { DataSources } from "@/components/home/DataSources"
@@ -155,6 +157,7 @@ export default async function Home() {
       <HowItWorks />
       <UseCases />
       <PricingCards totalCount={totalCount} totalEmails={totalEmails} totalPhones={totalPhones} />
+      <RecentOrders />
       <ApiSection />
       <CompetitorComparison />
       <Testimonials />
@@ -162,6 +165,7 @@ export default async function Home() {
       <DataSources />
       <StatsCTA />
       <FAQSection totalCount={totalCount} />
+      <RecentOrdersToast />
     </>
   )
 }
