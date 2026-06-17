@@ -100,7 +100,7 @@ const organizationSchema = {
       "@type": "Offer",
       name: "Full Database",
       description: "All 50 states, 889K+ real estate agent contacts CSV download",
-      price: "149.00",
+      price: "199.00",
       priceCurrency: "USD",
       url: "https://www.usagentleads.com/pricing",
     },

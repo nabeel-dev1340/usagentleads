@@ -47,7 +47,7 @@ const pricingProductSchema = {
     {
       "@type": "Offer",
       name: "Full Database",
-      price: "149.00",
+      price: "199.00",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
       url: "https://www.usagentleads.com/pricing",
@@ -134,7 +134,7 @@ const pricingProductSchema = {
 export const metadata: Metadata = {
   title: "Pricing 2026 — Real Estate Agent Database from $49/State",
   description:
-    "2026 realtor email lists from $49/state or $149 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
+    "2026 realtor email lists from $49/state or $199 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {
@@ -146,20 +146,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: "Pricing — Real Estate Agent Database from $49/State",
     description:
-      "Realtor email lists from $49/state or $149 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription.",
+      "Realtor email lists from $49/state or $199 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription.",
     url: "https://www.usagentleads.com/pricing",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pricing | Real Estate Agent Database from $49/State",
-    description: "Verified real estate agent contact data starting at $49 per state or $149 for all 50 states. Instant CSV delivery.",
+    description: "Verified real estate agent contact data starting at $49 per state or $199 for all 50 states. Instant CSV delivery.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
 
 const comparisonRows = [
-  { label: "Price", state: "$49/state", full: "$149", pro: "$49/mo", proApi: "$79/mo" },
+  { label: "Price", state: "$49/state", full: "$199", pro: "$49/mo", proApi: "$79/mo" },
   { label: "All 50 states", state: false, full: true, pro: false, proApi: false },
   { label: "CSV download", state: true, full: true, pro: false, proApi: false },
   { label: "Dashboard access", state: false, full: false, pro: true, proApi: true },
@@ -205,7 +205,7 @@ const pricingFAQs = [
   {
     question: "What's the difference between the Full Database and Pro Dashboard?",
     answer:
-      "The Full Database ($149 one-time) gives you a single CSV download of all 889K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
+      "The Full Database ($199 one-time) gives you a single CSV download of all 889K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
   },
 ]
 

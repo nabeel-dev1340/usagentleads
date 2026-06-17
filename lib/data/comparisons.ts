@@ -29,7 +29,7 @@ export const COMPETITORS: readonly Competitor[] = [
     features: [
       { feature: "Purpose", us: "Contact real estate agents", them: "Find expired/FSBO homeowner leads" },
       { feature: "Data Type", us: "Agent emails, phones, names", them: "Homeowner contact info" },
-      { feature: "Pricing", us: "$149 one-time (all states)", them: "$50-200/month subscription" },
+      { feature: "Pricing", us: "$199 one-time (all states)", them: "$50-200/month subscription" },
       { feature: "Per-State Option", us: "$49/state", them: "Zone-based pricing" },
       { feature: "Contract Required", us: false, them: true },
       { feature: "Instant Download", us: true, them: false },
@@ -78,7 +78,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Focus", us: "Agent contact data (all 50 states)", them: "Commercial RE analytics + agent metrics" },
       { feature: "Agent Emails", us: true, them: "Limited" },
       { feature: "Agent Phone Numbers", us: true, them: "Limited" },
-      { feature: "Pricing", us: "$149 one-time", them: "$300-1,000+/month" },
+      { feature: "Pricing", us: "$199 one-time", them: "$300-1,000+/month" },
       { feature: "Contract", us: "None", them: "Annual contract typical" },
       { feature: "Setup Time", us: "Instant download", them: "Sales process + onboarding" },
       { feature: "Production Data", us: false, them: true },
@@ -112,7 +112,7 @@ export const COMPETITORS: readonly Competitor[] = [
       },
       {
         question: "Why would I choose USAgentLeads over CoStar?",
-        answer: "If your goal is outreach — emailing or calling agents to sell a product or service — you don't need CoStar's analytics. USAgentLeads gives you the contact data at $149 instead of $300+/month.",
+        answer: "If your goal is outreach — emailing or calling agents to sell a product or service — you don't need CoStar's analytics. USAgentLeads gives you the contact data at $199 instead of $300+/month.",
       },
     ],
   },
@@ -126,7 +126,7 @@ export const COMPETITORS: readonly Competitor[] = [
     features: [
       { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
       { feature: "Real Estate Agent Coverage", us: "889,000+ verified", them: "Partial (not specialized)" },
-      { feature: "Pricing", us: "$149 one-time", them: "$15,000-30,000+/year" },
+      { feature: "Pricing", us: "$199 one-time", them: "$15,000-30,000+/year" },
       { feature: "Contract", us: "None", them: "Annual minimum" },
       { feature: "Data Export", us: "Unlimited CSV download", them: "Credit-based exports" },
       { feature: "Per-State Purchase", us: "$49/state", them: "Not available" },
@@ -146,7 +146,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "CRM integrations and workflow automation",
     ],
     verdict:
-      "If your sales team sells to many industries and needs a full B2B intelligence platform, ZoomInfo justifies its cost. But if you specifically target real estate agents, paying $15K+/year for ZoomInfo makes no sense when USAgentLeads covers 889,000+ agents for a one-time $149. The specialized database has better agent coverage at a fraction of the cost.",
+      "If your sales team sells to many industries and needs a full B2B intelligence platform, ZoomInfo justifies its cost. But if you specifically target real estate agents, paying $15K+/year for ZoomInfo makes no sense when USAgentLeads covers 889,000+ agents for a one-time $199. The specialized database has better agent coverage at a fraction of the cost.",
     keywords: [
       "ZoomInfo vs USAgentLeads",
       "ZoomInfo alternative for real estate",
@@ -161,7 +161,7 @@ export const COMPETITORS: readonly Competitor[] = [
       },
       {
         question: "Can I use both USAgentLeads and ZoomInfo?",
-        answer: "Absolutely. Many companies use ZoomInfo for general B2B prospecting and USAgentLeads specifically for real estate agent outreach. At $149 one-time, it's a negligible addition to your data stack.",
+        answer: "Absolutely. Many companies use ZoomInfo for general B2B prospecting and USAgentLeads specifically for real estate agent outreach. At $199 one-time, it's a negligible addition to your data stack.",
       },
     ],
   },
@@ -175,7 +175,7 @@ export const COMPETITORS: readonly Competitor[] = [
     features: [
       { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
       { feature: "Agent Coverage", us: "889,000+ verified", them: "Partial — not specialized" },
-      { feature: "Pricing", us: "$149 one-time", them: "$49-99/month per user" },
+      { feature: "Pricing", us: "$199 one-time", them: "$49-99/month per user" },
       { feature: "Email Sequencing", us: false, them: true },
       { feature: "Data Export", us: "Unlimited CSV", them: "Credit-limited" },
       { feature: "Per-State Purchase", us: "$49/state", them: "Not available" },
@@ -195,7 +195,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "Chrome extension for LinkedIn prospecting",
     ],
     verdict:
-      "Apollo is a great all-in-one prospecting tool, but its real estate agent coverage has gaps because it isn't specialized. If you already use Apollo for email sequences, buy the agent data from USAgentLeads for $149 and import it into Apollo — you get the best of both worlds: specialized data plus Apollo's workflow tools.",
+      "Apollo is a great all-in-one prospecting tool, but its real estate agent coverage has gaps because it isn't specialized. If you already use Apollo for email sequences, buy the agent data from USAgentLeads for $199 and import it into Apollo — you get the best of both worlds: specialized data plus Apollo's workflow tools.",
     keywords: [
       "Apollo.io vs USAgentLeads",
       "Apollo alternative for real estate",
@@ -222,7 +222,7 @@ export const COMPETITORS: readonly Competitor[] = [
     description:
       "RealtyAgentLists is a direct competitor selling real estate agent contact databases. Both services offer similar data — here's how they compare on pricing, data quality, and overall value.",
     features: [
-      { feature: "Full US Database", us: "$149", them: "$199-499+" },
+      { feature: "Full US Database", us: "$199", them: "$249-499+" },
       { feature: "Per-State Pricing", us: "$49", them: "$30-50" },
       { feature: "Agent Count", us: "889,000+", them: "Varies" },
       { feature: "Instant Download", us: true, them: true },
@@ -232,7 +232,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Money-Back Guarantee", us: true, them: "Varies" },
     ],
     ourAdvantages: [
-      "Consistently lower pricing — $149 vs $199+ for full database",
+      "Consistently lower pricing — $199 vs $249+ for full database",
       "No account required to purchase",
       "Phone numbers included at no extra charge",
       "Transparent pricing with no upsells",

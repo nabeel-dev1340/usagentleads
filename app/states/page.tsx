@@ -45,7 +45,7 @@ const statesFAQs = [
   },
   {
     question: "What's the difference between a state pack and the full database?",
-    answer: "A state pack ($49) gives you a CSV for a single state. The Full Database ($149, one-time) includes all 50 states in a single download — 889,000+ contacts. If you need 4+ states, the full database is better value.",
+    answer: "A state pack ($49) gives you a CSV for a single state. The Full Database ($199, one-time) includes all 50 states in a single download — 889,000+ contacts. If you need 4+ states, the full database is better value.",
   },
   {
     question: "How quickly is the CSV delivered after purchase?",
@@ -143,7 +143,7 @@ export default async function StatesPage() {
           {[
             "Same CSV fields in every pack",
             "Instant delivery",
-            "Full database: $149",
+            "Full database: $199",
           ].map((item, i) => (
             <div key={item} className="flex min-h-10 items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-[13px] text-body">
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-accent-light font-mono text-[11px] font-semibold text-accent">
@@ -182,7 +182,7 @@ export default async function StatesPage() {
             <p className="text-[14px] text-tertiary">
               Files are delivered as clean UTF-8 CSVs — ready to import into HubSpot, Salesforce, GoHighLevel, Mailchimp, or any email platform.{" "}
               <Link href="/pricing" className="text-accent font-medium hover:underline">
-                Need all 50 states? Get the Full Database for $149 →
+                Need all 50 states? Get the Full Database for $199 →
               </Link>
             </p>
           </div>

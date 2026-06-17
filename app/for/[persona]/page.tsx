@@ -250,6 +250,7 @@ function CTACard({ cta }: { cta: string }) {
       <div className="space-y-4 mb-6">
         <div>
           <div className="flex items-baseline gap-1.5 mb-1">
+            <span className="font-mono text-[18px] font-medium text-muted line-through decoration-muted/60 decoration-2">$99</span>
             <span className="font-mono text-[36px] font-semibold text-ink leading-none">$49</span>
             <span className="text-tertiary text-[15px]">per state</span>
           </div>
@@ -257,7 +258,8 @@ function CTACard({ cta }: { cta: string }) {
         </div>
         <div className="border-t border-border pt-4">
           <div className="flex items-baseline gap-1.5 mb-1">
-            <span className="font-mono text-[36px] font-semibold text-ink leading-none">$149</span>
+            <span className="font-mono text-[18px] font-medium text-muted line-through decoration-muted/60 decoration-2">$399</span>
+            <span className="font-mono text-[36px] font-semibold text-ink leading-none">$199</span>
             <span className="text-tertiary text-[15px]">all 50 states</span>
           </div>
           <p className="text-[13px] text-tertiary">

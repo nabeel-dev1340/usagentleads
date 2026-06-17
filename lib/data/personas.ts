@@ -106,7 +106,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "How does pricing compare to ZoomInfo or Apollo?",
         answer:
-          "A single state costs $49. The full 50-state database is $149 — one-time, not a subscription. That's typically 80-90% less than what you'd pay for the same contacts on ZoomInfo, Apollo, or similar platforms.",
+          "A single state costs $49. The full 50-state database is $199 — one-time, not a subscription. That's typically 80-90% less than what you'd pay for the same contacts on ZoomInfo, Apollo, or similar platforms.",
       },
     ],
     relatedBlogSlugs: [
@@ -147,7 +147,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "Can I target agents in just my local market?",
         answer:
-          "Yes. Buy individual state packs for $49 each, so you only pay for the markets you serve. If you operate in multiple states, the full database at $149 is usually the better deal.",
+          "Yes. Buy individual state packs for $49 each, so you only pay for the markets you serve. If you operate in multiple states, the full database at $199 is usually the better deal.",
       },
       {
         question: "Is this data compliant with real estate marketing regulations?",
@@ -203,7 +203,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "How often is the data updated?",
         answer:
-          "The database is refreshed regularly against state licensing records. Typical bounce rates run under 5%. For the freshest data, you can re-purchase periodically — at $149 for all 50 states, the cost is negligible compared to subscription-based alternatives.",
+          "The database is refreshed regularly against state licensing records. Typical bounce rates run under 5%. For the freshest data, you can re-purchase periodically — at $199 for all 50 states, the cost is negligible compared to subscription-based alternatives.",
       },
       {
         question: "Can I white-label or resell this data?",
@@ -310,7 +310,7 @@ export const PERSONAS: readonly Persona[] = [
       {
         question: "How does this compare to scraping the data myself?",
         answer:
-          "Building and maintaining scrapers for 50 state licensing sites costs thousands in engineering time, plus ongoing maintenance as sites change. Our database gives you the same result for $149, verified and formatted, with regular updates.",
+          "Building and maintaining scrapers for 50 state licensing sites costs thousands in engineering time, plus ongoing maintenance as sites change. Our database gives you the same result for $199, verified and formatted, with regular updates.",
       },
     ],
     relatedBlogSlugs: [

@@ -3,7 +3,7 @@ import { Check, X, ArrowRight } from "lucide-react"
 
 const rows = [
   { feature: "Full US Agent Database", us: true, others: true },
-  { feature: "Price (Full Database)", us: "$149", others: "$500 – $1,000+" },
+  { feature: "Price (Full Database)", us: "$199", others: "$500 – $1,000+" },
   { feature: "Per-State Purchase Option", us: "$49/state", others: "Rarely offered" },
   { feature: "Live Search Dashboard", us: true, others: false },
   { feature: "Instant CSV Download", us: true, others: true },

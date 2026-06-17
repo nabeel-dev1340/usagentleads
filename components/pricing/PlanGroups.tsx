@@ -22,6 +22,7 @@ interface Plan {
   group: GroupId
   subtitle: string
   price: string
+  originalPrice?: string
   period: string
   badge?: string
   stats?: Stat[]
@@ -51,6 +52,7 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number):
       group: "onetime",
       subtitle: "One state",
       price: "$49",
+      originalPrice: "$99",
       period: "/ state",
       features: [
         { text: "Single state CSV download", included: true },
@@ -65,7 +67,8 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number):
       name: "Full Database",
       group: "onetime",
       subtitle: "All 50 states",
-      price: "$149",
+      price: "$199",
+      originalPrice: "$399",
       period: "one-time",
       badge: "BEST VALUE",
       stats: fullDbStats,
@@ -176,6 +179,11 @@ function PlanCard({ plan, variant }: { plan: Plan; variant: "home" | "page" }) {
       </div>
 
       <div className="mt-4 flex items-baseline gap-1.5">
+        {plan.originalPrice && (
+          <span className="font-mono text-[20px] sm:text-[22px] font-medium text-muted line-through decoration-muted/60 decoration-2">
+            {plan.originalPrice}
+          </span>
+        )}
         <span className="font-mono text-[34px] sm:text-[40px] font-semibold text-ink leading-none">{plan.price}</span>
         <span className="text-tertiary text-[14px]">{plan.period}</span>
       </div>

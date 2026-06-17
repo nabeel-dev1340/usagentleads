@@ -12,7 +12,7 @@ declare global {
 }
 
 const PURCHASE_VALUES: Record<string, number> = {
-  full_database: 149,
+  full_database: 199,
   state_data: 49,
 }
 

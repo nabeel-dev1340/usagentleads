@@ -18,7 +18,7 @@ const testimonials = [
   {
     name: "Kevin L.",
     role: "PropTech Founder",
-    text: "The full database at $149 is incredible value. We've used other providers charging $500+ for less data. CSV format works perfectly with our marketing stack.",
+    text: "The full database at $199 is incredible value. We've used other providers charging $500+ for less data. CSV format works perfectly with our marketing stack.",
     rating: 5,
   },
 ]
