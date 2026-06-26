@@ -44,9 +44,6 @@ export async function createCheckout({
           checkout_data: {
             custom: customData,
           },
-          // No free trial — subscriptions are charged immediately. Setting
-          // trial_ends_at to now overrides any trial configured on the variant.
-          ...(isSubscription ? { trial_ends_at: new Date().toISOString() } : {}),
           expires_at: null,
         },
         relationships: {
