@@ -54,10 +54,25 @@ export function DashboardSidebar({
   const [totalCount, setTotalCount] = useState(0)
 
   useEffect(() => {
-    fetch("/api/subscription")
-      .then((r) => r.json())
-      .then((d) => setSub(d.subscription))
-      .catch(() => {})
+    // On a fresh post-checkout load the subscription_created webhook may still
+    // be in flight, so retry a few times until the plan card has data to show.
+    const justSubscribed =
+      new URLSearchParams(window.location.search).get("welcome") === "1"
+    let attempts = 0
+    const loadSub = () => {
+      fetch("/api/subscription")
+        .then((r) => r.json())
+        .then((d) => {
+          if (d.subscription) {
+            setSub(d.subscription)
+          } else if (justSubscribed && attempts < 8) {
+            attempts += 1
+            setTimeout(loadSub, 2000)
+          }
+        })
+        .catch(() => {})
+    }
+    loadSub()
 
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) {

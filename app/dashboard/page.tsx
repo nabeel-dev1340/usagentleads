@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar"
 import { AgentTable } from "@/components/dashboard/AgentTable"
@@ -24,10 +24,26 @@ export default function DashboardPage() {
   const [collapsed, setCollapsed] = useState(false)
   const [accessError, setAccessError] = useState<"auth" | "subscription" | null>(null)
 
+  // True right after a successful checkout (?welcome=1). The subscription_created
+  // webhook may not have landed yet, so we briefly retry before showing the
+  // "Subscription Required" screen to a user who just paid.
+  const justSubscribed = useRef(false)
+  const subRetries = useRef(0)
+  const MAX_SUB_RETRIES = 8
+
   // Restore collapsed preference
   useEffect(() => {
     const saved = localStorage.getItem(COLLAPSED_KEY)
     if (saved === "true") setCollapsed(true)
+  }, [])
+
+  // Detect post-checkout landing and strip the flag from the URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get("welcome") === "1") {
+      justSubscribed.current = true
+      window.history.replaceState({}, "", "/dashboard")
+    }
   }, [])
 
   const toggleCollapsed = () => {
@@ -54,18 +70,25 @@ export default function DashboardPage() {
         setCount(data.count)
         setTotalPages(data.totalPages)
         setAccessError(null)
+        subRetries.current = 0
       } else if (res.status === 401) {
         setAccessError("auth")
         return
       } else if (res.status === 403) {
+        // Freshly subscribed: the webhook may still be in flight. Keep the
+        // loading state held and retry rather than bouncing a paying user.
+        if (justSubscribed.current && subRetries.current < MAX_SUB_RETRIES) {
+          subRetries.current += 1
+          setTimeout(fetchAgents, 2000)
+          return // leave loading=true; the spinner stays until access resolves
+        }
         setAccessError("subscription")
         return
       }
     } catch (error) {
       console.error("Failed to fetch agents:", error)
-    } finally {
-      setLoading(false)
     }
+    setLoading(false)
   }, [state, search, page, pageSize])
 
   useEffect(() => {

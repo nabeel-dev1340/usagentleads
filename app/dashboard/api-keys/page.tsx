@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import {
   Key,
   Plus,
@@ -50,12 +50,33 @@ export default function ApiKeysPage() {
   // Code example toggle
   const [showExamples, setShowExamples] = useState(false)
 
+  // True right after a Pro API checkout (?welcome=1). The subscription_created
+  // webhook may still be in flight, so retry before showing the upgrade prompt.
+  const justSubscribed = useRef(false)
+  const upgradeRetries = useRef(0)
+  const MAX_RETRIES = 8
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get("welcome") === "1") {
+      justSubscribed.current = true
+      window.history.replaceState({}, "", "/dashboard/api-keys")
+    }
+  }, [])
+
   const fetchKeys = useCallback(async () => {
     try {
       const res = await fetch("/api/api-keys")
       if (res.status === 403) {
         const data = await res.json()
         if (data.upgrade) {
+          // Freshly subscribed: wait out webhook propagation before deciding
+          // the plan doesn't include API access.
+          if (justSubscribed.current && upgradeRetries.current < MAX_RETRIES) {
+            upgradeRetries.current += 1
+            setTimeout(fetchKeys, 2000)
+            return
+          }
           setNeedsUpgrade(true)
           setLoading(false)
           return
@@ -63,8 +84,11 @@ export default function ApiKeysPage() {
       }
       const data = await res.json()
       setKeys(data.keys || [])
+      setNeedsUpgrade(false)
+      upgradeRetries.current = 0
+      setLoading(false)
     } catch {
-      // ignore
+      setLoading(false)
     }
   }, [])
 
@@ -80,7 +104,9 @@ export default function ApiKeysPage() {
   }, [])
 
   useEffect(() => {
-    Promise.all([fetchKeys(), fetchUsage()]).finally(() => setLoading(false))
+    // fetchKeys owns the loading flag (it may retry while a webhook propagates).
+    fetchKeys()
+    fetchUsage()
   }, [fetchKeys, fetchUsage])
 
   const handleCreate = async () => {
