@@ -92,7 +92,7 @@ function getPlans(totalCount: number, totalEmails: number, totalPhones: number):
         { text: "Search & filter by state", included: true },
         { text: "Real-time data access", included: true },
         { text: "Cancel anytime", included: true },
-        { text: "Google Sign In required", included: true },
+        { text: "Sign In required", included: true },
       ],
       highlighted: false,
     },

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { createClient } from "@/lib/supabase/server"
 
-const ALLOWED_PREFIXES = ["/dashboard", "/pricing", "/"]
+const ALLOWED_PREFIXES = ["/dashboard", "/pricing", "/checkout", "/"]
 
 function sanitizeRedirect(path: string): string {
   if (!path.startsWith("/") || path.startsWith("//") || path.includes(":\\")) {

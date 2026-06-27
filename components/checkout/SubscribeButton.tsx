@@ -24,7 +24,10 @@ export function SubscribeButton({
       } = await supabase.auth.getUser()
 
       if (!user) {
-        window.location.href = "/login?next=/pricing"
+        // Carry the chosen plan through login so checkout auto-resumes
+        // straight to Lemon Squeezy after the magic link — no re-clicking.
+        const next = encodeURIComponent(`/checkout/resume?plan=${purchaseType}`)
+        window.location.href = `/login?next=${next}`
         return
       }
 
