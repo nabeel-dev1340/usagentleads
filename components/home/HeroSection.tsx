@@ -3,6 +3,7 @@ import { ArrowRight, Lock } from "lucide-react"
 import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
 import { StateDensityMap } from "@/components/home/StateDensityMap"
 import { TOTAL_AGENTS } from "@/lib/utils/states"
+import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 
 const previewRows = [
   { name: "James Harrington", email: "james@harrington-realty.com", phone: "(305) 881-2244", state: "FL" },
@@ -39,15 +40,12 @@ export function HeroSection({
           <div className="text-center lg:text-left">
             {/* Badge */}
             <div className="hero-badge inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-border bg-white px-3 py-2 text-[12px] shadow-sm sm:gap-3 sm:px-4 sm:text-[14px]">
-              <span className="flex items-center gap-1.5 font-medium text-success">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
-                Live Data
-              </span>
-              <span className="text-border-strong">|</span>
               <span className="font-mono font-medium text-ink">{displayCount}</span>
               <span className="text-tertiary">Contacts</span>
               <span className="text-border-strong">|</span>
               <span className="text-tertiary">All 50 States</span>
+              <span className="hidden text-border-strong sm:inline">|</span>
+              <span className="hidden text-tertiary sm:inline">Updated {DATA_LAST_REFRESHED}</span>
             </div>
 
             {/* H1 */}

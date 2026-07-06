@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronRight, Database, RefreshCw, ShieldCheck, SearchCheck } from "lucide-react"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
-import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
+import { DATA_LAST_REFRESHED, DATA_SOURCES } from "@/lib/utils/site"
 
 export const metadata: Metadata = {
   title: { absolute: "Real Estate Agent Data Sources & Verification Methodology" },
@@ -99,6 +99,13 @@ export default function DataSourcesPage() {
             <p className="section-sub mt-4 max-w-3xl">
               USAgentLeads is built for B2B teams that need practical, CRM-ready realtor contact data. This page explains where the data comes from, how it is cleaned, and how buyers can evaluate quality before using it.
             </p>
+            <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[13px] text-tertiary">
+              <span className="h-1.5 w-1.5 rounded-full bg-success" />
+              <span>
+                Dataset current as of{" "}
+                <span className="font-medium text-ink">{DATA_LAST_REFRESHED}</span>
+              </span>
+            </div>
           </header>
 
           <section className="grid gap-5 py-12 md:grid-cols-2">
@@ -111,6 +118,23 @@ export default function DataSourcesPage() {
                 <p className="text-[15px] text-body leading-[1.8]">{step.body}</p>
               </div>
             ))}
+          </section>
+
+          <section className="border-t border-border py-12">
+            <h2 className="text-[22px] font-semibold text-ink mb-4">Where the Data Comes From</h2>
+            <p className="text-[15px] text-body leading-[1.8] mb-5">
+              Records are compiled from public-facing real estate directories, brokerage sites, and public records — then normalized, deduplicated, and verified into a single CRM-ready format. Primary sources include:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {DATA_SOURCES.map((source) => (
+                <span
+                  key={source}
+                  className="rounded-lg border border-border bg-white px-4 py-2.5 text-[15px] text-body"
+                >
+                  {source}
+                </span>
+              ))}
+            </div>
           </section>
 
           <section className="border-t border-border py-12">

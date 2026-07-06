@@ -7,6 +7,7 @@ import { StateGrid } from "@/components/states/StateGrid"
 import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 import { CURRENT_YEAR, TOTAL_AGENTS, US_STATES } from "@/lib/utils/states"
+import { DATA_LAST_REFRESHED, DATA_SOURCES } from "@/lib/utils/site"
 
 export const metadata: Metadata = {
   title: { absolute: `Real Estate Agent Email Lists by State — 50 States (${CURRENT_YEAR})` },
@@ -126,6 +127,13 @@ export default async function StatesPage() {
               <p className="section-sub mt-4 max-w-2xl">
                 Pick a state and download a clean CSV — a complete list of real estate agents with licensed realtor names, email addresses, and phone numbers. Browse realtor email lists and agent databases for all 50 states below, each with the same format, price, and instant delivery.
               </p>
+              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-white px-3.5 py-1.5 text-[13px] text-tertiary">
+                <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                <span>
+                  Data current as of{" "}
+                  <span className="font-medium text-ink">{DATA_LAST_REFRESHED}</span>
+                </span>
+              </div>
             </div>
 
             <div className="grid grid-cols-3 overflow-hidden rounded-xl border border-border bg-white shadow-sm">
@@ -244,6 +252,25 @@ export default async function StatesPage() {
                   <p className="text-[13px] text-body leading-relaxed">{item.body}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-5 rounded-xl border border-border bg-white p-5">
+              <p className="text-[11px] font-mono uppercase tracking-wider text-muted mb-3">
+                Sources include
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {DATA_SOURCES.map((source) => (
+                  <span
+                    key={source}
+                    className="rounded-lg border border-border bg-subtle px-3 py-1.5 text-[13px] text-body"
+                  >
+                    {source}
+                  </span>
+                ))}
+              </div>
+              <p className="text-[13px] text-tertiary mt-4 leading-relaxed">
+                Records are compiled from public-facing real estate directories and public records, then cleaned, deduplicated, and verified before delivery. Dataset current as of {DATA_LAST_REFRESHED}.
+              </p>
             </div>
           </div>
         </section>
