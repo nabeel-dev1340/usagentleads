@@ -117,6 +117,13 @@ export default async function StatePage({ params }: Props) {
         ]
       })()
 
+  // High-demand states (by agent pool, which tracks search demand) — links from
+  // every state page concentrate internal-link equity on the money pages.
+  const popularStates = [...US_STATES]
+    .filter((s) => s.code !== state.code)
+    .sort((a, b) => b.agentCount - a.agentCount)
+    .slice(0, 8)
+
   return (
     <>
       <script
@@ -149,7 +156,7 @@ export default async function StatePage({ params }: Props) {
                 <span
                   className="block text-[clamp(16px,3vw,28px)] tracking-[-0.02em] leading-[1.3] text-tertiary font-medium mt-2"
                 >
-                  Real Estate Agent Email List & Database
+                  Realtor Email List & Real Estate Agent Database
                 </span>
               </h1>
 
@@ -161,7 +168,7 @@ export default async function StatePage({ params }: Props) {
                 verified contacts
               </p>
               <p className="text-[14px] text-body/70 mb-10">
-                Download {state.name} real estate agent emails and phone numbers. The complete {state.name} realtor email database with instant CSV delivery.
+                Download the complete list of real estate agents in {state.name} — verified realtor emails, phone numbers, and a CRM-ready {state.name} realtor database delivered instantly as a CSV.
               </p>
 
               {/* Mobile CTA */}
@@ -225,6 +232,19 @@ export default async function StatePage({ params }: Props) {
                   </span>
                 </div>
               </div>
+
+              {/* Complete list of real estate agents — broader-intent keyword capture */}
+              <section className="mb-10">
+                <h2 className="text-[17px] font-semibold text-ink mb-3">
+                  Complete List of Real Estate Agents in {state.name}
+                </h2>
+                <p className="text-[15px] text-body leading-[1.8] mb-3">
+                  This is the most complete list of real estate agents in {state.name} available for instant download — {agentCount.toLocaleString()}+ licensed {state.name} realtors and brokers compiled into one CRM-ready {state.name} realtor database. Every record is standardized with a full name, verified email address, and phone number.
+                </p>
+                <p className="text-[15px] text-body leading-[1.8]">
+                  Instead of scraping {stateContent?.licensingBody ? `the ${stateContent.licensingBody} directory` : "state licensing directories"} or stitching together a {state.name} real estate agents list by hand, download the entire {state.name} realtor email list as a single CSV and import it into your CRM in minutes.
+                </p>
+              </section>
 
               {/* About this state's data */}
               {stateContent && (
@@ -380,6 +400,26 @@ export default async function StatePage({ params }: Props) {
                     >
                       {guide.title}
                       <ChevronRight size={14} />
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              {/* Popular states — internal-link equity to high-demand pages */}
+              <section className="mb-10">
+                <h2 className="text-[13px] font-mono uppercase tracking-wider text-tertiary mb-4">
+                  Popular Real Estate Agent Lists
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {popularStates.map((s) => (
+                    <Link
+                      key={s.code}
+                      href={`/states/${s.slug}`}
+                      className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white border border-border
+                                 hover:border-accent hover:bg-accent-light transition-all duration-150 text-[14px]"
+                    >
+                      <span className="font-mono font-semibold text-ink">{s.code}</span>
+                      <span className="text-tertiary">{s.name} Realtor Email List</span>
                     </Link>
                   ))}
                 </div>

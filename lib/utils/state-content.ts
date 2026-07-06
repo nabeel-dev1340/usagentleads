@@ -1802,6 +1802,10 @@ export function getStateFAQs(
       question: `Is this the complete list of real estate agents in ${state.name}?`,
       answer: `Our ${state.name} database includes ${agentCount.toLocaleString()}+ licensed real estate agents and realtors. The list is compiled from public state licensing boards and professional directories to provide the most comprehensive coverage available.`,
     },
+    {
+      question: `Do you have a ${state.name} realtor database or real estate agents list to download?`,
+      answer: `Yes. The ${state.name} realtor database is a downloadable list of ${agentCount.toLocaleString()}+ real estate agents in ${state.name}, each with a verified name, email address, and phone number. Import the full ${state.name} real estate agents list into any CRM or spreadsheet as a CSV.`,
+    },
     ...(content?.extraFaqs ?? []),
   ]
 }

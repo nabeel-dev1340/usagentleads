@@ -6,12 +6,12 @@ import { ChevronRight, Check, Database, Shield, Zap } from "lucide-react"
 import { StateGrid } from "@/components/states/StateGrid"
 import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
-import { TOTAL_AGENTS, US_STATES } from "@/lib/utils/states"
+import { CURRENT_YEAR, TOTAL_AGENTS, US_STATES } from "@/lib/utils/states"
 
 export const metadata: Metadata = {
-  title: { absolute: "Real Estate Agent Email Lists by State: 50 States" },
+  title: { absolute: `Real Estate Agent Email Lists by State — 50 States (${CURRENT_YEAR})` },
   description:
-    "Buy verified real estate agent email lists by state. CSV files with realtor names, emails, and phone numbers for all 50 US states from $49.",
+    "Real estate agent email lists by state — download a verified realtor email list, agent database, and full list of real estate agents for any of the 50 US states. CSV from $49.",
   alternates: {
     canonical: "https://www.usagentleads.com/states",
     languages: {
@@ -21,15 +21,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     locale: "en_US",
-    title: "Real Estate Agent Email Lists by State: 50 States",
-    description: "Browse verified realtor email lists for every US state. CSV files with names, emails, and phone numbers from $49/state.",
+    title: `Real Estate Agent Email Lists by State — 50 States (${CURRENT_YEAR})`,
+    description: "Browse verified realtor email lists and agent databases for every US state. Download a complete list of real estate agents as a CSV from $49/state.",
     url: "https://www.usagentleads.com/states",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Real Estate Agent Email Lists by State: 50 States",
-    description: "Browse verified realtor email lists for every US state from $49/state.",
+    title: `Real Estate Agent Email Lists by State — 50 States (${CURRENT_YEAR})`,
+    description: "Browse verified realtor email lists and agent databases for every US state from $49/state.",
     images: ["https://www.usagentleads.com/twitter-image"],
   },
 }
@@ -54,6 +54,14 @@ const statesFAQs = [
   {
     question: "Can I import the CSV into my CRM?",
     answer: "Yes. The CSV format is compatible with all major CRMs including HubSpot, Salesforce, GoHighLevel, ActiveCampaign, and Mailchimp. The columns — name, email, phone, state — map directly to standard contact fields.",
+  },
+  {
+    question: "How do I get a list of real estate agents by state?",
+    answer: "Choose your state from the grid above and download its pack. Each state gives you a complete list of real estate agents — a CSV realtor database with every licensed agent's name, email, and phone number, sourced from official state licensing boards.",
+  },
+  {
+    question: "Do you offer a realtor database for every US state?",
+    answer: "Yes. Every one of the 50 US states has its own realtor email list and agent database available for instant download at $49. Need several states? The Full Database bundles all 50 states and 889,000+ real estate agents into a single CSV for $199.",
   },
 ]
 
@@ -116,7 +124,7 @@ export default async function StatesPage() {
               <p className="label-eyebrow mb-3">50 States Available</p>
               <h1 className="section-heading max-w-3xl">Real Estate Agent Email Lists by State</h1>
               <p className="section-sub mt-4 max-w-2xl">
-                Pick a state pack and download a clean CSV with licensed realtor names, email addresses, phone numbers, and state fields. Every card below follows the same format, price, and delivery model.
+                Pick a state and download a clean CSV — a complete list of real estate agents with licensed realtor names, email addresses, and phone numbers. Browse realtor email lists and agent databases for all 50 states below, each with the same format, price, and instant delivery.
               </p>
             </div>
 
@@ -155,6 +163,24 @@ export default async function StatesPage() {
         </div>
 
         <StateGrid countMap={countMap} />
+
+        {/* Broader-intent keyword capture: "list of real estate agents by state" / "realtor database by state" */}
+        <section className="mt-20 border-t border-border pt-16">
+          <div className="max-w-3xl">
+            <h2 className="text-[22px] font-semibold text-ink mb-6">A Complete List of Real Estate Agents by State</h2>
+            <p className="text-[15px] text-body leading-[1.8] mb-4">
+              Every state above links to its own realtor email list — a downloadable database of licensed real estate agents in that state, each with a verified name, email address, and phone number. Whether you need a single state&apos;s realtor database or a real estate agent list spanning several states, every pack ships in the same clean CSV format for {" "}
+              <span className="font-mono text-ink">$49</span>.
+            </p>
+            <p className="text-[15px] text-body leading-[1.8]">
+              Instead of scraping 50 different state licensing directories to build a real estate agent list by state, download ready-made packs and import them straight into your CRM. Buying four or more states?{" "}
+              <Link href="/pricing" className="text-accent font-medium hover:underline">
+                The Full Database covers all 50 states and 889,000+ agents for $199
+              </Link>
+              .
+            </p>
+          </div>
+        </section>
 
         {/* What's included */}
         <section className="mt-20 border-t border-border pt-16">
@@ -217,6 +243,30 @@ export default async function StatesPage() {
                   <h3 className="text-[14px] font-semibold text-ink mb-1.5">{item.title}</h3>
                   <p className="text-[13px] text-body leading-relaxed">{item.body}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Related guides — internal links to blog assets */}
+        <section className="mt-16 border-t border-border pt-16">
+          <div className="max-w-3xl">
+            <h2 className="text-[22px] font-semibold text-ink mb-6">Guides for Buying Realtor Data</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { href: "/blog/where-to-buy-realtor-email-list", label: "Where to buy a realtor email list" },
+                { href: "/blog/how-many-real-estate-agents-by-state", label: "How many real estate agents are in each state" },
+                { href: "/blog/real-estate-agent-license-lookup-all-states", label: "Free real estate license lookup by state" },
+                { href: "/blog/how-to-build-realtor-email-list", label: "How to build a realtor email list" },
+              ].map((g) => (
+                <Link
+                  key={g.href}
+                  href={g.href}
+                  className="flex items-center justify-between gap-3 card p-4 text-[14px] text-body hover:border-accent transition-colors"
+                >
+                  <span>{g.label}</span>
+                  <ChevronRight size={15} className="text-accent shrink-0" />
+                </Link>
               ))}
             </div>
           </div>
