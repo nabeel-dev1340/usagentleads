@@ -1,5 +1,7 @@
 import { Resend } from "resend"
 import { escapeHtml } from "@/lib/utils/security"
+import { unsubscribeUrl } from "@/lib/utils/unsubscribe"
+import { SITE_URL } from "@/lib/utils/site"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -406,6 +408,144 @@ export async function sendFreeSampleEmail({
     from: FROM_EMAIL,
     to,
     subject: "Your Free Sample — 500 Real Estate Agent Contacts",
+    html: emailLayout(body),
+  })
+}
+
+// ── Nurture drip (sample-lead follow-ups) ────────────────────────────
+
+/** Opt-out footer required on marketing email — see lib/utils/unsubscribe.ts. */
+function unsubFooter(email: string): string {
+  return `<p style="color: #94a3b8; font-size: 12px; margin: 28px 0 0 0; text-align: center; line-height: 1.6;">
+    You're receiving this because you downloaded a free sample from USAgentLeads.<br>
+    <a href="${escapeHtml(unsubscribeUrl(email))}" style="color: #94a3b8; text-decoration: underline;">Unsubscribe from these emails</a>
+  </p>`
+}
+
+/** Drip #1 (~day 2): help them actually use the sample and introduce the full DB. */
+export async function sendNurtureImport({ to }: { to: string }) {
+  const body = `
+    <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
+
+    <p style="margin: 0 0 8px 0; font-size: 15px;">
+      Thanks for grabbing the USAgentLeads free sample. Here's how to put it to work in a couple of minutes:
+    </p>
+
+    ${infoBox(`
+      <p style="margin: 0 0 8px 0; font-weight: 600; font-size: 14px; color: #1e3a5f;">Import in 3 steps</p>
+      <table style="width: 100%; font-size: 14px; color: #334155;">
+        <tr><td style="padding: 3px 0;">1. Open the CSV in Excel or Google Sheets</td></tr>
+        <tr><td style="padding: 3px 0;">2. Map the columns: Full Name, Email, Phone, State</td></tr>
+        <tr><td style="padding: 3px 0;">3. Import into HubSpot, Salesforce, GoHighLevel, or Mailchimp</td></tr>
+      </table>
+    `)}
+
+    <p style="margin: 0 0 8px 0; font-size: 15px;">
+      The sample is 500 rows. The full database covers <strong>all 50 states and 889K+ verified agents</strong> in the same clean format &mdash; one CSV, instant download, no account needed.
+    </p>
+
+    ${primaryButton(`${SITE_URL}/pricing`, "See Pricing")}
+
+    <p style="color: #64748b; font-size: 13px; margin: 0;">
+      Questions about the data or your use case? Just reply to this email.
+    </p>
+
+    ${unsubFooter(to)}`
+
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to,
+    subject: "How to import your real estate agent list into your CRM",
+    html: emailLayout(body),
+  })
+}
+
+/** Drip #2 (~day 4): handle the "is the data any good?" objection. */
+export async function sendNurtureQuality({ to }: { to: string }) {
+  const body = `
+    <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
+
+    <p style="margin: 0 0 16px 0; font-size: 15px;">
+      The most common question we get is a fair one: <em>is the data actually usable?</em> Here's how to check for yourself before you spend a dollar.
+    </p>
+
+    ${infoBox(`
+      <table style="width: 100%; font-size: 14px; color: #334155;">
+        <tr><td style="padding: 4px 0;">Spot-check a few records against public licensing or brokerage sources</td></tr>
+        <tr><td style="padding: 4px 0;">Run the sample emails through NeverBounce or ZeroBounce</td></tr>
+        <tr><td style="padding: 4px 0;">Confirm the fields map cleanly to your CRM</td></tr>
+      </table>
+    `)}
+
+    <p style="margin: 0 0 16px 0; font-size: 15px;">
+      Our records are compiled from public licensing records and professional directories, then cleaned, deduplicated, and verified for 90%+ deliverability. And every purchase is backed by a <strong>30-day money-back guarantee</strong> &mdash; if the data doesn't work for you, you get a refund.
+    </p>
+
+    ${primaryButton(`${SITE_URL}/states`, "Browse State Data")}
+
+    ${unsubFooter(to)}`
+
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to,
+    subject: "Not sure the data's any good? Here's how to check",
+    html: emailLayout(body),
+  })
+}
+
+/** A per-lead discount minted at send time — see createStateDiscount(). */
+export interface NurtureCoupon {
+  code: string
+  label: string
+  expiresAt: string
+}
+
+/** Drip #3 (~day 6): final nudge, with a dynamic per-lead coupon when provided. */
+export async function sendNurtureFinal({ to, coupon }: { to: string; coupon?: NurtureCoupon }) {
+  const expiryText = coupon
+    ? new Date(coupon.expiresAt).toLocaleDateString("en-US", { month: "long", day: "numeric" })
+    : ""
+
+  const couponBlock = coupon
+    ? infoBox(`
+        <p style="margin: 0 0 6px 0; font-weight: 600; font-size: 15px; color: #1e3a5f;">Use code ${escapeHtml(coupon.code)} at checkout for ${escapeHtml(coupon.label)}</p>
+        <p style="margin: 0; font-size: 13px; color: #475569;">Enter it in the "Add discount code" field on the checkout page. This code is yours alone and expires ${escapeHtml(expiryText)}.</p>
+      `)
+    : ""
+
+  const subject = coupon
+    ? `Your code for ${coupon.label} is inside (expires ${expiryText})`
+    : "Ready when you are — a quick recap"
+
+  const body = `
+    <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
+
+    <p style="margin: 0 0 16px 0; font-size: 15px;">
+      Whenever you're ready, USAgentLeads gives you a complete, CRM-ready list of licensed real estate agents &mdash; name, email, phone, and state on every record.
+    </p>
+
+    ${infoBox(`
+      <table style="width: 100%; font-size: 14px; color: #334155;">
+        <tr><td style="padding: 3px 0;">Single state &mdash; $49 CSV download</td></tr>
+        <tr><td style="padding: 3px 0;">All 50 states &mdash; $199, 889K+ verified contacts</td></tr>
+        <tr><td style="padding: 3px 0;">Instant delivery &middot; no account &middot; 30-day money-back guarantee</td></tr>
+      </table>
+    `)}
+
+    ${couponBlock}
+
+    ${primaryButton(`${SITE_URL}/pricing`, "View Pricing")}
+
+    <p style="color: #64748b; font-size: 13px; margin: 0;">
+      This is the last email in this series &mdash; no more follow-ups after today.
+    </p>
+
+    ${unsubFooter(to)}`
+
+  await resend.emails.send({
+    from: FROM_EMAIL,
+    to,
+    subject,
     html: emailLayout(body),
   })
 }

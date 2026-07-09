@@ -1,0 +1,5 @@
+{
+  "crons": [
+    { "path": "/api/cron/nurture-drip", "schedule": "0 15 * * *" }
+  ]
+}

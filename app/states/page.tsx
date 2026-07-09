@@ -2,8 +2,10 @@ export const revalidate = 3600
 
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ChevronRight, Check, Database, Shield, Zap } from "lucide-react"
+import { ChevronRight, Check, Database, Shield, Zap, FileSpreadsheet } from "lucide-react"
 import { StateGrid } from "@/components/states/StateGrid"
+import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
+import { ExitIntentPopup } from "@/components/home/ExitIntentPopup"
 import { createServiceClient } from "@/lib/supabase/server"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 import { CURRENT_YEAR, TOTAL_AGENTS, US_STATES } from "@/lib/utils/states"
@@ -38,11 +40,11 @@ export const metadata: Metadata = {
 const statesFAQs = [
   {
     question: "What data fields are included in each state pack?",
-    answer: "Every state CSV includes full name, email address, phone number, and state for each licensed real estate agent. Records are sourced from official state real estate licensing boards.",
+    answer: "Every state CSV includes full name, email address, phone number, and state for each licensed real estate agent. Records are compiled from public state licensing records and public-facing professional directories, then cleaned and verified.",
   },
   {
     question: "How is the agent data sourced and verified?",
-    answer: "All contacts are sourced from publicly available state real estate licensing board records — the same registries that regulators use to track active licenses. We run regular verification passes to maintain deliverability above 90%.",
+    answer: "All contacts are compiled from publicly available sources — public state licensing records, professional directories, and brokerage listings. We normalize, deduplicate, and run regular verification passes to maintain deliverability above 90%.",
   },
   {
     question: "What's the difference between a state pack and the full database?",
@@ -58,7 +60,7 @@ const statesFAQs = [
   },
   {
     question: "How do I get a list of real estate agents by state?",
-    answer: "Choose your state from the grid above and download its pack. Each state gives you a complete list of real estate agents — a CSV realtor database with every licensed agent's name, email, and phone number, sourced from official state licensing boards.",
+    answer: "Choose your state from the grid above and download its pack. Each state gives you a complete list of real estate agents — a CSV realtor database with every licensed agent's name, email, and phone number, compiled from public licensing records and professional directories.",
   },
   {
     question: "Do you offer a realtor database for every US state?",
@@ -110,6 +112,7 @@ export default async function StatesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, itemList, faqSchema]) }}
       />
+      <ExitIntentPopup />
     <div className="bg-page min-h-screen">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
@@ -172,6 +175,29 @@ export default async function StatesPage() {
 
         <StateGrid countMap={countMap} />
 
+        {/* Free-sample capture — give browsing visitors a low-commitment way to
+            leave their email. The sample CSV is a generic 500-row file. */}
+        <section className="mt-12">
+          <div className="card flex flex-col items-start justify-between gap-4 p-6 sm:flex-row sm:items-center">
+            <div className="flex items-start gap-3">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-accent-mid bg-accent-light">
+                <FileSpreadsheet size={20} className="text-accent" />
+              </span>
+              <div>
+                <p className="text-[15px] font-semibold text-ink">Want to see the data before you buy?</p>
+                <p className="text-[13px] text-tertiary leading-relaxed">
+                  Download a free 500-row sample CSV — check the exact fields and quality, no card required.
+                </p>
+              </div>
+            </div>
+            <FreeSampleDialog
+              source="states_directory"
+              triggerLabel="Get Free Sample"
+              triggerClassName="btn-outline shrink-0 whitespace-nowrap text-[14px] px-5 py-2.5"
+            />
+          </div>
+        </section>
+
         {/* Broader-intent keyword capture: "list of real estate agents by state" / "realtor database by state" */}
         <section className="mt-20 border-t border-border pt-16">
           <div className="max-w-3xl">
@@ -230,8 +256,8 @@ export default async function StatesPage() {
               {[
                 {
                   icon: Database,
-                  title: "State Licensing Boards",
-                  body: "Every contact is sourced from official state real estate commission and licensing board records — the same public registries regulators use to track active licenses.",
+                  title: "Public & Professional Records",
+                  body: "Every contact is compiled from public state licensing records and public-facing professional directories — the same public sources teams use to verify licensed agents.",
                 },
                 {
                   icon: Shield,

@@ -3,6 +3,7 @@
 import { Loader2, ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { track } from "@/lib/utils/analytics"
 
 export function SubscribeButton({
   className,
@@ -17,6 +18,7 @@ export function SubscribeButton({
 
   const handleSubscribe = async () => {
     setLoading(true)
+    track("subscribe_button_clicked", { plan: purchaseType })
     try {
       const supabase = createClient()
       const {
@@ -40,6 +42,7 @@ export function SubscribeButton({
       })
       const data = await res.json()
       if (data.url) {
+        track("checkout_started", { product: purchaseType })
         window.location.href = data.url
       }
     } catch {

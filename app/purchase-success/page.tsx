@@ -3,7 +3,8 @@
 import { Suspense, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { ArrowRight, CheckCircle, Download, Loader2, Mail } from "lucide-react"
+import { ArrowRight, CheckCircle, Download, Loader2, Mail, ShieldCheck } from "lucide-react"
+import { BuyFullDBButton } from "@/components/checkout/BuyFullDBButton"
 
 declare global {
   interface Window {
@@ -87,9 +88,12 @@ function PurchaseSuccessContent() {
     return () => { cancelled = true }
   }, [pageToken, retries])
 
+  const showStateUpsell = purchase?.status === "completed" && purchase.purchaseType === "state"
+
   return (
     <div className="bg-page min-h-[80vh] flex items-center justify-center px-4 py-16">
-      <div className="card max-w-lg w-full p-10 text-center">
+      <div className="flex w-full max-w-lg flex-col gap-5">
+      <div className="card w-full p-10 text-center">
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-success-bg border border-success/20">
           <CheckCircle className="h-8 w-8 text-success" />
         </div>
@@ -142,13 +146,34 @@ function PurchaseSuccessContent() {
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Link href="/states" className="btn-primary">
+          <Link href="/states" className={showStateUpsell ? "btn-outline" : "btn-primary"}>
             Browse More States <ArrowRight size={14} />
           </Link>
           <Link href="/" className="btn-outline">
             Back to Home
           </Link>
         </div>
+      </div>
+
+      {/* Post-purchase upsell: a state buyer is the hottest full-database prospect.
+          Shown only after a confirmed state purchase; priced at the standard $199. */}
+      {showStateUpsell && (
+        <div className="card w-full border-2 border-accent/30 p-7 text-left shadow-lg">
+          <p className="label-eyebrow mb-1">Complete your coverage</p>
+          <h2 className="text-[19px] font-semibold text-ink">Get all 50 states for $199</h2>
+          <p className="mt-2 text-[14px] text-body leading-relaxed">
+            You just unlocked one state. The Full Database bundles all 50 states and 889K+ verified
+            contacts into a single CSV — same instant delivery, no account needed.
+          </p>
+          <div className="mt-5">
+            <BuyFullDBButton className="w-full" />
+          </div>
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-[13px] text-tertiary">
+            <ShieldCheck size={13} />
+            One-time &middot; Instant delivery &middot; 30-day money-back guarantee
+          </p>
+        </div>
+      )}
       </div>
     </div>
   )

@@ -11,7 +11,9 @@ import { STATE_NEIGHBORS } from "@/lib/utils/state-neighbors"
 import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
 import { StateFAQ } from "@/components/states/StateFAQ"
-import { ChevronRight, Check, Lock, ShieldCheck } from "lucide-react"
+import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
+import { ExitIntentPopup } from "@/components/home/ExitIntentPopup"
+import { ChevronRight, Check, Lock, ShieldCheck, FileSpreadsheet } from "lucide-react"
 import { createServiceClient } from "@/lib/supabase/server"
 
 export const revalidate = 86400
@@ -130,6 +132,7 @@ export default async function StatePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumb, product, dataset, faqSchema]) }}
       />
+      <ExitIntentPopup />
       <div className="bg-page min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
@@ -231,6 +234,28 @@ export default async function StatePage({ params }: Props) {
                     Purchase to access all {agentCount.toLocaleString()} records
                   </span>
                 </div>
+              </div>
+
+              {/* Free-sample capture — give not-ready-to-buy visitors a reason to
+                  leave their email instead of bouncing. The sample CSV is a generic
+                  500-row file, so the copy stays honest about what it is. */}
+              <div className="card mb-10 flex flex-col items-start justify-between gap-3 p-5 sm:flex-row sm:items-center">
+                <div className="flex items-start gap-3">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent-light border border-accent-mid">
+                    <FileSpreadsheet size={18} className="text-accent" />
+                  </span>
+                  <div>
+                    <p className="text-[14px] font-semibold text-ink">Not ready to buy?</p>
+                    <p className="text-[13px] text-tertiary leading-relaxed">
+                      Download a free 500-row sample and check the format and data quality first — no card required.
+                    </p>
+                  </div>
+                </div>
+                <FreeSampleDialog
+                  source={`state_${state.code.toLowerCase()}`}
+                  triggerLabel="Get Free Sample"
+                  triggerClassName="btn-outline shrink-0 whitespace-nowrap text-[14px] px-5 py-2.5"
+                />
               </div>
 
               {/* Complete list of real estate agents — broader-intent keyword capture */}
@@ -493,8 +518,12 @@ function PurchaseCard({ stateCode, stateName, agentCount }: { stateCode: string;
 
       <BuyStateButton stateCode={stateCode} stateName={stateName} className="w-full" />
 
-      <p className="flex items-center justify-center gap-1.5 mt-4 text-[13px] text-tertiary">
+      <div className="mt-4 flex items-center justify-center gap-1.5 rounded-lg border border-success/20 bg-success-bg px-3 py-2 text-[13px] font-medium text-success">
         <ShieldCheck size={14} />
+        30-day money-back guarantee
+      </div>
+
+      <p className="mt-3 text-center text-[13px] text-tertiary">
         Secure checkout &middot; Instant delivery &middot; No account needed
       </p>
 

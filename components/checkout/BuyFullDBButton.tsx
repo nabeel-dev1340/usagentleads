@@ -2,12 +2,14 @@
 
 import { Loader2, ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { track } from "@/lib/utils/analytics"
 
 export function BuyFullDBButton({ className }: { className?: string }) {
   const [loading, setLoading] = useState(false)
 
   const handleBuy = async () => {
     setLoading(true)
+    track("buy_button_clicked", { product: "full_database", price: 199 })
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -18,6 +20,7 @@ export function BuyFullDBButton({ className }: { className?: string }) {
       })
       const data = await res.json()
       if (data.url) {
+        track("checkout_started", { product: "full_database", price: 199 })
         window.location.href = data.url
       }
     } catch {

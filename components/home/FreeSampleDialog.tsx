@@ -12,8 +12,22 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { DownloadIcon, CheckCircle2Icon, Loader2Icon, FileSpreadsheetIcon } from "lucide-react"
+import { track } from "@/lib/utils/analytics"
 
-export function FreeSampleDialog() {
+interface FreeSampleDialogProps {
+  /** Capture-point label stored with the lead, e.g. "home_hero" or "state_fl". */
+  source?: string
+  /** Override the trigger button styling (defaults to the compact accent button). */
+  triggerClassName?: string
+  /** Override the trigger button label. */
+  triggerLabel?: string
+}
+
+export function FreeSampleDialog({
+  source = "home_hero",
+  triggerClassName = "inline-flex items-center gap-1.5 rounded-lg bg-accent text-white text-[13px] font-medium px-4 py-2.5 min-h-[44px] hover:bg-accent-hover transition-colors",
+  triggerLabel = "Download Free Sample",
+}: FreeSampleDialogProps = {}) {
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
@@ -28,7 +42,7 @@ export function FreeSampleDialog() {
       const res = await fetch("/api/free-sample", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({ email: email.trim(), source }),
       })
 
       if (!res.ok) {
@@ -37,6 +51,7 @@ export function FreeSampleDialog() {
       }
 
       setSubmitted(true)
+      track("free_sample_submitted", { source })
       toast.success("Check your email for the download link!")
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong")
@@ -48,11 +63,11 @@ export function FreeSampleDialog() {
   return (
     <>
       <button
-        onClick={() => { setOpen(true); setSubmitted(false); setEmail("") }}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-accent text-white text-[13px] font-medium px-4 py-2.5 min-h-[44px] hover:bg-accent-hover transition-colors"
+        onClick={() => { setOpen(true); setSubmitted(false); setEmail(""); track("free_sample_opened", { source }) }}
+        className={triggerClassName}
       >
         <DownloadIcon size={13} />
-        Download Free Sample
+        {triggerLabel}
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>

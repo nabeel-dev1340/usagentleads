@@ -2,6 +2,7 @@
 
 import { Loader2, ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { track } from "@/lib/utils/analytics"
 
 interface BuyStateButtonProps {
   stateCode: string
@@ -14,6 +15,7 @@ export function BuyStateButton({ stateCode, stateName, className }: BuyStateButt
 
   const handleBuy = async () => {
     setLoading(true)
+    track("buy_button_clicked", { product: "state", state_code: stateCode, state_name: stateName, price: 49 })
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
@@ -25,6 +27,7 @@ export function BuyStateButton({ stateCode, stateName, className }: BuyStateButt
       })
       const data = await res.json()
       if (data.url) {
+        track("checkout_started", { product: "state", state_code: stateCode, price: 49 })
         window.location.href = data.url
       }
     } catch {

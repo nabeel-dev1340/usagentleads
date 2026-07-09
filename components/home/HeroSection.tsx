@@ -85,7 +85,7 @@ export function HeroSection({
 
             {/* Trust note */}
             <p className="hero-sub mt-5 text-[13px] text-tertiary sm:text-[14px]">
-              Trusted by 1,200+ marketers, agencies &amp; lenders
+              90%+ email deliverability, backed by a 30-day money-back guarantee
             </p>
           </div>
 

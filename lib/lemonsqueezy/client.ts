@@ -1,3 +1,82 @@
+import crypto from "crypto"
+
+const LS_API = "https://api.lemonsqueezy.com/v1"
+
+function lsHeaders() {
+  return {
+    Authorization: `Bearer ${process.env.LEMONSQUEEZY_API_KEY}`,
+    "Content-Type": "application/vnd.api+json",
+    Accept: "application/vnd.api+json",
+  }
+}
+
+export interface StateDiscount {
+  code: string
+  amountCents: number
+  expiresAt: string
+}
+
+/**
+ * Mint a unique, single-use Lemon Squeezy discount scoped to the State Pack,
+ * used by the day-6 nurture email. Fixed-amount, short expiry, one redemption —
+ * so "expires soon" is genuinely true and the code can't be shared/reused.
+ * Returns null on any failure so the caller can fall back to a couponless email.
+ */
+export async function createStateDiscount(opts?: {
+  amountCents?: number
+  expiresInHours?: number
+}): Promise<StateDiscount | null> {
+  const amountCents =
+    opts?.amountCents ?? (Number(process.env.NURTURE_COUPON_AMOUNT_CENTS) || 1000)
+  const expiresInHours = opts?.expiresInHours ?? 72
+  const expiresAt = new Date(Date.now() + expiresInHours * 3600 * 1000).toISOString()
+  // Codes must be uppercase alphanumeric; hex + prefix gives plenty of entropy.
+  const code = `SAMPLE${crypto.randomBytes(5).toString("hex").toUpperCase()}`
+
+  const storeId = process.env.LEMONSQUEEZY_STORE_ID
+  const variantId = process.env.NEXT_PUBLIC_LS_STATE_VARIANT_ID
+  if (!storeId || !variantId) {
+    console.error("createStateDiscount: missing store or state variant id")
+    return null
+  }
+
+  try {
+    const response = await fetch(`${LS_API}/discounts`, {
+      method: "POST",
+      headers: lsHeaders(),
+      body: JSON.stringify({
+        data: {
+          type: "discounts",
+          attributes: {
+            name: `Sample nurture ${code}`,
+            code,
+            amount: amountCents,
+            amount_type: "fixed",
+            is_limited_to_products: true,
+            is_limited_redemptions: true,
+            max_redemptions: 1,
+            expires_at: expiresAt,
+          },
+          relationships: {
+            store: { data: { type: "stores", id: storeId } },
+            variants: { data: [{ type: "variants", id: variantId }] },
+          },
+        },
+      }),
+    })
+
+    if (!response.ok) {
+      console.error("createStateDiscount failed:", response.status, await response.text())
+      return null
+    }
+
+    return { code, amountCents, expiresAt }
+  } catch (error) {
+    console.error("createStateDiscount error:", error)
+    return null
+  }
+}
+
 interface CreateCheckoutParams {
   variantId: string
   customData: Record<string, string>

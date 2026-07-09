@@ -17,6 +17,11 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json()
   const email = body.email?.trim()?.toLowerCase()
+  // Optional capture-point label (e.g. "home_hero", "state_florida", "exit_intent").
+  // Sanitized to a short slug so it's safe to store and group on.
+  const source = typeof body.source === "string"
+    ? body.source.trim().toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 40) || null
+    : null
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 })
@@ -31,6 +36,15 @@ export async function POST(request: NextRequest) {
 
   try {
     const supabase = createServiceClient()
+
+    // Persist the lead first so we capture it even if email delivery is slow or
+    // fails. First touch wins (keeps original created_at for accurate drip timing);
+    // a repeat request just refreshes the source. Non-fatal if it errors.
+    const { error: leadError } = await supabase
+      .schema("usagentleads")
+      .from("sample_leads")
+      .upsert({ email, source }, { onConflict: "email", ignoreDuplicates: true })
+    if (leadError) console.error("sample_leads insert error:", leadError)
 
     // Generate a signed URL (7 days) for the pre-generated sample CSV
     const { data: signedUrlData, error: signedUrlError } = await supabase.storage

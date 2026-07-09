@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
 import { DownloadIcon, MailIcon, Loader2Icon } from "lucide-react"
+import { track } from "@/lib/utils/analytics"
 
 const STORAGE_KEY = "exit-intent-shown"
 
@@ -31,6 +32,7 @@ export function ExitIntentPopup() {
     triggered.current = true
     sessionStorage.setItem(STORAGE_KEY, "1")
     setOpen(true)
+    track("free_sample_opened", { source: "exit_intent" })
   }, [])
 
   useEffect(() => {
@@ -66,7 +68,7 @@ export function ExitIntentPopup() {
       const res = await fetch("/api/free-sample", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({ email: email.trim(), source: "exit_intent" }),
       })
 
       if (!res.ok) {
@@ -75,6 +77,7 @@ export function ExitIntentPopup() {
       }
 
       setSubmitted(true)
+      track("free_sample_submitted", { source: "exit_intent" })
       localStorage.setItem(STORAGE_KEY, "1")
       toast.success("Check your email for the download link!")
     } catch (err) {
