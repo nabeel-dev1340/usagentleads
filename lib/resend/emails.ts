@@ -2,6 +2,7 @@ import { Resend } from "resend"
 import { escapeHtml } from "@/lib/utils/security"
 import { unsubscribeUrl } from "@/lib/utils/unsubscribe"
 import { SITE_URL } from "@/lib/utils/site"
+import { getAgentCount, formatAgentCountLabel } from "@/lib/utils/agent-count"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -201,6 +202,7 @@ interface SendSubscriptionWelcomeParams {
 export async function sendSubscriptionWelcome({
   to,
 }: SendSubscriptionWelcomeParams) {
+  const countLabel = formatAgentCountLabel(await getAgentCount())
   const body = `
     <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
 
@@ -211,7 +213,7 @@ export async function sendSubscriptionWelcome({
     ${infoBox(`
       <p style="margin: 0 0 8px 0; font-weight: 600; font-size: 14px; color: #1e3a5f;">Your Pro access includes:</p>
       <table style="width: 100%; font-size: 14px; color: #334155;">
-        <tr><td style="padding: 3px 0;">Browse 500K+ verified agents in-app</td></tr>
+        <tr><td style="padding: 3px 0;">Browse ${countLabel} verified agents in-app</td></tr>
         <tr><td style="padding: 3px 0;">Search & filter by state</td></tr>
         <tr><td style="padding: 3px 0;">Real-time updated data</td></tr>
         <tr><td style="padding: 3px 0;">Cancel anytime</td></tr>
@@ -372,6 +374,7 @@ export async function sendFreeSampleEmail({
   to,
   downloadUrl,
 }: SendFreeSampleEmailParams) {
+  const countLabel = formatAgentCountLabel(await getAgentCount())
   const body = `
     <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
 
@@ -395,7 +398,7 @@ export async function sendFreeSampleEmail({
     `)}
 
     <p style="margin: 0 0 8px 0; font-size: 15px;">
-      Want access to our <strong>full database of 500K+ agents</strong>?
+      Want access to our <strong>full database of ${countLabel} agents</strong>?
     </p>
 
     ${primaryButton("https://www.usagentleads.com/pricing", "View Pricing Plans")}
@@ -424,6 +427,7 @@ function unsubFooter(email: string): string {
 
 /** Drip #1 (~day 2): help them actually use the sample and introduce the full DB. */
 export async function sendNurtureImport({ to }: { to: string }) {
+  const countLabel = formatAgentCountLabel(await getAgentCount())
   const body = `
     <p style="margin: 0 0 16px 0; font-size: 15px;">Hi there,</p>
 
@@ -441,7 +445,7 @@ export async function sendNurtureImport({ to }: { to: string }) {
     `)}
 
     <p style="margin: 0 0 8px 0; font-size: 15px;">
-      The sample is 500 rows. The full database covers <strong>all 50 states and 889K+ verified agents</strong> in the same clean format &mdash; one CSV, instant download, no account needed.
+      The sample is 500 rows. The full database covers <strong>all 50 states and ${countLabel} verified agents</strong> in the same clean format &mdash; one CSV, instant download, no account needed.
     </p>
 
     ${primaryButton(`${SITE_URL}/pricing`, "See Pricing")}
@@ -502,6 +506,7 @@ export interface NurtureCoupon {
 
 /** Drip #3 (~day 6): final nudge, with a dynamic per-lead coupon when provided. */
 export async function sendNurtureFinal({ to, coupon }: { to: string; coupon?: NurtureCoupon }) {
+  const countLabel = formatAgentCountLabel(await getAgentCount())
   const expiryText = coupon
     ? new Date(coupon.expiresAt).toLocaleDateString("en-US", { month: "long", day: "numeric" })
     : ""
@@ -527,7 +532,7 @@ export async function sendNurtureFinal({ to, coupon }: { to: string; coupon?: Nu
     ${infoBox(`
       <table style="width: 100%; font-size: 14px; color: #334155;">
         <tr><td style="padding: 3px 0;">Single state &mdash; $49 CSV download</td></tr>
-        <tr><td style="padding: 3px 0;">All 50 states &mdash; $199, 889K+ verified contacts</td></tr>
+        <tr><td style="padding: 3px 0;">All 50 states &mdash; $199, ${countLabel} verified contacts</td></tr>
         <tr><td style="padding: 3px 0;">Instant delivery &middot; no account &middot; 30-day money-back guarantee</td></tr>
       </table>
     `)}
