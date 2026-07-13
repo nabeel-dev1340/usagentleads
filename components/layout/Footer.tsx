@@ -32,6 +32,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/directory" className="text-[15px] text-gray-300 hover:text-white transition-colors">
+                  Agent Directory
+                </Link>
+              </li>
+              <li>
                 <Link href="/pricing" className="text-[15px] text-gray-300 hover:text-white transition-colors">
                   Pricing
                 </Link>

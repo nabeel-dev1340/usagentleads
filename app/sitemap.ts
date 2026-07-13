@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${BASE_URL}/directory`,
+      lastModified: CONTENT_LAST_REVIEWED,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/pricing`,
       lastModified: CONTENT_LAST_REVIEWED,
       changeFrequency: "monthly",
@@ -97,6 +103,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
+  const directoryPages: MetadataRoute.Sitemap = US_STATES.map((state) => ({
+    url: `${BASE_URL}/directory/${state.slug}`,
+    lastModified: CONTENT_LAST_REVIEWED,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
   const personaPages: MetadataRoute.Sitemap = PERSONAS.map((persona) => ({
     url: `${BASE_URL}/for/${persona.slug}`,
     lastModified: CONTENT_LAST_REVIEWED,
@@ -126,5 +139,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...statePages, ...personaPages, ...comparisonPages, ...glossaryPages, ...blogPages]
+  return [...staticPages, ...statePages, ...directoryPages, ...personaPages, ...comparisonPages, ...glossaryPages, ...blogPages]
 }

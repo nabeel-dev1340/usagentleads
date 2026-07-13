@@ -269,6 +269,13 @@ export default async function StatePage({ params }: Props) {
                 <p className="text-[15px] text-body leading-[1.8]">
                   Instead of scraping {stateContent?.licensingBody ? `the ${stateContent.licensingBody} directory` : "state licensing directories"} or stitching together a {state.name} real estate agents list by hand, download the entire {state.name} realtor email list as a single CSV and import it into your CRM in minutes.
                 </p>
+                <p className="text-[15px] text-body leading-[1.8] mt-3">
+                  Want to look up a specific agent first?{" "}
+                  <Link href={`/directory/${state.slug}`} className="text-accent font-medium hover:underline">
+                    Search the {state.name} real estate agent directory by name
+                  </Link>{" "}
+                  — free to browse before you buy.
+                </p>
               </section>
 
               {/* About this state's data */}

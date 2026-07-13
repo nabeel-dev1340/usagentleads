@@ -79,14 +79,18 @@ export function Navbar() {
     setDropdownOpen(false)
   }
 
-  const navLinks = [
+  // Primary links shown in the desktop bar — kept lean so it never crowds.
+  // Dashboard is intentionally omitted (it lives in the account menu / Sign In).
+  const primaryLinks = [
     { href: "/states", label: "Browse States" },
+    { href: "/directory", label: "Agent Directory" },
     { href: "/pricing", label: "Pricing" },
     { href: "/blog", label: "Blog" },
     { href: "/docs", label: "API Docs" },
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/contact", label: "Contact" },
   ]
+
+  // The mobile overlay has room to spare, so it also surfaces Contact.
+  const mobileLinks = [...primaryLinks, { href: "/contact", label: "Contact" }]
 
   const initials = user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || "U"
 
@@ -112,8 +116,8 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => (
+          <div className="hidden items-center gap-1 lg:flex">
+            {primaryLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -125,7 +129,7 @@ export function Navbar() {
           </div>
 
           {/* Right side */}
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             {user ? (
               <div className="relative">
                 <button
@@ -197,7 +201,7 @@ export function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-tertiary transition-colors hover:text-ink md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-tertiary transition-colors hover:text-ink lg:hidden"
             aria-label="Open menu"
           >
             <Menu className="h-5 w-5" />
@@ -207,7 +211,7 @@ export function Navbar() {
 
       {/* Mobile full-screen overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] flex flex-col bg-white md:hidden animate-fade-in">
+        <div className="fixed inset-0 z-[60] flex flex-col bg-white lg:hidden animate-fade-in">
           {/* Mobile header */}
           <div className="flex h-16 shrink-0 items-center justify-between px-4 sm:px-6 border-b border-border">
             <Link href="/" className="flex items-center gap-2 text-[19px] font-semibold tracking-tight" onClick={() => setMobileOpen(false)}>
@@ -228,7 +232,7 @@ export function Navbar() {
 
           {/* Mobile nav links */}
           <div className="flex flex-1 flex-col items-center justify-center gap-5 px-6">
-            {navLinks.map((link, i) => (
+            {mobileLinks.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -252,7 +256,7 @@ export function Navbar() {
                   className="flex flex-col items-center gap-1"
                   style={{
                     animation: `fade-in-up 0.35s ease-out forwards`,
-                    animationDelay: `${navLinks.length * 70}ms`,
+                    animationDelay: `${mobileLinks.length * 70}ms`,
                     animationFillMode: "backwards",
                   }}
                 >
@@ -265,7 +269,7 @@ export function Navbar() {
                   className="flex flex-col items-center gap-3"
                   style={{
                     animation: `fade-in-up 0.35s ease-out forwards`,
-                    animationDelay: `${(navLinks.length + 1) * 70}ms`,
+                    animationDelay: `${(mobileLinks.length + 1) * 70}ms`,
                     animationFillMode: "backwards",
                   }}
                 >
@@ -301,7 +305,7 @@ export function Navbar() {
                 className="flex flex-col items-center gap-4"
                 style={{
                   animation: `fade-in-up 0.35s ease-out forwards`,
-                  animationDelay: `${navLinks.length * 70}ms`,
+                  animationDelay: `${mobileLinks.length * 70}ms`,
                   animationFillMode: "backwards",
                 }}
               >
