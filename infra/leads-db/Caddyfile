@@ -3,6 +3,13 @@
 # and ports 80/443 are open.
 {$LEADS_DOMAIN} {
 	encode gzip
+	# supabase-js hard-codes a `/rest/v1` path prefix on every request (it's built
+	# for Supabase's gateway). PostgREST serves at the root, so strip the prefix —
+	# without this, every query 404s. `handle_path` removes the matched prefix.
+	handle_path /rest/v1/* {
+		reverse_proxy postgrest:3000
+	}
+	# health / OpenAPI at the root
 	reverse_proxy postgrest:3000
 	header -Server
 }

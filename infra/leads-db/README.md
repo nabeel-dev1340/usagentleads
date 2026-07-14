@@ -5,7 +5,10 @@
 > - **Postgres**: Coolify-managed `postgres:16-alpine` (resource `leads-postgres`,
 >   internal host `jv0tsd8pl7267c5vhwwpjzin:5432`, db `leads`).
 > - **PostgREST**: Coolify service `leads-postgrest`, on the shared `coolify`
->   Traefik network, with a custom `letsencrypt` TLS label (see note) serving
+>   Traefik network, with custom Traefik labels for `letsencrypt` TLS **and a
+>   `stripprefix` middleware removing `/rest/v1`** (supabase-js prefixes every
+>   request with `/rest/v1`; PostgREST serves at root, so without the strip every
+>   query 404s). Serves
 >   **`https://postgrest-ickon4toi8r3ls08j7fjh2dp.89.167.116.36.sslip.io`**.
 > - Roles/schema/`refresh_states()` from `db/01-schema.sql` were applied via
 >   `docker exec … psql`; data was streamed with `pg_dump | psql` (PG17→PG16, the

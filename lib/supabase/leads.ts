@@ -6,6 +6,9 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js"
  * The leads table (~500 MB) was moved off Supabase to stay under the free-tier
  * storage cap; it now lives on our own Postgres, fronted by PostgREST, so the
  * supabase-js query builder keeps working unchanged — only the endpoint differs.
+ * NOTE: supabase-js sends every request under a `/rest/v1/*` path, so the endpoint
+ * at LEADS_REST_URL must strip that prefix before forwarding to PostgREST (done at
+ * the proxy: Traefik StripPrefix / Caddy handle_path). Otherwise every query 404s.
  * Every other table (auth-linked subscriptions, purchases, api_keys, state_count,
  * …) still lives on Supabase and must keep using the clients in ./server.
  *
