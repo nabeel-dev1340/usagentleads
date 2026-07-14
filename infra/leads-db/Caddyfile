@@ -1,0 +1,8 @@
+# Automatic HTTPS for the PostgREST endpoint. Caddy fetches + renews a
+# Let's Encrypt cert for $LEADS_DOMAIN as long as the domain's DNS points here
+# and ports 80/443 are open.
+{$LEADS_DOMAIN} {
+	encode gzip
+	reverse_proxy postgrest:3000
+	header -Server
+}

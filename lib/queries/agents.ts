@@ -1,4 +1,4 @@
-import { createServiceClient } from "@/lib/supabase/server"
+import { createLeadsClient } from "@/lib/supabase/leads"
 import { sanitizeSearchInput, isValidStateCode, clampPage } from "@/lib/utils/security"
 import { getStateByCode } from "@/lib/utils/states"
 
@@ -20,7 +20,7 @@ interface QueryAgentsResult {
 }
 
 export async function queryAgents(params: QueryAgentsParams): Promise<QueryAgentsResult> {
-  const serviceClient = createServiceClient()
+  const serviceClient = createLeadsClient()
 
   const page = clampPage(String(params.page || "1"))
   const rawSize = Number(params.pageSize || DEFAULT_PAGE_SIZE)

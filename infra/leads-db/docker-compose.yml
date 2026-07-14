@@ -1,0 +1,60 @@
+# Self-hosted home for the usagentleads.leads table (moved off Supabase to stay
+# under the free-tier 500 MB cap). Postgres holds the data; PostgREST exposes it
+# with the exact same REST interface supabase-js already speaks; Caddy terminates
+# TLS. Only Caddy is published to the internet — Postgres is never exposed.
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: leads
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      # Consumed by db/00-roles.sh to set the PostgREST login role's password.
+      AUTHENTICATOR_PASSWORD: ${AUTHENTICATOR_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d:ro   # roles + schema run once, at first boot
+    expose:
+      - "5432"                                 # internal to the compose network only
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d leads"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  postgrest:
+    image: postgrest/postgrest:v12.2.3
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://authenticator:${AUTHENTICATOR_PASSWORD}@db:5432/leads
+      PGRST_DB_SCHEMAS: usagentleads
+      PGRST_DB_ANON_ROLE: leads_anon          # no table grants → unauthenticated = denied
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+      PGRST_DB_POOL: "12"
+      PGRST_SERVER_PORT: "3000"
+    expose:
+      - "3000"                                 # internal only; Caddy proxies to it
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - postgrest
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      LEADS_DOMAIN: ${LEADS_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

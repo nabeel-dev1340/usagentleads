@@ -1,4 +1,4 @@
-import { createServiceClient } from "@/lib/supabase/server"
+import { createLeadsClient } from "@/lib/supabase/leads"
 import { sanitizeSearchInput, isValidStateCode } from "@/lib/utils/security"
 import { getStateByCode } from "@/lib/utils/states"
 import { cleanName } from "@/lib/utils/clean-name"
@@ -98,7 +98,7 @@ export async function searchDirectory(params: DirectoryParams): Promise<Director
     return EMPTY(page, stateName, hasQuery ? query : "")
   }
 
-  const supabase = createServiceClient()
+  const supabase = createLeadsClient()
   const from = (page - 1) * DIRECTORY_PAGE_SIZE
   // Fetch one extra row to detect a next page without an expensive exact count.
   const to = from + DIRECTORY_PAGE_SIZE

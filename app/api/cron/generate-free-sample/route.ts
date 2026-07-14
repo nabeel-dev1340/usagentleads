@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { createServiceClient } from "@/lib/supabase/server"
+import { createLeadsClient } from "@/lib/supabase/leads"
 import { cleanName, isValidName } from "@/lib/utils/clean-name"
 
 function escapeCSV(value: string | null): string {
@@ -32,10 +33,11 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const supabase = createServiceClient()
+    const supabase = createServiceClient() // Supabase: Storage upload
+    const leadsDb = createLeadsClient()    // self-hosted: the leads table
 
     // Fetch 500 leads with a mix of states
-    const { data: leads, error: leadsError } = await supabase
+    const { data: leads, error: leadsError } = await leadsDb
       .schema("usagentleads")
       .from("leads")
       .select("name, email, phone, state")

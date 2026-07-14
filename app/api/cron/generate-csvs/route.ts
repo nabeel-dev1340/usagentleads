@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { gzipSync } from "zlib"
 import { createServiceClient } from "@/lib/supabase/server"
+import { createLeadsClient } from "@/lib/supabase/leads"
 import { US_STATES } from "@/lib/utils/states"
 import { cleanName, isValidName } from "@/lib/utils/clean-name"
 
@@ -91,7 +92,8 @@ export async function GET(request: NextRequest) {
   const combine = request.nextUrl.searchParams.get("combine")
 
   try {
-    const supabase = createServiceClient()
+    const supabase = createServiceClient() // Supabase: Storage + state_count
+    const leads = createLeadsClient()      // self-hosted: the leads table
 
     // ?combine=true → merge all state CSVs into a single CSV (memory-efficient)
     if (combine === "true") {
@@ -184,7 +186,7 @@ export async function GET(request: NextRequest) {
     for (const name of stateNames) {
       let offset = 0
       while (true) {
-        const { data, error } = await supabase
+        const { data, error } = await leads
           .schema("usagentleads")
           .from("leads")
           .select("name, email, phone, state")
