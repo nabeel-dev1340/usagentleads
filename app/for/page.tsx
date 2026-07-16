@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { PERSONAS } from "@/lib/data/personas"
 import { generateBreadcrumbSchema } from "@/lib/utils/seo"
-import { ChevronRight, Megaphone, Laptop, Landmark, GraduationCap, Building2, Users } from "lucide-react"
+import { ChevronRight, Megaphone, Laptop, Landmark, GraduationCap, Building2, Users, Wrench, Shield, Camera, Truck } from "lucide-react"
 
 const BASE_URL = "https://www.usagentleads.com"
 
@@ -13,6 +13,10 @@ const iconMap: Record<string, typeof Megaphone> = {
   "marketing-agencies": Megaphone,
   brokerages: Building2,
   "lead-generation": Users,
+  "home-services": Wrench,
+  "insurance-agencies": Shield,
+  photographers: Camera,
+  "moving-companies": Truck,
 }
 
 export const metadata: Metadata = {

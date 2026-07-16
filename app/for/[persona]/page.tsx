@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { PERSONAS, getPersonaBySlug } from "@/lib/data/personas"
+import { AnswerBox } from "@/components/seo/AnswerBox"
 import { TOTAL_AGENTS } from "@/lib/utils/states"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 
@@ -101,6 +102,10 @@ export default async function PersonaPage({ params }: Props) {
               <p className="text-[15px] text-body leading-[1.8] mb-10">
                 {persona.description}
               </p>
+
+              <AnswerBox>
+                {persona.name} can buy a verified list of {TOTAL_AGENTS.toLocaleString()}+ licensed US real estate agents — name, email, phone, and state — from USAgentLeads for $49 per state or $199 one-time for all 50 states. The data is delivered instantly as a CSV that imports into any CRM or email tool, with no subscription and a 30-day money-back guarantee.
+              </AnswerBox>
 
               {/* Mobile CTA */}
               <div className="lg:hidden mb-10">
@@ -231,7 +236,7 @@ export default async function PersonaPage({ params }: Props) {
             </div>
 
             {/* Sticky CTA (desktop) */}
-            <div className="hidden lg:block w-[300px] shrink-0 sticky top-24">
+            <div className="hidden lg:block w-75 shrink-0 sticky top-24">
               <CTACard cta={persona.cta} />
             </div>
           </div>

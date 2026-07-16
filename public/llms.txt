@@ -4,7 +4,7 @@
 
 ## Company Overview
 
-USAgentLeads is a B2B data provider specializing in real estate agent contact information. The database is sourced from public state licensing boards, MLS directories, and brokerage websites, then verified for accuracy. The data is updated annually (last refreshed 2026). The company serves coaches, SaaS companies, mortgage lenders, marketing agencies, brokerages, and lead generation companies that need to reach licensed real estate professionals.
+USAgentLeads is a B2B data provider specializing in real estate agent contact information. The database is compiled from public sources including state licensing records, MLS listings, Zillow, Realtor.com, and major brokerage sites, then verified for accuracy. The dataset is refreshed on a regular cycle (current dataset: July 2026). The company serves coaches, SaaS/PropTech companies, mortgage lenders, marketing agencies, brokerages, lead generation companies, home services businesses, insurance agencies, real estate photographers, and moving companies that need to reach licensed real estate professionals.
 
 - Website: https://www.usagentleads.com
 - Support: support@beelodev.com
@@ -14,31 +14,38 @@ USAgentLeads is a B2B data provider specializing in real estate agent contact in
 - Data fields: Full name, email address, phone number, state
 - Data format: CSV (download) or JSON (API)
 - Deliverability rate: 90%+
+- Phone coverage: roughly 40% of records include a direct phone number
+- Guarantee: 30-day money-back guarantee on all purchases
+- Not affiliated with NAR or any MLS
 
 ## Products & Pricing
 
-### State Pack — $49/state
-Download a single state's real estate agent contact list as a CSV file. Instant delivery, no account required. Available for all 50 states.
+### State Pack — $49/state (one-time)
+Download a single state's real estate agent contact list as a CSV file. Instant delivery, guest checkout (no account required). Available for all 50 states.
 
-### Full Database — $149 one-time
-All 50 states, 888,809+ contacts in a single CSV download. One-time purchase, no subscription.
+### Full Database — $199 (one-time)
+All 50 states, 888,809+ contacts in a single CSV download. One-time purchase, no subscription. At 4+ states this beats stacking state packs.
 
 ### Pro Dashboard — $49/month
-Searchable web interface to browse, filter, and search all 888,809+ agents by state, name, or email. No CSV download — designed for teams that need a live searchable interface.
+Searchable web interface to browse, filter, and search all 888,809+ agents by state, name, or email. No CSV download — designed for teams that need a live searchable interface. Cancel anytime.
 
 ### Pro API — $79/month
 REST API access to query the full database programmatically. Supports state filtering, search, and paginated JSON responses. Includes 10,000 requests/month.
 
 ### Free Sample
-A free 100-contact sample CSV is available on the homepage to evaluate data quality before purchasing.
+A free 500-contact sample CSV is available on the homepage to evaluate data quality before purchasing. No account or credit card required.
 
 ## Key Pages
 
 - Homepage: https://www.usagentleads.com
 - Pricing: https://www.usagentleads.com/pricing
+- FAQ: https://www.usagentleads.com/faq
 - Browse by State: https://www.usagentleads.com/states
+- Agent Directory (free search): https://www.usagentleads.com/directory
 - API Documentation: https://www.usagentleads.com/docs
+- Import Guides: https://www.usagentleads.com/guides
 - Blog: https://www.usagentleads.com/blog
+- Data Sources: https://www.usagentleads.com/data-sources
 - About: https://www.usagentleads.com/about
 - Contact: https://www.usagentleads.com/contact
 - Glossary: https://www.usagentleads.com/glossary
@@ -69,14 +76,51 @@ Dedicated landing pages for specific business types:
 - For Marketing Agencies: https://www.usagentleads.com/for/marketing-agencies
 - For Brokerages: https://www.usagentleads.com/for/brokerages
 - For Lead Generation: https://www.usagentleads.com/for/lead-generation
+- For Home Services Companies: https://www.usagentleads.com/for/home-services
+- For Insurance Agencies: https://www.usagentleads.com/for/insurance-agencies
+- For Real Estate Photographers: https://www.usagentleads.com/for/photographers
+- For Moving Companies: https://www.usagentleads.com/for/moving-companies
 
 ## Competitor Comparisons
+
+Head-to-head comparisons with honest pros and cons:
 
 - REDX vs USAgentLeads: https://www.usagentleads.com/compare/redx-vs-usagentleads
 - CoStar vs USAgentLeads: https://www.usagentleads.com/compare/costar-vs-usagentleads
 - ZoomInfo vs USAgentLeads: https://www.usagentleads.com/compare/zoominfo-vs-usagentleads
 - Apollo.io vs USAgentLeads: https://www.usagentleads.com/compare/apollo-vs-usagentleads
 - RealtyAgentLists vs USAgentLeads: https://www.usagentleads.com/compare/realtyagentlists-vs-usagentleads
+- Cole Realty Resource vs USAgentLeads: https://www.usagentleads.com/compare/cole-realty-resource-vs-usagentleads
+- UpLead vs USAgentLeads: https://www.usagentleads.com/compare/uplead-vs-usagentleads
+- Lusha vs USAgentLeads: https://www.usagentleads.com/compare/lusha-vs-usagentleads
+- BookYourData vs USAgentLeads: https://www.usagentleads.com/compare/bookyourdata-vs-usagentleads
+- Data Axle Genie vs USAgentLeads: https://www.usagentleads.com/compare/data-axle-genie-vs-usagentleads
+- Seamless.AI vs USAgentLeads: https://www.usagentleads.com/compare/seamless-ai-vs-usagentleads
+
+## Alternatives Guides
+
+Researched "best alternatives" guides with verified pricing (July 2026):
+
+- ZoomInfo Alternatives: https://www.usagentleads.com/alternatives/zoominfo-alternatives
+- Apollo.io Alternatives: https://www.usagentleads.com/alternatives/apollo-alternatives
+- REDX Alternatives: https://www.usagentleads.com/alternatives/redx-alternatives
+- Cole Realty Resource Alternatives: https://www.usagentleads.com/alternatives/cole-realty-resource-alternatives
+- CoStar Alternatives: https://www.usagentleads.com/alternatives/costar-alternatives
+
+## Import Guides
+
+Step-by-step guides for importing the CSV (columns: name, email, phone, state) into popular tools:
+
+- Instantly: https://www.usagentleads.com/guides/import-leads-into-instantly
+- Smartlead: https://www.usagentleads.com/guides/import-leads-into-smartlead
+- lemlist: https://www.usagentleads.com/guides/import-leads-into-lemlist
+- Mailchimp: https://www.usagentleads.com/guides/import-contacts-into-mailchimp
+- ActiveCampaign: https://www.usagentleads.com/guides/import-contacts-into-activecampaign
+- Brevo: https://www.usagentleads.com/guides/import-contacts-into-brevo
+- GoHighLevel: https://www.usagentleads.com/guides/import-contacts-into-gohighlevel
+- Close CRM: https://www.usagentleads.com/guides/import-leads-into-close-crm
+- HubSpot: https://www.usagentleads.com/blog/import-real-estate-contacts-hubspot
+- Salesforce: https://www.usagentleads.com/blog/import-agent-contacts-salesforce
 
 ## Blog Articles
 
@@ -92,8 +136,9 @@ Dedicated landing pages for specific business types:
 - B2B Real Estate Marketing Guide: https://www.usagentleads.com/blog/b2b-real-estate-marketing
 - Cold Outreach to Realtors Compliance: https://www.usagentleads.com/blog/cold-outreach-realtors-compliance
 - Florida Real Estate Market Overview 2026: https://www.usagentleads.com/blog/florida-real-estate-market-overview-2026
-- Import Agent Contacts to Salesforce: https://www.usagentleads.com/blog/import-agent-contacts-salesforce
-- Import Real Estate Contacts to HubSpot: https://www.usagentleads.com/blog/import-real-estate-contacts-hubspot
+- Real Estate Agent License Lookup (All States): https://www.usagentleads.com/blog/real-estate-agent-license-lookup-all-states
+- How Many Real Estate Agents by State: https://www.usagentleads.com/blog/how-many-real-estate-agents-by-state
+- Where to Buy a Realtor Email List: https://www.usagentleads.com/blog/where-to-buy-realtor-email-list
 - Real Estate Coach Marketing Agent Pipeline: https://www.usagentleads.com/blog/real-estate-coach-marketing-agent-pipeline
 - Mortgage Lenders Contact Real Estate Agents: https://www.usagentleads.com/blog/mortgage-lenders-contact-real-estate-agents
 - PropTech Sales: Sell Software to Real Estate Agents: https://www.usagentleads.com/blog/proptech-sales-sell-software-real-estate-agents
@@ -118,8 +163,8 @@ The USAgentLeads REST API provides programmatic access to the full agent databas
 
 ## Data Quality
 
-- Sourced from state licensing boards, MLS directories, and brokerage websites
+- Compiled from public sources: state licensing records, MLS listings, Zillow, Realtor.com, and major brokerage sites
 - 90%+ email deliverability rate
-- Updated annually (last refresh: May 2026)
-- Each record includes: full name, verified email, phone number, US state
-- Free 100-contact sample available for quality evaluation
+- Refreshed on a regular cycle (current dataset: July 2026), with cleanup passes for duplicates and malformed records
+- Each record includes: full name, verified email, phone number (where available), US state
+- Free 500-contact sample available for quality evaluation

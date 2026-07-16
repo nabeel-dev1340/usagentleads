@@ -10,6 +10,7 @@ import { getAllPosts } from "@/lib/blog"
 import { STATE_NEIGHBORS } from "@/lib/utils/state-neighbors"
 import { DATA_LAST_REFRESHED } from "@/lib/utils/site"
 import { BuyStateButton } from "@/components/checkout/BuyStateButton"
+import { AnswerBox } from "@/components/seo/AnswerBox"
 import { StateFAQ } from "@/components/states/StateFAQ"
 import { FreeSampleDialog } from "@/components/home/FreeSampleDialog"
 import { ExitIntentPopup } from "@/components/home/ExitIntentPopup"
@@ -173,6 +174,10 @@ export default async function StatePage({ params }: Props) {
               <p className="text-[14px] text-body/70 mb-10">
                 Download the complete list of real estate agents in {state.name} — verified realtor emails, phone numbers, and a CRM-ready {state.name} realtor database delivered instantly as a CSV.
               </p>
+
+              <AnswerBox>
+                The {state.name} realtor email list from USAgentLeads contains {agentCount.toLocaleString()} verified real estate agent contacts — {totalEmails.toLocaleString()} email addresses and {totalPhones.toLocaleString()} phone numbers — for $49 one-time. It downloads instantly as a CRM-ready CSV (columns: name, email, phone, state), no subscription, with a 30-day money-back guarantee. Data last refreshed {DATA_LAST_REFRESHED}.
+              </AnswerBox>
 
               {/* Mobile CTA */}
               <div className="lg:hidden mb-10">

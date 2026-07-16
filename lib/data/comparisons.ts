@@ -261,6 +261,300 @@ export const COMPETITORS: readonly Competitor[] = [
       },
     ],
   },
+  {
+    slug: "cole-realty-resource-vs-usagentleads",
+    name: "Cole Realty Resource",
+    title: "Cole Realty Resource vs USAgentLeads — Data Comparison",
+    headline: "Cole Realty Resource vs USAgentLeads: Homeowner Farm Data vs Agent Contacts",
+    description:
+      "Cole Realty Resource (from Cole Information) sells neighborhood farming data — homeowner contacts by street — to real estate agents. USAgentLeads sells contact data for the agents themselves. Here's how the two compare, including reported Cole pricing.",
+    features: [
+      { feature: "Purpose", us: "Contact real estate agents", them: "Homeowner/farm data for agents" },
+      { feature: "Data Type", us: "Agent emails, phones, names", them: "Homeowner contact records" },
+      { feature: "Pricing", us: "$199 one-time (all states)", them: "Reported ~$119.95 + $99.95 setup (starter)" },
+      { feature: "Best-Rate Plans", us: "$49/state one-time", them: "$995–1,590/year (reported)" },
+      { feature: "Setup Fee", us: false, them: "Reported $99.95 (starter)" },
+      { feature: "Download Caps", us: false, them: "2,000/month on starter (reported)" },
+      { feature: "Instant Download", us: true, them: false },
+      { feature: "Agent Count", us: "889,000+", them: "N/A (homeowner data)" },
+    ],
+    ourAdvantages: [
+      "One-time purchase with no setup fee or download caps",
+      "Built for reaching agents — not homeowner prospecting",
+      "All 50 states for less than Cole's reported starter cost with setup fee",
+      "Guest checkout with instant CSV delivery",
+    ],
+    theirAdvantages: [
+      "Neighborhood-level homeowner farming data",
+      "Expired and withdrawn listing data",
+      "Unlimited downloads with phone append on the Pro annual plan",
+      "Long operating history (Cole Information, founded 1947)",
+    ],
+    verdict:
+      "These products serve opposite sides of the market. Agents building a geographic farm need Cole's homeowner data. Businesses marketing to agents — coaches, lenders, recruiters, PropTech — need USAgentLeads. If you've been comparing the two, the deciding question is simply: are your prospects homeowners, or the agents themselves?",
+    keywords: [
+      "Cole Realty Resource vs USAgentLeads",
+      "Cole Realty Resource alternative",
+      "Cole Information data comparison",
+      "real estate farming data vs agent database",
+      "Cole Realty Resource pricing",
+    ],
+    faqs: [
+      {
+        question: "Does USAgentLeads include homeowner data like Cole Realty Resource?",
+        answer: "No. USAgentLeads contains licensed real estate agent contacts only — name, email, phone, and state. Cole Realty Resource's core product is homeowner contact data for neighborhood farming.",
+      },
+      {
+        question: "What does Cole Realty Resource cost?",
+        answer: "Third-party reviews report a starter package around $119.95 with a $99.95 setup fee limited to 2,000 downloads/month, a Pro plan at $995/year with unlimited downloads and phone append, and a Power plan at $1,590/year. Confirm current pricing with Cole Information — packages change.",
+      },
+    ],
+  },
+  {
+    slug: "uplead-vs-usagentleads",
+    name: "UpLead",
+    title: "UpLead vs USAgentLeads — Real Estate Agent Data",
+    headline: "UpLead vs USAgentLeads: Credit-Based B2B Data vs Flat-Rate Agent Lists",
+    description:
+      "UpLead is a credit-based B2B prospecting database known for its 95% accuracy guarantee. It covers every industry — but you pay per revealed contact. If your target market is US real estate agents, here's how the economics compare.",
+    features: [
+      { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
+      { feature: "Pricing Model", us: "$199 one-time, unlimited use", them: "Credits: from $99/mo (170 credits)" },
+      { feature: "Cost Per Contact", us: "Fraction of a cent (889K for $199)", them: "~$0.44–0.50 per reveal (reported)" },
+      { feature: "Credits Expire", us: false, them: "Typically monthly (reported)" },
+      { feature: "Accuracy Guarantee", us: "30-day money-back guarantee", them: "95% with credit refunds" },
+      { feature: "Free Option", us: "Free 500-contact sample", them: "7-day trial (5 credits)" },
+      { feature: "Per-State Purchase", us: "$49/state", them: false },
+      { feature: "Agent Coverage", us: "889,000+ licensed agents", them: "Partial — not specialized" },
+    ],
+    ourAdvantages: [
+      "Orders of magnitude cheaper for bulk agent lists — no per-contact fees",
+      "No monthly credit expiry; the data is yours permanently",
+      "Specialized licensed-agent coverage across all 50 states",
+      "Phone numbers included at no extra credit cost",
+    ],
+    theirAdvantages: [
+      "95% accuracy guarantee with credit refunds for bad emails",
+      "Covers every industry, not just real estate",
+      "Firmographic and technographic search filters",
+      "Real-time email verification at reveal time",
+    ],
+    verdict:
+      "UpLead is a solid choice for multi-industry prospecting where you hand-pick contacts and want verified accuracy per reveal. But at reported rates near $0.44–0.50 per contact, building a large real estate agent list through credits costs thousands. USAgentLeads delivers the entire 889K-agent dataset for $199 — buy the list here, and keep a credit tool for other industries.",
+    keywords: [
+      "UpLead vs USAgentLeads",
+      "UpLead alternative for real estate",
+      "UpLead real estate agent data",
+      "credit-based vs flat-rate contact data",
+      "UpLead pricing comparison",
+    ],
+    faqs: [
+      {
+        question: "Is UpLead's data more accurate than USAgentLeads?",
+        answer: "UpLead verifies emails at reveal time and refunds credits for invalid ones — strong for hand-picked prospecting. USAgentLeads compiles agent records from public licensing and listing sources and backs purchases with a 30-day money-back guarantee. For bulk agent lists, the specialized source has far deeper coverage of licensed agents.",
+      },
+      {
+        question: "How much would 889,000 contacts cost on UpLead?",
+        answer: "At reported per-credit economics of roughly $0.44–0.50 per contact, revealing 889,000 contacts would cost well into six figures — and UpLead doesn't specialize in licensed real estate agents. USAgentLeads sells the full agent dataset for $199 one-time.",
+      },
+    ],
+  },
+  {
+    slug: "lusha-vs-usagentleads",
+    name: "Lusha",
+    title: "Lusha vs USAgentLeads — Real Estate Agent Data",
+    headline: "Lusha vs USAgentLeads: Per-Seat Lookups vs Bulk Agent Data",
+    description:
+      "Lusha is a per-user prospecting tool with credit-based contact reveals and a free plan. It's built for reps looking up contacts one at a time — not for buying complete vertical datasets. Here's how it compares when your market is US real estate agents.",
+    features: [
+      { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
+      { feature: "Pricing Model", us: "$199 one-time", them: "Per user: free (40 credits/mo) to $37+/user/mo" },
+      { feature: "Email Reveal Cost", us: "Included — no credits", them: "1 credit" },
+      { feature: "Phone Reveal Cost", us: "Included — no credits", them: "10 credits (current published rate)" },
+      { feature: "Bulk List Purchase", us: true, them: false },
+      { feature: "Free Option", us: "Free 500-contact sample", them: "Free plan (40 credits/mo)" },
+      { feature: "Per-State Purchase", us: "$49/state", them: false },
+      { feature: "Contract", us: "None", them: "Monthly or annual per seat" },
+    ],
+    ourAdvantages: [
+      "One flat purchase covers unlimited team use — no per-seat licenses",
+      "Phone numbers don't cost 10x extra like Lusha's credit rates",
+      "Complete licensed-agent dataset rather than one-at-a-time reveals",
+      "No recurring billing",
+    ],
+    theirAdvantages: [
+      "Free plan for occasional lookups",
+      "Multi-industry coverage",
+      "Browser-based lookup workflow for individual prospecting",
+      "Useful for enriching individual records on demand",
+    ],
+    verdict:
+      "Lusha works well for reps spot-checking contacts across industries. But its credit model — especially 10 credits per phone number at current published rates — makes vertical list building expensive. If you need the real estate agent vertical wholesale, buy the dataset once for $199 and skip the credit meter entirely.",
+    keywords: [
+      "Lusha vs USAgentLeads",
+      "Lusha alternative for real estate",
+      "Lusha real estate agent data",
+      "Lusha pricing comparison",
+      "bulk agent list vs credit reveals",
+    ],
+    faqs: [
+      {
+        question: "Can Lusha build a full real estate agent list?",
+        answer: "Not practically. Lusha meters access through per-seat credit allowances, and phone reveals cost 10 credits each under current published rates. Compiling hundreds of thousands of agent contacts through credits isn't economically viable — bulk vertical datasets are a different product category.",
+      },
+      {
+        question: "Which is better for a small team?",
+        answer: "If your team occasionally looks up contacts across many industries, Lusha's free or Starter plans are convenient. If the team's pipeline is real estate agents, one $199 purchase gives everyone the full dataset with no per-seat cost.",
+      },
+    ],
+  },
+  {
+    slug: "bookyourdata-vs-usagentleads",
+    name: "BookYourData",
+    title: "BookYourData vs USAgentLeads — Email List Comparison",
+    headline: "BookYourData vs USAgentLeads: Pay-Per-Contact vs Flat-Rate Vertical Data",
+    description:
+      "BookYourData sells B2B email lists on a pay-as-you-go credit model — reported at roughly $0.10–0.40 per contact depending on volume, with credits that never expire. It's a legitimate list vendor across many industries. Here's how it stacks up for real estate agent data specifically.",
+    features: [
+      { feature: "Focus", us: "Real estate agents only", them: "All industries" },
+      { feature: "Pricing Model", us: "$199 flat (all 50 states)", them: "Pay-as-you-go: ~$0.10–0.40/contact (reported)" },
+      { feature: "Entry Price", us: "$49 (one state)", them: "$99 for 250 credits (reported)" },
+      { feature: "Cost for 889K Contacts", us: "$199", them: "Five to six figures at reported per-contact rates" },
+      { feature: "Credits Expire", us: "N/A — no credits", them: "Never (reported)" },
+      { feature: "Phone Numbers", us: "Included (~40% of records)", them: "Varies by list" },
+      { feature: "Instant Download", us: true, them: true },
+      { feature: "Contract", us: "None", them: "None" },
+    ],
+    ourAdvantages: [
+      "Flat $199 for the complete agent dataset vs per-contact pricing",
+      "Specialized real estate agent coverage from licensing and listing sources",
+      "$49 per-state packs for targeted regional campaigns",
+      "30-day money-back guarantee",
+    ],
+    theirAdvantages: [
+      "Covers every industry and role, not just real estate agents",
+      "Credits never expire — buy once, use over time",
+      "Build custom-filtered lists (title, industry, geography)",
+      "No subscription either — both are commitment-free",
+    ],
+    verdict:
+      "BookYourData and USAgentLeads share a philosophy: no subscriptions, pay for data once. The difference is economics at scale. Hand-picking a few hundred targeted contacts across industries? BookYourData's model fits. Buying an entire vertical — every licensed US real estate agent — costs a flat $199 here versus per-contact pricing that would run orders of magnitude higher.",
+    keywords: [
+      "BookYourData vs USAgentLeads",
+      "BookYourData alternative",
+      "BookYourData real estate agents",
+      "pay per contact email list comparison",
+      "realtor email list providers",
+    ],
+    faqs: [
+      {
+        question: "Both are pay-once — what's actually different?",
+        answer: "Granularity and specialization. BookYourData charges per contact (reported ~$0.10–0.40 depending on volume) and spans all industries. USAgentLeads charges a flat rate for one deep vertical: 889,000+ licensed US real estate agents. Small custom lists favor per-contact pricing; the full agent vertical overwhelmingly favors flat-rate.",
+      },
+      {
+        question: "Can I combine both services?",
+        answer: "Yes — some teams buy the full agent dataset here and use pay-as-you-go vendors for other verticals or for enrichment fields we don't carry, like job titles or company data.",
+      },
+    ],
+  },
+  {
+    slug: "data-axle-genie-vs-usagentleads",
+    name: "Data Axle Genie",
+    title: "Data Axle Genie vs USAgentLeads — List Building Comparison",
+    headline: "Data Axle Genie vs USAgentLeads: Subscription List Builder vs One-Time Dataset",
+    description:
+      "Data Axle Genie (formerly Salesgenie) is a subscription list-building platform over Data Axle's business and consumer databases, reported at $99–299/month on 12-month contracts. Here's how it compares when the list you need is US real estate agents.",
+    features: [
+      { feature: "Focus", us: "Real estate agents only", them: "General business + consumer lists" },
+      { feature: "Pricing", us: "$199 one-time", them: "Reported $99–299/mo, 12-month contract" },
+      { feature: "Contract", us: "None", them: "12-month term (reported)" },
+      { feature: "Early Termination", us: "N/A", them: "Reported 50% early-termination fee" },
+      { feature: "Lead Caps / Overages", us: "None — full dataset included", them: "Reported caps with overage charges" },
+      { feature: "Free Option", us: "Free 500-contact sample", them: "Reported 3-day trial with 150 leads" },
+      { feature: "Instant CSV", us: true, them: true },
+      { feature: "CRM-Lite Tools", us: false, them: true },
+    ],
+    ourAdvantages: [
+      "No 12-month contract or early-termination fee",
+      "One flat price — no lead caps, overage charges, or add-on creep",
+      "Deeper licensed-agent coverage than general business databases",
+      "A year of Genie at reported entry pricing costs ~6x our full database",
+    ],
+    theirAdvantages: [
+      "Consumer lists as well as business lists",
+      "Built-in CRM-lite and campaign tooling",
+      "List filtering across many industries and demographics",
+      "Established data provider (Data Axle)",
+    ],
+    verdict:
+      "Data Axle Genie suits businesses that continuously build varied local lists — restaurants one month, dentists the next — and want light campaign tooling attached. Third-party guides note the real cost usually lands above sticker once overages and add-ons stack on the 12-month contract. If the list you need is real estate agents, a $199 one-time dataset makes the subscription hard to justify.",
+    keywords: [
+      "Data Axle Genie vs USAgentLeads",
+      "Salesgenie alternative",
+      "Data Axle Genie pricing comparison",
+      "Salesgenie real estate agent lists",
+      "business list subscription vs one-time purchase",
+    ],
+    faqs: [
+      {
+        question: "Does Data Axle Genie have real estate agent lists?",
+        answer: "Data Axle's business database includes real estate professionals among many industries, but it isn't specialized in licensing-record coverage. USAgentLeads focuses exclusively on licensed US real estate agents — 889,000+ records across all 50 states.",
+      },
+      {
+        question: "What's the real cost difference over a year?",
+        answer: "At reported Genie pricing of $99–299/month on a 12-month contract, a year runs $1,188–3,588 before overages and add-ons — versus $199 one-time for the full USAgentLeads database. Third-party guides also report a 50% early-termination fee on Genie contracts.",
+      },
+    ],
+  },
+  {
+    slug: "seamless-ai-vs-usagentleads",
+    name: "Seamless.AI",
+    title: "Seamless.AI vs USAgentLeads — Real Estate Agent Data",
+    headline: "Seamless.AI vs USAgentLeads: AI Contact Search vs Ready-Made Agent Dataset",
+    description:
+      "Seamless.AI is an AI-driven contact search platform with a free tier and reported entry pricing around $147/month — with upper tiers quote-only. It searches for contacts on demand; USAgentLeads sells a finished dataset. Here's the comparison for real estate agent outreach.",
+    features: [
+      { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
+      { feature: "Pricing", us: "$199 one-time", them: "Reported ~$147/mo entry; Pro quote-only" },
+      { feature: "Pricing Transparency", us: "Published flat rates", them: "Upper tiers require a sales quote" },
+      { feature: "Credit Model", us: "None", them: "Credits consumed per lookup (reported)" },
+      { feature: "Failed Lookups", us: "N/A — fixed dataset", them: "Reportedly still consume credits" },
+      { feature: "Cancellation", us: "Nothing to cancel", them: "Reported 60-day notice before renewal" },
+      { feature: "Free Option", us: "Free 500-contact sample", them: "50 lifetime free credits" },
+      { feature: "Agent Coverage", us: "889,000+ licensed agents", them: "Partial — not specialized" },
+    ],
+    ourAdvantages: [
+      "Flat one-time price — no credits, quotes, or renewal windows",
+      "You pay for data you receive, not for lookup attempts",
+      "Complete licensed-agent vertical in one download",
+      "No cancellation-notice requirements",
+    ],
+    theirAdvantages: [
+      "AI-assisted search across every industry",
+      "Real-time contact discovery workflow",
+      "Free lifetime credits to evaluate",
+      "List-building automation add-ons available",
+    ],
+    verdict:
+      "Seamless.AI fits teams prospecting many industries who value AI-assisted discovery and accept credit-metered economics — though user reports note credits burn on unsuccessful lookups and renewals require 60-day notice. For the real estate agent vertical, there's nothing to discover: the licensed-agent universe is a known dataset, and buying it outright for $199 is simpler and cheaper.",
+    keywords: [
+      "Seamless.AI vs USAgentLeads",
+      "Seamless.AI alternative",
+      "Seamless.AI real estate agents",
+      "Seamless AI pricing comparison",
+      "AI contact search vs data purchase",
+    ],
+    faqs: [
+      {
+        question: "Is Seamless.AI's data real-time while USAgentLeads is static?",
+        answer: "Seamless searches for contact data on demand, which can surface newer records but also consumes credits on lookups that return nothing usable, per user reports. USAgentLeads is a compiled dataset refreshed on a regular cycle from public licensing and listing sources, with the current refresh date shown on every page.",
+      },
+      {
+        question: "Which is cheaper for agent outreach at scale?",
+        answer: "For bulk real estate agent outreach, a flat $199 for 889,000+ contacts is far cheaper than credit-metered plans reported around $147/month at entry. Credit models suit selective, cross-industry prospecting rather than whole-vertical campaigns.",
+      },
+    ],
+  },
 ] as const
 
 export function getCompetitorBySlug(slug: string): Competitor | undefined {

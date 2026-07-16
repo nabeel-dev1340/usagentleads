@@ -52,6 +52,21 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/alternatives" className="text-[15px] text-gray-300 hover:text-white transition-colors">
+                  Alternatives
+                </Link>
+              </li>
+              <li>
+                <Link href="/guides" className="text-[15px] text-gray-300 hover:text-white transition-colors">
+                  Import Guides
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-[15px] text-gray-300 hover:text-white transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
                 <Link href="/glossary" className="text-[15px] text-gray-300 hover:text-white transition-colors">
                   Glossary
                 </Link>

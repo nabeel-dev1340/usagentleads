@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Check, Minus, ChevronRight } from "lucide-react"
 import { PlanGroups } from "@/components/pricing/PlanGroups"
+import { AnswerBox } from "@/components/seo/AnswerBox"
 import { getDatabaseTotals } from "@/lib/supabase/server"
 import { TOTAL_AGENTS } from "@/lib/utils/states"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
@@ -180,7 +181,7 @@ const pricingFAQs = [
   {
     question: "Is there a free sample?",
     answer:
-      "Yes. You can download a free sample of 50 agent contacts before purchasing — no account needed. The Pro Dashboard and Pro API plans don't include a free trial, but every plan is covered by our 30-day money-back guarantee, so you can try it risk-free.",
+      "Yes. You can download a free sample of 500 agent contacts before purchasing — no account needed. The Pro Dashboard and Pro API plans don't include a free trial, but every plan is covered by our 30-day money-back guarantee, so you can try it risk-free.",
   },
   {
     question: "Do I need to create an account to buy?",
@@ -207,6 +208,51 @@ const pricingFAQs = [
     answer:
       "The Full Database ($199 one-time) gives you a single CSV download of all 889K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
   },
+  {
+    question: "Should I buy state packs or the full database?",
+    answer:
+      "Simple math: state packs are $49 each, so at four or more states the $199 full database is already cheaper — and it covers all 50, so expanding into new markets later costs nothing extra.",
+  },
+  {
+    question: "What does this work out to per contact?",
+    answer:
+      "The full database is $199 for 889,000+ contacts — a fraction of a cent each. For comparison, credit-based prospecting tools commonly charge from roughly $0.10 to $0.50+ per revealed contact at their published rates.",
+  },
+  {
+    question: "Do phone numbers cost extra?",
+    answer:
+      "No. Phone numbers are included in every purchase at no extra charge — roughly 40% of records have a direct phone number. There is no separate phone-append fee.",
+  },
+  {
+    question: "Can my whole team use one purchase?",
+    answer:
+      "Yes. CSV purchases aren't seat-licensed — one purchase covers use across your business, including agency use on behalf of clients. Only reselling the raw data itself requires separate licensing.",
+  },
+  {
+    question: "Will I get an invoice or receipt?",
+    answer:
+      "Yes. Our payment processor, Lemon Squeezy, emails a receipt for every purchase, and subscription invoices are available anytime from your Lemon Squeezy customer portal.",
+  },
+]
+
+// Competitor pricing verified against vendor pricing pages and third-party
+// pricing guides, July 2026. Quote-based products use reported ranges.
+const marketComparisonRows = [
+  { provider: "USAgentLeads — Full Database", price: "$199 one-time", model: "Flat rate, 889K+ agent contacts, yours permanently", isUs: true },
+  { provider: "ZoomInfo", price: "Reported from ~$14,995/yr", model: "Quote-only annual contracts, credit-limited exports" },
+  { provider: "Data Axle Genie", price: "Reported $99–299/mo", model: "12-month contract, lead caps with overage charges" },
+  { provider: "UpLead", price: "From $99/mo", model: "Credit-based (~170 credits/mo at entry tier)" },
+  { provider: "BookYourData", price: "~$0.10–0.40 per contact", model: "Pay-as-you-go credits, no subscription" },
+  { provider: "Cole Realty Resource", price: "Reported $995/yr (Pro)", model: "Annual plan; homeowner farm data, not agent contacts" },
+]
+
+const includedItems = [
+  { title: "Four clean columns", detail: "name, email, phone, state — UTF-8 CSV that opens in Excel, Google Sheets, or any CRM" },
+  { title: "All records for what you bought", detail: "No credit meters, reveal limits, or per-contact charges — a state pack is the whole state" },
+  { title: "Instant email delivery", detail: "Download link arrives within minutes of payment, guest checkout, no account needed" },
+  { title: "Phone numbers included", detail: "Roughly 40% of records carry a direct phone number at no extra cost" },
+  { title: "Unlimited business use", detail: "Import into any tool, run any number of campaigns, use across clients" },
+  { title: "30-day money-back guarantee", detail: "Full refund if the data doesn't meet your expectations — no questions asked" },
 ]
 
 export default async function PricingPage() {
@@ -234,12 +280,18 @@ export default async function PricingPage() {
         </nav>
 
         {/* Header */}
-        <div className="section-header text-center flex flex-col items-center mb-14">
+        <div className="section-header text-center flex flex-col items-center mb-10">
           <p className="label-eyebrow">Pricing</p>
           <h1 className="section-heading">Simple, Transparent Pricing</h1>
           <p className="section-sub max-w-xl">
             Buy a one-time CSV download, or subscribe for always-current data. No hidden fees.
           </p>
+        </div>
+
+        <div className="max-w-3xl mx-auto mb-14">
+          <AnswerBox>
+            USAgentLeads costs $49 one-time per state or $199 one-time for all 50 states ({TOTAL_AGENTS.toLocaleString()}+ real estate agent contacts as an instant CSV download). Optional subscriptions: Pro Dashboard at $49/month (searchable web interface) and Pro API at $79/month (10,000 requests/month). There are no contracts, no per-contact credits, and every purchase carries a 30-day money-back guarantee.
+          </AnswerBox>
         </div>
 
         {/* Grouped plans */}
@@ -282,6 +334,60 @@ export default async function PricingPage() {
           </table>
         </div>
 
+        {/* What every purchase includes */}
+        <div className="mt-20 max-w-4xl mx-auto">
+          <h2 className="text-[22px] font-semibold text-ink text-center mb-8">
+            What Every CSV Purchase Includes
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {includedItems.map((item) => (
+              <div key={item.title} className="card p-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <Check size={15} className="text-success shrink-0" />
+                  <h3 className="text-[14px] font-semibold text-ink">{item.title}</h3>
+                </div>
+                <p className="text-[13px] text-tertiary leading-[1.7]">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Market pricing comparison */}
+        <div className="mt-20 max-w-4xl mx-auto">
+          <h2 className="text-[22px] font-semibold text-ink text-center mb-3">
+            How Our Pricing Compares
+          </h2>
+          <p className="text-[14px] text-tertiary text-center max-w-xl mx-auto mb-8">
+            Verified against vendor pricing pages and independent pricing guides as of July 2026. Quote-based products show reported ranges — always confirm current rates with each vendor.
+          </p>
+          <div className="card overflow-hidden overflow-x-auto">
+            <table className="data-table min-w-140">
+              <thead>
+                <tr>
+                  <th scope="col" className="text-left">Provider</th>
+                  <th scope="col" className="text-left">Price</th>
+                  <th scope="col" className="text-left">Model</th>
+                </tr>
+              </thead>
+              <tbody>
+                {marketComparisonRows.map((row) => (
+                  <tr key={row.provider} className={row.isUs ? "bg-accent-light/30" : undefined}>
+                    <td className={`text-[14px] font-medium ${row.isUs ? "text-accent" : "text-ink"}`}>{row.provider}</td>
+                    <td className="font-mono text-[13px] text-ink whitespace-nowrap">{row.price}</td>
+                    <td className="text-[13px] text-tertiary">{row.model}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-[13px] text-tertiary text-center mt-4">
+            Want the details?{" "}
+            <Link href="/compare" className="text-accent hover:underline">Head-to-head comparisons</Link>
+            {" · "}
+            <Link href="/alternatives" className="text-accent hover:underline">Alternatives guides</Link>
+          </p>
+        </div>
+
         {/* Pricing FAQ */}
         <div className="mt-20 max-w-3xl mx-auto">
           <h2 className="text-[22px] font-semibold text-ink text-center mb-8">
@@ -300,6 +406,12 @@ export default async function PricingPage() {
               </details>
             ))}
           </div>
+          <p className="text-[14px] text-tertiary text-center mt-8">
+            More questions?{" "}
+            <Link href="/faq" className="text-accent hover:underline font-medium">
+              Read the full FAQ
+            </Link>
+          </p>
         </div>
       </div>
     </div>

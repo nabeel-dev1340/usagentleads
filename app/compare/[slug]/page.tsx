@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { COMPETITORS, getCompetitorBySlug } from "@/lib/data/comparisons"
+import { AnswerBox } from "@/components/seo/AnswerBox"
 import { generateBreadcrumbSchema, generateFAQSchema } from "@/lib/utils/seo"
 import { ChevronRight, Check, X, ArrowRight } from "lucide-react"
 
@@ -100,9 +101,11 @@ export default async function ComparisonPage({ params }: Props) {
               {comp.description}
             </p>
 
+            <AnswerBox label="The Bottom Line">{comp.verdict}</AnswerBox>
+
             {/* Feature comparison table */}
             <div className="card overflow-hidden overflow-x-auto mb-10">
-              <table className="data-table min-w-[500px]">
+              <table className="data-table min-w-125">
                 <thead>
                   <tr>
                     <th scope="col" className="text-left">Feature</th>
@@ -153,12 +156,6 @@ export default async function ComparisonPage({ params }: Props) {
                 </div>
               </div>
             </div>
-
-            {/* Verdict */}
-            <section className="card p-5 sm:p-7 bg-subtle border-border mb-10">
-              <h2 className="text-[17px] font-semibold text-ink mb-3">The Bottom Line</h2>
-              <p className="text-[15px] text-body leading-[1.8]">{comp.verdict}</p>
-            </section>
 
             {/* CTA */}
             <div className="card p-5 sm:p-7 border-accent/30 border-2 mb-10 text-center">

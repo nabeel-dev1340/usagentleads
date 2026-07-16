@@ -319,6 +319,210 @@ export const PERSONAS: readonly Persona[] = [
       "find-real-estate-agent-email-addresses",
     ],
   },
+  {
+    slug: "home-services",
+    name: "Home Services Companies",
+    title: "Real Estate Agent Email List for Home Services Companies",
+    headline: "Turn Agents Into Your Referral Engine",
+    description:
+      "You run a home services business — contracting, roofing, landscaping, cleaning, staging, or inspections. Real estate agents are the single best referral source in your market: every listing they take needs work done before it sells, and every buyer they close needs vendors afterward. Our database gives you the verified email addresses and phone numbers of every licensed agent in the states you serve, so you can build those referral relationships systematically instead of waiting for word-of-mouth.",
+    painPoints: [
+      "Referrals depend on a handful of agents you happen to know personally",
+      "Homeowner advertising (Google Ads, Angi, Thumbtack) keeps getting more expensive per lead",
+      "No direct channel to introduce your services to the agents driving transactions in your area",
+      "Competitors with agent relationships get called first for pre-listing work",
+    ],
+    useCases: [
+      "Email agents in your service area introducing your pre-listing services",
+      "Offer agents a fast-turnaround guarantee for inspection-repair items",
+      "Send seasonal maintenance content agents can forward to their clients",
+      "Build a vendor-referral list one state (or one $49 pack) at a time",
+    ],
+    cta: "Reach the agents who refer work",
+    keywords: [
+      "real estate agent email list for contractors",
+      "realtor contacts for home services",
+      "agent referrals for home improvement",
+      "real estate agent list for staging companies",
+      "realtor email list for home inspectors",
+      "agent partnerships for service businesses",
+    ],
+    faqs: [
+      {
+        question: "Can I buy contacts for just my local market?",
+        answer:
+          "Yes — state packs are $49 each, so a single-market service business only pays for its own state. Multi-state operations usually do better with the full database at $199.",
+      },
+      {
+        question: "What's the best first email to send agents?",
+        answer:
+          "Lead with something concrete an agent can use this week: pre-listing turnaround times, a repair-quote SLA for inspection items, or a co-branded checklist for their sellers. Agents ignore generic 'partner with us' emails but respond to vendors who make their listings move faster.",
+      },
+      {
+        question: "What data do I get for each agent?",
+        answer:
+          "Each record includes the agent's full name, email address, phone number where available (roughly 40% of records), and state — delivered as a standard CSV that opens in Excel, Google Sheets, or any CRM.",
+      },
+    ],
+    relatedBlogSlugs: [
+      "real-estate-cold-email-templates",
+      "b2b-real-estate-marketing",
+      "how-to-build-realtor-email-list",
+    ],
+  },
+  {
+    slug: "insurance-agencies",
+    name: "Insurance Agencies",
+    title: "Real Estate Agent Email List for Insurance Agencies",
+    headline: "Get Introduced Before the Closing Date",
+    description:
+      "Every home purchase needs a homeowner's insurance policy — and the real estate agent is often the one the buyer asks for a recommendation. If you sell home, flood, or title insurance, agents are a compounding referral channel: win one agent's trust and you're in front of every client they close. Our database gives you verified contact data for licensed agents across all 50 states so you can build that channel deliberately.",
+    painPoints: [
+      "Buyers pick whichever insurer their agent or lender happens to mention",
+      "No scalable way to introduce your agency to the agents active in your market",
+      "Carrier-provided leads are shared with competing agents and close poorly",
+      "Referral relationships take years to build one networking event at a time",
+    ],
+    useCases: [
+      "Introduce your agency to agents in your state with quote-turnaround guarantees",
+      "Send agents closing-friendly content: binder timelines, flood-zone explainers, premium trends",
+      "Build drip campaigns for agents in zip codes where you want more policies",
+      "Reach agents in newly licensed states as you expand",
+    ],
+    cta: "Start building agent referral relationships",
+    keywords: [
+      "real estate agent email list for insurance",
+      "realtor contacts for insurance agents",
+      "agent referrals for homeowners insurance",
+      "insurance marketing to real estate agents",
+      "realtor referral partnerships insurance",
+      "agent email list for insurance agencies",
+    ],
+    faqs: [
+      {
+        question: "Why market to real estate agents instead of homebuyers directly?",
+        answer:
+          "Buyers shop for insurance once; agents transact all year. A single agent who trusts your agency can refer dozens of policies annually, and the introduction arrives exactly when the buyer needs a policy — before closing.",
+      },
+      {
+        question: "Can I target only the states where I'm licensed?",
+        answer:
+          "Yes. Buy individual state packs at $49 each for the states where you hold licenses. Records include the agent's state, so multi-state agencies can also segment the $199 full database by the state column.",
+      },
+      {
+        question: "Is emailing agents compliant?",
+        answer:
+          "The contacts are licensed professionals whose business information comes from public sources. Standard B2B email rules apply — follow CAN-SPAM: accurate subject lines, your business address, and a working unsubscribe link.",
+      },
+    ],
+    relatedBlogSlugs: [
+      "mortgage-lenders-contact-real-estate-agents",
+      "real-estate-cold-email-templates",
+      "cold-outreach-realtors-compliance",
+    ],
+  },
+  {
+    slug: "photographers",
+    name: "Real Estate Photographers & Media",
+    title: "Real Estate Agent Email List for Photographers",
+    headline: "Book More Listing Shoots with Direct Agent Outreach",
+    description:
+      "You shoot listings — photography, video walkthroughs, drone, 3D tours, or floor plans. Your clients are real estate agents, and the difference between a full calendar and a slow month is how many agents know your name when they take a listing. Our database gives you every licensed agent's verified contact info in your market, so you can pitch your portfolio directly instead of hoping referrals find you.",
+    painPoints: [
+      "Bookings cluster around a few loyal agents — one lost client hurts",
+      "Instagram posts reach other photographers, not the agents who hire you",
+      "Marketplace platforms take a cut and race everyone to the bottom on price",
+      "No efficient way to announce new services (drone, 3D tours) to agents at scale",
+    ],
+    useCases: [
+      "Email agents in your metro with your portfolio and listing-day turnaround times",
+      "Announce new offerings — twilight shoots, 3D tours, reels — to every agent in your state",
+      "Rebook past markets when you travel or expand coverage areas",
+      "Offer new-agent discounts to agents who just got licensed in your area",
+    ],
+    cta: "Put your portfolio in agents' inboxes",
+    keywords: [
+      "real estate agent email list for photographers",
+      "realtor contacts for real estate photography",
+      "market photography services to real estate agents",
+      "real estate videographer client outreach",
+      "agent email list for media companies",
+      "get real estate photography clients",
+    ],
+    faqs: [
+      {
+        question: "I only serve one metro area — is a state list too broad?",
+        answer:
+          "The data is segmented by state, and at $49 per state it's the cheapest targeted B2B list you'll find. Many photographers email the full state and let the subject line do the geographic filtering ('Listing photography in the Austin metro — 24-hour turnaround').",
+      },
+      {
+        question: "What should a photography pitch email include?",
+        answer:
+          "Three things agents care about: 2–4 of your best listing shots, your turnaround time, and simple pricing. Keep it under 100 words with a link to your portfolio. Agents book vendors who make them look good with minimal friction.",
+      },
+      {
+        question: "How current is the contact data?",
+        answer:
+          "The dataset is refreshed on a regular cycle from public licensing and listing sources — the current refresh date is shown on the site. Cleanup passes remove duplicates and malformed records between refreshes.",
+      },
+    ],
+    relatedBlogSlugs: [
+      "real-estate-cold-email-templates",
+      "how-to-build-realtor-email-list",
+      "real-estate-marketing-strategies",
+    ],
+  },
+  {
+    slug: "moving-companies",
+    name: "Moving Companies",
+    title: "Real Estate Agent Email List for Moving Companies",
+    headline: "Be the Mover Every Agent Recommends",
+    description:
+      "Every closed transaction ends with a move — and 'do you know a good mover?' is one of the most common questions agents get from clients. If your moving company isn't the one agents mention, a competitor is. Our database of licensed agent contacts lets you introduce your company to every agent in your service area and stay top-of-mind through the busy season.",
+    painPoints: [
+      "Lead aggregators sell the same customer to five competing movers",
+      "Agent referrals convert far better than paid leads, but you only know a few agents",
+      "Seasonal demand swings while your marketing stays static",
+      "New offices in new cities start with zero local referral network",
+    ],
+    useCases: [
+      "Introduce your company to agents with a client-discount referral offer",
+      "Send pre-summer capacity updates so agents know you have crews available",
+      "Launch new service areas by emailing every agent in the new state",
+      "Offer agents co-branded moving checklists they can share with clients",
+    ],
+    cta: "Get in front of agents before moving season",
+    keywords: [
+      "real estate agent email list for movers",
+      "realtor contacts for moving companies",
+      "agent referrals for moving company",
+      "moving company marketing to real estate agents",
+      "realtor partnership moving services",
+      "moving leads from real estate agents",
+    ],
+    faqs: [
+      {
+        question: "Why are agent referrals better than purchased moving leads?",
+        answer:
+          "Purchased leads are typically resold to multiple movers and arrive price-shopping. An agent referral arrives with trust already transferred — the client asked their agent for a recommendation. One good agent relationship can produce referrals for years.",
+      },
+      {
+        question: "Can I buy just the states we operate in?",
+        answer:
+          "Yes. State packs are $49 each, so a regional mover buys only its operating states. National carriers and franchises usually take the full 50-state database at $199.",
+      },
+      {
+        question: "When should I run agent outreach campaigns?",
+        answer:
+          "Ahead of peak season — most moves happen in late spring and summer, so agents are deciding which movers to recommend in early spring. A second touch in fall catches the year-end relocation wave.",
+      },
+    ],
+    relatedBlogSlugs: [
+      "real-estate-cold-email-templates",
+      "b2b-real-estate-marketing",
+      "how-to-build-realtor-email-list",
+    ],
+  },
 ] as const
 
 export function getPersonaBySlug(slug: string): Persona | undefined {

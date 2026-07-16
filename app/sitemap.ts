@@ -3,6 +3,8 @@ import { US_STATES } from "@/lib/utils/states"
 import { getAllPosts } from "@/lib/blog"
 import { PERSONAS } from "@/lib/data/personas"
 import { COMPETITORS } from "@/lib/data/comparisons"
+import { ALTERNATIVES_PAGES } from "@/lib/data/alternatives"
+import { IMPORT_GUIDES } from "@/lib/data/guides"
 import { GLOSSARY_TERMS } from "@/lib/data/glossary"
 import { CONTENT_LAST_REVIEWED, SITE_URL } from "@/lib/utils/site"
 
@@ -51,6 +53,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_LAST_REVIEWED,
       changeFrequency: "monthly",
       priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/alternatives`,
+      lastModified: CONTENT_LAST_REVIEWED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/guides`,
+      lastModified: CONTENT_LAST_REVIEWED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/faq`,
+      lastModified: CONTENT_LAST_REVIEWED,
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
     {
       url: `${BASE_URL}/glossary`,
@@ -124,6 +144,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
+  const alternativesPages: MetadataRoute.Sitemap = ALTERNATIVES_PAGES.map((page) => ({
+    url: `${BASE_URL}/alternatives/${page.slug}`,
+    lastModified: CONTENT_LAST_REVIEWED,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
+  const guidePages: MetadataRoute.Sitemap = IMPORT_GUIDES.map((guide) => ({
+    url: `${BASE_URL}/guides/${guide.slug}`,
+    lastModified: CONTENT_LAST_REVIEWED,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }))
+
   const glossaryPages: MetadataRoute.Sitemap = GLOSSARY_TERMS.map((term) => ({
     url: `${BASE_URL}/glossary/${term.slug}`,
     lastModified: CONTENT_LAST_REVIEWED,
@@ -139,5 +173,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...statePages, ...directoryPages, ...personaPages, ...comparisonPages, ...glossaryPages, ...blogPages]
+  return [...staticPages, ...statePages, ...directoryPages, ...personaPages, ...comparisonPages, ...alternativesPages, ...guidePages, ...glossaryPages, ...blogPages]
 }
