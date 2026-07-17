@@ -1,170 +1,106 @@
 # USAgentLeads
 
-> USAgentLeads is a verified real estate agent contact database covering all 50 US states. It provides 888,809+ agent contacts with name, email, phone, and state — available as instant CSV downloads or via REST API.
+> USAgentLeads is a verified real estate agent contact database covering all 50 US states. It provides 1,000,000+ agent contacts with name, email, phone, and state — available as instant CSV downloads or via a REST API.
 
-## Company Overview
+USAgentLeads is a B2B data provider specializing in real estate agent contact information. The database is compiled from public sources including state licensing records, MLS listings, Zillow, Realtor.com, and major brokerage sites, then verified for accuracy. The dataset is refreshed on a regular cycle (current dataset: July 2026). It serves coaches, SaaS/PropTech companies, mortgage lenders, marketing agencies, brokerages, lead generation companies, home services businesses, insurance agencies, real estate photographers, and moving companies that need to reach licensed real estate professionals.
 
-USAgentLeads is a B2B data provider specializing in real estate agent contact information. The database is compiled from public sources including state licensing records, MLS listings, Zillow, Realtor.com, and major brokerage sites, then verified for accuracy. The dataset is refreshed on a regular cycle (current dataset: July 2026). The company serves coaches, SaaS/PropTech companies, mortgage lenders, marketing agencies, brokerages, lead generation companies, home services businesses, insurance agencies, real estate photographers, and moving companies that need to reach licensed real estate professionals.
-
-- Website: https://www.usagentleads.com
-- Support: support@beelodev.com
-- Industry: B2B data / real estate technology
-- Coverage: All 50 US states
-- Total contacts: 888,809+
-- Data fields: Full name, email address, phone number, state
-- Data format: CSV (download) or JSON (API)
-- Deliverability rate: 90%+
-- Phone coverage: roughly 40% of records include a direct phone number
-- Guarantee: 30-day money-back guarantee on all purchases
-- Not affiliated with NAR or any MLS
+Key facts: 1,000,000+ contacts across all 50 states; fields are full name, email, phone, and state; 90%+ email deliverability; phone numbers on roughly 40% of records; delivered as CSV (download) or JSON (API); 30-day money-back guarantee; not affiliated with NAR or any MLS. Support: support@beelodev.com.
 
 ## Products & Pricing
 
-### State Pack — $49/state (one-time)
-Download a single state's real estate agent contact list as a CSV file. Instant delivery, guest checkout (no account required). Available for all 50 states.
-
-### Full Database — $199 (one-time)
-All 50 states, 888,809+ contacts in a single CSV download. One-time purchase, no subscription. At 4+ states this beats stacking state packs.
-
-### Pro Dashboard — $49/month
-Searchable web interface to browse, filter, and search all 888,809+ agents by state, name, or email. No CSV download — designed for teams that need a live searchable interface. Cancel anytime.
-
-### Pro API — $79/month
-REST API access to query the full database programmatically. Supports state filtering, search, and paginated JSON responses. Includes 10,000 requests/month.
-
-### Free Sample
-A free 500-contact sample CSV is available on the homepage to evaluate data quality before purchasing. No account or credit card required.
+- [State Pack](https://www.usagentleads.com/states): $49 one-time per state. A single state's agent list as a CSV. Instant delivery, guest checkout, no account required.
+- [Full Database](https://www.usagentleads.com/pricing): $199 one-time. All 50 states, 1,000,000+ contacts in one CSV. Beats stacking state packs at 4+ states.
+- [Pro Dashboard](https://www.usagentleads.com/pricing): $49/month. Searchable web interface to browse and filter every agent by state, name, or email. No CSV export. Cancel anytime.
+- [Pro API](https://www.usagentleads.com/docs): $79/month. REST API access to query the full database (state filter, search, paginated JSON). Includes 10,000 requests/month.
+- [Free Sample](https://www.usagentleads.com): Free 500-contact sample CSV to evaluate data quality. No account or credit card required.
 
 ## Key Pages
 
-- Homepage: https://www.usagentleads.com
-- Pricing: https://www.usagentleads.com/pricing
-- FAQ: https://www.usagentleads.com/faq
-- Browse by State: https://www.usagentleads.com/states
-- Agent Directory (free search): https://www.usagentleads.com/directory
-- API Documentation: https://www.usagentleads.com/docs
-- Import Guides: https://www.usagentleads.com/guides
-- Blog: https://www.usagentleads.com/blog
-- Data Sources: https://www.usagentleads.com/data-sources
-- About: https://www.usagentleads.com/about
-- Contact: https://www.usagentleads.com/contact
-- Glossary: https://www.usagentleads.com/glossary
+- [Homepage](https://www.usagentleads.com): Product overview, free sample, and pricing.
+- [Pricing](https://www.usagentleads.com/pricing): All plans and one-time vs subscription options.
+- [Browse by State](https://www.usagentleads.com/states): Per-state agent counts and purchase links for all 50 states.
+- [Agent Directory](https://www.usagentleads.com/directory): Free, searchable public directory of agents.
+- [API Documentation](https://www.usagentleads.com/docs): Endpoints, authentication, and response format.
+- [Import Guides](https://www.usagentleads.com/guides): How to load the CSV into common email and CRM tools.
+- [Blog](https://www.usagentleads.com/blog): Guides on realtor outreach, marketing, and CRMs.
+- [Data Sources](https://www.usagentleads.com/data-sources): Where the records are compiled from.
+- [FAQ](https://www.usagentleads.com/faq): Common questions on data, delivery, and refunds.
+- [About](https://www.usagentleads.com/about): Company background.
+- [Contact](https://www.usagentleads.com/contact): Support and sales contact.
 
 ## State Pages
 
-Each state has a dedicated page with agent count, sample data preview, and purchase option:
-
-- https://www.usagentleads.com/states/florida (167,814+ contacts)
-- https://www.usagentleads.com/states/california (84,478+ contacts)
-- https://www.usagentleads.com/states/texas (43,167+ contacts)
-- https://www.usagentleads.com/states/new-jersey (33,786+ contacts)
-- https://www.usagentleads.com/states/new-york (26,597+ contacts)
-- https://www.usagentleads.com/states/georgia (25,067+ contacts)
-- https://www.usagentleads.com/states/colorado (25,008+ contacts)
-- https://www.usagentleads.com/states/massachusetts (20,720+ contacts)
-- https://www.usagentleads.com/states/illinois (20,479+ contacts)
-- https://www.usagentleads.com/states/michigan (19,266+ contacts)
-- All 50 states available at https://www.usagentleads.com/states
+- [Florida](https://www.usagentleads.com/states/florida): 167,814+ contacts.
+- [California](https://www.usagentleads.com/states/california): 84,478+ contacts.
+- [Texas](https://www.usagentleads.com/states/texas): 43,167+ contacts.
+- [New Jersey](https://www.usagentleads.com/states/new-jersey): 33,786+ contacts.
+- [New York](https://www.usagentleads.com/states/new-york): 26,597+ contacts.
+- [Georgia](https://www.usagentleads.com/states/georgia): 25,067+ contacts.
+- [Colorado](https://www.usagentleads.com/states/colorado): 25,008+ contacts.
+- [Massachusetts](https://www.usagentleads.com/states/massachusetts): 20,720+ contacts.
+- [Illinois](https://www.usagentleads.com/states/illinois): 20,479+ contacts.
+- [Michigan](https://www.usagentleads.com/states/michigan): 19,266+ contacts.
+- [All 50 states](https://www.usagentleads.com/states): Full state index with live counts.
 
 ## Use Case Pages
 
-Dedicated landing pages for specific business types:
-
-- For Coaches: https://www.usagentleads.com/for/coaches
-- For SaaS Companies: https://www.usagentleads.com/for/saas-companies
-- For Mortgage Lenders: https://www.usagentleads.com/for/mortgage-lenders
-- For Marketing Agencies: https://www.usagentleads.com/for/marketing-agencies
-- For Brokerages: https://www.usagentleads.com/for/brokerages
-- For Lead Generation: https://www.usagentleads.com/for/lead-generation
-- For Home Services Companies: https://www.usagentleads.com/for/home-services
-- For Insurance Agencies: https://www.usagentleads.com/for/insurance-agencies
-- For Real Estate Photographers: https://www.usagentleads.com/for/photographers
-- For Moving Companies: https://www.usagentleads.com/for/moving-companies
+- [For Coaches](https://www.usagentleads.com/for/coaches): Reaching agents as a real estate coach.
+- [For SaaS Companies](https://www.usagentleads.com/for/saas-companies): Selling PropTech/SaaS to agents.
+- [For Mortgage Lenders](https://www.usagentleads.com/for/mortgage-lenders): Building an agent referral pipeline.
+- [For Marketing Agencies](https://www.usagentleads.com/for/marketing-agencies): Prospecting agents for agency services.
+- [For Brokerages](https://www.usagentleads.com/for/brokerages): Recruiting and outreach for brokerages.
+- [For Lead Generation](https://www.usagentleads.com/for/lead-generation): Sourcing agent contacts for lead-gen.
+- [For Home Services](https://www.usagentleads.com/for/home-services): Reaching agents from home-services businesses.
+- [For Insurance Agencies](https://www.usagentleads.com/for/insurance-agencies): Insurance outreach to agents.
+- [For Photographers](https://www.usagentleads.com/for/photographers): Real estate photographers reaching agents.
+- [For Moving Companies](https://www.usagentleads.com/for/moving-companies): Movers building agent partnerships.
 
 ## Competitor Comparisons
 
-Head-to-head comparisons with honest pros and cons:
-
-- REDX vs USAgentLeads: https://www.usagentleads.com/compare/redx-vs-usagentleads
-- CoStar vs USAgentLeads: https://www.usagentleads.com/compare/costar-vs-usagentleads
-- ZoomInfo vs USAgentLeads: https://www.usagentleads.com/compare/zoominfo-vs-usagentleads
-- Apollo.io vs USAgentLeads: https://www.usagentleads.com/compare/apollo-vs-usagentleads
-- RealtyAgentLists vs USAgentLeads: https://www.usagentleads.com/compare/realtyagentlists-vs-usagentleads
-- Cole Realty Resource vs USAgentLeads: https://www.usagentleads.com/compare/cole-realty-resource-vs-usagentleads
-- UpLead vs USAgentLeads: https://www.usagentleads.com/compare/uplead-vs-usagentleads
-- Lusha vs USAgentLeads: https://www.usagentleads.com/compare/lusha-vs-usagentleads
-- BookYourData vs USAgentLeads: https://www.usagentleads.com/compare/bookyourdata-vs-usagentleads
-- Data Axle Genie vs USAgentLeads: https://www.usagentleads.com/compare/data-axle-genie-vs-usagentleads
-- Seamless.AI vs USAgentLeads: https://www.usagentleads.com/compare/seamless-ai-vs-usagentleads
+- [REDX vs USAgentLeads](https://www.usagentleads.com/compare/redx-vs-usagentleads)
+- [CoStar vs USAgentLeads](https://www.usagentleads.com/compare/costar-vs-usagentleads)
+- [ZoomInfo vs USAgentLeads](https://www.usagentleads.com/compare/zoominfo-vs-usagentleads)
+- [Apollo.io vs USAgentLeads](https://www.usagentleads.com/compare/apollo-vs-usagentleads)
+- [RealtyAgentLists vs USAgentLeads](https://www.usagentleads.com/compare/realtyagentlists-vs-usagentleads)
+- [Cole Realty Resource vs USAgentLeads](https://www.usagentleads.com/compare/cole-realty-resource-vs-usagentleads)
+- [UpLead vs USAgentLeads](https://www.usagentleads.com/compare/uplead-vs-usagentleads)
+- [Lusha vs USAgentLeads](https://www.usagentleads.com/compare/lusha-vs-usagentleads)
+- [BookYourData vs USAgentLeads](https://www.usagentleads.com/compare/bookyourdata-vs-usagentleads)
+- [Data Axle Genie vs USAgentLeads](https://www.usagentleads.com/compare/data-axle-genie-vs-usagentleads)
+- [Seamless.AI vs USAgentLeads](https://www.usagentleads.com/compare/seamless-ai-vs-usagentleads)
 
 ## Alternatives Guides
 
-Researched "best alternatives" guides with verified pricing (July 2026):
-
-- ZoomInfo Alternatives: https://www.usagentleads.com/alternatives/zoominfo-alternatives
-- Apollo.io Alternatives: https://www.usagentleads.com/alternatives/apollo-alternatives
-- REDX Alternatives: https://www.usagentleads.com/alternatives/redx-alternatives
-- Cole Realty Resource Alternatives: https://www.usagentleads.com/alternatives/cole-realty-resource-alternatives
-- CoStar Alternatives: https://www.usagentleads.com/alternatives/costar-alternatives
+- [ZoomInfo Alternatives](https://www.usagentleads.com/alternatives/zoominfo-alternatives): Researched alternatives with verified July 2026 pricing.
+- [Apollo.io Alternatives](https://www.usagentleads.com/alternatives/apollo-alternatives)
+- [REDX Alternatives](https://www.usagentleads.com/alternatives/redx-alternatives)
+- [Cole Realty Resource Alternatives](https://www.usagentleads.com/alternatives/cole-realty-resource-alternatives)
+- [CoStar Alternatives](https://www.usagentleads.com/alternatives/costar-alternatives)
 
 ## Import Guides
 
-Step-by-step guides for importing the CSV (columns: name, email, phone, state) into popular tools:
-
-- Instantly: https://www.usagentleads.com/guides/import-leads-into-instantly
-- Smartlead: https://www.usagentleads.com/guides/import-leads-into-smartlead
-- lemlist: https://www.usagentleads.com/guides/import-leads-into-lemlist
-- Mailchimp: https://www.usagentleads.com/guides/import-contacts-into-mailchimp
-- ActiveCampaign: https://www.usagentleads.com/guides/import-contacts-into-activecampaign
-- Brevo: https://www.usagentleads.com/guides/import-contacts-into-brevo
-- GoHighLevel: https://www.usagentleads.com/guides/import-contacts-into-gohighlevel
-- Close CRM: https://www.usagentleads.com/guides/import-leads-into-close-crm
-- HubSpot: https://www.usagentleads.com/blog/import-real-estate-contacts-hubspot
-- Salesforce: https://www.usagentleads.com/blog/import-agent-contacts-salesforce
-
-## Blog Articles
-
-- How to Build a Realtor Email List in 2026: https://www.usagentleads.com/blog/how-to-build-realtor-email-list
-- 10 Real Estate Marketing Strategies That Work in 2026: https://www.usagentleads.com/blog/real-estate-marketing-strategies
-- The 5 Best CRMs for Real Estate Agents in 2026: https://www.usagentleads.com/blog/best-crm-for-real-estate-agents
-- Real Estate Cold Email Templates: https://www.usagentleads.com/blog/real-estate-cold-email-templates
-- Real Estate Agent Mailing List Buying Guide 2026: https://www.usagentleads.com/blog/real-estate-agent-mailing-list-guide
-- Find Real Estate Agent Email Addresses: https://www.usagentleads.com/blog/find-real-estate-agent-email-addresses
-- Realtor Database Download Guide: https://www.usagentleads.com/blog/realtor-database-download-guide
-- Real Estate Agent Email List All States: https://www.usagentleads.com/blog/real-estate-agent-email-list-all-states
-- Free vs Paid Real Estate Contact Database: https://www.usagentleads.com/blog/real-estate-contact-database-free-vs-paid
-- B2B Real Estate Marketing Guide: https://www.usagentleads.com/blog/b2b-real-estate-marketing
-- Cold Outreach to Realtors Compliance: https://www.usagentleads.com/blog/cold-outreach-realtors-compliance
-- Florida Real Estate Market Overview 2026: https://www.usagentleads.com/blog/florida-real-estate-market-overview-2026
-- Real Estate Agent License Lookup (All States): https://www.usagentleads.com/blog/real-estate-agent-license-lookup-all-states
-- How Many Real Estate Agents by State: https://www.usagentleads.com/blog/how-many-real-estate-agents-by-state
-- Where to Buy a Realtor Email List: https://www.usagentleads.com/blog/where-to-buy-realtor-email-list
-- Real Estate Coach Marketing Agent Pipeline: https://www.usagentleads.com/blog/real-estate-coach-marketing-agent-pipeline
-- Mortgage Lenders Contact Real Estate Agents: https://www.usagentleads.com/blog/mortgage-lenders-contact-real-estate-agents
-- PropTech Sales: Sell Software to Real Estate Agents: https://www.usagentleads.com/blog/proptech-sales-sell-software-real-estate-agents
-
-## Glossary
-
-Key terms defined: MLS, IDX, NAR, Realtor vs Real Estate Agent, Brokerage, Commission Split, CRM, Cold Email, CAN-SPAM, Real Estate Lead, Email List, CSV.
-
-Browse all: https://www.usagentleads.com/glossary
+- [Import into Instantly](https://www.usagentleads.com/guides/import-leads-into-instantly)
+- [Import into Smartlead](https://www.usagentleads.com/guides/import-leads-into-smartlead)
+- [Import into lemlist](https://www.usagentleads.com/guides/import-leads-into-lemlist)
+- [Import into Mailchimp](https://www.usagentleads.com/guides/import-contacts-into-mailchimp)
+- [Import into ActiveCampaign](https://www.usagentleads.com/guides/import-contacts-into-activecampaign)
+- [Import into Brevo](https://www.usagentleads.com/guides/import-contacts-into-brevo)
+- [Import into GoHighLevel](https://www.usagentleads.com/guides/import-contacts-into-gohighlevel)
+- [Import into Close CRM](https://www.usagentleads.com/guides/import-leads-into-close-crm)
+- [Import into HubSpot](https://www.usagentleads.com/blog/import-real-estate-contacts-hubspot)
+- [Import into Salesforce](https://www.usagentleads.com/blog/import-agent-contacts-salesforce)
 
 ## API Overview
 
-The USAgentLeads REST API provides programmatic access to the full agent database.
+- [API Documentation](https://www.usagentleads.com/docs): Full reference for the REST API.
+- Base URL: `https://www.usagentleads.com/api/v1`
+- Authentication: API key via the `X-API-Key` header.
+- Endpoints: `GET /agents` (list/search/filter) and `GET /agents/:id` (single agent).
+- Filtering: by state (two-letter code) and search by name or email; JSON responses with pagination.
+- Rate limit: 10,000 requests/month on the Pro API plan.
 
-- Base URL: https://www.usagentleads.com/api/v1
-- Authentication: API key via X-API-Key header
-- Endpoints: GET /agents (list/search/filter agents), GET /agents/:id (single agent)
-- Filtering: by state (two-letter code), search by name/email
-- Response format: JSON with pagination
-- Rate limit: 10,000 requests/month (Pro API plan)
-- Full docs: https://www.usagentleads.com/docs
+## Optional
 
-## Data Quality
-
-- Compiled from public sources: state licensing records, MLS listings, Zillow, Realtor.com, and major brokerage sites
-- 90%+ email deliverability rate
-- Refreshed on a regular cycle (current dataset: July 2026), with cleanup passes for duplicates and malformed records
-- Each record includes: full name, verified email, phone number (where available), US state
-- Free 500-contact sample available for quality evaluation
+- [Blog index](https://www.usagentleads.com/blog): All articles on realtor lists, cold email, CRMs, and market overviews.
+- [Glossary](https://www.usagentleads.com/glossary): Definitions of MLS, IDX, NAR, brokerage, CAN-SPAM, and related terms.
+- [Data Sources](https://www.usagentleads.com/data-sources): Detail on the public sources records are compiled from.

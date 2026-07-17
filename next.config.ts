@@ -24,6 +24,14 @@ const securityHeaders = [
       "img-src 'self' data: https: https://www.googletagmanager.com https://www.google-analytics.com https://www.facebook.com",
       "connect-src 'self' https://*.supabase.co https://api.lemonsqueezy.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://us.i.posthog.com https://us-assets.i.posthog.com https://connect.facebook.net https://www.facebook.com",
       "frame-src https://app.lemonsqueezy.com https://www.facebook.com",
+      // Hardening: block plugins, lock down <base>, disallow framing & off-site
+      // form posts. Scripts still need 'unsafe-inline' (inline gtag/fbq/JSON-LD),
+      // so this isn't a nonce-strict policy, but it closes the cheap XSS vectors.
+      "object-src 'none'",
+      "base-uri 'self'",
+      "frame-ancestors 'self'",
+      "form-action 'self'",
+      "upgrade-insecure-requests",
     ].join("; "),
   },
 ]
@@ -31,6 +39,15 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
+  },
+  experimental: {
+    // Inline the page's CSS into <style> tags in the document head instead of
+    // shipping render-blocking <link rel="stylesheet"> requests. Removes the two
+    // blocking CSS round-trips Lighthouse flagged (~630ms mobile) from the
+    // critical path. Trade-off: CSS rides in the HTML rather than a separately
+    // cached file, but this site's pages are statically rendered / ISR-cached at
+    // the edge, so the HTML is already cache-friendly.
+    inlineCss: true,
   },
   trailingSlash: false,
   // Required for the PostHog reverse proxy below — PostHog's API ignores trailing slashes

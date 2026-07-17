@@ -84,6 +84,9 @@ export default function RootLayout({
   return (
     <html lang="en-US" className={`${poppins.variable} ${jetbrainsMono.variable}`}>
       <head>
+        {/* Resolve DNS for deferred third-party origins early (cheap; no connection cost). */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-T91HEN5X72" strategy="lazyOnload" />
         <Script id="google-analytics" strategy="lazyOnload">
           {`
@@ -93,7 +96,7 @@ export default function RootLayout({
             gtag('config', 'G-T91HEN5X72');
           `}
         </Script>
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

@@ -145,8 +145,8 @@ export default async function StatesPage() {
                 { value: totalContacts.toLocaleString(), label: "Contacts" },
                 { value: "$49", label: "Per State" },
               ].map((stat) => (
-                <div key={stat.label} className="border-r border-border px-3 py-4 text-center last:border-r-0">
-                  <p className="font-mono text-[18px] font-semibold leading-tight text-ink sm:text-[22px]">
+                <div key={stat.label} className="border-r border-border px-2 py-4 text-center last:border-r-0">
+                  <p className="font-mono text-[18px] font-semibold leading-tight text-ink sm:text-[22px] lg:text-[18px]">
                     {stat.value}
                   </p>
                   <p className="mt-1 text-[11px] font-mono uppercase tracking-wider text-muted">

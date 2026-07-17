@@ -369,12 +369,16 @@ html, body {
   }
 }
 
-/* Hero load sequence — CSS-only */
-.hero-badge   { animation: slide-up 0.5s ease 0.1s both; }
-.hero-h1      { animation: slide-up 0.6s ease 0.25s both; }
-.hero-sub     { animation: slide-up 0.5s ease 0.45s both; }
-.hero-ctas    { animation: slide-up 0.5s ease 0.6s both; }
-.hero-preview { animation: slide-up 0.6s ease 0.8s both; }
+/* Hero load sequence — CSS-only.
+   Delays are deliberately tiny: the `both` fill-mode holds each element at
+   opacity:0 until its delay elapses, and an opacity:0 element can't be the LCP
+   candidate. The H1 (the LCP element) therefore animates with no delay so it
+   paints on the first frame; the rest keep a light stagger for polish. */
+.hero-badge   { animation: slide-up 0.4s ease both; }
+.hero-h1      { animation: slide-up 0.45s ease both; }
+.hero-sub     { animation: slide-up 0.4s ease 0.08s both; }
+.hero-ctas    { animation: slide-up 0.4s ease 0.14s both; }
+.hero-preview { animation: slide-up 0.45s ease 0.2s both; }
 
 /* Scroll reveal */
 .reveal {
