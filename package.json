@@ -9,6 +9,8 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "db:push": "supabase db push",
+    "ingest:mi": "node scripts/ingest/michigan.mjs",
+    "ingest:va": "node scripts/ingest/virginia.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

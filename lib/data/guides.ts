@@ -74,7 +74,7 @@ export const IMPORT_GUIDES: readonly ImportGuide[] = [
       { ourColumn: "state", toolField: "Custom variable", note: "Reference in copy: “agents in {{state}}”" },
     ],
     tips: [
-      "Don't blast the full 889K list from one inbox — Instantly's own best practices favor multiple warmed sending accounts with low daily volumes per account.",
+      "Don't blast the full 1M list from one inbox — Instantly's own best practices favor multiple warmed sending accounts with low daily volumes per account.",
       "Segment campaigns by state (the CSV's state column) so subject lines can reference the agent's market.",
       "Follow CAN-SPAM: real from-address, your business address in the footer, and a working unsubscribe link.",
       SPLIT_NAME_NOTE,
@@ -275,7 +275,7 @@ export const IMPORT_GUIDES: readonly ImportGuide[] = [
       { ourColumn: "state", toolField: "Text merge field (e.g. STATE)", note: "Use for segments: State = TX" },
     ],
     tips: [
-      "Mailchimp prices by contact count — importing all 889K contacts lands in high pricing tiers. Import only the states you're actively mailing.",
+      "Mailchimp prices by contact count — importing all 1M contacts lands in high pricing tiers. Import only the states you're actively mailing.",
       "Create a segment per state from the STATE merge field instead of separate audiences; multiple audiences multiply cost.",
       "Mailchimp enforces its acceptable-use rules on bounces and abuse reports, so verify the list slice before a first big send and always include a clean unsubscribe path.",
       SPLIT_NAME_NOTE,
@@ -341,7 +341,7 @@ export const IMPORT_GUIDES: readonly ImportGuide[] = [
     ],
     tips: [
       "Create the state custom field during mapping — it takes one click and unlocks per-state automations.",
-      "ActiveCampaign bills by contact count; import per-state slices as you campaign instead of all 889K at once.",
+      "ActiveCampaign bills by contact count; import per-state slices as you campaign instead of all 1M at once.",
       "Route first-touch cold outreach through a dedicated cold-email tool and use ActiveCampaign for engaged replies and nurture — engagement-based platforms punish cold-list bounce rates.",
       SPLIT_NAME_NOTE,
     ],
@@ -414,7 +414,7 @@ export const IMPORT_GUIDES: readonly ImportGuide[] = [
       {
         question: "Why Brevo over Mailchimp for a large purchased list?",
         answer:
-          "Cost structure. Mailchimp bills by stored contacts; Brevo bills by emails sent. Storing 889K contacts is expensive on contact-billed platforms and effectively free on Brevo — you pay per campaign instead.",
+          "Cost structure. Mailchimp bills by stored contacts; Brevo bills by emails sent. Storing 1M contacts is expensive on contact-billed platforms and effectively free on Brevo — you pay per campaign instead.",
       },
       {
         question: "My import shows garbled characters — what happened?",

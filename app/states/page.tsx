@@ -48,7 +48,7 @@ const statesFAQs = [
   },
   {
     question: "What's the difference between a state pack and the full database?",
-    answer: "A state pack ($49) gives you a CSV for a single state. The Full Database ($199, one-time) includes all 50 states in a single download — 889,000+ contacts. If you need 4+ states, the full database is better value.",
+    answer: "A state pack ($49) gives you a CSV for a single state. The Full Database ($199, one-time) includes all 50 states in a single download — 1,000,000+ contacts. If you need 4+ states, the full database is better value.",
   },
   {
     question: "How quickly is the CSV delivered after purchase?",
@@ -64,7 +64,7 @@ const statesFAQs = [
   },
   {
     question: "Do you offer a realtor database for every US state?",
-    answer: "Yes. Every one of the 50 US states has its own realtor email list and agent database available for instant download at $49. Need several states? The Full Database bundles all 50 states and 889,000+ real estate agents into a single CSV for $199.",
+    answer: "Yes. Every one of the 50 US states has its own realtor email list and agent database available for instant download at $49. Need several states? The Full Database bundles all 50 states and 1,000,000+ real estate agents into a single CSV for $199.",
   },
 ]
 
@@ -209,7 +209,7 @@ export default async function StatesPage() {
             <p className="text-[15px] text-body leading-[1.8]">
               Instead of scraping 50 different state licensing directories to build a real estate agent list by state, download ready-made packs and import them straight into your CRM. Buying four or more states?{" "}
               <Link href="/pricing" className="text-accent font-medium hover:underline">
-                The Full Database covers all 50 states and 889,000+ agents for $199
+                The Full Database covers all 50 states and 1,000,000+ agents for $199
               </Link>
               .
             </p>

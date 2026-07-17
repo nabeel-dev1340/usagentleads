@@ -174,9 +174,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: `Unknown state code: ${code}` }, { status: 400 })
     }
 
-    // Also match "Washington Dc" variant for DC
+    // Also match "Washington Dc" variant for DC (deduped — stateName is
+    // already "District of Columbia", listing it twice doubled every DC row)
     const stateNames = code === "DC"
-      ? [stateName, "Washington Dc", "District of Columbia"]
+      ? [...new Set([stateName, "Washington Dc", "District of Columbia"])]
       : [stateName]
 
     // Fetch all leads for this state, paginating in chunks of 1000

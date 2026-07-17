@@ -99,7 +99,7 @@ const organizationSchema = {
     {
       "@type": "Offer",
       name: "Full Database",
-      description: "All 50 states, 889K+ real estate agent contacts CSV download",
+      description: "All 50 states, 1M+ real estate agent contacts CSV download",
       price: "199.00",
       priceCurrency: "USD",
       url: "https://www.usagentleads.com/pricing",
@@ -107,7 +107,7 @@ const organizationSchema = {
     {
       "@type": "Offer",
       name: "Pro Dashboard",
-      description: "Searchable web interface to browse and filter 889K+ real estate agents",
+      description: "Searchable web interface to browse and filter 1M+ real estate agents",
       price: "49.00",
       priceCurrency: "USD",
       priceSpecification: {
@@ -121,7 +121,7 @@ const organizationSchema = {
     {
       "@type": "Offer",
       name: "Pro API",
-      description: "REST API access to query 889K+ real estate agent contacts programmatically",
+      description: "REST API access to query 1M+ real estate agent contacts programmatically",
       price: "79.00",
       priceCurrency: "USD",
       priceSpecification: {

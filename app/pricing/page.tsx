@@ -135,7 +135,7 @@ const pricingProductSchema = {
 export const metadata: Metadata = {
   title: "Pricing 2026 — Real Estate Agent Database from $49/State",
   description:
-    "2026 realtor email lists from $49/state or $199 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
+    "2026 realtor email lists from $49/state or $199 for all 50 states. 1M+ verified contacts, instant CSV delivery, no subscription. Free sample available.",
   alternates: {
     canonical: "https://www.usagentleads.com/pricing",
     languages: {
@@ -147,7 +147,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     title: "Pricing — Real Estate Agent Database from $49/State",
     description:
-      "Realtor email lists from $49/state or $199 for all 50 states. 889K+ verified contacts, instant CSV delivery, no subscription.",
+      "Realtor email lists from $49/state or $199 for all 50 states. 1M+ verified contacts, instant CSV delivery, no subscription.",
     url: "https://www.usagentleads.com/pricing",
     images: [{ url: "https://www.usagentleads.com/opengraph-image", width: 1200, height: 630, alt: "USAgentLeads - Real Estate Agent Contact Database" }],
   },
@@ -206,7 +206,7 @@ const pricingFAQs = [
   {
     question: "What's the difference between the Full Database and Pro Dashboard?",
     answer:
-      "The Full Database ($199 one-time) gives you a single CSV download of all 889K+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
+      "The Full Database ($199 one-time) gives you a single CSV download of all 1M+ contacts. The Pro Dashboard ($49/month) gives you a searchable, filterable interface to browse agents in-app without downloading a file. Choose CSV if you want the data in your own tools; choose Pro if you prefer a web interface.",
   },
   {
     question: "Should I buy state packs or the full database?",
@@ -216,7 +216,7 @@ const pricingFAQs = [
   {
     question: "What does this work out to per contact?",
     answer:
-      "The full database is $199 for 889,000+ contacts — a fraction of a cent each. For comparison, credit-based prospecting tools commonly charge from roughly $0.10 to $0.50+ per revealed contact at their published rates.",
+      "The full database is $199 for 1,000,000+ contacts — a fraction of a cent each. For comparison, credit-based prospecting tools commonly charge from roughly $0.10 to $0.50+ per revealed contact at their published rates.",
   },
   {
     question: "Do phone numbers cost extra?",
@@ -238,7 +238,7 @@ const pricingFAQs = [
 // Competitor pricing verified against vendor pricing pages and third-party
 // pricing guides, July 2026. Quote-based products use reported ranges.
 const marketComparisonRows = [
-  { provider: "USAgentLeads — Full Database", price: "$199 one-time", model: "Flat rate, 889K+ agent contacts, yours permanently", isUs: true },
+  { provider: "USAgentLeads — Full Database", price: "$199 one-time", model: "Flat rate, 1M+ agent contacts, yours permanently", isUs: true },
   { provider: "ZoomInfo", price: "Reported from ~$14,995/yr", model: "Quote-only annual contracts, credit-limited exports" },
   { provider: "Data Axle Genie", price: "Reported $99–299/mo", model: "12-month contract, lead caps with overage charges" },
   { provider: "UpLead", price: "From $99/mo", model: "Credit-based (~170 credits/mo at entry tier)" },

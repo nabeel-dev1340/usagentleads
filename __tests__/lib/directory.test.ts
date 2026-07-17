@@ -35,6 +35,10 @@ function loadWithResult(result: QueryResult) {
     createServiceClient: vi.fn(() => client),
     createClient: vi.fn(),
   }))
+  // searchDirectory reads leads via the self-hosted PostgREST client
+  vi.doMock("@/lib/supabase/leads", () => ({
+    createLeadsClient: vi.fn(() => client),
+  }))
   return { calls }
 }
 

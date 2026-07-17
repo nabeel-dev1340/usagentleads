@@ -53,9 +53,9 @@ All access is **server-side** and now goes through `createLeadsClient()`:
 The table is effectively **read-only from the app** — the only writes are the
 hygiene inside `refresh_states()`, which runs on the VPS.
 
-> ⚠️ **Ingestion caveat:** whatever process *loads new leads* (your scraper /
-> import job, which lives outside this repo) currently writes to Supabase. After
-> cutover it must point at this VPS Postgres instead, or new leads will vanish.
+> ⚠️ **Ingestion:** new leads are loaded by `scripts/ingest/*.mjs` (state
+> licensing bulk data), which upsert through this PostgREST endpoint using the
+> same `LEADS_REST_URL`/`LEADS_REST_KEY` — see `scripts/ingest/README.md`.
 
 ---
 

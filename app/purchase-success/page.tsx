@@ -162,7 +162,7 @@ function PurchaseSuccessContent() {
           <p className="label-eyebrow mb-1">Complete your coverage</p>
           <h2 className="text-[19px] font-semibold text-ink">Get all 50 states for $199</h2>
           <p className="mt-2 text-[14px] text-body leading-relaxed">
-            You just unlocked one state. The Full Database bundles all 50 states and 889K+ verified
+            You just unlocked one state. The Full Database bundles all 50 states and 1M+ verified
             contacts into a single CSV — same instant delivery, no account needed.
           </p>
           <div className="mt-5">
