@@ -64,11 +64,40 @@ Checked 2026-07-17; most states have removed contact info from public files:
   no email or phone columns.
 - **Montana**: downloadable list exists but excludes phone; tiny population.
 
-### Paid fallbacks (if more volume is ever needed)
+### Round-2 research (2026-07-17, via US VPS for geo-blocked sites)
 
-- **North Carolina NCREC** — [data subscription / roster orders](https://www.ncrec.gov/orderform)
-  (~100k licensees; our NC coverage is thin).
-- **Georgia GREC** — sells licensee data files (~100k licensees).
+Checked the next tier of states for bulk files with emails — none have free
+scriptable downloads:
+
+- **Oklahoma / South Carolina / Maine / Tennessee / Oregon / Massachusetts**:
+  lookup-only portals; bulk data requires a records/data request to the agency.
+- **Missouri**: moved to a Salesforce portal (MO PRO); no direct files.
+- **New Hampshire**: publishes a real-estate roster xlsx on
+  [oplc.nh.gov](https://www.oplc.nh.gov/list-oplc-licensees-and-their-license-types)
+  but Akamai 403s all non-browser fetches — manual browser download works
+  (email presence unverified; small state).
+- **Vermont / Rhode Island**: eLicense portals have "roster download" exports,
+  but VT's documented fields exclude email; both tiny.
+- **Pennsylvania**: PALS has no public bulk-with-email; competitors sell 62k+
+  PA agent emails, sourced via **Right-to-Know requests** to the Dept. of State.
+
+### Paths to grow further (in order of value)
+
+1. **Records requests** (free/cheap, slower): PA Right-to-Know, MA, TN, SC, OK,
+   OR, MO, WA public-records requests for licensee name + email. This is how
+   list vendors build their coverage. Biggest single win: **Florida DBPR** —
+   licensee emails are public record under Ch. 455 but excluded from the web
+   extracts; a records request for the email file could fill the ~71k FL rows
+   that have no email today (needs an UPDATE path, not the insert-only upsert).
+2. **Re-run MI/VA monthly** — both scripts are idempotent; each run picks up
+   newly licensed agents.
+3. **Cheap paid lists**: Alabama AREC [List Request](https://arec.alabama.gov/apps/listrequest)
+   ($10/list, "address information" — confirm email with arec@arec.alabama.gov before buying);
+   **North Carolina NCREC** [data subscription / roster orders](https://www.ncrec.gov/orderform)
+   (~100k licensees; our NC coverage is thin); **Georgia GREC** licensee files
+   (~100k licensees).
+4. **ARELLO national licensee DB**: license-verification data only, no emails —
+   not useful for contacts.
 
 ## Adding a new source
 
