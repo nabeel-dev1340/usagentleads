@@ -26,11 +26,21 @@ export async function GET(request: NextRequest) {
 
   try {
     const supabase = createServiceClient()
-    await supabase
+    // People not in sample_leads (e.g. purchasers reached by one-off
+    // campaigns) must have their opt-out recorded too, so insert a row when
+    // the update matches nothing. status "unsubscribed" keeps the row out of
+    // the nurture drip's new/active filter.
+    const { count } = await supabase
       .schema("usagentleads")
       .from("sample_leads")
-      .update({ status: "unsubscribed" })
+      .update({ status: "unsubscribed" }, { count: "exact" })
       .eq("email", email)
+    if (!count) {
+      await supabase
+        .schema("usagentleads")
+        .from("sample_leads")
+        .insert({ email, status: "unsubscribed", source: "unsubscribe" })
+    }
   } catch (error) {
     console.error("Unsubscribe error:", error)
     return page("Something went wrong", "We couldn't process your request just now. Please reply to any email and we'll remove you manually.")
@@ -38,3 +48,7 @@ export async function GET(request: NextRequest) {
 
   return page("You're unsubscribed", "You won't receive any more follow-up emails from USAgentLeads. Your free sample download link still works.")
 }
+
+// RFC 8058 one-click unsubscribe (List-Unsubscribe-Post) arrives as a POST to
+// the same URL; mail clients like Gmail require it for bulk senders.
+export { GET as POST }
