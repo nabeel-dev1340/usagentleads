@@ -11,8 +11,14 @@
     "db:push": "supabase db push",
     "ingest:mi": "node scripts/ingest/michigan.mjs",
     "ingest:va": "node scripts/ingest/virginia.mjs",
+    "ingest:anywhere": "node scripts/ingest/anywhere.mjs",
+    "ingest:compass": "node scripts/ingest/compass.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "ingest:har": "node scripts/ingest/har.mjs",
+    "ingest:csv": "node scripts/ingest/import-csv.mjs",
+    "ingest:atproperties": "node scripts/ingest/atproperties.mjs",
+    "ingest:enrich": "node scripts/ingest/enrich.mjs"
   },
   "dependencies": {
     "@anthropic-ai/claude-code": "^2.1.74",

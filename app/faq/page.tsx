@@ -56,7 +56,7 @@ function buildCategories(): { name: string; items: FAQItem[] }[] {
         {
           question: "What share of records include phone numbers?",
           answer:
-            "Email coverage is near-complete across the database, and roughly 40% of records include a direct phone number. Phone numbers are included at no extra charge — there's no separate 'phone append' fee.",
+            "Over 90% of records include an email address across the database, and over 90% of records include a phone number. Phone numbers are included at no extra charge — there's no separate 'phone append' fee.",
         },
         {
           question: "Do you have data for my specific state?",

@@ -32,9 +32,18 @@ export async function getAgentCount(): Promise<number> {
   return TOTAL_AGENTS
 }
 
-/** Round down to a clean label, e.g. 963112 -> "963K+", 1_050_000 -> "1M+". */
+/**
+ * Round down to a clean label, e.g. 963112 -> "963K+", 1_168_510 -> "1.1M+".
+ *
+ * Millions keep one decimal — flooring to a whole million understated the
+ * database by well over 100k once it passed 1.1M. Always rounds *down* so the
+ * "+" stays honest.
+ */
 export function formatAgentCountLabel(n: number): string {
-  if (n >= 1_000_000) return `${Math.floor(n / 1_000_000)}M+`
+  if (n >= 1_000_000) {
+    const millions = Math.floor(n / 100_000) / 10
+    return `${Number.isInteger(millions) ? millions.toFixed(0) : millions.toFixed(1)}M+`
+  }
   if (n >= 1000) return `${Math.floor(n / 1000)}K+`
   return `${n}+`
 }

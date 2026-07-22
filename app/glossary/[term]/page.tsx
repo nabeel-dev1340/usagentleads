@@ -205,7 +205,7 @@ export default async function GlossaryTermPage({ params }: Props) {
             {/* CTA */}
             <div className="card p-5 sm:p-7 border-accent/30 border-2 mb-10 text-center">
               <p className="text-[15px] text-body mb-4">
-                Need real estate agent contact data? 1,000,000+ verified contacts across all 50 states.
+                Need real estate agent contact data? 1,100,000+ verified contacts across all 50 states.
               </p>
               <Link href="/states" className="btn-primary inline-flex items-center gap-2">
                 Browse Agent Data

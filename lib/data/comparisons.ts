@@ -34,7 +34,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Contract Required", us: false, them: true },
       { feature: "Instant Download", us: true, them: false },
       { feature: "CRM-Ready CSV", us: true, them: "Proprietary format" },
-      { feature: "Agent Count", us: "1,000,000+", them: "N/A (homeowner leads)" },
+      { feature: "Agent Count", us: "1,100,000+", them: "N/A (homeowner leads)" },
     ],
     ourAdvantages: [
       "One-time payment vs monthly subscription — no recurring costs",
@@ -125,7 +125,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "ZoomInfo is a massive B2B contact database covering every industry. It's powerful but expensive. If you specifically need real estate agent contacts, here's why a specialized database might be the better fit.",
     features: [
       { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
-      { feature: "Real Estate Agent Coverage", us: "1,000,000+ verified", them: "Partial (not specialized)" },
+      { feature: "Real Estate Agent Coverage", us: "1,100,000+ verified", them: "Partial (not specialized)" },
       { feature: "Pricing", us: "$199 one-time", them: "$15,000-30,000+/year" },
       { feature: "Contract", us: "None", them: "Annual minimum" },
       { feature: "Data Export", us: "Unlimited CSV download", them: "Credit-based exports" },
@@ -146,7 +146,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "CRM integrations and workflow automation",
     ],
     verdict:
-      "If your sales team sells to many industries and needs a full B2B intelligence platform, ZoomInfo justifies its cost. But if you specifically target real estate agents, paying $15K+/year for ZoomInfo makes no sense when USAgentLeads covers 1,000,000+ agents for a one-time $199. The specialized database has better agent coverage at a fraction of the cost.",
+      "If your sales team sells to many industries and needs a full B2B intelligence platform, ZoomInfo justifies its cost. But if you specifically target real estate agents, paying $15K+/year for ZoomInfo makes no sense when USAgentLeads covers 1,100,000+ agents for a one-time $199. The specialized database has better agent coverage at a fraction of the cost.",
     keywords: [
       "ZoomInfo vs USAgentLeads",
       "ZoomInfo alternative for real estate",
@@ -174,7 +174,7 @@ export const COMPETITORS: readonly Competitor[] = [
       "Apollo.io is a popular sales intelligence platform with a large B2B database and built-in email sequencing. Here's how it stacks up against USAgentLeads when your target is specifically real estate agents.",
     features: [
       { feature: "Focus", us: "Real estate agents only", them: "All B2B contacts" },
-      { feature: "Agent Coverage", us: "1,000,000+ verified", them: "Partial — not specialized" },
+      { feature: "Agent Coverage", us: "1,100,000+ verified", them: "Partial — not specialized" },
       { feature: "Pricing", us: "$199 one-time", them: "$49-99/month per user" },
       { feature: "Email Sequencing", us: false, them: true },
       { feature: "Data Export", us: "Unlimited CSV", them: "Credit-limited" },
@@ -224,7 +224,7 @@ export const COMPETITORS: readonly Competitor[] = [
     features: [
       { feature: "Full US Database", us: "$199", them: "$249-499+" },
       { feature: "Per-State Pricing", us: "$49", them: "$30-50" },
-      { feature: "Agent Count", us: "1,000,000+", them: "Varies" },
+      { feature: "Agent Count", us: "1,100,000+", them: "Varies" },
       { feature: "Instant Download", us: true, them: true },
       { feature: "CSV Format", us: true, them: true },
       { feature: "No Account Required", us: true, them: false },
@@ -276,7 +276,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Setup Fee", us: false, them: "Reported $99.95 (starter)" },
       { feature: "Download Caps", us: false, them: "2,000/month on starter (reported)" },
       { feature: "Instant Download", us: true, them: false },
-      { feature: "Agent Count", us: "1,000,000+", them: "N/A (homeowner data)" },
+      { feature: "Agent Count", us: "1,100,000+", them: "N/A (homeowner data)" },
     ],
     ourAdvantages: [
       "One-time purchase with no setup fee or download caps",
@@ -325,7 +325,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Accuracy Guarantee", us: "30-day money-back guarantee", them: "95% with credit refunds" },
       { feature: "Free Option", us: "Free 500-contact sample", them: "7-day trial (5 credits)" },
       { feature: "Per-State Purchase", us: "$49/state", them: false },
-      { feature: "Agent Coverage", us: "1,000,000+ licensed agents", them: "Partial — not specialized" },
+      { feature: "Agent Coverage", us: "1,100,000+ licensed agents", them: "Partial — not specialized" },
     ],
     ourAdvantages: [
       "Orders of magnitude cheaper for bulk agent lists — no per-contact fees",
@@ -354,8 +354,8 @@ export const COMPETITORS: readonly Competitor[] = [
         answer: "UpLead verifies emails at reveal time and refunds credits for invalid ones — strong for hand-picked prospecting. USAgentLeads compiles agent records from public licensing and listing sources and backs purchases with a 30-day money-back guarantee. For bulk agent lists, the specialized source has far deeper coverage of licensed agents.",
       },
       {
-        question: "How much would 1,000,000 contacts cost on UpLead?",
-        answer: "At reported per-credit economics of roughly $0.44–0.50 per contact, revealing 1,000,000 contacts would cost well into six figures — and UpLead doesn't specialize in licensed real estate agents. USAgentLeads sells the full agent dataset for $199 one-time.",
+        question: "How much would 1,100,000 contacts cost on UpLead?",
+        answer: "At reported per-credit economics of roughly $0.44–0.50 per contact, revealing 1,100,000 contacts would cost well into six figures — and UpLead doesn't specialize in licensed real estate agents. USAgentLeads sells the full agent dataset for $199 one-time.",
       },
     ],
   },
@@ -421,7 +421,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Entry Price", us: "$49 (one state)", them: "$99 for 250 credits (reported)" },
       { feature: "Cost for 1M Contacts", us: "$199", them: "Five to six figures at reported per-contact rates" },
       { feature: "Credits Expire", us: "N/A — no credits", them: "Never (reported)" },
-      { feature: "Phone Numbers", us: "Included (~40% of records)", them: "Varies by list" },
+      { feature: "Phone Numbers", us: "Included (90%+ of records)", them: "Varies by list" },
       { feature: "Instant Download", us: true, them: true },
       { feature: "Contract", us: "None", them: "None" },
     ],
@@ -449,7 +449,7 @@ export const COMPETITORS: readonly Competitor[] = [
     faqs: [
       {
         question: "Both are pay-once — what's actually different?",
-        answer: "Granularity and specialization. BookYourData charges per contact (reported ~$0.10–0.40 depending on volume) and spans all industries. USAgentLeads charges a flat rate for one deep vertical: 1,000,000+ licensed US real estate agents. Small custom lists favor per-contact pricing; the full agent vertical overwhelmingly favors flat-rate.",
+        answer: "Granularity and specialization. BookYourData charges per contact (reported ~$0.10–0.40 depending on volume) and spans all industries. USAgentLeads charges a flat rate for one deep vertical: 1,100,000+ licensed US real estate agents. Small custom lists favor per-contact pricing; the full agent vertical overwhelmingly favors flat-rate.",
       },
       {
         question: "Can I combine both services?",
@@ -498,7 +498,7 @@ export const COMPETITORS: readonly Competitor[] = [
     faqs: [
       {
         question: "Does Data Axle Genie have real estate agent lists?",
-        answer: "Data Axle's business database includes real estate professionals among many industries, but it isn't specialized in licensing-record coverage. USAgentLeads focuses exclusively on licensed US real estate agents — 1,000,000+ records across all 50 states.",
+        answer: "Data Axle's business database includes real estate professionals among many industries, but it isn't specialized in licensing-record coverage. USAgentLeads focuses exclusively on licensed US real estate agents — 1,100,000+ records across all 50 states.",
       },
       {
         question: "What's the real cost difference over a year?",
@@ -521,7 +521,7 @@ export const COMPETITORS: readonly Competitor[] = [
       { feature: "Failed Lookups", us: "N/A — fixed dataset", them: "Reportedly still consume credits" },
       { feature: "Cancellation", us: "Nothing to cancel", them: "Reported 60-day notice before renewal" },
       { feature: "Free Option", us: "Free 500-contact sample", them: "50 lifetime free credits" },
-      { feature: "Agent Coverage", us: "1,000,000+ licensed agents", them: "Partial — not specialized" },
+      { feature: "Agent Coverage", us: "1,100,000+ licensed agents", them: "Partial — not specialized" },
     ],
     ourAdvantages: [
       "Flat one-time price — no credits, quotes, or renewal windows",
@@ -551,7 +551,7 @@ export const COMPETITORS: readonly Competitor[] = [
       },
       {
         question: "Which is cheaper for agent outreach at scale?",
-        answer: "For bulk real estate agent outreach, a flat $199 for 1,000,000+ contacts is far cheaper than credit-metered plans reported around $147/month at entry. Credit models suit selective, cross-industry prospecting rather than whole-vertical campaigns.",
+        answer: "For bulk real estate agent outreach, a flat $199 for 1,100,000+ contacts is far cheaper than credit-metered plans reported around $147/month at entry. Credit models suit selective, cross-industry prospecting rather than whole-vertical campaigns.",
       },
     ],
   },
