@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import crypto from "crypto"
+import { isAuthorizedCron } from "@/lib/utils/cronAuth"
 import { gzipSync } from "zlib"
 import { createServiceClient } from "@/lib/supabase/server"
 import { createLeadsClient } from "@/lib/supabase/leads"
@@ -74,17 +74,7 @@ function buildCSV(rows: { name: string | null; email: string; phone: string | nu
  *   ?combine=true    → reads all state CSVs from storage, merges into full CSV
  */
 export async function GET(request: NextRequest) {
-  const authHeader = request.headers.get("authorization")
-  const expected = `Bearer ${process.env.CRON_SECRET}`
-
-  if (
-    !authHeader ||
-    authHeader.length !== expected.length ||
-    !crypto.timingSafeEqual(
-      Buffer.from(authHeader),
-      Buffer.from(expected)
-    )
-  ) {
+  if (!isAuthorizedCron(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 

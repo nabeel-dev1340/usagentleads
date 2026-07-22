@@ -15,11 +15,20 @@ export async function POST(request: Request) {
 
     const body = await request.formData()
 
-    const name = body.get("name") as string
-    const email = body.get("email") as string
-    const subject = body.get("subject") as string
-    const message = body.get("message") as string
-    const honey = body.get("_honey") as string
+    // Read as strings only. A multipart File entry has no .replace/.trim, so a
+    // blind `as string` cast let a crafted upload throw deep inside the mailer.
+    const field = (key: string, max: number): string => {
+      const value = body.get(key)
+      return typeof value === "string" ? value.trim().slice(0, max) : ""
+    }
+
+    // Every field is length-capped: these are relayed verbatim into an email we
+    // send ourselves, so unbounded input is both a delivery and a cost problem.
+    const name = field("name", 100)
+    const email = field("email", 254)
+    const subject = field("subject", 200)
+    const message = field("message", 5000)
+    const honey = field("_honey", 100)
 
     // Honeypot check
     if (honey) {

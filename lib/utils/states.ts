@@ -22,7 +22,7 @@ export const US_STATES: readonly USState[] = [
   { code: "ME", name: "Maine", slug: "maine", agentCount: 10517 },
   { code: "MD", name: "Maryland", slug: "maryland", agentCount: 15388 },
   { code: "MA", name: "Massachusetts", slug: "massachusetts", agentCount: 25429 },
-  { code: "MI", name: "Michigan", slug: "michigan", agentCount: 64420 },
+  { code: "MI", name: "Michigan", slug: "michigan", agentCount: 64715 },
   { code: "MN", name: "Minnesota", slug: "minnesota", agentCount: 16259 },
   { code: "MS", name: "Mississippi", slug: "mississippi", agentCount: 9759 },
   { code: "MO", name: "Missouri", slug: "missouri", agentCount: 17285 },
@@ -49,7 +49,7 @@ export const US_STATES: readonly USState[] = [
   { code: "VA", name: "Virginia", slug: "virginia", agentCount: 58487 },
   { code: "WA", name: "Washington", slug: "washington", agentCount: 15157 },
   { code: "WV", name: "West Virginia", slug: "west-virginia", agentCount: 5624 },
-  { code: "WI", name: "Wisconsin", slug: "wisconsin", agentCount: 12652 },
+  { code: "WI", name: "Wisconsin", slug: "wisconsin", agentCount: 12662 },
   { code: "WY", name: "Wyoming", slug: "wyoming", agentCount: 2209 },
 ] as const
 

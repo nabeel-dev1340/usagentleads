@@ -15,15 +15,30 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const body = await request.json()
-  const email = body.email?.trim()?.toLowerCase()
+  // Parse defensively: a malformed body, or a non-string `email` (e.g. a number
+  // or object), previously threw before any handler and surfaced as a 500.
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Valid email required" }, { status: 400 })
+  }
+  if (typeof body !== "object" || body === null) {
+    return NextResponse.json({ error: "Valid email required" }, { status: 400 })
+  }
+
+  const { email: rawEmail, source: rawSource } = body as Record<string, unknown>
+  const email =
+    typeof rawEmail === "string" ? rawEmail.trim().toLowerCase() : ""
   // Optional capture-point label (e.g. "home_hero", "state_florida", "exit_intent").
   // Sanitized to a short slug so it's safe to store and group on.
-  const source = typeof body.source === "string"
-    ? body.source.trim().toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 40) || null
+  const source = typeof rawSource === "string"
+    ? rawSource.trim().toLowerCase().replace(/[^a-z0-9_]/g, "").slice(0, 40) || null
     : null
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  // Cap length before the regex: the address also becomes a rate-limit key and
+  // a stored row, and an unbounded string is a cheap way to abuse both.
+  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Valid email required" }, { status: 400 })
   }
 

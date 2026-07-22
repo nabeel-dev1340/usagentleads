@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import crypto from "crypto"
+import { isAuthorizedCron } from "@/lib/utils/cronAuth"
 import { createServiceClient } from "@/lib/supabase/server"
 import { sendNurtureImport, sendNurtureQuality, sendNurtureFinal, type NurtureCoupon } from "@/lib/resend/emails"
 import { createStateDiscount } from "@/lib/lemonsqueezy/client"
@@ -26,19 +26,8 @@ const GATES: Gate[] = [
 
 const BATCH_PER_STAGE = 100
 
-function authorized(request: NextRequest): boolean {
-  const authHeader = request.headers.get("authorization")
-  const expected = `Bearer ${process.env.CRON_SECRET}`
-  if (!authHeader || authHeader.length !== expected.length) return false
-  try {
-    return crypto.timingSafeEqual(Buffer.from(authHeader), Buffer.from(expected))
-  } catch {
-    return false
-  }
-}
-
 export async function GET(request: NextRequest) {
-  if (!authorized(request)) {
+  if (!isAuthorizedCron(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 

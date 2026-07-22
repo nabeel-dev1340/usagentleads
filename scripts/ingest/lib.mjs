@@ -92,6 +92,45 @@ export function stateName(raw) {
   return full ?? null
 }
 
+/**
+ * Circuit breaker for crawlers.
+ *
+ * When a site starts blocking us, every remaining request is both useless and
+ * abusive — the @properties run burned 3,876 requests against a server that was
+ * already returning 403, and HAR's PerimeterX ban happened the same way. Trip
+ * after N consecutive failures and stop, rather than grinding to the end.
+ *
+ *   const guard = createFailureGuard({ label: "@properties" })
+ *   ... guard.tripped -> stop; guard.ok() on success; guard.fail() on failure
+ */
+export function createFailureGuard({ threshold = 40, label = "source" } = {}) {
+  let consecutive = 0
+  let tripped = false
+  return {
+    get tripped() {
+      return tripped
+    },
+    get consecutive() {
+      return consecutive
+    },
+    ok() {
+      consecutive = 0
+    },
+    fail() {
+      consecutive++
+      if (!tripped && consecutive >= threshold) {
+        tripped = true
+        console.error(
+          `\n  ! ${label}: ${consecutive} consecutive failures — aborting.\n` +
+            `    Almost certainly rate-limited or IP-blocked. Re-run later with lower --concurrency;\n` +
+            `    the upsert is idempotent so nothing already collected is lost.`
+        )
+      }
+      return tripped
+    },
+  }
+}
+
 export function cleanPhone(raw) {
   const digits = String(raw ?? "").replace(/\D/g, "")
   if (digits.length === 10) return digits

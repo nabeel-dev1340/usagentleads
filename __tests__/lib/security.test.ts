@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
 import {
+  timingSafeCompare,
   sanitizeSearchInput,
   escapeHtml,
   isValidStateCode,
@@ -162,5 +163,36 @@ describe("isValidUUID", () => {
   it("rejects SQL injection in UUID field", () => {
     expect(isValidUUID("'; DROP TABLE--")).toBe(false)
     expect(isValidUUID("00000000-0000-0000-0000-00000' OR 1=1")).toBe(false)
+  })
+})
+
+describe("timingSafeCompare", () => {
+  it("matches identical strings", () => {
+    expect(timingSafeCompare("Bearer secret", "Bearer secret")).toBe(true)
+    expect(timingSafeCompare("", "")).toBe(true)
+  })
+
+  it("rejects different strings of equal length", () => {
+    expect(timingSafeCompare("Bearer secretA", "Bearer secretB")).toBe(false)
+  })
+
+  it("rejects strings of different length without throwing", () => {
+    expect(timingSafeCompare("short", "a much longer value")).toBe(false)
+  })
+
+  // Regression: crypto.timingSafeEqual compares BYTE length, but callers guard
+  // on String.length. A multi-byte char passes a .length check while producing a
+  // longer buffer, which used to throw RangeError and 500 the route.
+  it("rejects equal-char-length but different-byte-length input", () => {
+    const a = "Bearer abcdefgé" // 15 chars, 16 bytes
+    const b = "Bearer abcdefgh" // 15 chars, 15 bytes
+    expect(a.length).toBe(b.length)
+    expect(() => timingSafeCompare(a, b)).not.toThrow()
+    expect(timingSafeCompare(a, b)).toBe(false)
+  })
+
+  it("rejects emoji padding used to match a length guard", () => {
+    expect(() => timingSafeCompare("Bearer 🔑", "Bearer ab")).not.toThrow()
+    expect(timingSafeCompare("Bearer 🔑", "Bearer ab")).toBe(false)
   })
 })

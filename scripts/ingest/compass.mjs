@@ -12,7 +12,17 @@
 // Note the emails are uniformly first.last@compass.com — deliverable, but
 // brokerage-routed rather than personal.
 
-import { cleanEmail, cleanPhone, parseArgs, printSummary, stateName, titleCase, upsertLeads, writeCsv } from "./lib.mjs"
+import {
+  cleanEmail,
+  cleanPhone,
+  createFailureGuard,
+  parseArgs,
+  printSummary,
+  stateName,
+  titleCase,
+  upsertLeads,
+  writeCsv,
+} from "./lib.mjs"
 
 const SITEMAP_INDEX = "https://www.compass.com/sitemaps/agent-pages/index.xml"
 const UA =
@@ -92,13 +102,17 @@ async function crawl(urls, concurrency) {
   let failed = 0
   let noData = 0
   let cursor = 0
+  const guard = createFailureGuard({ label: "Compass" })
 
   const worker = async () => {
-    while (cursor < urls.length) {
+    while (cursor < urls.length && !guard.tripped) {
       const url = urls[cursor++]
       const html = await getText(url)
-      if (!html) failed++
-      else {
+      if (!html) {
+        failed++
+        guard.fail()
+      } else {
+        guard.ok()
         const lead = parseProfile(html)
         if (lead) leads.push(lead)
         else noData++

@@ -10,11 +10,25 @@
 //     mailto body, as `Email: <address>` followed by `Phone: <number>`.
 //     That body is built for this specific agent, so it is unambiguous.
 
-import { cleanEmail, cleanPhone, parseArgs, printSummary, stateName, titleCase, upsertLeads, writeCsv } from "./lib.mjs"
+import {
+  cleanEmail,
+  cleanPhone,
+  createFailureGuard,
+  parseArgs,
+  printSummary,
+  stateName,
+  titleCase,
+  upsertLeads,
+  writeCsv,
+} from "./lib.mjs"
 
 const SITEMAP_INDEX = "https://resources.atproperties.com/sitemaps/atp/sitemap_index.xml"
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+
+// A concurrency-6 run with no pacing got this IP nginx-403'd after ~360 pages.
+// Default to something the site will tolerate; raise deliberately, not by habit.
+const PAGE_DELAY_MS = Number(process.env.ATP_PAGE_DELAY_MS ?? 600)
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
@@ -100,25 +114,30 @@ async function crawl(urls, concurrency) {
   let failed = 0
   let noData = 0
   let cursor = 0
+  const guard = createFailureGuard({ label: "@properties" })
 
   const worker = async () => {
-    while (cursor < urls.length) {
+    while (cursor < urls.length && !guard.tripped) {
       const html = await getText(urls[cursor++])
-      if (!html) failed++
-      else {
+      if (!html) {
+        failed++
+        guard.fail()
+      } else {
+        guard.ok()
         const lead = parseProfile(html)
         if (lead) leads.push(lead)
         else noData++
       }
       if (++done % 250 === 0) {
-        process.stdout.write(`\r  crawled ${done}/${urls.length} — kept ${leads.length}, no-data ${noData}, failed ${failed}`)
+        process.stdout.write(`\r  crawled ${done}/${urls.length} — kept ${leads.length}, no-data ${noData}, failed ${failed}\n`)
       }
+      await sleep(PAGE_DELAY_MS)
     }
   }
 
   await Promise.all(Array.from({ length: concurrency }, worker))
   process.stdout.write(`\r  crawled ${done}/${urls.length} — kept ${leads.length}, no-data ${noData}, failed ${failed}\n`)
-  return { leads, failed, noData }
+  return { leads, failed, noData, aborted: guard.tripped }
 }
 
 async function main() {
@@ -129,13 +148,14 @@ async function main() {
   console.log(`  total unique agent URLs: ${urls.length}`)
   if (Number.isFinite(args.limit)) urls = urls.slice(0, args.limit)
 
-  const { leads, failed, noData } = await crawl(urls, args.concurrency)
+  const { leads, failed, noData, aborted } = await crawl(urls, args.concurrency)
 
   if (args.csv) writeCsv(args.csv, leads)
 
   const stats = await upsertLeads(leads, { dryRun: args.dryRun, batch: args.batch })
   printSummary("@properties", {
     "profiles fetched": urls.length,
+    "aborted early (blocked)": aborted ? "yes" : "no",
     "fetch failures": failed,
     "no usable contact": noData,
     "agents collected": leads.length,
