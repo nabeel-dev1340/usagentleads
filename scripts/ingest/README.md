@@ -35,10 +35,21 @@ LEADS_REST_URL=… LEADS_REST_KEY=… npm run ingest:va
 LEADS_REST_URL=… LEADS_REST_KEY=… npm run ingest:anywhere
 LEADS_REST_URL=… LEADS_REST_KEY=… npm run ingest:compass -- --concurrency 8
 
-# 3. Afterwards, refresh derived data:
-#    - GET /api/cron/update-state-counts   (CRON_SECRET) → Supabase state_count
-#    - GET /api/cron/generate-csvs         (CRON_SECRET) → state CSV exports
+# 3. Afterwards, refresh derived data — all three steps:
+#    a. GET /api/cron/update-state-counts        → Supabase state_count
+#    b. GET /api/cron/generate-csvs              → ⚠ only LISTS state codes
+#       GET /api/cron/generate-csvs?state=XX     → builds+uploads each state CSV
+#       GET /api/cron/generate-csvs?combine=true → rebuilds the full-database CSV
+#    c. node scripts/sync-state-counts.mjs       → refresh lib/utils/states.ts
 ```
+
+> ⚠ **`generate-csvs` with no params does not generate anything** — it returns
+> the worklist of state codes. Treating its 200 as "done" leaves the
+> customer-facing CSVs stale at the previous ingest. `.github/workflows/
+> generate-csvs.yml` is the reference implementation (list → 51× `?state=` →
+> `?combine=true`); it runs Mondays 03:00 UTC, so trigger it manually after any
+> mid-week ingest. Sanity-check `totalRows` in the combine response against the
+> table count.
 
 Flags: `--dry-run`, `--limit N` (cap rows, for testing), `--csv out.csv`
 (dump normalized rows), `--batch N` (upsert batch size, default 1000),
